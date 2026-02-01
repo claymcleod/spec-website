@@ -7,7 +7,7 @@
 
 @utility prose {
   --tw-prose-body: var(--color-gray-600);
-  --tw-prose-headings: var(--color-gray-700);
+  --tw-prose-headings: var(--color-gray-600);
   code {
     font-weight: 400;
   }
@@ -18,7 +18,7 @@
 }
 
 :is(.dark) .prose {
-  --tw-prose-body: var(--color-gray-300);
+  --tw-prose-body: var(--color-gray-200);
   --tw-prose-headings: var(--color-gray-100);
 }
 
@@ -60,6 +60,17 @@
   }
 
   html.dark {
+    /* Dark mode gray overrides */
+    --color-gray-50: #E8E8E9;
+    --color-gray-100: #C7C8CB;
+    --color-gray-200: #9497A1;
+    --color-gray-300: #696E7A;
+    --color-gray-400: #3A3F4A;
+    --color-gray-500: #242833;
+    --color-gray-600: #171B26;
+    --color-gray-700: #10131C;
+    --color-gray-800: #0D0F16;
+    --color-gray-900: #0A0C12;
     @apply bg-gray-900 text-gray-100;
   }
 
@@ -83,7 +94,7 @@
   }
 
   :is(.dark) .sidebar-link {
-    @apply text-gray-300;
+    @apply text-gray-100;
   }
 
   :is(.dark) .sidebar-link:not(.sidebar-row .sidebar-link):hover {
@@ -153,6 +164,12 @@
   }
 
   .wdl-badge-deprecated {
+    background-color: rgba(180, 130, 20, 0.15);
+    color: #92600a;
+    border: 1px solid rgba(180, 130, 20, 0.4);
+  }
+
+  :is(.dark) .wdl-badge-deprecated {
     background-color: rgba(251, 191, 36, 0.15);
     color: #FCD34D;
     border: 1px solid rgba(251, 191, 36, 0.3);

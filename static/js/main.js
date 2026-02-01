@@ -5,8 +5,9 @@ const themeIconLight = document.getElementById('theme-icon-light');
 
 function updateThemeIcons() {
     const isDark = document.documentElement.classList.contains('dark');
-    themeIconDark?.classList.toggle('hidden', !isDark);
-    themeIconLight?.classList.toggle('hidden', isDark);
+    // Show sun in dark mode (to switch to light), moon in light mode (to switch to dark)
+    themeIconDark?.classList.toggle('hidden', isDark);
+    themeIconLight?.classList.toggle('hidden', !isDark);
 }
 
 updateThemeIcons();
