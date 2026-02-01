@@ -70,19 +70,63 @@
 
 @layer components {
   .sidebar-link {
-    @apply block px-2 py-1.5 text-sm text-gray-600 hover:text-teal-900 hover:bg-teal-200 rounded transition-colors;
+    @apply block px-2 py-1.5 text-sm text-gray-600 rounded transition-colors;
   }
 
-  :is(.dark) .sidebar-link {
-    @apply text-gray-300 hover:text-teal-400 hover:bg-gray-800/50;
+  /* Standalone links (not in a row) get their own hover/active backgrounds */
+  .sidebar-link:not(.sidebar-row .sidebar-link):hover {
+    @apply bg-teal-200 text-teal-900;
   }
 
-  .sidebar-link-active {
+  .sidebar-link:not(.sidebar-row .sidebar-link).sidebar-link-active {
     @apply bg-teal-100 text-teal-700 font-medium;
   }
 
-  :is(.dark) .sidebar-link-active {
+  :is(.dark) .sidebar-link {
+    @apply text-gray-300;
+  }
+
+  :is(.dark) .sidebar-link:not(.sidebar-row .sidebar-link):hover {
+    @apply bg-gray-800/50 text-teal-400;
+  }
+
+  :is(.dark) .sidebar-link:not(.sidebar-row .sidebar-link).sidebar-link-active {
     @apply bg-teal-900/30 text-teal-400;
+  }
+
+  /* Row hover styles */
+  .sidebar-row:hover {
+    @apply bg-teal-200 rounded;
+  }
+
+  .sidebar-row:hover .sidebar-link {
+    @apply text-teal-900;
+  }
+
+  :is(.dark) .sidebar-row:hover {
+    @apply bg-gray-800/50;
+  }
+
+  :is(.dark) .sidebar-row:hover .sidebar-link {
+    @apply text-teal-400;
+  }
+
+  /* Links inside rows only get text styling */
+  .sidebar-row .sidebar-link-active {
+    @apply text-teal-700 font-medium;
+  }
+
+  :is(.dark) .sidebar-row .sidebar-link-active {
+    @apply text-teal-400;
+  }
+
+  /* Highlight the entire row when it contains an active link */
+  .sidebar-row:has(.sidebar-link-active) {
+    @apply bg-teal-100 rounded;
+  }
+
+  :is(.dark) .sidebar-row:has(.sidebar-link-active) {
+    @apply bg-teal-900/30;
   }
 
   .heading-anchor {

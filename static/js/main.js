@@ -37,7 +37,7 @@ mobileSidebarOverlay?.addEventListener('click', closeMobileSidebar);
 
 // Active navigation highlighting
 const currentPath = window.location.pathname;
-const navLinks = document.querySelectorAll('.sidebar-link[data-path]');
+const navLinks = document.querySelectorAll('.sidebar-link[href]');
 
 const activeSections = new Set();
 
@@ -46,10 +46,12 @@ const normalizedCurrentPath = currentPath.endsWith('/') ? currentPath : currentP
 
 // Check regular links
 navLinks.forEach(link => {
-  const linkPath = link.getAttribute('data-path');
+  // Get the pathname from the link's href (handles base URL automatically)
+  const linkPath = new URL(link.href).pathname;
+  const normalizedLinkPath = linkPath.endsWith('/') ? linkPath : linkPath + '/';
 
   // Only highlight if exact match
-  if (normalizedCurrentPath === linkPath) {
+  if (normalizedCurrentPath === normalizedLinkPath) {
     link.classList.add('sidebar-link-active');
 
     // Walk up the DOM tree and collect all parent sections
