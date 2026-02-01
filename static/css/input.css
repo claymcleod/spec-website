@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Martian+Mono:wght@300;400;500;600;700&display=swap');
+
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@utility prose {
+  code {
+    font-weight: 400;
+  }
+  code::before,
+  code::after {
+    content: none;
+  }
+}
+
+@source "../../templates";
+@source "../../content";
+@source "../js";
+
+@theme {
+  --font-sans: 'Public Sans', sans-serif;
+  --font-mono: 'Martian Mono', monospace;
+
+  --color-teal-50: #EDFBFF;
+  --color-teal-100: #C7F3FD;
+  --color-teal-200: #ACEDFD;
+  --color-teal-300: #86E5FC;
+  --color-teal-400: #6FE0FB;
+  --color-teal-500: #4BD8FA;
+  --color-teal-600: #44C5E4;
+  --color-teal-700: #3599B2;
+  --color-teal-800: #29778A;
+  --color-teal-900: #205B69;
+
+  --color-gray-50: #E8E8E9;
+  --color-gray-100: #C7C8CB;
+  --color-gray-200: #9497A1;
+  --color-gray-300: #696E7A;
+  --color-gray-400: #3A3F4A;
+  --color-gray-500: #242833;
+  --color-gray-600: #171B26;
+  --color-gray-700: #10131C;
+  --color-gray-800: #0D0F16;
+  --color-gray-900: #0A0C12;
+}
+
+@layer base {
+  html {
+    @apply antialiased bg-gray-900 text-gray-100;
+  }
+
+  body {
+    @apply font-sans;
+  }
+}
+
+@layer components {
+  .sidebar-link {
+    @apply block px-1 py-1.5 text-sm text-gray-100 hover:text-teal-400 hover:bg-gray-800/50 rounded transition-colors;
+  }
+
+  .sidebar-link-active {
+    @apply bg-gray-800 text-teal-400 font-medium;
+  }
+
+  .heading-anchor {
+    @apply text-teal-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2;
+  }
+
+  /* WDL spec badges */
+  .wdl-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.125rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 0.25rem;
+    margin-left: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+  }
+
+  .wdl-badge-new {
+    background-color: rgba(79, 209, 197, 0.15);
+    color: var(--color-teal-400);
+    border: 1px solid rgba(79, 209, 197, 0.3);
+  }
+
+  .wdl-badge-deprecated {
+    background-color: rgba(251, 191, 36, 0.15);
+    color: #FCD34D;
+    border: 1px solid rgba(251, 191, 36, 0.3);
+  }
+
+  /* Headings with badges */
+  h1 .wdl-badge, h2 .wdl-badge, h3 .wdl-badge, h4 .wdl-badge {
+    font-size: 0.35em;
+    margin-left: 0.75rem;
+  }
+
+  /* Inline code */
+  :not(pre) > code {
+    font-family: 'Martian Mono', monospace;
+    font-size: 0.875em;
+    font-weight: 400;
+    padding: 0.125rem 0.375rem;
+    border-radius: 0.25rem;
+    background-color: var(--color-gray-500);
+    border: 1px solid var(--color-gray-400);
+  }
+
+
+  /* Details/summary styling */
+  details {
+    margin: 1.5rem 0;
+    border: 1px solid var(--color-gray-700);
+    border-radius: 0.375rem;
+    background-color: var(--color-gray-800);
+  }
+
+  details summary {
+    padding: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--color-gray-100);
+    user-select: none;
+  }
+
+  details summary pre,
+  details summary pre * {
+    cursor: text;
+    user-select: text;
+  }
+
+  details summary:hover {
+    background-color: var(--color-gray-700);
+  }
+
+  details[open] summary {
+    border-bottom: 1px solid var(--color-gray-700);
+    margin-bottom: 1rem;
+  }
+
+  details > *:not(summary) {
+    padding: 0 1rem 1rem 1rem;
+  }
+}
+
+@layer utilities {
+  pre[data-lang] {
+    @apply rounded-lg p-4 overflow-x-auto font-mono text-sm border border-gray-300/40 bg-gray-500;
+  }
+
+  .chevron-open {
+    transform: rotate(90deg);
+  }
+  
+  .chevron-closed {
+    transform: rotate(0deg);
+  }
+}

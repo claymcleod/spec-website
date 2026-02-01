@@ -1,0 +1,22 @@
+# The URL the site will be built for
+base_url = "https://spec.openwdl.org"
+title = "WDL Specification"
+description = "Workflow Description Language - Open Standard for Bioinformatics Workflows"
+
+# Whether to automatically compile all Sass files in the sass directory
+compile_sass = false
+
+# Whether to build a search index to be used later on by a JavaScript library
+build_search_index = true
+
+[markdown.highlighting]
+# Whether to do syntax highlighting
+highlight_code = true
+theme = "material-theme-ocean"
+extra_grammars = ["syntaxes/wdl.json"]
+
+[extra]
+# OpenWDL brand identity
+logo_text = "{wdl}"
+github_url = "https://github.com/openwdl/wdl"
+current_version = "1.2"

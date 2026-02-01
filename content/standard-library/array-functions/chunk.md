@@ -1,0 +1,70 @@
++++
+title = "chunk"
+description = "Split array into chunks"
+weight = 70
++++
+
+<span class="wdl-badge wdl-badge-new">New in 1.2</span>
+
+```
+Array[Array[X]] chunk(Array[X], Int)
+```
+
+Given an array and a length *n*, splits the array into consecutive, non-overlapping arrays of *n* elements. If the length of the array is not a multiple *n* then the final sub-array will have `length(array) % n` elements.
+
+**Parameters**
+
+1. `Array[X]`: The array to split. May be empty.
+2. `Int`: The desired length of the sub-arrays. Must be > 0.
+
+**Returns**: An array of sub-arrays, where each sub-array is of length `N` except possibly the last one.
+
+<details>
+<summary>
+Example: chunk_array.wdl
+
+```wdl
+version 1.2
+workflow chunk_array {
+  Array[String] s1 = ["a", "b", "c", "d", "e", "f"]
+  Array[String] s2 = ["a", "b", "c", "d", "e"]
+  Array[String] s3 = ["a", "b"]
+  Array[String] s4 = []
+  
+  scatter (a in chunk(s1, 3)) {
+    String concat = sep("", a)
+  }
+
+  output {
+    Boolean is_reversible = s1 == flatten(chunk(s1, 3))
+    Array[Array[String]] o1 = chunk(s1, 3)
+    Array[Array[String]] o2 = chunk(s2, 3)
+    Array[Array[String]] o3 = chunk(s3, 3)
+    Array[Array[String]] o4 = chunk(s4, 3)
+    Array[String] concats = concat
+  }
+}
+```
+</summary>
+<p>
+Example input:
+
+```json
+{}
+```
+
+Example output:
+
+```json
+{
+  "chunk_array.is_reversible": true,
+  "chunk_array.o1": [["a", "b", "c"], ["d", "e", "f"]],
+  "chunk_array.o2": [["a", "b", "c"], ["d", "e"]],
+  "chunk_array.o3": [["a", "b"]],
+  "chunk_array.o4": [],
+  "chunk_array.concats": ["abc", "def"]
+}
+``` 
+</p>
+</details>
+

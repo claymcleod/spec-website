@@ -1,0 +1,25 @@
+# Zola build output
+public/
+
+# Node
+node_modules/
+
+# Tailwind generated CSS
+static/css/style.css
+
+# Fetched syntax grammars
+syntaxes/*
+!syntaxes/.gitkeep
+
+# Editor directories
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+
+# Local symlinks
+SPEC.md

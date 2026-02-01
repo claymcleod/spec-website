@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="text-center mb-16">
+    <div class="flex flex-col items-center mb-12">
+        <img src="{{ get_url(path='img/full-cyan-logo-white-text.svg') }}" alt="OpenWDL Logo" class="h-18 mt-10 mb-12">
+        <h1 class="text-6xl font-bold text-gray-50 mb-6">
+            Specification
+        </h1>
+        <p class="text-xl text-gray-300 max-w-3xl mx-auto mb-8">
+            An open standard for describing data processing workflows with a human-readable and writable syntax.
+        </p>
+        <div class="flex items-center justify-center space-x-4">
+            <a href="{{ get_url(path='/introduction/') }}" class="px-6 py-3 bg-teal-500 hover:bg-teal-600 text-gray-900 font-semibold rounded-md transition-colors">
+                Read the Spec
+            </a>
+            <a href="{{ config.extra.github_url }}" class="px-6 py-3 bg-gray-800 hover:bg-gray-700 text-gray-100 font-semibold rounded-md border border-gray-700 transition-colors">
+                Join the Community
+            </a>
+            <a href="{{ config.extra.github_url }}" class="px-6 py-3 bg-gray-800 hover:bg-gray-700 text-gray-100 font-semibold rounded-md border border-gray-700 transition-colors">
+                View on GitHub
+            </a>
+        </div>
+    </div>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+    <div class="p-6 bg-gray-800 border border-gray-700 rounded-lg">
+        <h3 class="text-xl font-semibold text-gray-50 mb-3">Human-readable</h3>
+        <p class="text-gray-400">
+            Designed to be readable and writable by scientists, engineers, and platform operators.
+        </p>
+    </div>
+    <div class="p-6 bg-gray-800 border border-gray-700 rounded-lg">
+        <h3 class="text-xl font-semibold text-gray-50 mb-3">Portable</h3>
+        <p class="text-gray-400">
+            Write once, run anywhere—from laptops to HPC clusters to cloud platforms.
+        </p>
+    </div>
+    <div class="p-6 bg-gray-800 border border-gray-700 rounded-lg">
+        <h3 class="text-xl font-semibold text-gray-50 mb-3">Open standard</h3>
+        <p class="text-gray-400">
+            Community-driven specification with multiple implementations and broad ecosystem support.
+        </p>
+    </div>
+</div>
+{% endblock content %}
