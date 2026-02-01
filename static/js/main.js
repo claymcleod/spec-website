@@ -1,3 +1,22 @@
+// Theme toggle
+const themeToggle = document.getElementById('theme-toggle');
+const themeIconDark = document.getElementById('theme-icon-dark');
+const themeIconLight = document.getElementById('theme-icon-light');
+
+function updateThemeIcons() {
+    const isDark = document.documentElement.classList.contains('dark');
+    themeIconDark?.classList.toggle('hidden', !isDark);
+    themeIconLight?.classList.toggle('hidden', isDark);
+}
+
+updateThemeIcons();
+
+themeToggle?.addEventListener('click', () => {
+    const isDark = document.documentElement.classList.toggle('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    updateThemeIcons();
+});
+
 // Mobile sidebar toggle
 const mobileMenuButton = document.getElementById('mobile-menu-button');
 const mobileSidebar = document.getElementById('mobile-sidebar');

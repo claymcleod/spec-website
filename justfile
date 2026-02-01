@@ -1,24 +1,5 @@
-# Start development servers with CSS watching
-dev: fetch-grammar
-    #!/usr/bin/env bash
-    set -e
-
-    # Build CSS initially
-    npx tailwindcss -i ./static/css/input.css -o ./static/css/style.css
-
-    # Watch templates and content, rebuild CSS on changes
-    (
-        while true; do
-            find templates content -type f -newer static/css/style.css 2>/dev/null | grep -q . && {
-                echo "Detected template/content change, rebuilding CSS..."
-                npx tailwindcss -i ./static/css/input.css -o ./static/css/style.css
-            }
-            sleep 0.5
-        done
-    ) &
-    WATCH_PID=$!
-
-    trap "kill $WATCH_PID 2>/dev/null" EXIT
+# Start development servers
+dev: fetch-grammar build-css
     zola serve
 
 fetch-grammar:
