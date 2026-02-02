@@ -38,7 +38,7 @@
                     </a>
 
                     <div class="relative">
-                        <select disabled aria-label="Select WDL specification version" class="w-full appearance-none pl-3 pr-10 py-2 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md text-sm text-gray-500 dark:text-gray-400 cursor-not-allowed">
+                        <select disabled aria-label="Select WDL specification version" class="w-full appearance-none pl-3 pr-10 py-2 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md text-sm text-gray-600 dark:text-gray-100 cursor-not-allowed">
                             <option>Version {{ config.extra.current_version }}</option>
                         </select>
                         <i class="fa-solid fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-400 pointer-events-none"></i>
@@ -326,9 +326,9 @@
 
                     <div class="flex-1 flex justify-center">
                         <div class="relative w-full max-w-md">
-                            <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 dark:text-gray-500 text-sm pointer-events-none"></i>
+                            <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 text-sm pointer-events-none"></i>
                             <input type="search" id="search-input" placeholder="Search documentation..." aria-label="Search documentation" aria-autocomplete="list" aria-controls="search-results" aria-expanded="false" class="w-full pl-9 pr-16 py-2 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md text-sm text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-500">
-                            <kbd class="absolute right-3 top-1/2 -translate-y-1/2 px-1.5 py-0.5 text-xs font-mono text-gray-400 dark:text-gray-500 bg-gray-200 dark:bg-gray-700 rounded border border-gray-300 dark:border-gray-600 pointer-events-none">/</kbd>
+                            <kbd class="absolute right-3 top-1/2 -translate-y-1/2 px-1.5 py-0.5 text-xs font-mono text-gray-500 dark:text-gray-400 bg-gray-200 dark:bg-gray-700 rounded border border-gray-400 dark:border-gray-500 pointer-events-none">/</kbd>
                             <div id="search-results" role="listbox" aria-label="Search results" class="hidden absolute top-full left-0 right-0 mt-1 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md shadow-lg max-h-96 overflow-y-auto z-50"></div>
                         </div>
                     </div>
@@ -347,8 +347,8 @@
             </main>
 
             <footer class="border-t border-gray-200 dark:border-gray-600 px-6 py-6">
-                <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center sm:justify-between gap-3 text-sm text-gray-600 dark:text-gray-100">
-                    <p class="text-center sm:text-left">© {{ now() | date(format="%Y") }} OpenWDL. Licensed under BSD 3-Clause.</p>
+                <div class="max-w-4xl mx-auto flex flex-col md:flex-row md:justify-between md:items-center items-center gap-3 text-sm text-gray-600 dark:text-gray-100">
+                    <p>© {{ now() | date(format="%Y") }} OpenWDL. Licensed under BSD 3-Clause.</p>
                     <div class="flex items-center space-x-6">
                         <a href="{{ config.extra.github_url }}" class="hover:text-teal-600 dark:hover:text-teal-400 transition-colors">GitHub</a>
                         <a href="/community/" class="hover:text-teal-600 dark:hover:text-teal-400 transition-colors">Community</a>
