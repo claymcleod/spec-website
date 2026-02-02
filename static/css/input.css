@@ -366,6 +366,27 @@
     user-select: text;
   }
 
+  /* Mobile responsive adjustments */
+  @media (max-width: 640px) {
+    details summary {
+      padding: 0.75rem 0.75rem;
+    }
+
+    details summary::before {
+      margin: -0.75rem -0.75rem 0.5rem -0.75rem;
+      padding: 0.5rem 0.75rem;
+    }
+
+    details > p,
+    details > div {
+      padding: 0.5rem 0.75rem 0.125rem;
+    }
+
+    details > pre {
+      margin: 0.25rem 0.75rem 0.75rem;
+    }
+  }
+
 }
 
 @layer utilities {
