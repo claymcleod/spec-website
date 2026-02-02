@@ -141,3 +141,135 @@ document.querySelectorAll('pre code').forEach((block) => {
     }, 2000);
   });
 });
+
+// Search functionality
+const searchInput = document.getElementById('search-input');
+const searchResults = document.getElementById('search-results');
+let searchIndex = null;
+let selectedIndex = -1;
+
+async function loadSearchIndex() {
+    if (searchIndex) return;
+
+    // Check if index is already loaded (via script tag)
+    if (window.searchIndex) {
+        searchIndex = elasticlunr.Index.load(window.searchIndex);
+        return;
+    }
+
+    // Dynamically load the search index script
+    return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = '/search_index.en.js';
+        script.onload = () => {
+            if (window.searchIndex) {
+                searchIndex = elasticlunr.Index.load(window.searchIndex);
+                resolve();
+            } else {
+                reject(new Error('Search index not found'));
+            }
+        };
+        script.onerror = () => reject(new Error('Failed to load search index'));
+        document.head.appendChild(script);
+    });
+}
+
+function performSearch(query) {
+    if (!searchIndex || !query.trim()) {
+        hideResults();
+        return;
+    }
+
+    const results = searchIndex.search(query, {
+        fields: { title: { boost: 2 }, body: { boost: 1 } },
+        expand: true
+    }).slice(0, 8);
+
+    if (results.length === 0) {
+        searchResults.innerHTML = '<div class="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">No results found</div>';
+        showResults();
+        return;
+    }
+
+    const html = results.map((result, index) => {
+        const url = result.ref;
+        // Try to get doc from documentStore, fall back to URL-based title
+        let title = '';
+        let snippet = '';
+
+        const doc = searchIndex.documentStore?.getDoc(url);
+        if (doc && doc.title) {
+            title = doc.title;
+            snippet = doc.body ? doc.body.substring(0, 120).replace(/\n/g, ' ') + '...' : '';
+        } else {
+            // Extract title from URL path
+            const parts = url.split('/').filter(p => p);
+            title = parts[parts.length - 1]?.replace(/-/g, ' ') || url;
+            title = title.charAt(0).toUpperCase() + title.slice(1);
+        }
+
+        // Convert absolute URL to relative path
+        const path = url.replace(/^https?:\/\/[^\/]+/, '');
+
+        return `
+            <a href="${path}" class="search-result block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 border-b border-gray-200 dark:border-gray-700 last:border-0 ${index === selectedIndex ? 'bg-gray-100 dark:bg-gray-700' : ''}" data-index="${index}">
+                <div class="font-medium text-gray-900 dark:text-gray-100 text-sm">${title}</div>
+                ${snippet ? `<div class="text-xs text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">${snippet}</div>` : `<div class="text-xs text-gray-500 dark:text-gray-400 mt-1">${path}</div>`}
+            </a>
+        `;
+    }).join('');
+
+    searchResults.innerHTML = html;
+    showResults();
+}
+
+function showResults() {
+    searchResults?.classList.remove('hidden');
+}
+
+function hideResults() {
+    searchResults?.classList.add('hidden');
+    selectedIndex = -1;
+}
+
+function updateSelection(results) {
+    results.forEach((el, i) => {
+        el.classList.toggle('bg-gray-100', i === selectedIndex);
+        el.classList.toggle('dark:bg-gray-700', i === selectedIndex);
+    });
+}
+
+searchInput?.addEventListener('focus', loadSearchIndex);
+
+let debounceTimer;
+searchInput?.addEventListener('input', (e) => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => performSearch(e.target.value), 300);
+});
+
+searchInput?.addEventListener('keydown', (e) => {
+    const results = searchResults?.querySelectorAll('.search-result') || [];
+    if (results.length === 0) return;
+
+    if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        selectedIndex = Math.min(selectedIndex + 1, results.length - 1);
+        updateSelection(results);
+    } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        selectedIndex = Math.max(selectedIndex - 1, 0);
+        updateSelection(results);
+    } else if (e.key === 'Enter' && selectedIndex >= 0) {
+        e.preventDefault();
+        results[selectedIndex].click();
+    } else if (e.key === 'Escape') {
+        hideResults();
+        searchInput.blur();
+    }
+});
+
+document.addEventListener('click', (e) => {
+    if (!searchInput?.contains(e.target) && !searchResults?.contains(e.target)) {
+        hideResults();
+    }
+});
