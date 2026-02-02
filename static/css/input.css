@@ -72,6 +72,27 @@
     --color-gray-800: #0D0F16;
     --color-gray-900: #0A0C12;
     @apply bg-gray-900 text-gray-100;
+
+    /* Dark mode scrollbar styling */
+    scrollbar-color: #3A3F4A #0A0C12;
+  }
+
+  html.dark *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  html.dark *::-webkit-scrollbar-track {
+    background: #0D0F16;
+  }
+
+  html.dark *::-webkit-scrollbar-thumb {
+    background: #3A3F4A;
+    border-radius: 4px;
+  }
+
+  html.dark *::-webkit-scrollbar-thumb:hover {
+    background: #696E7A;
   }
 
   body {
