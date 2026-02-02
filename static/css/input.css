@@ -18,7 +18,7 @@
 }
 
 :is(.dark) .prose {
-  --tw-prose-body: var(--color-gray-200);
+  --tw-prose-body: var(--color-gray-100);
   --tw-prose-headings: var(--color-gray-100);
 }
 
