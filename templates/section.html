@@ -4,16 +4,16 @@
 
 {% block content %}
 <nav class="flex items-center space-x-2 text-sm mb-8">
-    <a href="{{ get_url(path='/') }}" class="text-gray-500 dark:text-gray-400 hover:text-teal-600 dark:hover:text-teal-400">Home</a>
-    <span class="text-gray-400 dark:text-gray-600">/</span>
-    <span class="text-gray-900 dark:text-gray-100">{{ section.title }}</span>
+    <a href="{{ get_url(path='/') }}" class="text-gray-500 dark:text-gray-100 hover:text-teal-600 dark:hover:text-teal-400">Home</a>
+    <span class="text-gray-500 dark:text-gray-100">/</span>
+    <span class="text-gray-900 dark:text-white">{{ section.title }}</span>
 </nav>
 
 <article class="prose prose-lg prose-gray dark:prose-invert prose-teal max-w-none">
     <header class="not-prose mb-12">
         <h1 class="text-5xl font-bold text-gray-700 dark:text-gray-50 mb-4">{{ section.title }}</h1>
         {% if section.description %}
-        <p class="text-xl text-gray-600 dark:text-gray-300">{{ section.description }}</p>
+        <p class="text-xl text-gray-600 dark:text-gray-100">{{ section.description }}</p>
         {% endif %}
     </header>
 
@@ -27,7 +27,7 @@
             {{ section.pages[0].title }}
         </h3>
         {% if section.pages[0].description %}
-        <p class="text-sm text-gray-600 dark:text-gray-400">{{ section.pages[0].description }}</p>
+        <p class="text-sm text-gray-600 dark:text-gray-100">{{ section.pages[0].description }}</p>
         {% endif %}
     </a>
 </div>
@@ -59,7 +59,7 @@
         <div class="text-xs text-gray-500 mb-2">Previous</div>
         <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-50 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">{{ prev_section.title }}</h3>
         {% if prev_section.description %}
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">{{ prev_section.description }}</p>
+        <p class="text-sm text-gray-600 dark:text-gray-100 mt-2">{{ prev_section.description }}</p>
         {% endif %}
     </a>
     {% else %}
@@ -71,7 +71,7 @@
         <div class="text-xs text-gray-500 mb-2">Next</div>
         <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-50 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">{{ next_section.title }}</h3>
         {% if next_section.description %}
-        <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">{{ next_section.description }}</p>
+        <p class="text-sm text-gray-600 dark:text-gray-100 mt-2">{{ next_section.description }}</p>
         {% endif %}
     </a>
     {% else %}

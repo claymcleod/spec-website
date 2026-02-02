@@ -1,0 +1,47 @@
+name: Accessibility Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  a11y:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Setup tools
+        uses: taiki-e/install-action@v2
+        with:
+          tool: zola@0.22.0,just
+
+      - name: Build CSS
+        run: just build-css
+
+      - name: Fetch grammar
+        run: just fetch-grammar
+
+      - name: Start dev server
+        run: |
+          zola serve &
+          sleep 5
+          curl --retry 10 --retry-delay 2 --retry-connrefused http://127.0.0.1:1111 > /dev/null
+
+      - name: Run accessibility tests (dark mode)
+        run: just a11y-dark
+
+      - name: Run accessibility tests (light mode)
+        run: just a11y-light

@@ -186,7 +186,7 @@ function performSearch(query) {
     }).slice(0, 8);
 
     if (results.length === 0) {
-        searchResults.innerHTML = '<div class="px-4 py-3 text-sm text-gray-500 dark:text-gray-400">No results found</div>';
+        searchResults.innerHTML = '<div class="px-4 py-3 text-sm text-gray-500 dark:text-gray-100" role="status">No results found</div>';
         showResults();
         return;
     }
@@ -212,9 +212,9 @@ function performSearch(query) {
         const path = url.replace(/^https?:\/\/[^\/]+/, '');
 
         return `
-            <a href="${path}" class="search-result block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 border-b border-gray-200 dark:border-gray-700 last:border-0 ${index === selectedIndex ? 'bg-gray-100 dark:bg-gray-700' : ''}" data-index="${index}">
+            <a href="${path}" class="search-result block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-100 dark:focus:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-teal-500 border-b border-gray-200 dark:border-gray-700 last:border-0 ${index === selectedIndex ? 'bg-gray-100 dark:bg-gray-700' : ''}" data-index="${index}" role="option" aria-selected="${index === selectedIndex}" tabindex="0">
                 <div class="font-medium text-gray-900 dark:text-gray-100 text-sm">${title}</div>
-                ${snippet ? `<div class="text-xs text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">${snippet}</div>` : `<div class="text-xs text-gray-500 dark:text-gray-400 mt-1">${path}</div>`}
+                ${snippet ? `<div class="text-xs text-gray-500 dark:text-gray-100 mt-1 line-clamp-2">${snippet}</div>` : `<div class="text-xs text-gray-500 dark:text-gray-100 mt-1">${path}</div>`}
             </a>
         `;
     }).join('');
@@ -225,10 +225,12 @@ function performSearch(query) {
 
 function showResults() {
     searchResults?.classList.remove('hidden');
+    searchInput?.setAttribute('aria-expanded', 'true');
 }
 
 function hideResults() {
     searchResults?.classList.add('hidden');
+    searchInput?.setAttribute('aria-expanded', 'false');
     selectedIndex = -1;
 }
 
@@ -255,16 +257,49 @@ searchInput?.addEventListener('keydown', (e) => {
         e.preventDefault();
         selectedIndex = Math.min(selectedIndex + 1, results.length - 1);
         updateSelection(results);
+        results[selectedIndex]?.focus();
     } else if (e.key === 'ArrowUp') {
         e.preventDefault();
         selectedIndex = Math.max(selectedIndex - 1, 0);
         updateSelection(results);
+        results[selectedIndex]?.focus();
     } else if (e.key === 'Enter' && selectedIndex >= 0) {
         e.preventDefault();
         results[selectedIndex].click();
     } else if (e.key === 'Escape') {
         hideResults();
         searchInput.blur();
+    }
+});
+
+// Allow arrow key navigation within search results
+searchResults?.addEventListener('keydown', (e) => {
+    const results = searchResults?.querySelectorAll('.search-result') || [];
+    if (results.length === 0) return;
+
+    const currentIndex = Array.from(results).findIndex(el => el === document.activeElement);
+    if (currentIndex === -1) return;
+
+    if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        const nextIndex = Math.min(currentIndex + 1, results.length - 1);
+        results[nextIndex]?.focus();
+        selectedIndex = nextIndex;
+        updateSelection(results);
+    } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        if (currentIndex === 0) {
+            searchInput?.focus();
+            selectedIndex = -1;
+        } else {
+            const prevIndex = currentIndex - 1;
+            results[prevIndex]?.focus();
+            selectedIndex = prevIndex;
+            updateSelection(results);
+        }
+    } else if (e.key === 'Escape') {
+        hideResults();
+        searchInput?.focus();
     }
 });
 

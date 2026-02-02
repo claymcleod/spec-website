@@ -81,7 +81,7 @@
 
 @layer components {
   .sidebar-link {
-    @apply block px-2 py-1.5 text-sm text-gray-600 rounded transition-colors;
+    @apply block px-2 py-1.5 text-sm text-gray-500 rounded transition-colors;
   }
 
   /* Standalone links (not in a row) get their own hover/active backgrounds */
@@ -90,11 +90,11 @@
   }
 
   .sidebar-link:not(.sidebar-row .sidebar-link).sidebar-link-active {
-    @apply bg-teal-100 text-teal-700 font-medium;
+    @apply bg-teal-100 text-teal-900 font-medium;
   }
 
   :is(.dark) .sidebar-link {
-    @apply text-gray-100;
+    @apply text-white;
   }
 
   :is(.dark) .sidebar-link:not(.sidebar-row .sidebar-link):hover {
@@ -124,7 +124,7 @@
 
   /* Links inside rows only get text styling */
   .sidebar-row .sidebar-link-active {
-    @apply text-teal-700 font-medium;
+    @apply text-teal-900 font-medium;
   }
 
   :is(.dark) .sidebar-row .sidebar-link-active {
@@ -253,6 +253,12 @@
 
   :is(.dark) pre[data-lang] {
     @apply border-gray-800 bg-gray-900;
+  }
+
+  /* Override syntax highlighting comment color for better contrast
+     Detected by pa11y-ci WCAG2AA accessibility testing */
+  pre span[style*="color: #464B5D"] {
+    color: #8b949e !important;
   }
 
   .chevron-open {

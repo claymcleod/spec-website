@@ -19,3 +19,16 @@ clean:
     rm -f static/css/style.css
     rm -rf public/
     rm -rf syntaxes/
+
+# Run accessibility tests (requires dev server running)
+a11y: a11y-dark a11y-light
+
+# Run accessibility tests in dark mode
+a11y-dark:
+    @echo "Running accessibility tests (dark mode)..."
+    node .pa11y/run.js dark http://127.0.0.1:1111/sitemap.xml
+
+# Run accessibility tests in light mode
+a11y-light:
+    @echo "Running accessibility tests (light mode)..."
+    node .pa11y/run.js light http://127.0.0.1:1111/sitemap.xml
