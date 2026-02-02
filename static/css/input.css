@@ -140,8 +140,32 @@
     @apply bg-teal-900/30;
   }
 
-  .heading-anchor {
-    @apply text-teal-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2;
+  /* Heading anchors */
+  .zola-anchor {
+    @apply text-gray-400 mr-1 no-underline! font-bold;
+    vertical-align: baseline;
+  }
+
+  .zola-anchor:hover {
+    @apply text-teal-500;
+  }
+
+  :is(.dark) .zola-anchor {
+    @apply text-gray-500;
+  }
+
+  :is(.dark) .zola-anchor:hover {
+    @apply text-teal-400;
+  }
+
+  /* Scroll margin for heading anchors */
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4,
+  .prose h5,
+  .prose h6 {
+    @apply scroll-mt-20;
   }
 
   /* WDL spec badges */
