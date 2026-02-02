@@ -22,7 +22,7 @@
 
 {% if section.pages %}
 <div class="flex justify-end mt-12">
-    <a href="{{ section.pages[0].permalink }}" class="group block p-6 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-teal-500 transition-colors max-w-md w-1/3">
+    <a href="{{ section.pages[0].permalink }}" class="group block p-6 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg hover:border-teal-500 transition-colors max-w-md w-1/3">
         <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-50 mb-2">
             {{ section.pages[0].title }}
         </h3>
@@ -53,9 +53,9 @@
     {% endif %}
 {% endfor %}
 
-<nav class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-800 flex items-center justify-between gap-4">
+<nav class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-600 flex items-center justify-between gap-4">
     {% if prev_section %}
-    <a href="{{ prev_section.permalink }}" class="group block p-6 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-teal-500 transition-colors max-w-md w-1/3">
+    <a href="{{ prev_section.permalink }}" class="group block p-6 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg hover:border-teal-500 transition-colors max-w-md w-1/3">
         <div class="text-xs text-gray-500 mb-2">Previous</div>
         <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-50 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">{{ prev_section.title }}</h3>
         {% if prev_section.description %}
@@ -67,7 +67,7 @@
     {% endif %}
 
     {% if next_section %}
-    <a href="{{ next_section.permalink }}" class="group block p-6 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-teal-500 transition-colors max-w-md w-1/3 text-right">
+    <a href="{{ next_section.permalink }}" class="group block p-6 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg hover:border-teal-500 transition-colors max-w-md w-1/3 text-right">
         <div class="text-xs text-gray-500 mb-2">Next</div>
         <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-50 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">{{ next_section.title }}</h3>
         {% if next_section.description %}
