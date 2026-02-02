@@ -160,7 +160,8 @@ async function loadSearchIndex() {
     // Dynamically load the search index script
     return new Promise((resolve, reject) => {
         const script = document.createElement('script');
-        script.src = '/search_index.en.js';
+        const baseUrl = window.BASE_URL || '';
+        script.src = baseUrl + '/search_index.en.js';
         script.onload = () => {
             if (window.searchIndex) {
                 searchIndex = elasticlunr.Index.load(window.searchIndex);

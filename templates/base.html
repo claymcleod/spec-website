@@ -30,14 +30,14 @@
             <div class="flex flex-col h-full">
                 <div class="flex-1 overflow-y-auto px-6 py-8">
                     <div>
-                        <a href="{{ get_url(path='/') }}" class="flex items-center gap-3 mb-6">
-                            <img src="{{ get_url(path='img/full-cyan-logo-black-text.svg') }}" alt="OpenWDL Logo" class="h-5 dark:hidden">
-                            <img src="{{ get_url(path='img/full-cyan-logo-white-text.svg') }}" alt="OpenWDL Logo" class="h-5 hidden dark:block">
+                        <a href="{{ get_url(path='/') }}" class="flex items-center gap-3 mb-4">
+                            <img src="{{ get_url(path='img/full-cyan-logo-black-text.svg') }}" alt="OpenWDL Logo" class="h-4 dark:hidden">
+                            <img src="{{ get_url(path='img/full-cyan-logo-white-text.svg') }}" alt="OpenWDL Logo" class="h-4 hidden dark:block">
                             <span class="text-xl font-semibold text-gray-500 dark:text-gray-100">/</span>
                             <span class="text-md font-semibold text-gray-900 dark:text-white">Specification</span>
                         </a>
 
-                        <div class="mb-6">
+                        <div class="mb-8">
                             <div class="relative">
                                 <select disabled aria-label="Select WDL specification version" class="w-full appearance-none pl-3 pr-10 py-2 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-md text-sm text-gray-500 dark:text-gray-400 cursor-not-allowed">
                                     <option>Version {{ config.extra.current_version }}</option>
@@ -57,7 +57,7 @@
                             <div class="sidebar-section" data-section="introduction">
                                 <div class="flex items-center justify-between sidebar-row">
                                     <a href="{{ get_url(path='/introduction/') }}" class="sidebar-link flex-1" data-path="/introduction/" data-section="introduction">Introduction</a>
-                                    <button class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded transition-colors chevron-toggle" aria-label="Toggle Introduction submenu">
+                                    <button class="p-1.5 rounded transition-colors chevron-toggle" aria-label="Toggle Introduction submenu">
                                         <svg class="w-4 h-4 transition-transform sidebar-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                         </svg>
@@ -78,7 +78,7 @@
                             <div class="sidebar-section" data-section="types">
                                 <div class="flex items-center justify-between sidebar-row">
                                     <a href="{{ get_url(path='/types/') }}" class="sidebar-link flex-1" data-path="/types/" data-section="types">Type System</a>
-                                    <button class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded transition-colors chevron-toggle" aria-label="Toggle Type System submenu">
+                                    <button class="p-1.5 rounded transition-colors chevron-toggle" aria-label="Toggle Type System submenu">
                                         <svg class="w-4 h-4 transition-transform sidebar-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                         </svg>
@@ -88,7 +88,7 @@
                                     <div class="sidebar-section" data-section="primitive-types">
                                         <div class="flex items-center justify-between sidebar-row">
                                             <a href="{{ get_url(path='/types/primitive-types/') }}" class="sidebar-link flex-1 pl-6" data-path="/types/primitive-types/" data-section="primitive-types">Primitive Types</a>
-                                            <button class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded transition-colors chevron-toggle" aria-label="Toggle Primitive Types submenu">
+                                            <button class="p-1.5 rounded transition-colors chevron-toggle" aria-label="Toggle Primitive Types submenu">
                                                 <svg class="w-4 h-4 transition-transform sidebar-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                                 </svg>
@@ -102,7 +102,7 @@
                                     <div class="sidebar-section" data-section="compound-types">
                                         <div class="flex items-center justify-between sidebar-row">
                                             <a href="{{ get_url(path='/types/compound-types/') }}" class="sidebar-link flex-1 pl-6" data-path="/types/compound-types/" data-section="compound-types">Compound Types</a>
-                                            <button class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded transition-colors chevron-toggle" aria-label="Toggle Compound Types submenu">
+                                            <button class="p-1.5 rounded transition-colors chevron-toggle" aria-label="Toggle Compound Types submenu">
                                                 <svg class="w-4 h-4 transition-transform sidebar-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                                 </svg>
@@ -120,7 +120,7 @@
                             <div class="sidebar-section" data-section="tasks">
                                 <div class="flex items-center justify-between sidebar-row">
                                     <a href="{{ get_url(path='/tasks/') }}" class="sidebar-link flex-1" data-path="/tasks/" data-section="tasks">Tasks</a>
-                                    <button class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded transition-colors chevron-toggle" aria-label="Toggle Tasks submenu">
+                                    <button class="p-1.5 rounded transition-colors chevron-toggle" aria-label="Toggle Tasks submenu">
                                         <svg class="w-4 h-4 transition-transform sidebar-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                         </svg>
@@ -143,7 +143,7 @@
                             <div class="sidebar-section" data-section="workflows">
                                 <div class="flex items-center justify-between sidebar-row">
                                     <a href="{{ get_url(path='/workflows/') }}" class="sidebar-link flex-1" data-path="/workflows/" data-section="workflows">Workflows</a>
-                                    <button class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded transition-colors chevron-toggle" aria-label="Toggle Workflows submenu">
+                                    <button class="p-1.5 rounded transition-colors chevron-toggle" aria-label="Toggle Workflows submenu">
                                         <svg class="w-4 h-4 transition-transform sidebar-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                         </svg>
@@ -164,7 +164,7 @@
                             <div class="sidebar-section" data-section="standard-library">
                                 <div class="flex items-center justify-between sidebar-row">
                                     <a href="{{ get_url(path='/standard-library/') }}" class="sidebar-link flex-1" data-path="/standard-library/" data-section="standard-library">Standard Library</a>
-                                    <button class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded transition-colors chevron-toggle" aria-label="Toggle Standard Library submenu">
+                                    <button class="p-1.5 rounded transition-colors chevron-toggle" aria-label="Toggle Standard Library submenu">
                                         <svg class="w-4 h-4 transition-transform sidebar-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                         </svg>
@@ -174,7 +174,7 @@
                                     <div class="sidebar-section" data-section="numeric-functions">
                                         <div class="flex items-center justify-between sidebar-row">
                                             <a href="{{ get_url(path='/standard-library/numeric-functions/') }}" class="sidebar-link flex-1 pl-6" data-path="/standard-library/numeric-functions/" data-section="numeric-functions">Numeric Functions</a>
-                                            <button class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded transition-colors chevron-toggle" aria-label="Toggle Numeric Functions submenu">
+                                            <button class="p-1.5 rounded transition-colors chevron-toggle" aria-label="Toggle Numeric Functions submenu">
                                                 <svg class="w-4 h-4 transition-transform sidebar-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                                 </svg>
@@ -191,7 +191,7 @@
                                     <div class="sidebar-section" data-section="string-functions">
                                         <div class="flex items-center justify-between sidebar-row">
                                             <a href="{{ get_url(path='/standard-library/string-functions/') }}" class="sidebar-link flex-1 pl-6" data-path="/standard-library/string-functions/" data-section="string-functions">String Functions</a>
-                                            <button class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded transition-colors chevron-toggle" aria-label="Toggle String Functions submenu">
+                                            <button class="p-1.5 rounded transition-colors chevron-toggle" aria-label="Toggle String Functions submenu">
                                                 <svg class="w-4 h-4 transition-transform sidebar-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                                 </svg>
@@ -206,7 +206,7 @@
                                     <div class="sidebar-section" data-section="file-functions">
                                         <div class="flex items-center justify-between sidebar-row">
                                             <a href="{{ get_url(path='/standard-library/file-functions/') }}" class="sidebar-link flex-1 pl-6" data-path="/standard-library/file-functions/" data-section="file-functions">File Functions</a>
-                                            <button class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded transition-colors chevron-toggle" aria-label="Toggle File Functions submenu">
+                                            <button class="p-1.5 rounded transition-colors chevron-toggle" aria-label="Toggle File Functions submenu">
                                                 <svg class="w-4 h-4 transition-transform sidebar-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                                 </svg>
@@ -240,7 +240,7 @@
                                     <div class="sidebar-section" data-section="array-string-functions">
                                         <div class="flex items-center justify-between sidebar-row">
                                             <a href="{{ get_url(path='/standard-library/array-string-functions/') }}" class="sidebar-link flex-1 pl-6" data-path="/standard-library/array-string-functions/" data-section="array-string-functions">String Array Functions</a>
-                                            <button class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded transition-colors chevron-toggle" aria-label="Toggle String Array Functions submenu">
+                                            <button class="p-1.5 rounded transition-colors chevron-toggle" aria-label="Toggle String Array Functions submenu">
                                                 <svg class="w-4 h-4 transition-transform sidebar-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                                 </svg>
@@ -257,7 +257,7 @@
                                     <div class="sidebar-section" data-section="array-functions">
                                         <div class="flex items-center justify-between sidebar-row">
                                             <a href="{{ get_url(path='/standard-library/array-functions/') }}" class="sidebar-link flex-1 pl-6" data-path="/standard-library/array-functions/" data-section="array-functions">Array Functions</a>
-                                            <button class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded transition-colors chevron-toggle" aria-label="Toggle Array Functions submenu">
+                                            <button class="p-1.5 rounded transition-colors chevron-toggle" aria-label="Toggle Array Functions submenu">
                                                 <svg class="w-4 h-4 transition-transform sidebar-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                                 </svg>
@@ -279,7 +279,7 @@
                                     <div class="sidebar-section" data-section="map-functions">
                                         <div class="flex items-center justify-between sidebar-row">
                                             <a href="{{ get_url(path='/standard-library/map-functions/') }}" class="sidebar-link flex-1 pl-6" data-path="/standard-library/map-functions/" data-section="map-functions">Map Functions</a>
-                                            <button class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded transition-colors chevron-toggle" aria-label="Toggle Map Functions submenu">
+                                            <button class="p-1.5 rounded transition-colors chevron-toggle" aria-label="Toggle Map Functions submenu">
                                                 <svg class="w-4 h-4 transition-transform sidebar-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                                 </svg>
@@ -297,7 +297,7 @@
                                     <div class="sidebar-section" data-section="other-functions">
                                         <div class="flex items-center justify-between sidebar-row">
                                             <a href="{{ get_url(path='/standard-library/other-functions/') }}" class="sidebar-link flex-1 pl-6" data-path="/standard-library/other-functions/" data-section="other-functions">Other Functions</a>
-                                            <button class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded transition-colors chevron-toggle" aria-label="Toggle Other Functions submenu">
+                                            <button class="p-1.5 rounded transition-colors chevron-toggle" aria-label="Toggle Other Functions submenu">
                                                 <svg class="w-4 h-4 transition-transform sidebar-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                                 </svg>
@@ -313,7 +313,7 @@
                             <div class="sidebar-section" data-section="input-output">
                                 <div class="flex items-center justify-between sidebar-row">
                                     <a href="{{ get_url(path='/input-output/') }}" class="sidebar-link flex-1" data-path="/input-output/" data-section="input-output">Input/Output Formats</a>
-                                    <button class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded transition-colors chevron-toggle" aria-label="Toggle Input/Output submenu">
+                                    <button class="p-1.5 rounded transition-colors chevron-toggle" aria-label="Toggle Input/Output submenu">
                                         <svg class="w-4 h-4 transition-transform sidebar-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                         </svg>
@@ -403,8 +403,8 @@
             <div class="px-6 py-8">
                 <div class="flex items-center justify-between mb-6">
                     <div class="flex items-center gap-3">
-                        <img src="{{ get_url(path='img/full-cyan-logo-black-text.svg') }}" alt="OpenWDL Logo" class="h-5 dark:hidden">
-                        <img src="{{ get_url(path='img/full-cyan-logo-white-text.svg') }}" alt="OpenWDL Logo" class="h-5 hidden dark:block">
+                        <img src="{{ get_url(path='img/full-cyan-logo-black-text.svg') }}" alt="OpenWDL Logo" class="h-4 dark:hidden">
+                        <img src="{{ get_url(path='img/full-cyan-logo-white-text.svg') }}" alt="OpenWDL Logo" class="h-4 hidden dark:block">
                         <span class="text-xl font-semibold text-gray-500 dark:text-gray-100">/</span>
                         <span class="text-base font-mono font-semibold text-gray-900 dark:text-white">Specification</span>
                     </div>
@@ -423,7 +423,7 @@
                             <div class="sidebar-section" data-section="introduction">
                                 <div class="flex items-center justify-between sidebar-row">
                                     <a href="{{ get_url(path='/introduction/') }}" class="sidebar-link flex-1" data-path="/introduction/" data-section="introduction">Introduction</a>
-                                    <button class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded transition-colors chevron-toggle" aria-label="Toggle Introduction submenu">
+                                    <button class="p-1.5 rounded transition-colors chevron-toggle" aria-label="Toggle Introduction submenu">
                                         <svg class="w-4 h-4 transition-transform sidebar-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                         </svg>
@@ -444,7 +444,7 @@
                             <div class="sidebar-section" data-section="types">
                                 <div class="flex items-center justify-between sidebar-row">
                                     <a href="{{ get_url(path='/types/') }}" class="sidebar-link flex-1" data-path="/types/" data-section="types">Type System</a>
-                                    <button class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded transition-colors chevron-toggle" aria-label="Toggle Type System submenu">
+                                    <button class="p-1.5 rounded transition-colors chevron-toggle" aria-label="Toggle Type System submenu">
                                         <svg class="w-4 h-4 transition-transform sidebar-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                         </svg>
@@ -454,7 +454,7 @@
                                     <div class="sidebar-section" data-section="primitive-types">
                                         <div class="flex items-center justify-between sidebar-row">
                                             <a href="{{ get_url(path='/types/primitive-types/') }}" class="sidebar-link flex-1 pl-6" data-path="/types/primitive-types/" data-section="primitive-types">Primitive Types</a>
-                                            <button class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded transition-colors chevron-toggle" aria-label="Toggle Primitive Types submenu">
+                                            <button class="p-1.5 rounded transition-colors chevron-toggle" aria-label="Toggle Primitive Types submenu">
                                                 <svg class="w-4 h-4 transition-transform sidebar-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                                 </svg>
@@ -468,7 +468,7 @@
                                     <div class="sidebar-section" data-section="compound-types">
                                         <div class="flex items-center justify-between sidebar-row">
                                             <a href="{{ get_url(path='/types/compound-types/') }}" class="sidebar-link flex-1 pl-6" data-path="/types/compound-types/" data-section="compound-types">Compound Types</a>
-                                            <button class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded transition-colors chevron-toggle" aria-label="Toggle Compound Types submenu">
+                                            <button class="p-1.5 rounded transition-colors chevron-toggle" aria-label="Toggle Compound Types submenu">
                                                 <svg class="w-4 h-4 transition-transform sidebar-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                                 </svg>
@@ -486,7 +486,7 @@
                             <div class="sidebar-section" data-section="tasks">
                                 <div class="flex items-center justify-between sidebar-row">
                                     <a href="{{ get_url(path='/tasks/') }}" class="sidebar-link flex-1" data-path="/tasks/" data-section="tasks">Tasks</a>
-                                    <button class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded transition-colors chevron-toggle" aria-label="Toggle Tasks submenu">
+                                    <button class="p-1.5 rounded transition-colors chevron-toggle" aria-label="Toggle Tasks submenu">
                                         <svg class="w-4 h-4 transition-transform sidebar-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                         </svg>
@@ -509,7 +509,7 @@
                             <div class="sidebar-section" data-section="workflows">
                                 <div class="flex items-center justify-between sidebar-row">
                                     <a href="{{ get_url(path='/workflows/') }}" class="sidebar-link flex-1" data-path="/workflows/" data-section="workflows">Workflows</a>
-                                    <button class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded transition-colors chevron-toggle" aria-label="Toggle Workflows submenu">
+                                    <button class="p-1.5 rounded transition-colors chevron-toggle" aria-label="Toggle Workflows submenu">
                                         <svg class="w-4 h-4 transition-transform sidebar-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                         </svg>
@@ -530,7 +530,7 @@
                             <div class="sidebar-section" data-section="standard-library">
                                 <div class="flex items-center justify-between sidebar-row">
                                     <a href="{{ get_url(path='/standard-library/') }}" class="sidebar-link flex-1" data-path="/standard-library/" data-section="standard-library">Standard Library</a>
-                                    <button class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded transition-colors chevron-toggle" aria-label="Toggle Standard Library submenu">
+                                    <button class="p-1.5 rounded transition-colors chevron-toggle" aria-label="Toggle Standard Library submenu">
                                         <svg class="w-4 h-4 transition-transform sidebar-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                         </svg>
@@ -540,7 +540,7 @@
                                     <div class="sidebar-section" data-section="numeric-functions">
                                         <div class="flex items-center justify-between sidebar-row">
                                             <a href="{{ get_url(path='/standard-library/numeric-functions/') }}" class="sidebar-link flex-1 pl-6" data-path="/standard-library/numeric-functions/" data-section="numeric-functions">Numeric Functions</a>
-                                            <button class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded transition-colors chevron-toggle" aria-label="Toggle Numeric Functions submenu">
+                                            <button class="p-1.5 rounded transition-colors chevron-toggle" aria-label="Toggle Numeric Functions submenu">
                                                 <svg class="w-4 h-4 transition-transform sidebar-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                                 </svg>
@@ -557,7 +557,7 @@
                                     <div class="sidebar-section" data-section="string-functions">
                                         <div class="flex items-center justify-between sidebar-row">
                                             <a href="{{ get_url(path='/standard-library/string-functions/') }}" class="sidebar-link flex-1 pl-6" data-path="/standard-library/string-functions/" data-section="string-functions">String Functions</a>
-                                            <button class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded transition-colors chevron-toggle" aria-label="Toggle String Functions submenu">
+                                            <button class="p-1.5 rounded transition-colors chevron-toggle" aria-label="Toggle String Functions submenu">
                                                 <svg class="w-4 h-4 transition-transform sidebar-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                                 </svg>
@@ -572,7 +572,7 @@
                                     <div class="sidebar-section" data-section="file-functions">
                                         <div class="flex items-center justify-between sidebar-row">
                                             <a href="{{ get_url(path='/standard-library/file-functions/') }}" class="sidebar-link flex-1 pl-6" data-path="/standard-library/file-functions/" data-section="file-functions">File Functions</a>
-                                            <button class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded transition-colors chevron-toggle" aria-label="Toggle File Functions submenu">
+                                            <button class="p-1.5 rounded transition-colors chevron-toggle" aria-label="Toggle File Functions submenu">
                                                 <svg class="w-4 h-4 transition-transform sidebar-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                                 </svg>
@@ -606,7 +606,7 @@
                                     <div class="sidebar-section" data-section="array-string-functions">
                                         <div class="flex items-center justify-between sidebar-row">
                                             <a href="{{ get_url(path='/standard-library/array-string-functions/') }}" class="sidebar-link flex-1 pl-6" data-path="/standard-library/array-string-functions/" data-section="array-string-functions">String Array Functions</a>
-                                            <button class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded transition-colors chevron-toggle" aria-label="Toggle String Array Functions submenu">
+                                            <button class="p-1.5 rounded transition-colors chevron-toggle" aria-label="Toggle String Array Functions submenu">
                                                 <svg class="w-4 h-4 transition-transform sidebar-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                                 </svg>
@@ -623,7 +623,7 @@
                                     <div class="sidebar-section" data-section="array-functions">
                                         <div class="flex items-center justify-between sidebar-row">
                                             <a href="{{ get_url(path='/standard-library/array-functions/') }}" class="sidebar-link flex-1 pl-6" data-path="/standard-library/array-functions/" data-section="array-functions">Array Functions</a>
-                                            <button class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded transition-colors chevron-toggle" aria-label="Toggle Array Functions submenu">
+                                            <button class="p-1.5 rounded transition-colors chevron-toggle" aria-label="Toggle Array Functions submenu">
                                                 <svg class="w-4 h-4 transition-transform sidebar-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                                 </svg>
@@ -645,7 +645,7 @@
                                     <div class="sidebar-section" data-section="map-functions">
                                         <div class="flex items-center justify-between sidebar-row">
                                             <a href="{{ get_url(path='/standard-library/map-functions/') }}" class="sidebar-link flex-1 pl-6" data-path="/standard-library/map-functions/" data-section="map-functions">Map Functions</a>
-                                            <button class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded transition-colors chevron-toggle" aria-label="Toggle Map Functions submenu">
+                                            <button class="p-1.5 rounded transition-colors chevron-toggle" aria-label="Toggle Map Functions submenu">
                                                 <svg class="w-4 h-4 transition-transform sidebar-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                                 </svg>
@@ -663,7 +663,7 @@
                                     <div class="sidebar-section" data-section="other-functions">
                                         <div class="flex items-center justify-between sidebar-row">
                                             <a href="{{ get_url(path='/standard-library/other-functions/') }}" class="sidebar-link flex-1 pl-6" data-path="/standard-library/other-functions/" data-section="other-functions">Other Functions</a>
-                                            <button class="p-1.5 hover:bg-gray-200 dark:hover:bg-gray-800 rounded transition-colors chevron-toggle" aria-label="Toggle Other Functions submenu">
+                                            <button class="p-1.5 rounded transition-colors chevron-toggle" aria-label="Toggle Other Functions submenu">
                                                 <svg class="w-4 h-4 transition-transform sidebar-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                                 </svg>
@@ -685,6 +685,7 @@
     </div>
 
     <script src="{{ get_url(path='elasticlunr.min.js', trailing_slash=false) }}"></script>
+    <script>window.BASE_URL = "{{ config.base_url | safe }}";</script>
     <script src="{{ get_url(path='js/main.js', trailing_slash=false) }}"></script>
     {% block extra_scripts %}{% endblock extra_scripts %}
 </body>
