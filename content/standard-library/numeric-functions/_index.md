@@ -2,6 +2,7 @@
 title = "Numeric Functions"
 description = "Functions for numeric operations"
 weight = 10
+sort_by = "weight"
 transparent = true
 +++
 

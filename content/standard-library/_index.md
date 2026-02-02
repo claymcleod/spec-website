@@ -1,5 +1,6 @@
 +++
 title = "Standard Library"
+sort_by = "weight"
 description = "Built-in functions for WDL workflows"
 +++
 

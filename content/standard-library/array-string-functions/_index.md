@@ -1,5 +1,6 @@
 +++
 title = "String Array Functions"
+sort_by = "weight"
 description = "Functions for array of strings operations"
 weight = 40
 transparent = true

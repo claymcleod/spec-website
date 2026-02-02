@@ -1,5 +1,6 @@
 +++
 title = "Compound Types"
+sort_by = "weight"
 description = "Parameterized types in WDL: Array, Pair, and Map"
 weight = 40
 transparent = true

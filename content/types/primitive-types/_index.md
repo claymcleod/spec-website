@@ -1,5 +1,6 @@
 +++
 title = "Primitive Types"
+sort_by = "weight"
 description = "Basic data types in WDL: Boolean, Int, Float, String, File, and Directory"
 weight = 10
 transparent = true
