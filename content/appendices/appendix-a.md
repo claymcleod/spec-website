@@ -3,7 +3,7 @@ title = "Appendix A: WDL Value Serialization and Deserialization"
 weight = 10
 +++
 
-This section provides suggestions for ways to deal with primitive and compound values in the task [command section](#). When a WDL execution engine instantiates a command specified in the `command` section of a task, it must evaluate all expression placeholders (`~{...}` and `${...}`) in the command and coerce their values to strings. There are multiple different ways that WDL values can be communicated to the command(s) being called in the `command` section, and the best method will vary by command.
+This section provides suggestions for ways to deal with primitive and compound values in the task [command section](@/tasks/command.md). When a WDL execution engine instantiates a command specified in the `command` section of a task, it must evaluate all expression placeholders (`~{...}` and `${...}`) in the command and coerce their values to strings. There are multiple different ways that WDL values can be communicated to the command(s) being called in the `command` section, and the best method will vary by command.
 
 For example, a task that wraps a tool that operates on an `Array` of FASTQ files has several ways that it can specify the list of files to the tool:
 
@@ -17,7 +17,7 @@ The various methods for serializing and deserializing primitive and compound val
 
 ## Primitive Values
 
-WDL primitive values are naturally converted to string values. This is described in detail in the [string interpolation](#) section.
+WDL primitive values are naturally converted to string values. This is described in detail in the [string interpolation](@/types/primitive-types/strings.md) section.
 
 Deserialization of primitive values is done via one of the `read_*` functions, each of which deserializes a different type of primitive value from a file. The file must contain a single value of the expected type, with optional whitespace. The value is read as a string and then converted to the appropriate type, or raises an error if the value cannot be converted.
 
@@ -79,18 +79,18 @@ Example output:
 
 A compound value such as `Array` or `Map` must be serialized to a string before it can be used in the command. There are a two general strategies for converting a compound value to a string:
 
-* JSON: most compound values can be written to JSON format using [`write_json`](#).
+* JSON: most compound values can be written to JSON format using [`write_json`](@/standard-library/file-functions/write_json.md).
 * Delimitation: convert each element of the compound value to a string, then join them together into a single string using a delimiter. Some common approaches are:
-    * Separate values by a tool-specific delimiter (e.g., whitespace or comma) and pass the string as a single command line argument. This can be accomplished with the [`sep`](#) function.
-    * Prefix each value with a command line option. This can be accomplished with the [`prefix`](#) function.
-    * Separate values by newlines (`\n`) and write them to a file. This can be accomplished with the [`write_lines`](#) function.
-    * For nested types such as `Struct`s and `Object`, separate the fields of each value with a tab (`\t`), and write each tab-delimited line to a file. This is commonly called tab_separated value (TSV) format. This can be accomplished using [`write_tsv`](#), [`write_map`](#), [`write_object`](#), or [`write_objects`](#).
+    * Separate values by a tool-specific delimiter (e.g., whitespace or comma) and pass the string as a single command line argument. This can be accomplished with the [`sep`](@/standard-library/array-string-functions/sep.md) function.
+    * Prefix each value with a command line option. This can be accomplished with the [`prefix`](@/standard-library/array-string-functions/prefix.md) function.
+    * Separate values by newlines (`\n`) and write them to a file. This can be accomplished with the [`write_lines`](@/standard-library/file-functions/write_lines.md) function.
+    * For nested types such as `Struct`s and `Object`, separate the fields of each value with a tab (`\t`), and write each tab-delimited line to a file. This is commonly called tab_separated value (TSV) format. This can be accomplished using [`write_tsv`](@/standard-library/file-functions/write_tsv.md), [`write_map`](@/standard-library/file-functions/write_map.md), [`write_object`](@/standard-library/file-functions/write_object.md), or [`write_objects`](@/standard-library/file-functions/write_objects.md).
 
-Similarly, data output by a command must be deserialized to be used in WDL. Commands generally either write output to `stdout` (or sometimes `stderr`) or to a regular file. The contents of `stdout` and `stderr` can be read a files using the [`stdout`](#) and [`stderr`](#) functions. The two general strategies for deserializing data from a file are:
+Similarly, data output by a command must be deserialized to be used in WDL. Commands generally either write output to `stdout` (or sometimes `stderr`) or to a regular file. The contents of `stdout` and `stderr` can be read a files using the [`stdout`](@/standard-library/file-functions/stdout.md) and [`stderr`](@/standard-library/file-functions/stderr.md) functions. The two general strategies for deserializing data from a file are:
 
-* If the output is in JSON format, it can be read into a WDL value using [`read_json`](#).
-* If the output is line-oriented (i.e., one value per line), it can be read into a WDL `Array` using [`read_lines`](#).
-* If the output is tab-delimited (TSV), it can be read into a structured value using [`read_tsv`](#), [`read_map`](#), [`read_object`](#), or [`read_objects`](#).
+* If the output is in JSON format, it can be read into a WDL value using [`read_json`](@/standard-library/file-functions/read_json.md).
+* If the output is line-oriented (i.e., one value per line), it can be read into a WDL `Array` using [`read_lines`](@/standard-library/file-functions/read_lines.md).
+* If the output is tab-delimited (TSV), it can be read into a structured value using [`read_tsv`](@/standard-library/file-functions/read_tsv.md), [`read_map`](@/standard-library/file-functions/read_map.md), [`read_object`](@/standard-library/file-functions/read_object.md), or [`read_objects`](@/standard-library/file-functions/read_objects.md).
 
 Specific examples of serializing and deserializing each type of compound value are given below.
 
@@ -98,7 +98,7 @@ Specific examples of serializing and deserializing each type of compound value a
 
 #### Array serialization by delimitation
 
-This method applies to an array of a primitive type. Each element of the array is coerced to a string, and the strings are then joined into a single string separated by a delimiter. This is done using the [`sep`](#) function.
+This method applies to an array of a primitive type. Each element of the array is coerced to a string, and the strings are then joined into a single string separated by a delimiter. This is done using the [`sep`](@/standard-library/array-string-functions/sep.md) function.
 
 <details>
 <summary>
@@ -229,7 +229,7 @@ world
 
 #### Array serialization/deserialization using `write_json()`/`read_json()`
 
-This method applies to an array of any type that can be serialized to JSON. Calling [`write_json`](#) with an `Array` parameter results in the creation of a file containing a JSON array.
+This method applies to an array of any type that can be serialized to JSON. Calling [`write_json`](@/standard-library/file-functions/write_json.md) with an `Array` parameter results in the creation of a file containing a JSON array.
 
 <details>
 <summary>
@@ -440,7 +440,7 @@ Example output:
 
 #### Pair serialization/deserialization using `read_json`/`write_json`
 
-A `Pair[X, Y]` can be [converted to JSON](#) and then serialized using [`write_json`](#) and deserialized using [`read_json`](#).
+A `Pair[X, Y]` can be [converted to JSON](@/input-output/json-serialization.md) and then serialized using [`write_json`](@/standard-library/file-functions/write_json.md) and deserialized using [`read_json`](@/standard-library/file-functions/read_json.md).
 
 ### Map
 
@@ -545,7 +545,7 @@ Example output:
 
 #### Map serialization/deserialization using `write_map()`/`read_map()`
 
-A `Map[String, String]` value can be serialized as a two-column TSV file using [`write_map`](#), and deserialized from a two-column TSV file using [`read_map`](#).
+A `Map[String, String]` value can be serialized as a two-column TSV file using [`write_map`](@/standard-library/file-functions/write_map.md), and deserialized from a two-column TSV file using [`read_map`](@/standard-library/file-functions/read_map.md).
 
 <details>
 <summary>
@@ -628,7 +628,7 @@ Which is deserialized to the `Map` `{"a": "c", "e": "b", "d": "f"}`.
 
 #### Map serialization/deserialization using `write_json()`/`read_json()`
 
-A `Map[String, Y]` value can be serialized as a JSON `object` using [`write_json`](#), and a JSON object can be read into a `Map[String, Y]` using [`read_json`](#) so long as all the values of the JSON object are coercible to `Y`.
+A `Map[String, Y]` value can be serialized as a JSON `object` using [`write_json`](@/standard-library/file-functions/write_json.md), and a JSON object can be read into a `Map[String, Y]` using [`read_json`](@/standard-library/file-functions/read_json.md) so long as all the values of the JSON object are coercible to `Y`.
 
 <details>
 <summary>
@@ -717,5 +717,5 @@ Where `/jobs/564757/sample_quality_scores.json` would contain:
 
 There are two alternative serialization formats for `Struct`s and `Objects:
 
-* JSON: `Struct`s and `Object`s are serialized identically using [`write_json`](#). A JSON object is deserialized to a WDL `Object` using [`read_json`](#), which can then be coerced to a `Struct` type if necessary.
-* TSV: `Struct`s and `Object`s can be serialized to TSV format using [`write_object`](#). The generated file has two lines tab-delimited: a header with the member names and the values, which must be coercible to `String`s. An array of `Struct`s or `Object`s can be written using [`write_objects`](#), in which case the generated file has one line of values for each struct/object. `Struct`s and `Object`s can be deserialized from the same TSV format using [`read_object`](#)/[`read_objects`](#). Object member values are always of type `String` whereas struct member types must be coercible from `String`.
+* JSON: `Struct`s and `Object`s are serialized identically using [`write_json`](@/standard-library/file-functions/write_json.md). A JSON object is deserialized to a WDL `Object` using [`read_json`](@/standard-library/file-functions/read_json.md), which can then be coerced to a `Struct` type if necessary.
+* TSV: `Struct`s and `Object`s can be serialized to TSV format using [`write_object`](@/standard-library/file-functions/write_object.md). The generated file has two lines tab-delimited: a header with the member names and the values, which must be coercible to `String`s. An array of `Struct`s or `Object`s can be written using [`write_objects`](@/standard-library/file-functions/write_objects.md), in which case the generated file has one line of values for each struct/object. `Struct`s and `Object`s can be deserialized from the same TSV format using [`read_object`](@/standard-library/file-functions/read_object.md)/[`read_objects`](@/standard-library/file-functions/read_objects.md). Object member values are always of type `String` whereas struct member types must be coercible from `String`.

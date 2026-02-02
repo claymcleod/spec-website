@@ -62,9 +62,9 @@ Test config:
 After the command is executed, the following outputs are expected to be found in the task execution directory:
 
 - A file called "threshold.txt", which contains one line that consists of only an integer and whitespace.
-- One or more files (as indicated by the `+` postfix quantifier) with the `.csv` extension in the working directory that are collected into an array by the [`glob`](#) function.
+- One or more files (as indicated by the `+` postfix quantifier) with the `.csv` extension in the working directory that are collected into an array by the [`glob`](@/standard-library/file-functions/glob.md) function.
 
-See the [WDL Value Serialization](#) section for more details.
+See the [WDL Value Serialization](@/appendices/appendix-a.md) section for more details.
 
 #### File, Directory, and Optional Outputs
 
@@ -116,7 +116,7 @@ Example output:
 
 In the preceding example, if `prefix` were specified as `"foobar"`, then `"~{prefix}.out"` would be evaluated to `"foobar.out"`.
 
-Another common pattern is to use the [`glob`](#) function to define outputs that might contain zero, one, or many files.
+Another common pattern is to use the [`glob`](@/standard-library/file-functions/glob.md) function to define outputs that might contain zero, one, or many files.
 
 <details>
 <summary>

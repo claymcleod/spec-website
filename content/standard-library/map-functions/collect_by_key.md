@@ -8,7 +8,7 @@ weight = 60
 Map[P, Array[Y]] collect_by_key(Array[Pair[P, Y]])
 ```
 
-Given an `Array` of `Pair`s, creates a `Map` in which the right elements of the `Pair`s are grouped by the left elements. In other words, the input `Array` may have multiple `Pair`s with the same key. Rather than causing an error (as would happen with [`as_map`](#)), all the values with the same key are grouped together into an `Array`.
+Given an `Array` of `Pair`s, creates a `Map` in which the right elements of the `Pair`s are grouped by the left elements. In other words, the input `Array` may have multiple `Pair`s with the same key. Rather than causing an error (as would happen with [`as_map`](@/standard-library/map-functions/as_map.md)), all the values with the same key are grouped together into an `Array`.
 
 The order of the keys in the output `Map` is the same as the order of their first occurrence in the input `Array`. The order of the elements in the `Map` values is the same as their order of occurrence in the input `Array`.
 

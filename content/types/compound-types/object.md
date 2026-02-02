@@ -50,4 +50,4 @@ Example output:
 </p>
 </details>
 
-Due to the lack of explicitness in the typing of `Object` being at odds with the goal of being able to know the type information of all WDL declarations, the use of the `Object` type and the `object` literal syntax have been deprecated. In WDL 2.0, `Object` will become a [hidden type](#) that may only be instantiated by the execution engine. `Object` declarations can be replaced with use of [structs](#).
+Due to the lack of explicitness in the typing of `Object` being at odds with the goal of being able to know the type information of all WDL declarations, the use of the `Object` type and the `object` literal syntax have been deprecated. In WDL 2.0, `Object` will become a [hidden type](@/types/hidden-types.md) that may only be instantiated by the execution engine. `Object` declarations can be replaced with use of [structs](@/types/compound-types/structs.md).

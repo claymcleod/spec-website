@@ -10,11 +10,11 @@ preparing the execution script, but are actually available at runtime directly f
 normal shell variable access semantics (i.e. `$FOO` or `${FOO}`).
 
 In order to access an input value as an environment variable, you can add the `env` modifier preceding a declaration anywhere
-within the task. This applies to declarations within the input section as well as [private declarations](#). An important thing to note is that while the `env` modifier makes the declaration available in the
+within the task. This applies to declarations within the input section as well as [private declarations](@/tasks/private-declarations.md). An important thing to note is that while the `env` modifier makes the declaration available in the
 environment, it does not change its access to normal WDL expressions within a command. That means you can refer to a declaration
 annotated with `env` either through the shell semantics (`${FOO}`) or through normal WDL semantics (`~{FOO}`).
 
-When an input is annotated with `env` it is the engine's responsibility to serialize the value appropriately into a string (see section on [Serialization of WDL values](#))
+When an input is annotated with `env` it is the engine's responsibility to serialize the value appropriately into a string (see section on [Serialization of WDL values](@/appendices/appendix-a.md))
 that will then be set as an environment variable. Engines may impose limits on the total length a single environment variable is allowed to occupy as well as the number of environment variables that are allowed to be passed into a single task.
 If such limitations exist, it is the engine's responsibility to provide clear documentation outlining what they are for the user.
 

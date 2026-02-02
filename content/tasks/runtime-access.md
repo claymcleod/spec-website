@@ -4,13 +4,13 @@ description = "Accessing runtime information within tasks"
 weight = 110
 +++
 
-The `requirements` and `hints` sections comprise resource requests to the execution engine. But these requests can be [specified or overridden at runtime](#), and the execution engine has some latitude in whether and how it fulfills them. Thus, the workflow developer may wish to know exactly what resources are available at runtime, such as:
+The `requirements` and `hints` sections comprise resource requests to the execution engine. But these requests can be [specified or overridden at runtime](@/input-output/json-input-format.md#specifying-overriding-requirements-and-hints), and the execution engine has some latitude in whether and how it fulfills them. Thus, the workflow developer may wish to know exactly what resources are available at runtime, such as:
 
 * What are the actual resource allocations. For example, a task may request at least `8 GiB` of memory but may be able to use more memory if it is available.
 * The task metadata, to avoid duplication. For example, the task may wish to write log messages with the task's name and description without having to duplicate the information in the task's `meta` section.
 * The runtime engine may also choose to provide additional information at runtime.
 
-This information is provided by the `task` variable, which is implicitly defined by the execution engine. The type of `task` is a [scoped type](#) with the following members:
+This information is provided by the `task` variable, which is implicitly defined by the execution engine. The type of `task` is a [scoped type](@/types/hidden-types.md#task-hidden-scoped-type) with the following members:
 
 * `name`: The task name.
 * `id`: A `String` with the unique ID of the task. The execution engine may choose the format for this ID, but it is suggested to include at least the following information:
@@ -28,7 +28,7 @@ This information is provided by the `task` variable, which is implicitly defined
 * `return_code`: An `Int?` whose value is initially `None` and is set to the value of the `command`'s return code. The value is only guaranteed to be defined in the `output` section.
 * `meta`: An `Object` containing a copy of the task's `meta` section, or the empty `Object` if there is no `meta` section or if it is empty.
 * `parameter_meta`: An `Object` containing a copy of the task's `parameter_meta` section, or the empty `Object` if there is no `parameter_meta` section or if it is empty.
-* `ext`: An `Object` containing execution engine-specific attributes, or the empty `Object` if there aren't any. Members of `ext` should be considered optional. It is recommended to only access a member of `ext` using [string interpolation](#) to avoid an error if it is not defined.
+* `ext`: An `Object` containing execution engine-specific attributes, or the empty `Object` if there aren't any. Members of `ext` should be considered optional. It is recommended to only access a member of `ext` using [string interpolation](@/types/primitive-types/strings.md) to avoid an error if it is not defined.
 
 If the runtime engine is not able to provide the actual value of a requirement, then it must provide the requested value instead, or the default value if no specific value was requested.
 
@@ -92,5 +92,5 @@ Test config:
 </p>
 </details>
 
-If a task is using the deprecated [`runtime`](#) section rather than `requirements` and `hints`, then the runtime values of the reserved `runtime` attributes (i.e., the ones that appear in the `requirements` section) are populated in the `requirements` member.
+If a task is using the deprecated [`runtime`](@/tasks/runtime.md) section rather than `requirements` and `hints`, then the runtime values of the reserved `runtime` attributes (i.e., the ones that appear in the `requirements` section) are populated in the `requirements` member.
 

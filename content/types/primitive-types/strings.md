@@ -293,18 +293,18 @@ During task execution, the following additional constraints apply:
 * To write to a file, the path's parent directory must be accessible for writing.
 * To write to a directory, it must exist and be accessible for writing.
 
-An execution engine may support [other ways](#) to specify `File` and `Directory` inputs (e.g., as URIs), but prior to task execution it must [localize inputs](#) so that the runtime value of a `File`/`Directory` variable is a local path. Remote files must be treated as read-only. For remote files, localization occurs as part of value creation—the remote file must be accessible and valid when the `File` or `Directory` value is evaluated, at which point it is localized and the resulting local path is validated according to the rules above.
+An execution engine may support [other ways](@/input-output/json-input-format.md#file-directory-inputs) to specify `File` and `Directory` inputs (e.g., as URIs), but prior to task execution it must [localize inputs](@/tasks/inputs.md#task-input-localization) so that the runtime value of a `File`/`Directory` variable is a local path. Remote files must be treated as read-only. For remote files, localization occurs as part of value creation—the remote file must be accessible and valid when the `File` or `Directory` value is evaluated, at which point it is localized and the resulting local path is validated according to the rules above.
 
 ### Relative and Absolute Paths
 
 The interpretation of relative paths (paths that do not start with `/`) depends on the context in which they appear:
 
-* *Outside the `output` section (e.g., in `input` or private declarations)*, relative paths are interpreted relative to the parent directory of the WDL document itself on the host filesystem, similar to how [import](#) paths are resolved.
-* *Inside the `output` section*, relative paths are interpreted relative to the task's execution directory. This is where task commands create their output files. See [Task Outputs](#) for details.
+* *Outside the `output` section (e.g., in `input` or private declarations)*, relative paths are interpreted relative to the parent directory of the WDL document itself on the host filesystem, similar to how import paths are resolved.
+* *Inside the `output` section*, relative paths are interpreted relative to the task's execution directory. This is where task commands create their output files. See [Task Outputs](@/tasks/outputs.md) for details.
 
 In both contexts, if an optional `File?` or `Directory?` declaration refers to a path that does not exist, the value is set to `None`.
 
-Absolute paths (paths starting with `/`) refer to specific locations on the host filesystem when used outside the `output` section. Within the `output` section, absolute paths may be interpreted in a container-dependent way—see [Task Outputs](#) for details.
+Absolute paths (paths starting with `/`) refer to specific locations on the host filesystem when used outside the `output` section. Within the `output` section, absolute paths may be interpreted in a container-dependent way—see [Task Outputs](@/tasks/outputs.md) for details.
 
 <details>
 <summary>

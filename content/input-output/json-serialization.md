@@ -17,7 +17,7 @@ All primitive WDL types serialize naturally to JSON values:
 | `Directory` | `string`  |
 | `None`      | `null`    |
 
-JSON has a single numeric type - it does not differentiate between integral and floating point values. A JSON `number` is always deserialized to a WDL `Float`, which may then be [coerced](#) to an `Int` if necessary.
+JSON has a single numeric type - it does not differentiate between integral and floating point values. A JSON `number` is always deserialized to a WDL `Float`, which may then be [coerced](@/types/type-conversion.md) to an `Int` if necessary.
 
 JSON does not have a specific type for filesystem paths, but a WDL `String` may be coerced to a `File` if necessary.
 

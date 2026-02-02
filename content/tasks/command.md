@@ -16,7 +16,7 @@ command <<< ... >>>
 command { ... }
 ```
 
-The command template is evaluated *after* all of the inputs are staged and before the outputs are evaluated. The command template is evaluated similarly to [multi-line strings](#):
+The command template is evaluated *after* all of the inputs are staged and before the outputs are evaluated. The command template is evaluated similarly to [multi-line strings](@/types/primitive-types/strings.md#multi-line-strings):
 
 1. Remove all whitespace following the opening `<<<`, up to and including a newline (if any).
 2. Remove all whitespace preceeding the closing `>>>`, up to and including a newline (if any).
@@ -202,7 +202,7 @@ Test config:
 </p>
 </details>
 
-Like any other WDL string, the command section is subject to the rules of [string interpolation](#): all placeholders must contain expressions that are valid when analyzed statically, and that can be converted to a `String` value when evaluated dynamically. However, the evaluation of placeholder expressions during command instantiation is more lenient than typical dynamic evaluation as described in [Expression Placeholder Coercion](#).
+Like any other WDL string, the command section is subject to the rules of [string interpolation](@/types/primitive-types/strings.md): all placeholders must contain expressions that are valid when analyzed statically, and that can be converted to a `String` value when evaluated dynamically. However, the evaluation of placeholder expressions during command instantiation is more lenient than typical dynamic evaluation as described in [Expression Placeholders](#expression-placeholders).
 
 The implementation is *not* responsible for interpreting the contents of the command section to check that it is a valid Bash script, ignore comment lines, etc. For example, in the following task the `greeting` declaration is commented out, so `greeting` is not a valid identifier in the task's scope. However, the placeholder in the command section refers to `greeting`, so the implementation will raise an error during static analysis. The fact that the placeholder occurs in a commented line of the Bash script doesn't matter.
 

@@ -52,7 +52,7 @@ Example output:
 </p>
 </details>
 
-The value of a private declaration may *not* be specified by the task caller, nor is it accessible outside of the task [scope](#).
+The value of a private declaration may *not* be specified by the task caller, nor is it accessible outside of the task [scope](@/appendices/appendix-b.md).
 
 <details>
 <summary>

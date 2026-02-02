@@ -4,7 +4,7 @@ description = "Specifying minimum runtime environment conditions"
 weight = 70
 +++
 
-The `requirements` section defines a set of key/value pairs that represent the minimum requirements needed to run a task and the conditions under which a task should be interpreted as a failure or success. The `requirements` section is limited to the attributes defined in this specification. Arbitrary key/value pairs are not allowed in the `requirements` section, and must instead be placed in the [`hints`](#) section.
+The `requirements` section defines a set of key/value pairs that represent the minimum requirements needed to run a task and the conditions under which a task should be interpreted as a failure or success. The `requirements` section is limited to the attributes defined in this specification. Arbitrary key/value pairs are not allowed in the `requirements` section, and must instead be placed in the [`hints`](@/tasks/hints.md) section.
 
 During execution of a task, all resource requirements within the `requirements` section must be enforced by the engine. If the engine is not able to provision the requested resources, then the task immediately fails. 
 
@@ -59,7 +59,7 @@ Example output:
 
 #### Units of Storage
 
-Several of the `requirements` attributes (and some [Standard Library](#) functions) accept a string value with an optional unit suffix, using one of the valid [SI or IEC abbreviations](https://en.wikipedia.org/wiki/Binary_prefix). At a minimum, execution engines must support the following suffices in a case-insensitive manner:
+Several of the `requirements` attributes (and some [Standard Library](@/standard-library/_index.md) functions) accept a string value with an optional unit suffix, using one of the valid [SI or IEC abbreviations](https://en.wikipedia.org/wiki/Binary_prefix). At a minimum, execution engines must support the following suffices in a case-insensitive manner:
 
 * B (bytes)
 * Decimal: KB, MB, GB, TB
@@ -277,7 +277,7 @@ Test config:
 
 The `gpu` and `fpga` attributes indicate to the execution engine whether a task requires a GPU and/or FPGA accelerator to run to completion. The execution engine must guarantee that at least one of each of the request types of accelerators is available or immediately fail the task prior to instantiating the command.
 
-The [`gpu` and `fpga` hints](#) can be used to request specific attributes for the provisioned accelerators (e.g., quantity, model, driver version).
+The [`gpu` and `fpga` hints](@/tasks/hints.md#sparkles-gpu-and-sparkles-fpga) can be used to request specific attributes for the provisioned accelerators (e.g., quantity, model, driver version).
 
 <details>
 <summary>
@@ -346,7 +346,7 @@ If the mount point is omitted, it is assumed to be a persistent volume mounted a
 
 If a mount point is specified, then it must be an absolute path to a location in the execution environment (i.e., within the container). The specified path either must not already exist in the execution environment, or it must be empty and have at least the requested amount of space available. The mount point should be assumed to be ephemeral, i.e., it will be deleted after the task completes.
 
-The execution engine is free to provision any class(es) of persistent volume it has available (e.g., SSD or HDD). The [`disks` hint](#) hint can be used to request specific attributes for the provisioned disks.
+The execution engine is free to provision any class(es) of persistent volume it has available (e.g., SSD or HDD). The [`disks` hint](@/tasks/hints.md#sparkles-disks) hint can be used to request specific attributes for the provisioned disks.
 
 <details>
 <summary>

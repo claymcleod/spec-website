@@ -8,7 +8,7 @@ A type may have a `?` postfix quantifier, which means that its value is allowed 
 
 Multi-level optionals are not allowed. A value cannot have multiple levels of optionality, for example, `Int??` is not a valid type. However, nested optionals within compound types are allowed, such as `Array[String?]?`, where each `?` applies to a different structural level of the type.
 
-WDL has a special value `None` whose meaning is "an undefined value". The `None` value has the (hidden) type [`Union`](#), meaning `None` can be assigned to an optional declaration of any type.
+WDL has a special value `None` whose meaning is "an undefined value". The `None` value has the (hidden) type [`Union`](@/types/hidden-types.md#union-hidden-type), meaning `None` can be assigned to an optional declaration of any type.
 
 An optional declaration has a default initialization of `None`, which indicates that it is undefined. An optional declaration may be initialized to any literal or expression of the correct type, including the special `None` value.
 
@@ -60,4 +60,4 @@ An optional declaration has a default initialization of `None`, which indicates 
   </p>
 </details>
 
-For more details, see the sections on [Input Type Constraints](#) and [Optional Inputs with Defaults](#).
+For more details, see the sections on [Input Type Constraints](@/tasks/inputs.md#input-type-constraints) and [Optional Inputs with Defaults](@/tasks/inputs.md#optional-inputs-with-defaults).

@@ -8,7 +8,7 @@ The `hints` section is optional and may contain any number of attributes (key/va
 
 #### Hints-scoped types
 
-There are three [scoped types](#) that must be declared by the execution engine within the `hints` section. These types are intentionally given names that are already reserved keywords so that they don't conflict with any user-defined types.
+There are three [scoped types](@/types/hidden-types.md#hints-input-and-output-scoped-types) that must be declared by the execution engine within the `hints` section. These types are intentionally given names that are already reserved keywords so that they don't conflict with any user-defined types.
 
 The `hints` type is similar to `Object` in that it can contain arbitrary key-value pairs. However, the members of a `hints` object must have the same semantics as the `hints` section itself (i.e., any [reserved hints](#reserved-task-hints) must have the same types and allowed values), and the `hints` type cannot be nested (i.e., a member of a `hints` object may not have a `hints` type value). The `hints` type is primarily intended to be used to define the [`inputs`](#inputs), [`outputs`](#outputs), and [compute environment](#compute-environments) attributes.
 
@@ -91,7 +91,7 @@ Test config:
     * `Float`
 * Alias: `maxCpu`
 
-A hint to the execution engine that the task expects to use no more than the specified number of CPUs. The value of this hint has the same specification as [`requirements.cpu`](#).
+A hint to the execution engine that the task expects to use no more than the specified number of CPUs. The value of this hint has the same specification as [`requirements.cpu`](@/tasks/requirements.md#cpu).
 
 ##### `max_memory`
 
@@ -100,7 +100,7 @@ A hint to the execution engine that the task expects to use no more than the spe
     * `String`: A decimal value with, optionally with a unit suffix.
 * Alias: `maxMemory`
 
-A hint to the execution engine that the task expects to use no more than the specified amount of memory. The value of this hint has the same specification as [`requirements.memory`](#).
+A hint to the execution engine that the task expects to use no more than the specified amount of memory. The value of this hint has the same specification as [`requirements.memory`](@/tasks/requirements.md#memory).
 
 ##### ✨ `disks`
 
@@ -108,7 +108,7 @@ A hint to the execution engine that the task expects to use no more than the spe
     * `String`: Disk specification.
     * `Map[String, String]`: Map of mount point to disk specification.
 
-A hint to the execution engine to mount [disks](#) with specific attributes. The value of this hint can be a `String` with a specification that applies to all mount points, or a `Map` with the key being the mount point and the value being a `String` with the specification for that mount point.
+A hint to the execution engine to mount [disks](@/tasks/requirements.md#disks) with specific attributes. The value of this hint can be a `String` with a specification that applies to all mount points, or a `Map` with the key being the mount point and the value being a `String` with the specification for that mount point.
 
 Volume specifications are left intentionally vague as they are primarily intented to be used in the context of a specific [compute environment](#compute-environments). The values "HDD" and "SSD" should be recognized to indicate that a specific class of hardware is being requested.
 
@@ -118,7 +118,7 @@ Volume specifications are left intentionally vague as they are primarily intente
     * `Int`: Minimum number of accelerators being requested.
     * `String`: Specification for accelerator(s) being requested, e.g., manufacturer or model name.
 
-A hint to the execution engine to provision [hardware accelerators](#) with specific attributes. Accelerator specifications are left intentionally vague as they are primarily intended to be used in the context of a specific [compute environment](#compute-environments).
+A hint to the execution engine to provision [hardware accelerators](@/tasks/requirements.md#hardware-accelerators-gpu-and-sparkles-fpga) with specific attributes. Accelerator specifications are left intentionally vague as they are primarily intended to be used in the context of a specific [compute environment](#compute-environments).
 
 ##### `short_task`
 
@@ -143,7 +143,7 @@ For example, a task that processes its input file once in linear fashion could h
 
 * Accepted types: [`input`](#hints-scoped-types)
 
-Provides input-specific hints. Each key must refer to a parameter defined in the task's [`input`](#) section. A key may also used dotted notation to refer to a specific member of a struct input.
+Provides input-specific hints. Each key must refer to a parameter defined in the task's [`input`](@/tasks/inputs.md) section. A key may also used dotted notation to refer to a specific member of a struct input.
 
 <details>
 <summary>
@@ -213,13 +213,13 @@ Example output:
 
 Reserved input-specific attributes:
 
-* `inputs.<key>.localization_optional`: Indicates that a specific `File` input does not need to be localized prior to executing this task. This attribute has the same semantics as the task-level [localization_optional](#) hint.
+* `inputs.<key>.localization_optional`: Indicates that a specific `File` input does not need to be localized prior to executing this task. This attribute has the same semantics as the task-level [localization_optional](#localization-optional) hint.
 
 ##### `outputs`
 
 * Accepted types: `output`
 
-Provides output-specific hints. Each key must refer to a parameter defined in the task's [`output`](#) section. A key may also use dotted notation to refer to a specific member of a struct output.
+Provides output-specific hints. Each key must refer to a parameter defined in the task's [`output`](@/tasks/outputs.md) section. A key may also use dotted notation to refer to a specific member of a struct output.
 
 #### Compute Environments
 

@@ -8,7 +8,7 @@ The `hints` section is optional and may contain any number of attributes (key/va
 
 The execution engine may ignore any unsupported hint. A workflow execution never fails due to the inability of the execution engine to recognize or satisfy a hint.
 
-Unlike [task hints](#), workflow hints must have literal values; expressions are not allowed.
+Unlike [task hints](@/tasks/hints.md), workflow hints must have literal values; expressions are not allowed.
 
 #### Reserved Workflow Hints
 

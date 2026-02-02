@@ -3,7 +3,7 @@ title = "JSON Output Format"
 weight = 20
 +++
 
-The outputs from a workflow invocation may be serialized as a JSON object that contains one member for each top-level workflow output; subworkflow and task outputs are not provided. The name of the object member is the [fully-qualified name](#) of the output parameter, and the value is the [serialized form](#) of the WDL value.
+The outputs from a workflow invocation may be serialized as a JSON object that contains one member for each top-level workflow output; subworkflow and task outputs are not provided. The name of the object member is the [fully-qualified name](@/workflows/qualified-names.md) of the output parameter, and the value is the [serialized form](@/input-output/json-serialization.md) of the WDL value.
 
 Every WDL implementation must provide the ability to serialize workflow outputs in this standard format. It is suggested that WDL implementations make the standard format be the default output format.
 

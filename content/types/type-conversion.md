@@ -4,9 +4,9 @@ description = "Converting values between different WDL types"
 weight = 60
 +++
 
-WDL has some limited facilities for converting a value of one type to another type. Some of these are explicitly provided by [standard library](#) functions, while others are [implicit](#type-coercion). When converting between types, it is best to be explicit whenever possible, even if an implicit conversion is allowed.
+WDL has some limited facilities for converting a value of one type to another type. Some of these are explicitly provided by [standard library](@/standard-library/_index.md) functions, while others are [implicit](#type-coercion). When converting between types, it is best to be explicit whenever possible, even if an implicit conversion is allowed.
 
-The execution engine is also responsible for converting (or "serializing") input values when constructing commands, as well as "deserializing" command outputs. For more information, see the [Command Section](#) and the more extensive Appendix on [WDL Value Serialization and Deserialization](#).
+The execution engine is also responsible for converting (or "serializing") input values when constructing commands, as well as "deserializing" command outputs. For more information, see the [Command Section](@/tasks/command.md) and the more extensive Appendix on [WDL Value Serialization and Deserialization](@/appendices/appendix-a.md).
 
 Note that type conversion is non-destructive - the converted value can be considered to be a new value that copies whatever properties of the original value are supported by the target type. If the original value was assigned to a variable, then that variable remains unchanged after the type conversion. For example:
 
@@ -18,7 +18,7 @@ String new_path = "~{path}_2"  # can still use `path` here
 
 ## Primitive Conversion to String 
 
-Primitive types can always be converted to `String` using [string interpolation](#). See [Expression Placeholder Coercion](#) for details.
+Primitive types can always be converted to `String` using [string interpolation](@/types/primitive-types/strings.md). See [Expression Placeholders](@/tasks/command.md#expression-placeholders) for details.
 
 <details>
 <summary>
@@ -169,7 +169,7 @@ The table below lists all globally valid coercions. The "target" type is the typ
 | `Struct`         | `Object`         | `Object` keys must match `Struct` member names, and `Object` values must be coercible to `Struct` member types                                   |
 | `Struct`         | `Struct`         | The two `Struct` types must have members with identical names and compatible types (see [Struct-to-Struct Coercion](#struct-to-struct-coercion)) |
 
-The [`read_lines`](#) function presents a special case in which the `Array[String]` value it returns may be immediately coerced into other `Array[P]` values, where `P` is a primitive type. See [Appendix A](#) for details and best practices.
+The [`read_lines`](@/standard-library/file-functions/read_lines.md) function presents a special case in which the `Array[String]` value it returns may be immediately coerced into other `Array[P]` values, where `P` is a primitive type. See [Appendix A](@/appendices/appendix-a.md) for details and best practices.
 
 ### Order of Precedence
 
@@ -222,12 +222,12 @@ Boolean b3 = 1 == true
 
 A non-optional type `T` can always be coerced to an optional type `T?`, but the reverse is not true - coercion from `T?` to `T` is not allowed because the latter cannot accept `None`.
 
-This constraint propagates into compound types. For example, an `Array[T?]` can contain both optional and non-optional elements. This facilitates the common idiom [`select_first([expr, default])`](#), where `expr` is of type `T?` and `default` is of type `T`, for converting an optional type to a non-optional type. However, an `Array[T?]` could not be passed to the [`sep`](#) function, which requires an `Array[T]`.
+This constraint propagates into compound types. For example, an `Array[T?]` can contain both optional and non-optional elements. This facilitates the common idiom [`select_first([expr, default])`](@/standard-library/array-functions/select_first.md), where `expr` is of type `T?` and `default` is of type `T`, for converting an optional type to a non-optional type. However, an `Array[T?]` could not be passed to the [`sep`](@/standard-library/array-string-functions/sep.md) function, which requires an `Array[T]`.
 
 There are two exceptions where coercion from `T?` to `T` is allowed:
 
-* [String concatenation in expression placeholders](#)
-* [Equality and inequality comparisons](#)
+* [String concatenation in expression placeholders](@/tasks/command.md#expression-placeholders)
+* [Equality and inequality comparisons](@/types/type-conversion.md#coercion-of-optional-types)
 
 ### Struct/Object Coercion from Map
 

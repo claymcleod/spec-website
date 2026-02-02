@@ -4,7 +4,7 @@ description = "Declaring workflow output parameters"
 weight = 50
 +++
 
-The workflow and [task `output` sections](#) have identical semantics.
+The workflow and [task `output` sections](@/tasks/outputs.md) have identical semantics.
 
 By default, if the `output {...}` section is omitted from a top-level workflow, then the workflow has no outputs. However, the execution engine may choose allow the user to specify that when the top-level output section is omitted, all outputs from all calls (including nested calls) should be returned.
 

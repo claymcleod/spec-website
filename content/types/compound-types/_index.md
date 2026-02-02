@@ -217,7 +217,7 @@ Test config:
 </p>
 </details>
 
-For more details see the section on [Input Type Constraints](#).
+For more details see the section on [Input Type Constraints](@/tasks/inputs.md#input-type-constraints).
 
 ## Pair[X, Y]
 
@@ -344,7 +344,7 @@ Test config:
 </p>
 </details>
 
-A `Map` is insertion-ordered, meaning the order in which elements are added to the `Map` is preserved, for example when [converting a `Map` to an array of `Pair`s](#).
+A `Map` is insertion-ordered, meaning the order in which elements are added to the `Map` is preserved, for example when [converting a `Map` to an array of `Pair`s](@/standard-library/map-functions/as_pairs.md).
 
 <details>
 <summary>

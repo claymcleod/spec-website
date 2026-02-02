@@ -48,7 +48,7 @@ Example input:
 `File` and `Directory` inputs may require localization to the execution environment. For example, a file located on a remote web server that is provided to the execution engine as an `https://` URL must first be downloaded to the machine where the task is being executed.
 
 - `File`s and `Directory`s are localized into the execution environment prior to evaluating any expressions. This means that references to `File` or `Directory` declarations in input declaration expressions, private declaration expressions, and the command section are always replaced with the local paths to those files/directories.
-- When multiple input declarations refer to the same canonicalized `File` or `Directory` (i.e., they [compare as equal](#)), the execution engine should localize the resource once, and all references to those declarations should resolve to the same localized path.
+- When multiple input declarations refer to the same canonicalized `File` or `Directory` (i.e., they [compare as equal](@/types/primitive-types/strings.md#path-canonicalization-and-validation)), the execution engine should localize the resource once, and all references to those declarations should resolve to the same localized path.
 - When localizing a `File` or `Directory`, the engine may choose to place the local resource wherever it likes so long as it adheres to these rules:
   - The original file/directory name (the "basename") must be preserved even if the path to it has changed.
   - Two distinct input files with the same basename must be located separately, to avoid name collision. Note that this refers to two different files (that would not compare as equal), not to multiple input declarations that reference the same underlying file.
@@ -57,7 +57,7 @@ Example input:
     - For remote paths specified as a URI, "parent" means the entire URI up to the last '/' of the path (i.e., excluding the final component and any parameters). For example, http://foo.com/bar/a.txt and http://foo.com/bar/b.txt have the same parent (http://foo.com/bar/), so they must be localized into the same directory.
     - For remote paths specified by other means, it is up to the execution engine to determine what is meant by "parent".
   - See the [special case handling for Versioning Filesystems](#special-case-versioning-filesystem) below.
-- When a WDL author uses a `File` or `Directory` input in their [Command Section](#), the absolute path to the localized file/directory is substituted when that declaration is referenced.
+- When a WDL author uses a `File` or `Directory` input in their [Command Section](@/tasks/command.md), the absolute path to the localized file/directory is substituted when that declaration is referenced.
 
 The above rules do *not* guarantee that two files will be localized to the same directory *unless* they originate from the same parent location. If you are writing a task for a tool that assumes two files will be co-located, then it is safest to manually co-locate them prior to running the tool. For example, the following task runs a variant caller (`varcall`) on a BAM file and expects the BAM's index file (`.bai` extension) to be in the same directory as the BAM file.
 

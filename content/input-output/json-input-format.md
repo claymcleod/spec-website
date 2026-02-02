@@ -3,9 +3,9 @@ title = "JSON Input Format"
 weight = 10
 +++
 
-The inputs for a workflow invocation may be specified as a single JSON object that contains one member for each top-level workflow input. The name of the object member is the [fully-qualified name](#) of the input parameter, and the value is the [serialized form](#) of the WDL value.
+The inputs for a workflow invocation may be specified as a single JSON object that contains one member for each top-level workflow input. The name of the object member is the [fully-qualified name](@/workflows/qualified-names.md) of the input parameter, and the value is the [serialized form](@/input-output/json-serialization.md) of the WDL value.
 
-If the WDL implementation supports the [`allow_nested_inputs`](#) hint, then optional inputs for nested calls can also be specified in the input JSON, provided the call does not already specify a value for the input. Nested inputs are referenced using the name of the `call`, which may be different from the name of the task or subworkflow (i.e., if is imported or called with an alias). When a `call` appears within a `scatter`, setting the value of an input applies to every instance of the call.
+If the WDL implementation supports the [`allow_nested_inputs`](@/workflows/hints.md#allow-nested-inputs) hint, then optional inputs for nested calls can also be specified in the input JSON, provided the call does not already specify a value for the input. Nested inputs are referenced using the name of the `call`, which may be different from the name of the task or subworkflow (i.e., if is imported or called with an alias). When a `call` appears within a `scatter`, setting the value of an input applies to every instance of the call.
 
 Here is an example JSON input file for a workflow `wf`:
 
@@ -78,7 +78,7 @@ The following would all be valid JSON inputs:
 
 ### Specifying / Overriding Requirements and Hints
 
-[Requirement](#) and [hint](#) attributes can be specified (or overridden) for any task in the JSON input file. To differentiate requirements and hints from task inputs, the `requirements` or `hints` namespace is added after the task name.
+[Requirement](@/tasks/requirements.md) and [hint](@/tasks/hints.md) attributes can be specified (or overridden) for any task in the JSON input file. To differentiate requirements and hints from task inputs, the `requirements` or `hints` namespace is added after the task name.
 
 ```json
 {
@@ -92,4 +92,4 @@ The following would all be valid JSON inputs:
 
 Overriding an attribute for a task nested within a `scatter` applies to all invocations of that task.
 
-Unlike inputs, a WDL implementation must support overriding requirements and hints regardless of whether it supports the [`allow_nested_inputs`](#) workflow hint. Requirements and hints specified in the input JSON always supersede values supplied directly in the WDL. Any hints that are not supported by the execution engine are ignored.
+Unlike inputs, a WDL implementation must support overriding requirements and hints regardless of whether it supports the [`allow_nested_inputs`](@/workflows/hints.md#allow-nested-inputs) workflow hint. Requirements and hints specified in the input JSON always supersede values supplied directly in the WDL. Any hints that are not supported by the execution engine are ignored.

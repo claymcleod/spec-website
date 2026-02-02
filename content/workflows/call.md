@@ -4,7 +4,7 @@ description = "Invoking tasks and sub-workflows"
 weight = 70
 +++
 
-A workflow calls other tasks/workflows via the `call` keyword. A `call` is followed by the name of the task or subworkflow to run. If a task is defined in the same WDL document as the calling workflow, it may be called using just the task name. A task or workflow in an imported WDL must be called using its [fully-qualified name](#).
+A workflow calls other tasks/workflows via the `call` keyword. A `call` is followed by the name of the task or subworkflow to run. If a task is defined in the same WDL document as the calling workflow, it may be called using just the task name. A task or workflow in an imported WDL must be called using its [fully-qualified name](@/workflows/qualified-names.md).
 
 Each `call` must be uniquely identifiable. By default, the `call`'s unique identifier is the task or subworkflow name (e.g., `call foo` would be referenced by name `foo`). However, to `call foo` multiple times in the same workflow, it is necessary to give all except one of the `call` statements a unique alias using the `as` clause, e.g., `call foo as bar`.
 
@@ -279,7 +279,7 @@ Example output:
 
 #### Computing Call Inputs
 
-Any required workflow inputs (i.e., those that are not initialized with a default expression) must have their values provided when invoking the workflow. Inputs may be specified for a workflow invocation using any mechanism supported by the execution engine, including the [standard JSON format](#). 
+Any required workflow inputs (i.e., those that are not initialized with a default expression) must have their values provided when invoking the workflow. Inputs may be specified for a workflow invocation using any mechanism supported by the execution engine, including the [standard JSON format](@/input-output/json-input-format.md). 
 
 A call to a subworkflow or task must, at a minimum, provide a value for each required input. The call may also specify values for any optional inputs. Any optional inputs that are not specified in the call may be set by the user at runtime if the execution engine supports the `allow_nested_inputs` hint and it is set to `true` in the workflow's `hints` section.
 

@@ -14,14 +14,14 @@ The following sections enumerate the hidden and scoped types that are available 
 
 `Union` is a hidden type that is used for a value that may have any one of several concrete types. A `Union` value must always be coerced to a concrete type. The `Union` type is used in the following contexts:
 
-* It is the type of the special [`None`](#) value.
-* It is the return type of some standard library functions, such as [`read_json`](#).
-* It is the type of some [`requirements`](#) and reserved [`hints`](#) attributes.
+* It is the type of the special [`None`](@/types/optional-types.md) value.
+* It is the return type of some standard library functions, such as [`read_json`](@/standard-library/file-functions/read_json.md).
+* It is the type of some [`requirements`](@/tasks/requirements.md) and reserved [`hints`](@/tasks/hints.md) attributes.
 
 ## `hints`, `input`, and `output` (Scoped Types)
 
-The [`hints`](#) section has [three scoped types](#) that may be instantiated by the user within that scope.
+The [`hints`](@/tasks/hints.md) section has [three scoped types](@/tasks/hints.md#hints-scoped-types) that may be instantiated by the user within that scope.
 
 ## `task` (Hidden Scoped Type)
 
-The [`task` type](#) is a hidden type that is scoped to the `command` and `output` sections.
+The [`task` type](@/tasks/runtime-access.md) is a hidden type that is scoped to the `command` and `output` sections.

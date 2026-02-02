@@ -19,7 +19,7 @@ Reads a JSON file into a WDL value whose type depends on the file's contents. Th
 | boolean   | `Boolean`        |
 | null      | `None`           |
 
-The return value is of type [`Union`](#) and must be used in a context where it can be coerced to the expected type, or an error is raised. For example, if the JSON file contains `null`, then the return value will be `None`, meaning the value can only be used in a context where an optional type is expected.
+The return value is of type [`Union`](@/types/hidden-types.md#union-hidden-type) and must be used in a context where it can be coerced to the expected type, or an error is raised. For example, if the JSON file contains `null`, then the return value will be `None`, meaning the value can only be used in a context where an optional type is expected.
 
 If the JSON file contains an array, then all the elements of the array must be coercible to the same type, or an error is raised.
 

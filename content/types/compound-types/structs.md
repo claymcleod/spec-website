@@ -4,11 +4,11 @@ description = "User-defined struct types in WDL"
 weight = 20
 +++
 
-WDL provides the ability to define custom compound types called [structs](#). `Struct` types are defined directly in the WDL document and are usable like any other type. A struct is defined using the `struct` keyword, followed by a unique name, followed by member declarations within braces. A struct definition contains any number of declarations of any types, including other `Struct`s.
+WDL provides the ability to define custom compound types called structs. `Struct` types are defined directly in the WDL document and are usable like any other type. A struct is defined using the `struct` keyword, followed by a unique name, followed by member declarations within braces. A struct definition contains any number of declarations of any types, including other `Struct`s.
 
 A declaration with a custom type can be initialized with a struct literal, which begins with the `Struct` type name followed by a comma-separated list of name-value pairs in braces (`{}`), where name-value pairs are delimited by `:`. The member names in a struct literal are not quoted. A struct literal must provide values for all of the struct's non-optional members, and may provide values for any of the optional members. The members of a struct literal are validated against the struct's definition at the time of creation. Members do not need to be in any specific order. Once a struct literal is created, it is immutable like any other WDL value.
 
-The value of a specific member of a struct value can be [accessed](#) by placing a `.` followed by the member name after the identifier.
+The value of a specific member of a struct value can be accessed by placing a `.` followed by the member name after the identifier.
 
 <details>
 <summary>

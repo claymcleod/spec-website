@@ -9,20 +9,20 @@ Namespaces and scoping in WDL are somewhat complex topics, and some aspects are 
 
 The following WDL namespaces exist:
 
-* [WDL document](#)
-    * The namespace of an [imported](#) document equals that of the basename of the imported file by default, but may be aliased using the `as <identifier>` syntax.
+* [WDL document](@/introduction/_index.md)
+    * The namespace of an [imported](@/introduction/_index.md) document equals that of the basename of the imported file by default, but may be aliased using the `as <identifier>` syntax.
     * A WDL document may contain a `workflow` and/or `task`s, which are names within the document's namespace.
-    * A WDL document may contain `struct`s, which are also names within the document's namespace and usable as types in any declarations. Structs from any imported documents are [copied into the document's namespace](#) and may be aliased using the `alias <source name> as <new name>` syntax.
-* A [WDL `task`](#) is a namespace consisting of:
+    * A WDL document may contain `struct`s, which are also names within the document's namespace and usable as types in any declarations. Structs from any imported documents are copied into the document's namespace and may be aliased using the `alias <source name> as <new name>` syntax.
+* A [WDL `task`](@/tasks/_index.md) is a namespace consisting of:
     * `input`, `output`, and private declarations
-    * A [`requirements`](#) namespace that contains all the runtime requirements
-* A [WDL `workflow`](#) is a namespace consisting of:
+    * A [`requirements`](@/tasks/requirements.md) namespace that contains all the runtime requirements
+* A [WDL `workflow`](@/workflows/_index.md) is a namespace consisting of:
     * `input`, `output`, and private declarations
-    * The [`call`s](#) made to tasks and subworkflows within the body of the workflow.
+    * The [`call`s](@/workflows/call.md) made to tasks and subworkflows within the body of the workflow.
         * A call is itself a namespace that equals the name of the called task or subworkflow by default, but may be aliased using the `as <identifier>` syntax.
         * A call namespace contains the output declarations of the called task or workflow.
     * The body of each nested element (`struct` or `if` statement).
-* A [`Struct` instance](#): is a namespace consisting of the members defined in the struct. This also applies to `Object` instances.
+* A [`Struct` instance](@/types/compound-types/structs.md): is a namespace consisting of the members defined in the struct. This also applies to `Object` instances.
 
 All members of a namespace must be unique within that namespace. For example:
 
@@ -30,7 +30,7 @@ All members of a namespace must be unique within that namespace. For example:
 * A workflow and a namespace both named `foo` cannot exist inside a common namespace.
 * There cannot be a call `foo` in a workflow also named `foo`.
  
-However, two sub-namespaces imported into the same parent namespace are allowed to contain the same names. For example, two documents with different namespace identifiers `foo` and `bar` can both have a task named `baz`, because the [fully-qualified names](#) of the two tasks would be different: `foo.baz` and `bar.baz`.
+However, two sub-namespaces imported into the same parent namespace are allowed to contain the same names. For example, two documents with different namespace identifiers `foo` and `bar` can both have a task named `baz`, because the [fully-qualified names](@/workflows/qualified-names.md) of the two tasks would be different: `foo.baz` and `bar.baz`.
 
 ## Scopes
 

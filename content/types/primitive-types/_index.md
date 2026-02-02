@@ -11,7 +11,7 @@ The following primitive types exist in WDL:
 * A `Boolean` represents a value of `true` or `false`.
 * An `Int` represents a signed 64-bit integer (in the range `[-2^63, 2^63)`).
 * A `Float` represents a finite 64-bit IEEE-754 floating point number.
-* A `String` represents a unicode character string following the format described [below](#).
+* A `String` represents a unicode character string following the format described [below](@/types/primitive-types/strings.md).
 * A `File` represents a file (or file-like object).
 * <span class="wdl-badge wdl-badge-new">New in 1.2</span> A `Directory` represents a (possibly nested) directory of files.
 

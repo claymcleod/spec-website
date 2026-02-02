@@ -10,15 +10,15 @@ A task is defined using the `task` keyword, followed by a task name that is uniq
 
 Tasks are comprised of the following elements:
 
-* A single, optional [`input`](#) section, which defines the inputs for the task.
-* A single, required [`command`](#) section, which defines the Bash script to be executed.
-* A single, optional [`output`](#) section, which defines the outputs for the task.
-* A single, optional [`requirements`](#) section, which defines the minimum, required runtime environment conditions.
-* A single, optional [`hints`](#) section, which provides hints to the execution engine.
-* <span class="wdl-badge wdl-badge-deprecated">Deprecated</span> A single, optional [`runtime`](#) section, which defines the runtime environment conditions. This is mutually exclusive with the `requirements` and `hints` sections.
-* A single, optional [`meta`](#) section, which defines task-level metadata.
-* A single, optional [`parameter_meta`](#) section, which defines parameter-level metadata.
-* Any number of [private declarations](#).
+* A single, optional [`input`](@/tasks/inputs.md) section, which defines the inputs for the task.
+* A single, required [`command`](@/tasks/command.md) section, which defines the Bash script to be executed.
+* A single, optional [`output`](@/tasks/outputs.md) section, which defines the outputs for the task.
+* A single, optional [`requirements`](@/tasks/requirements.md) section, which defines the minimum, required runtime environment conditions.
+* A single, optional [`hints`](@/tasks/hints.md) section, which provides hints to the execution engine.
+* <span class="wdl-badge wdl-badge-deprecated">Deprecated</span> A single, optional [`runtime`](@/tasks/runtime.md) section, which defines the runtime environment conditions. This is mutually exclusive with the `requirements` and `hints` sections.
+* A single, optional [`meta`](@/tasks/metadata.md) section, which defines task-level metadata.
+* A single, optional [`parameter_meta`](@/tasks/metadata.md) section, which defines parameter-level metadata.
+* Any number of [private declarations](@/tasks/private-declarations.md).
 
 There is no enforced order for task elements.
 

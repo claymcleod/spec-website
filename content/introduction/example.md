@@ -4,7 +4,7 @@ description = "A simple Hello World workflow demonstrating WDL syntax"
 weight = 10
 +++
 
-Below is the code for the "Hello World" workflow in WDL. This is just meant to give a flavor of WDL syntax and capabilities - all WDL elements are described in detail in the [Language Specification](#).
+Below is the code for the "Hello World" workflow in WDL. This is just meant to give a flavor of WDL syntax and capabilities - all WDL elements are described in detail in the [Language Specification](@/types/_index.md).
 
 <details>
   <summary>

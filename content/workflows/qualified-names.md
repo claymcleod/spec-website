@@ -10,11 +10,11 @@ A fully qualified name is the unique identifier of any particular call, input, o
 * For inputs and outputs: `<parent namespace>.<input or output name>`
 * For `Struct`s and `Object`s: `<parent namespace>.<member name>`
 
-A [namespace](#) is a set of names, such that every name is unique within the namespace (but the same name could be used in two different namespaces). The `parent namespace` is the fully qualified name of the workflow containing the call, the workflow or task containing the input or output declaration, or the `Struct` or `Object` declaration containing the member. For the top-level workflow this is equal to the workflow name.
+A [namespace](@/appendices/appendix-b.md) is a set of names, such that every name is unique within the namespace (but the same name could be used in two different namespaces). The `parent namespace` is the fully qualified name of the workflow containing the call, the workflow or task containing the input or output declaration, or the `Struct` or `Object` declaration containing the member. For the top-level workflow this is equal to the workflow name.
 
 For example: `ns.ns2.mytask` is a fully-qualified name - `ns.ns2` is the parent namespace, and `mytask` is the task name being referred to within that namespace. Fully-qualified names are left-associative, meaning `ns.ns2.mytask` is interpreted as `((ns.ns2).mytask)`, meaning `ns.ns2` has to resolve to a namespace so that `.mytask` can be applied.
 
-When a [call statement](#) needs to refer to a task or workflow in another namespace, then it must use the fully-qualified name of that task or workflow. When an [expression](#) needs to refer to a declaration in another namespace, it must use a *namespaced identifier*, which is an identifier consisting of a fully-qualified name.
+When a [call statement](@/workflows/call.md) needs to refer to a task or workflow in another namespace, then it must use the fully-qualified name of that task or workflow. When an [expression](@/types/_index.md) needs to refer to a declaration in another namespace, it must use a *namespaced identifier*, which is an identifier consisting of a fully-qualified name.
 
 <details>
 <summary>
@@ -59,7 +59,7 @@ Example output:
 </p>
 </details>
 
-The workflow in the above example imports the WDL file from the previous section using an alias. The import creates the namespace `ns1`, and the workflow calls a task in the imported namespace using its fully qualified name, `ns1.double`. Each call is aliased, and the alias is used to refer to the output of the task, e.g., `d1.out` (see the [Call Statement](#) section for details on call aliasing).
+The workflow in the above example imports the WDL file from the previous section using an alias. The import creates the namespace `ns1`, and the workflow calls a task in the imported namespace using its fully qualified name, `ns1.double`. Each call is aliased, and the alias is used to refer to the output of the task, e.g., `d1.out` (see the [Call Statement](@/workflows/call.md) section for details on call aliasing).
 
 In the following more extensive example, all of the fully-qualified names that exist within the top-level workflow are listed exhaustively.
 
@@ -230,5 +230,5 @@ The following fully-qualified names exist when calling `workflow main` in `main.
 | `main.foobar_results`         | `Int` result from call to `foobar`                                                          | Anywhere in `main`'s output section and by the caller of `main` |
 | `main.echo_array`             | Array of `String` contents of `File` results from calls to `echo` in the scatter            | Anywhere in `main`'s output section and by the caller of `main` |
 
-\* Task inputs are accessible to be set by the caller of `main` if the workflow is called with [`allow_nested_inputs: true`](#) in its `hints` section.
+\* Task inputs are accessible to be set by the caller of `main` if the workflow is called with [`allow_nested_inputs: true`](@/workflows/hints.md#allow-nested-inputs) in its `hints` section.
 

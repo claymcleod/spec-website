@@ -10,7 +10,7 @@ This document provides a detailed technical specification for WDL. Users who are
 
 Here is provided a short example of WDL, after which are several sections that provide the necessary details both for WDL users and for implementers of WDL execution engines:
 
-* [Language Specification](#): a description of the WDL grammar and all the parts of the WDL document.
-* [Standard Library](/standard-library/): a catalog of the functions available to be called from within a WDL document.
-* [Input and Output Formats](#): a description of the standard input and output formats that must be supported by all WDL implementations.
-* [Appendices](#): Sections with more detailed information about various parts of the specification.
+* [Language Specification](@/types/_index.md): a description of the WDL grammar and all the parts of the WDL document.
+* [Standard Library](@/standard-library/_index.md): a catalog of the functions available to be called from within a WDL document.
+* [Input and Output Formats](@/input-output/_index.md): a description of the standard input and output formats that must be supported by all WDL implementations.
+* [Appendices](@/appendices/_index.md): Sections with more detailed information about various parts of the specification.
