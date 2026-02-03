@@ -309,3 +309,13 @@ document.addEventListener('click', (e) => {
         hideResults();
     }
 });
+
+// Keyboard shortcut: "/" to focus search
+document.addEventListener('keydown', (e) => {
+    // Only trigger if not already in an input/textarea
+    if (e.key === '/' && !['INPUT', 'TEXTAREA'].includes(document.activeElement.tagName)) {
+        e.preventDefault();
+        searchInput?.focus();
+        loadSearchIndex();
+    }
+});
