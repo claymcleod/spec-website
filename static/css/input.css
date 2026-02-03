@@ -191,7 +191,11 @@
   }
 
   .sidebar-content .chevron-toggle:hover {
-    @apply bg-transparent text-teal-600;
+    @apply bg-teal-200 text-teal-800;
+  }
+
+  .sidebar-content .sidebar-row:hover .chevron-toggle {
+    @apply text-teal-700;
   }
 
   :is(.dark) .sidebar-content .chevron-toggle {
@@ -199,7 +203,11 @@
   }
 
   :is(.dark) .sidebar-content .chevron-toggle:hover {
-    @apply bg-transparent text-teal-400;
+    @apply bg-teal-900/50 text-teal-300;
+  }
+
+  :is(.dark) .sidebar-content .sidebar-row:hover .chevron-toggle {
+    @apply text-teal-300;
   }
 
   /* Heading anchors */
