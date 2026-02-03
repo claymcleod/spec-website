@@ -161,6 +161,47 @@
     @apply bg-teal-900/30;
   }
 
+  /* Chevron toggle buttons - top level only get box styling */
+  .chevron-toggle {
+    @apply cursor-pointer text-gray-500 border border-gray-300 bg-gray-100 flex items-center justify-center;
+    border-radius: 0;
+    width: 1.25rem;
+    height: 1.25rem;
+    padding: 0;
+  }
+
+  .chevron-toggle:hover {
+    @apply border-teal-600 text-white bg-teal-700;
+  }
+
+  :is(.dark) .chevron-toggle {
+    @apply text-gray-400 border-gray-600 bg-gray-700;
+  }
+
+  :is(.dark) .chevron-toggle:hover {
+    @apply border-teal-500 text-white bg-teal-700;
+  }
+
+  /* Nested chevrons - just the icon, no box */
+  .sidebar-content .chevron-toggle {
+    @apply border-0 bg-transparent text-gray-400;
+    width: auto;
+    height: auto;
+    padding: 0.375rem;
+  }
+
+  .sidebar-content .chevron-toggle:hover {
+    @apply bg-transparent text-teal-600;
+  }
+
+  :is(.dark) .sidebar-content .chevron-toggle {
+    @apply text-gray-500;
+  }
+
+  :is(.dark) .sidebar-content .chevron-toggle:hover {
+    @apply bg-transparent text-teal-400;
+  }
+
   /* Heading anchors */
   .zola-anchor {
     @apply text-teal-500 mr-1 no-underline! font-bold;

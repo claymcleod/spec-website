@@ -26,10 +26,17 @@ const mobileSidebarOverlay = document.getElementById('mobile-sidebar-overlay');
 
 function openMobileSidebar() {
   mobileSidebar?.classList.remove('hidden');
+  sessionStorage.setItem('mobileSidebarOpen', 'true');
 }
 
 function closeMobileSidebar() {
   mobileSidebar?.classList.add('hidden');
+  sessionStorage.removeItem('mobileSidebarOpen');
+}
+
+// Restore sidebar state on page load
+if (sessionStorage.getItem('mobileSidebarOpen') === 'true') {
+  mobileSidebar?.classList.remove('hidden');
 }
 
 mobileMenuButton?.addEventListener('click', openMobileSidebar);
