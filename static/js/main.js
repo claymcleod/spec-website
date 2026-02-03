@@ -117,9 +117,11 @@ sidebarSections.forEach(section => {
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
+    const hash = this.getAttribute('href');
+    const target = document.querySelector(hash);
     if (target) {
       target.scrollIntoView({ behavior: 'smooth' });
+      history.pushState(null, '', hash);
     }
   });
 });
