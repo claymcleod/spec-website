@@ -1,3 +1,4 @@
+{% set v = config.extra.current_version %}
 <!DOCTYPE html>
 <html lang="en" class="h-full dark">
 <head>
@@ -27,7 +28,7 @@
 </head>
 <body class="h-full bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100">
     <div class="flex h-full">
-        <aside class="hidden lg:block w-72 shrink-0 border-r border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-900">
+        <aside class="hidden lg:block w-80 shrink-0 border-r border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-900">
             <div class="flex flex-col h-full">
                 <div class="sticky top-0 z-10 bg-gray-50 dark:bg-gray-900 px-6 pt-6 pb-4 border-b border-gray-300 dark:border-gray-600">
                     <a href="{{ get_url(path='/') }}" class="flex items-center gap-3 mb-4">
@@ -37,274 +38,26 @@
                         <span class="text-md font-semibold text-gray-900 dark:text-white">Specification</span>
                     </a>
 
-                    <div class="relative">
-                        <select disabled aria-label="Select WDL specification version" class="w-full appearance-none pl-3 pr-10 py-2 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md text-sm text-gray-600 dark:text-gray-100 cursor-not-allowed">
-                            <option>Version {{ config.extra.current_version }}</option>
-                        </select>
-                        <i class="fa-solid fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-sm text-gray-400 pointer-events-none"></i>
+                    <div class="relative version-dropdown">
+                        <button type="button" onclick="toggleVersionMenu(this)" aria-label="Select WDL specification version" aria-expanded="false" class="version-dropdown-toggle w-full flex items-center justify-between pl-3 pr-3 py-2 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md text-sm text-gray-900 dark:text-gray-100 cursor-pointer focus:outline-none focus:ring-2 focus:ring-teal-500">
+                            <span class="flex items-center">Version {{ v }}{% if v == config.extra.current_version %} <span class="inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] leading-none font-semibold bg-teal-800 text-white dark:bg-teal-400 dark:text-gray-900 ml-1.5">latest</span>{% endif %}</span>
+                            <i class="fa-solid fa-chevron-down text-xs text-gray-400 ml-2"></i>
+                        </button>
+                        <div class="version-dropdown-menu hidden absolute z-50 w-full mt-1 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md shadow-lg py-1">
+                            {% for version in config.extra.versions %}
+                            <button type="button" onclick="selectVersion(this)" class="version-dropdown-item w-full text-left px-3 py-1.5 text-sm text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center {% if version == v %}font-semibold bg-gray-100 dark:bg-gray-600{% endif %}" data-version="{{ version }}">
+                                Version {{ version }}{% if version == config.extra.current_version %} <span class="inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] leading-none font-semibold bg-teal-800 text-white dark:bg-teal-400 dark:text-gray-900 ml-1.5">latest</span>{% endif %}
+                            </button>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
 
                 <div class="flex-1 overflow-y-auto px-6 py-6" style="scrollbar-gutter: stable">
                     <nav class="space-y-4">
                     {% block sidebar_nav %}
-                    <div>
-                        <div class="text-xs font-semibold text-gray-700 dark:text-gray-100 uppercase tracking-wide mb-2">Getting Started</div>
-                        <div class="space-y-0.5">
-                            <div class="sidebar-section" data-section="introduction">
-                                <div class="flex items-center justify-between sidebar-row">
-                                    <a href="{{ get_url(path='/introduction/') }}" class="sidebar-link flex-1" data-path="/introduction/" data-section="introduction">Introduction</a>
-                                    <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle Introduction submenu">
-                                        <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
-                                    </button>
-                                </div>
-                                <div class="sidebar-content hidden">
-                                    <a href="{{ get_url(path='/introduction/example/') }}" class="sidebar-link pl-6" data-path="/introduction/example/" data-section="introduction">An Example Workflow</a>
-                                    <a href="{{ get_url(path='/introduction/executing/') }}" class="sidebar-link pl-6" data-path="/introduction/executing/" data-section="introduction">Executing Workflows</a>
-                                    <a href="{{ get_url(path='/introduction/advanced-features/') }}" class="sidebar-link pl-6" data-path="/introduction/advanced-features/" data-section="introduction">Advanced Features</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="text-xs font-semibold text-gray-700 dark:text-gray-100 uppercase tracking-wide mb-2">Core Concepts</div>
-                        <div class="space-y-0.5">
-                            <div class="sidebar-section" data-section="types">
-                                <div class="flex items-center justify-between sidebar-row">
-                                    <a href="{{ get_url(path='/types/') }}" class="sidebar-link flex-1" data-path="/types/" data-section="types">Type System</a>
-                                    <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle Type System submenu">
-                                        <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
-                                    </button>
-                                </div>
-                                <div class="sidebar-content hidden">
-                                    <div class="sidebar-section" data-section="primitive-types">
-                                        <div class="flex items-center justify-between sidebar-row">
-                                            <a href="{{ get_url(path='/types/primitive-types/') }}" class="sidebar-link flex-1 pl-6" data-path="/types/primitive-types/" data-section="primitive-types">Primitive Types</a>
-                                            <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle Primitive Types submenu">
-                                                <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
-                                            </button>
-                                        </div>
-                                        <div class="sidebar-content hidden">
-                                            <a href="{{ get_url(path='/types/primitive-types/strings/') }}" class="sidebar-link pl-12" data-path="/types/primitive-types/strings/" data-section="primitive-types">Strings</a>
-                                        </div>
-                                    </div>
-                                    <a href="{{ get_url(path='/types/optional-types/') }}" class="sidebar-link pl-6" data-path="/types/optional-types/" data-section="types">Optional Types</a>
-                                    <div class="sidebar-section" data-section="compound-types">
-                                        <div class="flex items-center justify-between sidebar-row">
-                                            <a href="{{ get_url(path='/types/compound-types/') }}" class="sidebar-link flex-1 pl-6" data-path="/types/compound-types/" data-section="compound-types">Compound Types</a>
-                                            <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle Compound Types submenu">
-                                                <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
-                                            </button>
-                                        </div>
-                                        <div class="sidebar-content hidden">
-                                            <a href="{{ get_url(path='/types/compound-types/object/') }}" class="sidebar-link pl-12" data-path="/types/compound-types/object/" data-section="compound-types">Object</a>
-                                            <a href="{{ get_url(path='/types/compound-types/structs/') }}" class="sidebar-link pl-12" data-path="/types/compound-types/structs/" data-section="compound-types">Structs</a>
-                                        </div>
-                                    </div>
-                                    <a href="{{ get_url(path='/types/hidden-types/') }}" class="sidebar-link pl-6" data-path="/types/hidden-types/" data-section="types">Hidden Types</a>
-                                    <a href="{{ get_url(path='/types/type-conversion/') }}" class="sidebar-link pl-6" data-path="/types/type-conversion/" data-section="types">Type Conversion</a>
-                                </div>
-                            </div>
-                            <div class="sidebar-section" data-section="tasks">
-                                <div class="flex items-center justify-between sidebar-row">
-                                    <a href="{{ get_url(path='/tasks/') }}" class="sidebar-link flex-1" data-path="/tasks/" data-section="tasks">Tasks</a>
-                                    <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle Tasks submenu">
-                                        <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
-                                    </button>
-                                </div>
-                                <div class="sidebar-content hidden">
-                                    <a href="{{ get_url(path='/tasks/inputs/') }}" class="sidebar-link pl-6" data-path="/tasks/inputs/" data-section="tasks">Task Inputs</a>
-                                    <a href="{{ get_url(path='/tasks/private-declarations/') }}" class="sidebar-link pl-6" data-path="/tasks/private-declarations/" data-section="tasks">Private Declarations</a>
-                                    <a href="{{ get_url(path='/tasks/environment-variables/') }}" class="sidebar-link pl-6" data-path="/tasks/environment-variables/" data-section="tasks">Environment Variables</a>
-                                    <a href="{{ get_url(path='/tasks/command/') }}" class="sidebar-link pl-6" data-path="/tasks/command/" data-section="tasks">Command Section</a>
-                                    <a href="{{ get_url(path='/tasks/outputs/') }}" class="sidebar-link pl-6" data-path="/tasks/outputs/" data-section="tasks">Task Outputs</a>
-                                    <a href="{{ get_url(path='/tasks/evaluation/') }}" class="sidebar-link pl-6" data-path="/tasks/evaluation/" data-section="tasks">Evaluation</a>
-                                    <a href="{{ get_url(path='/tasks/requirements/') }}" class="sidebar-link pl-6" data-path="/tasks/requirements/" data-section="tasks">Requirements</a>
-                                    <a href="{{ get_url(path='/tasks/hints/') }}" class="sidebar-link pl-6" data-path="/tasks/hints/" data-section="tasks">Hints</a>
-                                    <a href="{{ get_url(path='/tasks/runtime/') }}" class="sidebar-link pl-6" data-path="/tasks/runtime/" data-section="tasks">Runtime</a>
-                                    <a href="{{ get_url(path='/tasks/metadata/') }}" class="sidebar-link pl-6" data-path="/tasks/metadata/" data-section="tasks">Metadata</a>
-                                    <a href="{{ get_url(path='/tasks/runtime-access/') }}" class="sidebar-link pl-6" data-path="/tasks/runtime-access/" data-section="tasks">Runtime Access</a>
-                                </div>
-                            </div>
-                            <div class="sidebar-section" data-section="workflows">
-                                <div class="flex items-center justify-between sidebar-row">
-                                    <a href="{{ get_url(path='/workflows/') }}" class="sidebar-link flex-1" data-path="/workflows/" data-section="workflows">Workflows</a>
-                                    <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle Workflows submenu">
-                                        <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
-                                    </button>
-                                </div>
-                                <div class="sidebar-content hidden">
-                                    <a href="{{ get_url(path='/workflows/elements/') }}" class="sidebar-link pl-6" data-path="/workflows/elements/" data-section="workflows">Workflow Elements</a>
-                                    <a href="{{ get_url(path='/workflows/evaluation/') }}" class="sidebar-link pl-6" data-path="/workflows/evaluation/" data-section="workflows">Evaluation</a>
-                                    <a href="{{ get_url(path='/workflows/qualified-names/') }}" class="sidebar-link pl-6" data-path="/workflows/qualified-names/" data-section="workflows">Qualified Names</a>
-                                    <a href="{{ get_url(path='/workflows/inputs/') }}" class="sidebar-link pl-6" data-path="/workflows/inputs/" data-section="workflows">Workflow Inputs</a>
-                                    <a href="{{ get_url(path='/workflows/outputs/') }}" class="sidebar-link pl-6" data-path="/workflows/outputs/" data-section="workflows">Workflow Outputs</a>
-                                    <a href="{{ get_url(path='/workflows/hints/') }}" class="sidebar-link pl-6" data-path="/workflows/hints/" data-section="workflows">Workflow Hints</a>
-                                    <a href="{{ get_url(path='/workflows/call/') }}" class="sidebar-link pl-6" data-path="/workflows/call/" data-section="workflows">Call Statement</a>
-                                    <a href="{{ get_url(path='/workflows/scatter/') }}" class="sidebar-link pl-6" data-path="/workflows/scatter/" data-section="workflows">Scatter</a>
-                                    <a href="{{ get_url(path='/workflows/conditional/') }}" class="sidebar-link pl-6" data-path="/workflows/conditional/" data-section="workflows">Conditional</a>
-                                </div>
-                            </div>
-                            <div class="sidebar-section" data-section="standard-library">
-                                <div class="flex items-center justify-between sidebar-row">
-                                    <a href="{{ get_url(path='/standard-library/') }}" class="sidebar-link flex-1" data-path="/standard-library/" data-section="standard-library">Standard Library</a>
-                                    <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle Standard Library submenu">
-                                        <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
-                                    </button>
-                                </div>
-                                <div class="sidebar-content hidden">
-                                    <div class="sidebar-section" data-section="numeric-functions">
-                                        <div class="flex items-center justify-between sidebar-row">
-                                            <a href="{{ get_url(path='/standard-library/numeric-functions/') }}" class="sidebar-link flex-1 pl-6" data-path="/standard-library/numeric-functions/" data-section="numeric-functions">Numeric Functions</a>
-                                            <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle Numeric Functions submenu">
-                                                <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
-                                            </button>
-                                        </div>
-                                        <div class="sidebar-content hidden">
-                                            <a href="{{ get_url(path='/standard-library/numeric-functions/floor/') }}" class="sidebar-link pl-12" data-path="/standard-library/numeric-functions/floor/" data-section="numeric-functions">floor</a>
-                                            <a href="{{ get_url(path='/standard-library/numeric-functions/ceil/') }}" class="sidebar-link pl-12" data-path="/standard-library/numeric-functions/ceil/" data-section="numeric-functions">ceil</a>
-                                            <a href="{{ get_url(path='/standard-library/numeric-functions/round/') }}" class="sidebar-link pl-12" data-path="/standard-library/numeric-functions/round/" data-section="numeric-functions">round</a>
-                                            <a href="{{ get_url(path='/standard-library/numeric-functions/min/') }}" class="sidebar-link pl-12" data-path="/standard-library/numeric-functions/min/" data-section="numeric-functions">min</a>
-                                            <a href="{{ get_url(path='/standard-library/numeric-functions/max/') }}" class="sidebar-link pl-12" data-path="/standard-library/numeric-functions/max/" data-section="numeric-functions">max</a>
-                                        </div>
-                                    </div>
-                                    <div class="sidebar-section" data-section="string-functions">
-                                        <div class="flex items-center justify-between sidebar-row">
-                                            <a href="{{ get_url(path='/standard-library/string-functions/') }}" class="sidebar-link flex-1 pl-6" data-path="/standard-library/string-functions/" data-section="string-functions">String Functions</a>
-                                            <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle String Functions submenu">
-                                                <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
-                                            </button>
-                                        </div>
-                                        <div class="sidebar-content hidden">
-                                            <a href="{{ get_url(path='/standard-library/string-functions/find/') }}" class="sidebar-link pl-12" data-path="/standard-library/string-functions/find/" data-section="string-functions">find</a>
-                                            <a href="{{ get_url(path='/standard-library/string-functions/matches/') }}" class="sidebar-link pl-12" data-path="/standard-library/string-functions/matches/" data-section="string-functions">matches</a>
-                                            <a href="{{ get_url(path='/standard-library/string-functions/sub/') }}" class="sidebar-link pl-12" data-path="/standard-library/string-functions/sub/" data-section="string-functions">sub</a>
-                                        </div>
-                                    </div>
-                                    <div class="sidebar-section" data-section="file-functions">
-                                        <div class="flex items-center justify-between sidebar-row">
-                                            <a href="{{ get_url(path='/standard-library/file-functions/') }}" class="sidebar-link flex-1 pl-6" data-path="/standard-library/file-functions/" data-section="file-functions">File Functions</a>
-                                            <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle File Functions submenu">
-                                                <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
-                                            </button>
-                                        </div>
-                                        <div class="sidebar-content hidden">
-                                            <a href="{{ get_url(path='/standard-library/file-functions/basename/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/basename/" data-section="file-functions">basename</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/join_paths/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/join_paths/" data-section="file-functions">join_paths</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/glob/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/glob/" data-section="file-functions">glob</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/size/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/size/" data-section="file-functions">size</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/stdout/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/stdout/" data-section="file-functions">stdout</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/stderr/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/stderr/" data-section="file-functions">stderr</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/read_string/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/read_string/" data-section="file-functions">read_string</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/read_int/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/read_int/" data-section="file-functions">read_int</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/read_float/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/read_float/" data-section="file-functions">read_float</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/read_boolean/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/read_boolean/" data-section="file-functions">read_boolean</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/read_lines/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/read_lines/" data-section="file-functions">read_lines</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/write_lines/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/write_lines/" data-section="file-functions">write_lines</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/read_tsv/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/read_tsv/" data-section="file-functions">read_tsv</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/write_tsv/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/write_tsv/" data-section="file-functions">write_tsv</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/read_map/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/read_map/" data-section="file-functions">read_map</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/write_map/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/write_map/" data-section="file-functions">write_map</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/read_json/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/read_json/" data-section="file-functions">read_json</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/write_json/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/write_json/" data-section="file-functions">write_json</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/read_object/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/read_object/" data-section="file-functions">read_object</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/read_objects/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/read_objects/" data-section="file-functions">read_objects</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/write_object/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/write_object/" data-section="file-functions">write_object</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/write_objects/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/write_objects/" data-section="file-functions">write_objects</a>
-                                        </div>
-                                    </div>
-                                    <div class="sidebar-section" data-section="array-string-functions">
-                                        <div class="flex items-center justify-between sidebar-row">
-                                            <a href="{{ get_url(path='/standard-library/array-string-functions/') }}" class="sidebar-link flex-1 pl-6" data-path="/standard-library/array-string-functions/" data-section="array-string-functions">String Array Functions</a>
-                                            <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle String Array Functions submenu">
-                                                <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
-                                            </button>
-                                        </div>
-                                        <div class="sidebar-content hidden">
-                                            <a href="{{ get_url(path='/standard-library/array-string-functions/prefix/') }}" class="sidebar-link pl-12" data-path="/standard-library/array-string-functions/prefix/" data-section="array-string-functions">prefix</a>
-                                            <a href="{{ get_url(path='/standard-library/array-string-functions/suffix/') }}" class="sidebar-link pl-12" data-path="/standard-library/array-string-functions/suffix/" data-section="array-string-functions">suffix</a>
-                                            <a href="{{ get_url(path='/standard-library/array-string-functions/quote/') }}" class="sidebar-link pl-12" data-path="/standard-library/array-string-functions/quote/" data-section="array-string-functions">quote</a>
-                                            <a href="{{ get_url(path='/standard-library/array-string-functions/squote/') }}" class="sidebar-link pl-12" data-path="/standard-library/array-string-functions/squote/" data-section="array-string-functions">squote</a>
-                                            <a href="{{ get_url(path='/standard-library/array-string-functions/sep/') }}" class="sidebar-link pl-12" data-path="/standard-library/array-string-functions/sep/" data-section="array-string-functions">sep</a>
-                                        </div>
-                                    </div>
-                                    <div class="sidebar-section" data-section="array-functions">
-                                        <div class="flex items-center justify-between sidebar-row">
-                                            <a href="{{ get_url(path='/standard-library/array-functions/') }}" class="sidebar-link flex-1 pl-6" data-path="/standard-library/array-functions/" data-section="array-functions">Array Functions</a>
-                                            <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle Array Functions submenu">
-                                                <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
-                                            </button>
-                                        </div>
-                                        <div class="sidebar-content hidden">
-                                            <a href="{{ get_url(path='/standard-library/array-functions/range/') }}" class="sidebar-link pl-12" data-path="/standard-library/array-functions/range/" data-section="array-functions">range</a>
-                                            <a href="{{ get_url(path='/standard-library/array-functions/transpose/') }}" class="sidebar-link pl-12" data-path="/standard-library/array-functions/transpose/" data-section="array-functions">transpose</a>
-                                            <a href="{{ get_url(path='/standard-library/array-functions/cross/') }}" class="sidebar-link pl-12" data-path="/standard-library/array-functions/cross/" data-section="array-functions">cross</a>
-                                            <a href="{{ get_url(path='/standard-library/array-functions/zip/') }}" class="sidebar-link pl-12" data-path="/standard-library/array-functions/zip/" data-section="array-functions">zip</a>
-                                            <a href="{{ get_url(path='/standard-library/array-functions/unzip/') }}" class="sidebar-link pl-12" data-path="/standard-library/array-functions/unzip/" data-section="array-functions">unzip</a>
-                                            <a href="{{ get_url(path='/standard-library/array-functions/contains/') }}" class="sidebar-link pl-12" data-path="/standard-library/array-functions/contains/" data-section="array-functions">contains</a>
-                                            <a href="{{ get_url(path='/standard-library/array-functions/chunk/') }}" class="sidebar-link pl-12" data-path="/standard-library/array-functions/chunk/" data-section="array-functions">chunk</a>
-                                            <a href="{{ get_url(path='/standard-library/array-functions/flatten/') }}" class="sidebar-link pl-12" data-path="/standard-library/array-functions/flatten/" data-section="array-functions">flatten</a>
-                                            <a href="{{ get_url(path='/standard-library/array-functions/select_first/') }}" class="sidebar-link pl-12" data-path="/standard-library/array-functions/select_first/" data-section="array-functions">select_first</a>
-                                            <a href="{{ get_url(path='/standard-library/array-functions/select_all/') }}" class="sidebar-link pl-12" data-path="/standard-library/array-functions/select_all/" data-section="array-functions">select_all</a>
-                                        </div>
-                                    </div>
-                                    <div class="sidebar-section" data-section="map-functions">
-                                        <div class="flex items-center justify-between sidebar-row">
-                                            <a href="{{ get_url(path='/standard-library/map-functions/') }}" class="sidebar-link flex-1 pl-6" data-path="/standard-library/map-functions/" data-section="map-functions">Map Functions</a>
-                                            <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle Map Functions submenu">
-                                                <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
-                                            </button>
-                                        </div>
-                                        <div class="sidebar-content hidden">
-                                            <a href="{{ get_url(path='/standard-library/map-functions/as_pairs/') }}" class="sidebar-link pl-12" data-path="/standard-library/map-functions/as_pairs/" data-section="map-functions">as_pairs</a>
-                                            <a href="{{ get_url(path='/standard-library/map-functions/as_map/') }}" class="sidebar-link pl-12" data-path="/standard-library/map-functions/as_map/" data-section="map-functions">as_map</a>
-                                            <a href="{{ get_url(path='/standard-library/map-functions/keys/') }}" class="sidebar-link pl-12" data-path="/standard-library/map-functions/keys/" data-section="map-functions">keys</a>
-                                            <a href="{{ get_url(path='/standard-library/map-functions/contains_key/') }}" class="sidebar-link pl-12" data-path="/standard-library/map-functions/contains_key/" data-section="map-functions">contains_key</a>
-                                            <a href="{{ get_url(path='/standard-library/map-functions/values/') }}" class="sidebar-link pl-12" data-path="/standard-library/map-functions/values/" data-section="map-functions">values</a>
-                                            <a href="{{ get_url(path='/standard-library/map-functions/collect_by_key/') }}" class="sidebar-link pl-12" data-path="/standard-library/map-functions/collect_by_key/" data-section="map-functions">collect_by_key</a>
-                                        </div>
-                                    </div>
-                                    <div class="sidebar-section" data-section="other-functions">
-                                        <div class="flex items-center justify-between sidebar-row">
-                                            <a href="{{ get_url(path='/standard-library/other-functions/') }}" class="sidebar-link flex-1 pl-6" data-path="/standard-library/other-functions/" data-section="other-functions">Other Functions</a>
-                                            <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle Other Functions submenu">
-                                                <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
-                                            </button>
-                                        </div>
-                                        <div class="sidebar-content hidden">
-                                            <a href="{{ get_url(path='/standard-library/other-functions/defined/') }}" class="sidebar-link pl-12" data-path="/standard-library/other-functions/defined/" data-section="other-functions">defined</a>
-                                            <a href="{{ get_url(path='/standard-library/other-functions/length/') }}" class="sidebar-link pl-12" data-path="/standard-library/other-functions/length/" data-section="other-functions">length</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="sidebar-section" data-section="input-output">
-                                <div class="flex items-center justify-between sidebar-row">
-                                    <a href="{{ get_url(path='/input-output/') }}" class="sidebar-link flex-1" data-path="/input-output/" data-section="input-output">Input/Output Formats</a>
-                                    <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle Input/Output submenu">
-                                        <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
-                                    </button>
-                                </div>
-                                <div class="sidebar-content hidden">
-                                    <a href="{{ get_url(path='/input-output/json-input-format/') }}" class="sidebar-link pl-6" data-path="/input-output/json-input-format/" data-section="input-output">JSON Input Format</a>
-                                    <a href="{{ get_url(path='/input-output/json-output-format/') }}" class="sidebar-link pl-6" data-path="/input-output/json-output-format/" data-section="input-output">JSON Output Format</a>
-                                    <a href="{{ get_url(path='/input-output/extended-format/') }}" class="sidebar-link pl-6" data-path="/input-output/extended-format/" data-section="input-output">Extended Format</a>
-                                    <a href="{{ get_url(path='/input-output/json-serialization/') }}" class="sidebar-link pl-6" data-path="/input-output/json-serialization/" data-section="input-output">JSON Serialization</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="text-xs font-semibold text-gray-700 dark:text-gray-100 uppercase tracking-wide mb-2">Appendices</div>
-                        <div class="space-y-0.5">
-                            <a href="{{ get_url(path='/appendices/appendix-a/') }}" class="sidebar-link" data-path="/appendices/appendix-a/" data-section="appendices">Appendix A: Serialization</a>
-                            <a href="{{ get_url(path='/appendices/appendix-b/') }}" class="sidebar-link" data-path="/appendices/appendix-b/" data-section="appendices">Appendix B: Namespaces</a>
-                            <a href="{{ get_url(path='/appendices/appendix-c/') }}" class="sidebar-link" data-path="/appendices/appendix-c/" data-section="appendices">Appendix C: Example Data</a>
-                        </div>
-                    </div>
-                        {% endblock sidebar_nav %}
+                    {% include "sidebar_nav.html" %}
+                    {% endblock sidebar_nav %}
                     </nav>
                 </div>
 
@@ -347,11 +100,11 @@
             </main>
 
             <footer class="border-t border-gray-200 dark:border-gray-600 px-6 py-6">
-                <div class="max-w-4xl mx-auto flex flex-col md:flex-row md:justify-between md:items-center items-center gap-3 text-sm text-gray-600 dark:text-gray-100">
-                    <p>© {{ now() | date(format="%Y") }} OpenWDL. Licensed under BSD 3-Clause.</p>
+                <div class="flex flex-col md:flex-row md:justify-between md:items-center items-center gap-3 text-sm text-gray-600 dark:text-gray-100">
+                    <p>&copy; {{ now() | date(format="%Y") }} OpenWDL. Licensed under BSD 3-Clause.</p>
                     <div class="flex items-center space-x-6">
-                        <a href="{{ config.extra.github_url }}" class="hover:text-teal-600 dark:hover:text-teal-400 transition-colors">GitHub</a>
-                        <a href="/community/" class="hover:text-teal-600 dark:hover:text-teal-400 transition-colors">Community</a>
+                        <a href="https://join.slack.com/t/openwdl/shared_invite/zt-ctmj4mhf-cFBNxIiZYs6SY9HgM9UAVw" class="inline-flex items-center gap-1.5 hover:text-teal-600 dark:hover:text-teal-400 transition-colors"><i class="fa-brands fa-slack"></i> Slack</a>
+                        <a href="{{ config.extra.github_url }}" class="inline-flex items-center gap-1.5 hover:text-teal-600 dark:hover:text-teal-400 transition-colors"><i class="fa-brands fa-github"></i> GitHub</a>
                     </div>
                 </div>
             </footer>
@@ -360,9 +113,9 @@
 
     <div id="mobile-sidebar" class="hidden fixed inset-0 z-50 lg:hidden">
         <div class="fixed inset-0 bg-gray-900/80 dark:bg-gray-900/80 backdrop-blur" id="mobile-sidebar-overlay"></div>
-        <aside class="fixed inset-y-0 left-0 w-72 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-600 overflow-y-auto">
+        <aside class="fixed inset-y-0 left-0 w-80 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-600 overflow-y-auto">
             <div class="px-6 py-8">
-                <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center justify-between mb-4">
                     <a href="{{ get_url(path='/') }}" class="flex items-center gap-2">
                         <img src="{{ get_url(path='img/full-cyan-logo-black-text.svg') }}" alt="OpenWDL Logo" class="h-4 dark:hidden">
                         <img src="{{ get_url(path='img/full-cyan-logo-white-text.svg') }}" alt="OpenWDL Logo" class="h-4 hidden dark:block">
@@ -374,250 +127,23 @@
                     </button>
                 </div>
 
+                <div class="relative mb-6 version-dropdown">
+                    <button type="button" onclick="toggleVersionMenu(this)" aria-label="Select WDL specification version" aria-expanded="false" class="version-dropdown-toggle w-full flex items-center justify-between pl-3 pr-3 py-2 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md text-sm text-gray-900 dark:text-gray-100 cursor-pointer focus:outline-none focus:ring-2 focus:ring-teal-500">
+                        <span class="flex items-center">Version {{ v }}{% if v == config.extra.current_version %} <span class="inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] leading-none font-semibold bg-teal-800 text-white dark:bg-teal-400 dark:text-gray-900 ml-1.5">latest</span>{% endif %}</span>
+                        <i class="fa-solid fa-chevron-down text-xs text-gray-400 ml-2"></i>
+                    </button>
+                    <div class="version-dropdown-menu hidden absolute z-50 w-full mt-1 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md shadow-lg py-1">
+                        {% for version in config.extra.versions %}
+                        <button type="button" onclick="selectVersion(this)" class="version-dropdown-item w-full text-left px-3 py-1.5 text-sm text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-700 flex items-center {% if version == v %}font-semibold bg-gray-100 dark:bg-gray-600{% endif %}" data-version="{{ version }}">
+                            Version {{ version }}{% if version == config.extra.current_version %} <span class="inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] leading-none font-semibold bg-teal-800 text-white dark:bg-teal-400 dark:text-gray-900 ml-1.5">latest</span>{% endif %}
+                        </button>
+                        {% endfor %}
+                    </div>
+                </div>
+
                 <nav class="space-y-4">
                     {% block mobile_nav %}
-                    <div>
-                        <div class="text-xs font-semibold text-gray-700 dark:text-gray-100 uppercase tracking-wide mb-2">Getting Started</div>
-                        <div class="space-y-0.5">
-                            <div class="sidebar-section" data-section="introduction">
-                                <div class="flex items-center justify-between sidebar-row">
-                                    <a href="{{ get_url(path='/introduction/') }}" class="sidebar-link flex-1" data-path="/introduction/" data-section="introduction">Introduction</a>
-                                    <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle Introduction submenu">
-                                        <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
-                                    </button>
-                                </div>
-                                <div class="sidebar-content hidden">
-                                    <a href="{{ get_url(path='/introduction/example/') }}" class="sidebar-link pl-6" data-path="/introduction/example/" data-section="introduction">An Example Workflow</a>
-                                    <a href="{{ get_url(path='/introduction/executing/') }}" class="sidebar-link pl-6" data-path="/introduction/executing/" data-section="introduction">Executing Workflows</a>
-                                    <a href="{{ get_url(path='/introduction/advanced-features/') }}" class="sidebar-link pl-6" data-path="/introduction/advanced-features/" data-section="introduction">Advanced Features</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="text-xs font-semibold text-gray-700 dark:text-gray-100 uppercase tracking-wide mb-2">Core Concepts</div>
-                        <div class="space-y-0.5">
-                            <div class="sidebar-section" data-section="types">
-                                <div class="flex items-center justify-between sidebar-row">
-                                    <a href="{{ get_url(path='/types/') }}" class="sidebar-link flex-1" data-path="/types/" data-section="types">Type System</a>
-                                    <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle Type System submenu">
-                                        <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
-                                    </button>
-                                </div>
-                                <div class="sidebar-content hidden">
-                                    <div class="sidebar-section" data-section="primitive-types">
-                                        <div class="flex items-center justify-between sidebar-row">
-                                            <a href="{{ get_url(path='/types/primitive-types/') }}" class="sidebar-link flex-1 pl-6" data-path="/types/primitive-types/" data-section="primitive-types">Primitive Types</a>
-                                            <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle Primitive Types submenu">
-                                                <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
-                                            </button>
-                                        </div>
-                                        <div class="sidebar-content hidden">
-                                            <a href="{{ get_url(path='/types/primitive-types/strings/') }}" class="sidebar-link pl-12" data-path="/types/primitive-types/strings/" data-section="primitive-types">Strings</a>
-                                        </div>
-                                    </div>
-                                    <a href="{{ get_url(path='/types/optional-types/') }}" class="sidebar-link pl-6" data-path="/types/optional-types/" data-section="types">Optional Types</a>
-                                    <div class="sidebar-section" data-section="compound-types">
-                                        <div class="flex items-center justify-between sidebar-row">
-                                            <a href="{{ get_url(path='/types/compound-types/') }}" class="sidebar-link flex-1 pl-6" data-path="/types/compound-types/" data-section="compound-types">Compound Types</a>
-                                            <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle Compound Types submenu">
-                                                <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
-                                            </button>
-                                        </div>
-                                        <div class="sidebar-content hidden">
-                                            <a href="{{ get_url(path='/types/compound-types/object/') }}" class="sidebar-link pl-12" data-path="/types/compound-types/object/" data-section="compound-types">Object</a>
-                                            <a href="{{ get_url(path='/types/compound-types/structs/') }}" class="sidebar-link pl-12" data-path="/types/compound-types/structs/" data-section="compound-types">Structs</a>
-                                        </div>
-                                    </div>
-                                    <a href="{{ get_url(path='/types/hidden-types/') }}" class="sidebar-link pl-6" data-path="/types/hidden-types/" data-section="types">Hidden Types</a>
-                                    <a href="{{ get_url(path='/types/type-conversion/') }}" class="sidebar-link pl-6" data-path="/types/type-conversion/" data-section="types">Type Conversion</a>
-                                </div>
-                            </div>
-                            <div class="sidebar-section" data-section="tasks">
-                                <div class="flex items-center justify-between sidebar-row">
-                                    <a href="{{ get_url(path='/tasks/') }}" class="sidebar-link flex-1" data-path="/tasks/" data-section="tasks">Tasks</a>
-                                    <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle Tasks submenu">
-                                        <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
-                                    </button>
-                                </div>
-                                <div class="sidebar-content hidden">
-                                    <a href="{{ get_url(path='/tasks/inputs/') }}" class="sidebar-link pl-6" data-path="/tasks/inputs/" data-section="tasks">Task Inputs</a>
-                                    <a href="{{ get_url(path='/tasks/private-declarations/') }}" class="sidebar-link pl-6" data-path="/tasks/private-declarations/" data-section="tasks">Private Declarations</a>
-                                    <a href="{{ get_url(path='/tasks/environment-variables/') }}" class="sidebar-link pl-6" data-path="/tasks/environment-variables/" data-section="tasks">Environment Variables</a>
-                                    <a href="{{ get_url(path='/tasks/command/') }}" class="sidebar-link pl-6" data-path="/tasks/command/" data-section="tasks">Command Section</a>
-                                    <a href="{{ get_url(path='/tasks/outputs/') }}" class="sidebar-link pl-6" data-path="/tasks/outputs/" data-section="tasks">Task Outputs</a>
-                                    <a href="{{ get_url(path='/tasks/evaluation/') }}" class="sidebar-link pl-6" data-path="/tasks/evaluation/" data-section="tasks">Evaluation</a>
-                                    <a href="{{ get_url(path='/tasks/requirements/') }}" class="sidebar-link pl-6" data-path="/tasks/requirements/" data-section="tasks">Requirements</a>
-                                    <a href="{{ get_url(path='/tasks/hints/') }}" class="sidebar-link pl-6" data-path="/tasks/hints/" data-section="tasks">Hints</a>
-                                    <a href="{{ get_url(path='/tasks/runtime/') }}" class="sidebar-link pl-6" data-path="/tasks/runtime/" data-section="tasks">Runtime</a>
-                                    <a href="{{ get_url(path='/tasks/metadata/') }}" class="sidebar-link pl-6" data-path="/tasks/metadata/" data-section="tasks">Metadata</a>
-                                    <a href="{{ get_url(path='/tasks/runtime-access/') }}" class="sidebar-link pl-6" data-path="/tasks/runtime-access/" data-section="tasks">Runtime Access</a>
-                                </div>
-                            </div>
-                            <div class="sidebar-section" data-section="workflows">
-                                <div class="flex items-center justify-between sidebar-row">
-                                    <a href="{{ get_url(path='/workflows/') }}" class="sidebar-link flex-1" data-path="/workflows/" data-section="workflows">Workflows</a>
-                                    <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle Workflows submenu">
-                                        <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
-                                    </button>
-                                </div>
-                                <div class="sidebar-content hidden">
-                                    <a href="{{ get_url(path='/workflows/elements/') }}" class="sidebar-link pl-6" data-path="/workflows/elements/" data-section="workflows">Workflow Elements</a>
-                                    <a href="{{ get_url(path='/workflows/evaluation/') }}" class="sidebar-link pl-6" data-path="/workflows/evaluation/" data-section="workflows">Evaluation</a>
-                                    <a href="{{ get_url(path='/workflows/qualified-names/') }}" class="sidebar-link pl-6" data-path="/workflows/qualified-names/" data-section="workflows">Qualified Names</a>
-                                    <a href="{{ get_url(path='/workflows/inputs/') }}" class="sidebar-link pl-6" data-path="/workflows/inputs/" data-section="workflows">Workflow Inputs</a>
-                                    <a href="{{ get_url(path='/workflows/outputs/') }}" class="sidebar-link pl-6" data-path="/workflows/outputs/" data-section="workflows">Workflow Outputs</a>
-                                    <a href="{{ get_url(path='/workflows/hints/') }}" class="sidebar-link pl-6" data-path="/workflows/hints/" data-section="workflows">Workflow Hints</a>
-                                    <a href="{{ get_url(path='/workflows/call/') }}" class="sidebar-link pl-6" data-path="/workflows/call/" data-section="workflows">Call Statement</a>
-                                    <a href="{{ get_url(path='/workflows/scatter/') }}" class="sidebar-link pl-6" data-path="/workflows/scatter/" data-section="workflows">Scatter</a>
-                                    <a href="{{ get_url(path='/workflows/conditional/') }}" class="sidebar-link pl-6" data-path="/workflows/conditional/" data-section="workflows">Conditional</a>
-                                </div>
-                            </div>
-                            <div class="sidebar-section" data-section="standard-library">
-                                <div class="flex items-center justify-between sidebar-row">
-                                    <a href="{{ get_url(path='/standard-library/') }}" class="sidebar-link flex-1" data-path="/standard-library/" data-section="standard-library">Standard Library</a>
-                                    <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle Standard Library submenu">
-                                        <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
-                                    </button>
-                                </div>
-                                <div class="sidebar-content hidden">
-                                    <div class="sidebar-section" data-section="numeric-functions">
-                                        <div class="flex items-center justify-between sidebar-row">
-                                            <a href="{{ get_url(path='/standard-library/numeric-functions/') }}" class="sidebar-link flex-1 pl-6" data-path="/standard-library/numeric-functions/" data-section="numeric-functions">Numeric Functions</a>
-                                            <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle Numeric Functions submenu">
-                                                <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
-                                            </button>
-                                        </div>
-                                        <div class="sidebar-content hidden">
-                                            <a href="{{ get_url(path='/standard-library/numeric-functions/floor/') }}" class="sidebar-link pl-12" data-path="/standard-library/numeric-functions/floor/" data-section="numeric-functions">floor</a>
-                                            <a href="{{ get_url(path='/standard-library/numeric-functions/ceil/') }}" class="sidebar-link pl-12" data-path="/standard-library/numeric-functions/ceil/" data-section="numeric-functions">ceil</a>
-                                            <a href="{{ get_url(path='/standard-library/numeric-functions/round/') }}" class="sidebar-link pl-12" data-path="/standard-library/numeric-functions/round/" data-section="numeric-functions">round</a>
-                                            <a href="{{ get_url(path='/standard-library/numeric-functions/min/') }}" class="sidebar-link pl-12" data-path="/standard-library/numeric-functions/min/" data-section="numeric-functions">min</a>
-                                            <a href="{{ get_url(path='/standard-library/numeric-functions/max/') }}" class="sidebar-link pl-12" data-path="/standard-library/numeric-functions/max/" data-section="numeric-functions">max</a>
-                                        </div>
-                                    </div>
-                                    <div class="sidebar-section" data-section="string-functions">
-                                        <div class="flex items-center justify-between sidebar-row">
-                                            <a href="{{ get_url(path='/standard-library/string-functions/') }}" class="sidebar-link flex-1 pl-6" data-path="/standard-library/string-functions/" data-section="string-functions">String Functions</a>
-                                            <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle String Functions submenu">
-                                                <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
-                                            </button>
-                                        </div>
-                                        <div class="sidebar-content hidden">
-                                            <a href="{{ get_url(path='/standard-library/string-functions/find/') }}" class="sidebar-link pl-12" data-path="/standard-library/string-functions/find/" data-section="string-functions">find</a>
-                                            <a href="{{ get_url(path='/standard-library/string-functions/matches/') }}" class="sidebar-link pl-12" data-path="/standard-library/string-functions/matches/" data-section="string-functions">matches</a>
-                                            <a href="{{ get_url(path='/standard-library/string-functions/sub/') }}" class="sidebar-link pl-12" data-path="/standard-library/string-functions/sub/" data-section="string-functions">sub</a>
-                                        </div>
-                                    </div>
-                                    <div class="sidebar-section" data-section="file-functions">
-                                        <div class="flex items-center justify-between sidebar-row">
-                                            <a href="{{ get_url(path='/standard-library/file-functions/') }}" class="sidebar-link flex-1 pl-6" data-path="/standard-library/file-functions/" data-section="file-functions">File Functions</a>
-                                            <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle File Functions submenu">
-                                                <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
-                                            </button>
-                                        </div>
-                                        <div class="sidebar-content hidden">
-                                            <a href="{{ get_url(path='/standard-library/file-functions/basename/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/basename/" data-section="file-functions">basename</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/join_paths/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/join_paths/" data-section="file-functions">join_paths</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/glob/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/glob/" data-section="file-functions">glob</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/size/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/size/" data-section="file-functions">size</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/stdout/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/stdout/" data-section="file-functions">stdout</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/stderr/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/stderr/" data-section="file-functions">stderr</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/read_string/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/read_string/" data-section="file-functions">read_string</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/read_int/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/read_int/" data-section="file-functions">read_int</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/read_float/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/read_float/" data-section="file-functions">read_float</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/read_boolean/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/read_boolean/" data-section="file-functions">read_boolean</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/read_lines/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/read_lines/" data-section="file-functions">read_lines</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/write_lines/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/write_lines/" data-section="file-functions">write_lines</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/read_tsv/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/read_tsv/" data-section="file-functions">read_tsv</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/write_tsv/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/write_tsv/" data-section="file-functions">write_tsv</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/read_map/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/read_map/" data-section="file-functions">read_map</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/write_map/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/write_map/" data-section="file-functions">write_map</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/read_json/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/read_json/" data-section="file-functions">read_json</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/write_json/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/write_json/" data-section="file-functions">write_json</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/read_object/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/read_object/" data-section="file-functions">read_object</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/read_objects/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/read_objects/" data-section="file-functions">read_objects</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/write_object/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/write_object/" data-section="file-functions">write_object</a>
-                                            <a href="{{ get_url(path='/standard-library/file-functions/write_objects/') }}" class="sidebar-link pl-12" data-path="/standard-library/file-functions/write_objects/" data-section="file-functions">write_objects</a>
-                                        </div>
-                                    </div>
-                                    <div class="sidebar-section" data-section="array-string-functions">
-                                        <div class="flex items-center justify-between sidebar-row">
-                                            <a href="{{ get_url(path='/standard-library/array-string-functions/') }}" class="sidebar-link flex-1 pl-6" data-path="/standard-library/array-string-functions/" data-section="array-string-functions">String Array Functions</a>
-                                            <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle String Array Functions submenu">
-                                                <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
-                                            </button>
-                                        </div>
-                                        <div class="sidebar-content hidden">
-                                            <a href="{{ get_url(path='/standard-library/array-string-functions/prefix/') }}" class="sidebar-link pl-12" data-path="/standard-library/array-string-functions/prefix/" data-section="array-string-functions">prefix</a>
-                                            <a href="{{ get_url(path='/standard-library/array-string-functions/suffix/') }}" class="sidebar-link pl-12" data-path="/standard-library/array-string-functions/suffix/" data-section="array-string-functions">suffix</a>
-                                            <a href="{{ get_url(path='/standard-library/array-string-functions/quote/') }}" class="sidebar-link pl-12" data-path="/standard-library/array-string-functions/quote/" data-section="array-string-functions">quote</a>
-                                            <a href="{{ get_url(path='/standard-library/array-string-functions/squote/') }}" class="sidebar-link pl-12" data-path="/standard-library/array-string-functions/squote/" data-section="array-string-functions">squote</a>
-                                            <a href="{{ get_url(path='/standard-library/array-string-functions/sep/') }}" class="sidebar-link pl-12" data-path="/standard-library/array-string-functions/sep/" data-section="array-string-functions">sep</a>
-                                        </div>
-                                    </div>
-                                    <div class="sidebar-section" data-section="array-functions">
-                                        <div class="flex items-center justify-between sidebar-row">
-                                            <a href="{{ get_url(path='/standard-library/array-functions/') }}" class="sidebar-link flex-1 pl-6" data-path="/standard-library/array-functions/" data-section="array-functions">Array Functions</a>
-                                            <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle Array Functions submenu">
-                                                <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
-                                            </button>
-                                        </div>
-                                        <div class="sidebar-content hidden">
-                                            <a href="{{ get_url(path='/standard-library/array-functions/range/') }}" class="sidebar-link pl-12" data-path="/standard-library/array-functions/range/" data-section="array-functions">range</a>
-                                            <a href="{{ get_url(path='/standard-library/array-functions/transpose/') }}" class="sidebar-link pl-12" data-path="/standard-library/array-functions/transpose/" data-section="array-functions">transpose</a>
-                                            <a href="{{ get_url(path='/standard-library/array-functions/cross/') }}" class="sidebar-link pl-12" data-path="/standard-library/array-functions/cross/" data-section="array-functions">cross</a>
-                                            <a href="{{ get_url(path='/standard-library/array-functions/zip/') }}" class="sidebar-link pl-12" data-path="/standard-library/array-functions/zip/" data-section="array-functions">zip</a>
-                                            <a href="{{ get_url(path='/standard-library/array-functions/unzip/') }}" class="sidebar-link pl-12" data-path="/standard-library/array-functions/unzip/" data-section="array-functions">unzip</a>
-                                            <a href="{{ get_url(path='/standard-library/array-functions/contains/') }}" class="sidebar-link pl-12" data-path="/standard-library/array-functions/contains/" data-section="array-functions">contains</a>
-                                            <a href="{{ get_url(path='/standard-library/array-functions/chunk/') }}" class="sidebar-link pl-12" data-path="/standard-library/array-functions/chunk/" data-section="array-functions">chunk</a>
-                                            <a href="{{ get_url(path='/standard-library/array-functions/flatten/') }}" class="sidebar-link pl-12" data-path="/standard-library/array-functions/flatten/" data-section="array-functions">flatten</a>
-                                            <a href="{{ get_url(path='/standard-library/array-functions/select_first/') }}" class="sidebar-link pl-12" data-path="/standard-library/array-functions/select_first/" data-section="array-functions">select_first</a>
-                                            <a href="{{ get_url(path='/standard-library/array-functions/select_all/') }}" class="sidebar-link pl-12" data-path="/standard-library/array-functions/select_all/" data-section="array-functions">select_all</a>
-                                        </div>
-                                    </div>
-                                    <div class="sidebar-section" data-section="map-functions">
-                                        <div class="flex items-center justify-between sidebar-row">
-                                            <a href="{{ get_url(path='/standard-library/map-functions/') }}" class="sidebar-link flex-1 pl-6" data-path="/standard-library/map-functions/" data-section="map-functions">Map Functions</a>
-                                            <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle Map Functions submenu">
-                                                <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
-                                            </button>
-                                        </div>
-                                        <div class="sidebar-content hidden">
-                                            <a href="{{ get_url(path='/standard-library/map-functions/as_pairs/') }}" class="sidebar-link pl-12" data-path="/standard-library/map-functions/as_pairs/" data-section="map-functions">as_pairs</a>
-                                            <a href="{{ get_url(path='/standard-library/map-functions/as_map/') }}" class="sidebar-link pl-12" data-path="/standard-library/map-functions/as_map/" data-section="map-functions">as_map</a>
-                                            <a href="{{ get_url(path='/standard-library/map-functions/keys/') }}" class="sidebar-link pl-12" data-path="/standard-library/map-functions/keys/" data-section="map-functions">keys</a>
-                                            <a href="{{ get_url(path='/standard-library/map-functions/contains_key/') }}" class="sidebar-link pl-12" data-path="/standard-library/map-functions/contains_key/" data-section="map-functions">contains_key</a>
-                                            <a href="{{ get_url(path='/standard-library/map-functions/values/') }}" class="sidebar-link pl-12" data-path="/standard-library/map-functions/values/" data-section="map-functions">values</a>
-                                            <a href="{{ get_url(path='/standard-library/map-functions/collect_by_key/') }}" class="sidebar-link pl-12" data-path="/standard-library/map-functions/collect_by_key/" data-section="map-functions">collect_by_key</a>
-                                        </div>
-                                    </div>
-                                    <div class="sidebar-section" data-section="other-functions">
-                                        <div class="flex items-center justify-between sidebar-row">
-                                            <a href="{{ get_url(path='/standard-library/other-functions/') }}" class="sidebar-link flex-1 pl-6" data-path="/standard-library/other-functions/" data-section="other-functions">Other Functions</a>
-                                            <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle Other Functions submenu">
-                                                <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
-                                            </button>
-                                        </div>
-                                        <div class="sidebar-content hidden">
-                                            <a href="{{ get_url(path='/standard-library/other-functions/defined/') }}" class="sidebar-link pl-12" data-path="/standard-library/other-functions/defined/" data-section="other-functions">defined</a>
-                                            <a href="{{ get_url(path='/standard-library/other-functions/length/') }}" class="sidebar-link pl-12" data-path="/standard-library/other-functions/length/" data-section="other-functions">length</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="text-xs font-semibold text-gray-700 dark:text-gray-100 uppercase tracking-wide mb-2">Appendices</div>
-                        <div class="space-y-0.5">
-                            <a href="{{ get_url(path='/appendices/appendix-a/') }}" class="sidebar-link" data-path="/appendices/appendix-a/" data-section="appendices">Appendix A: Serialization</a>
-                            <a href="{{ get_url(path='/appendices/appendix-b/') }}" class="sidebar-link" data-path="/appendices/appendix-b/" data-section="appendices">Appendix B: Namespaces</a>
-                            <a href="{{ get_url(path='/appendices/appendix-c/') }}" class="sidebar-link" data-path="/appendices/appendix-c/" data-section="appendices">Appendix C: Example Data</a>
-                        </div>
-                    </div>
+                    {% include "sidebar_nav.html" %}
                     {% endblock mobile_nav %}
                 </nav>
             </div>
@@ -625,7 +151,7 @@
     </div>
 
     <script src="{{ get_url(path='elasticlunr.min.js', trailing_slash=false) }}"></script>
-    <script>window.BASE_URL = "{{ config.base_url | safe }}";</script>
+    <script>window.BASE_URL = "{{ config.base_url | safe }}"; window.DEFAULT_VERSION = "{{ v }}"; window.LATEST_VERSION = "{{ config.extra.current_version }}";</script>
     <script src="{{ get_url(path='js/main.js', trailing_slash=false) }}"></script>
     {% block extra_scripts %}{% endblock extra_scripts %}
 </body>

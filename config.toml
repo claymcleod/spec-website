@@ -23,4 +23,5 @@ extra_grammars = ["syntaxes/wdl.json"]
 # OpenWDL brand identity
 logo_text = "{wdl}"
 github_url = "https://github.com/openwdl/wdl"
-current_version = "1.2"
+current_version = "1.3"
+versions = ["1.3", "1.2", "1.1", "1.0"]

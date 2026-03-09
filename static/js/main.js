@@ -1,3 +1,141 @@
+// Version handling
+const defaultVersion = window.DEFAULT_VERSION || '1.2';
+
+function compareVersions(a, b) {
+    const partsA = a.split('.').map(Number);
+    const partsB = b.split('.').map(Number);
+    for (let i = 0; i < Math.max(partsA.length, partsB.length); i++) {
+        const numA = partsA[i] || 0;
+        const numB = partsB[i] || 0;
+        if (numA !== numB) return numA - numB;
+    }
+    return 0;
+}
+
+function getVersionFromUrl() {
+    const match = window.location.pathname.match(/^\/([\d.]+)\//);
+    return match ? match[1] : null;
+}
+
+function rewriteVersionedLinks(targetVersion) {
+    document.querySelectorAll('a[href]').forEach(link => {
+        const href = link.getAttribute('href');
+        if (/^\/([\d.]+)\//.test(href)) {
+            link.setAttribute('href', href.replace(/^\/([\d.]+)\//, '/' + targetVersion + '/'));
+        }
+    });
+}
+
+function updateVersionVisibility(version) {
+    document.querySelectorAll('[data-min-version]').forEach(el => {
+        const minV = el.getAttribute('data-min-version');
+        el.style.display = compareVersions(version, minV) < 0 ? 'none' : '';
+        // Add "new" pill for items introduced in this version
+        const existing = el.querySelector('.new-in-version');
+        if (existing) existing.remove();
+        if (minV === version) {
+            // Append to the link, not the container div
+            const target = el.tagName === 'A' ? el : el.querySelector('a.sidebar-link');
+            if (target) {
+                target.classList.add('whitespace-nowrap');
+                const badge = document.createElement('span');
+                badge.className = 'new-in-version inline-flex items-center align-middle px-1.5 py-0.5 rounded-full text-[10px] leading-none font-semibold bg-amber-200 text-amber-900 dark:bg-amber-900 dark:text-amber-200 ml-2 shrink-0';
+                badge.textContent = 'new';
+                target.appendChild(badge);
+            }
+        } else {
+            const target = el.tagName === 'A' ? el : el.querySelector('a.sidebar-link');
+            if (target) target.classList.remove('whitespace-nowrap');
+        }
+    });
+    document.querySelectorAll('[data-max-version]').forEach(el => {
+        el.style.display = compareVersions(version, el.getAttribute('data-max-version')) > 0 ? 'none' : '';
+    });
+
+    // Add "New in vX.Y" pill below page h1 if this page was introduced in a later version
+    const header = document.querySelector('article > header');
+    if (header) {
+        const existingBadge = header.querySelector('.new-in-version');
+        if (existingBadge) existingBadge.remove();
+        const currentPath = window.location.pathname;
+        const activeLink = document.querySelector('a.sidebar-link[href="' + currentPath + '"]');
+        if (activeLink) {
+            const pageMinVersion = activeLink.getAttribute('data-min-version') || activeLink.closest('[data-min-version]')?.getAttribute('data-min-version');
+            if (pageMinVersion) {
+                const badge = document.createElement('span');
+                badge.className = 'new-in-version inline-flex items-center px-2 py-1 rounded-full text-sm font-semibold bg-amber-200 text-amber-900 dark:bg-amber-900 dark:text-amber-200 mb-4';
+                badge.textContent = 'New in v' + pageMinVersion;
+                const h1 = header.querySelector('h1');
+                h1.insertAdjacentElement('afterend', badge);
+            }
+        }
+    }
+}
+
+// Determine active version: URL wins, then localStorage, then default
+const urlVersion = getVersionFromUrl();
+const currentVersion = urlVersion || localStorage.getItem('wdl-version') || defaultVersion;
+localStorage.setItem('wdl-version', currentVersion);
+
+// Rewrite all versioned links to match active version
+if (currentVersion !== defaultVersion) {
+    rewriteVersionedLinks(currentVersion);
+}
+updateVersionVisibility(currentVersion);
+
+// Sync dropdown display to match active version
+const latestVersion = window.LATEST_VERSION || defaultVersion;
+function updateDropdownDisplay(version) {
+    const pill = version === latestVersion
+        ? ' <span class="inline-flex items-center px-1.5 py-0.5 rounded-full text-[10px] leading-none font-semibold bg-teal-800 text-white dark:bg-teal-400 dark:text-gray-900 ml-1.5">latest</span>'
+        : '';
+    document.querySelectorAll('.version-dropdown').forEach(dropdown => {
+        const toggle = dropdown.querySelector('.version-dropdown-toggle > span');
+        toggle.innerHTML = 'Version ' + version + pill;
+        dropdown.querySelectorAll('.version-dropdown-item').forEach(item => {
+            const isSelected = item.getAttribute('data-version') === version;
+            item.classList.toggle('font-semibold', isSelected);
+            item.classList.toggle('bg-gray-100', isSelected);
+            item.classList.toggle('dark:bg-gray-600', isSelected);
+        });
+    });
+}
+updateDropdownDisplay(currentVersion);
+
+// Version dropdown
+function toggleVersionMenu(btn) {
+    const dropdown = btn.closest('.version-dropdown');
+    const menu = dropdown.querySelector('.version-dropdown-menu');
+    const isOpen = !menu.classList.contains('hidden');
+    closeAllVersionMenus();
+    if (!isOpen) {
+        menu.classList.remove('hidden');
+        btn.setAttribute('aria-expanded', 'true');
+    }
+}
+
+function selectVersion(btn) {
+    const newVersion = btn.getAttribute('data-version');
+    localStorage.setItem('wdl-version', newVersion);
+    closeAllVersionMenus();
+    if (urlVersion) {
+        window.location.href = window.location.pathname.replace(/^\/([\d.]+)\//, '/' + newVersion + '/');
+    } else {
+        rewriteVersionedLinks(newVersion);
+        updateVersionVisibility(newVersion);
+        updateDropdownDisplay(newVersion);
+    }
+}
+
+function closeAllVersionMenus() {
+    document.querySelectorAll('.version-dropdown-menu').forEach(m => m.classList.add('hidden'));
+    document.querySelectorAll('.version-dropdown-toggle').forEach(t => t.setAttribute('aria-expanded', 'false'));
+}
+
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.version-dropdown')) closeAllVersionMenus();
+});
+
 // Theme toggle
 const themeToggle = document.getElementById('theme-toggle');
 const themeIconDark = document.getElementById('theme-icon-dark');

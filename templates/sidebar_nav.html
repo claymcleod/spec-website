@@ -1,0 +1,308 @@
+<div>
+    <div class="text-xs font-semibold text-gray-700 dark:text-gray-100 uppercase tracking-wide mb-2">Getting Started</div>
+    <div class="space-y-0.5">
+        <div class="sidebar-section" data-section="introduction">
+            <div class="flex items-center justify-between sidebar-row">
+                <a href="/{{ v }}/introduction/" class="sidebar-link flex-1" data-section="introduction">Introduction</a>
+                <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle Introduction submenu">
+                    <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
+                </button>
+            </div>
+            <div class="sidebar-content hidden">
+                <a href="/{{ v }}/introduction/example/" class="sidebar-link pl-6" data-section="introduction" data-min-version="1.1">An Example Workflow</a>
+                <a href="/{{ v }}/introduction/executing/" class="sidebar-link pl-6" data-section="introduction" data-min-version="1.1">Executing Workflows</a>
+                <a href="/{{ v }}/introduction/advanced-features/" class="sidebar-link pl-6" data-section="introduction" data-min-version="1.1">Advanced Features</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <div class="text-xs font-semibold text-gray-700 dark:text-gray-100 uppercase tracking-wide mb-2">Core Concepts</div>
+    <div class="space-y-0.5">
+        <a href="/{{ v }}/syntax/" class="sidebar-link" data-section="syntax">Syntax</a>
+
+        <div class="sidebar-section" data-section="types">
+            <div class="flex items-center justify-between sidebar-row">
+                <a href="/{{ v }}/types/" class="sidebar-link flex-1" data-section="types">Type System</a>
+                <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle Type System submenu">
+                    <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
+                </button>
+            </div>
+            <div class="sidebar-content hidden">
+                <div class="sidebar-section" data-section="primitive-types">
+                    <div class="flex items-center justify-between sidebar-row">
+                        <a href="/{{ v }}/types/primitive-types/" class="sidebar-link flex-1 pl-6" data-section="primitive-types">Primitive Types</a>
+                        <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle Primitive Types submenu">
+                            <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar-content hidden">
+                        <a href="/{{ v }}/types/primitive-types/strings/" class="sidebar-link pl-12" data-section="primitive-types">Strings</a>
+                    </div>
+                </div>
+                <a href="/{{ v }}/types/optional-types/" class="sidebar-link pl-6" data-section="types">Optional Types</a>
+                <div class="sidebar-section" data-section="compound-types">
+                    <div class="flex items-center justify-between sidebar-row">
+                        <a href="/{{ v }}/types/compound-types/" class="sidebar-link flex-1 pl-6" data-section="compound-types">Compound Types</a>
+                        <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle Compound Types submenu">
+                            <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar-content hidden">
+                        <a href="/{{ v }}/types/compound-types/object/" class="sidebar-link pl-12" data-section="compound-types">Object</a>
+                        <a href="/{{ v }}/types/compound-types/structs/" class="sidebar-link pl-12" data-section="compound-types">Structs</a>
+                        <a href="/{{ v }}/types/compound-types/enums/" class="sidebar-link pl-12" data-section="compound-types" data-min-version="1.3">Enums</a>
+                    </div>
+                </div>
+                <a href="/{{ v }}/types/hidden-types/" class="sidebar-link pl-6" data-section="types" data-min-version="1.1">Hidden Types</a>
+                <a href="/{{ v }}/types/type-conversion/" class="sidebar-link pl-6" data-section="types">Type Conversion</a>
+            </div>
+        </div>
+
+        <div class="sidebar-section" data-section="expressions">
+            <div class="flex items-center justify-between sidebar-row">
+                <a href="/{{ v }}/expressions/" class="sidebar-link flex-1" data-section="expressions">Expressions</a>
+                <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle Expressions submenu">
+                    <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
+                </button>
+            </div>
+            <div class="sidebar-content hidden">
+                <a href="/{{ v }}/expressions/declarations/" class="sidebar-link pl-6" data-section="expressions">Declarations</a>
+                <a href="/{{ v }}/expressions/operators/" class="sidebar-link pl-6" data-section="expressions">Operators</a>
+                <a href="/{{ v }}/expressions/operator-precedence/" class="sidebar-link pl-6" data-section="expressions">Operator Precedence</a>
+                <a href="/{{ v }}/expressions/member-access/" class="sidebar-link pl-6" data-section="expressions">Member Access</a>
+                <a href="/{{ v }}/expressions/ternary/" class="sidebar-link pl-6" data-section="expressions">Ternary (if-then-else)</a>
+                <a href="/{{ v }}/expressions/function-calls/" class="sidebar-link pl-6" data-section="expressions">Function Calls</a>
+                <a href="/{{ v }}/expressions/string-interpolation/" class="sidebar-link pl-6" data-section="expressions">String Interpolation</a>
+                <a href="/{{ v }}/expressions/placeholder-options/" class="sidebar-link pl-6" data-section="expressions">Placeholder Options</a>
+                <a href="/{{ v }}/expressions/static-analysis/" class="sidebar-link pl-6" data-section="expressions" data-min-version="1.1">Static Analysis</a>
+            </div>
+        </div>
+
+        <div class="sidebar-section" data-section="wdl-documents">
+            <div class="flex items-center justify-between sidebar-row">
+                <a href="/{{ v }}/wdl-documents/" class="sidebar-link flex-1" data-section="wdl-documents">WDL Documents</a>
+                <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle WDL Documents submenu">
+                    <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
+                </button>
+            </div>
+            <div class="sidebar-content hidden">
+                <a href="/{{ v }}/wdl-documents/versioning/" class="sidebar-link pl-6" data-section="wdl-documents">Versioning</a>
+                <a href="/{{ v }}/wdl-documents/import-statements/" class="sidebar-link pl-6" data-section="wdl-documents">Import Statements</a>
+            </div>
+        </div>
+
+        <div class="sidebar-section" data-section="tasks">
+            <div class="flex items-center justify-between sidebar-row">
+                <a href="/{{ v }}/tasks/" class="sidebar-link flex-1" data-section="tasks">Tasks</a>
+                <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle Tasks submenu">
+                    <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
+                </button>
+            </div>
+            <div class="sidebar-content hidden">
+                <a href="/{{ v }}/tasks/inputs/" class="sidebar-link pl-6" data-section="tasks">Task Inputs</a>
+                <a href="/{{ v }}/tasks/private-declarations/" class="sidebar-link pl-6" data-section="tasks">Private Declarations</a>
+                <a href="/{{ v }}/tasks/environment-variables/" class="sidebar-link pl-6" data-section="tasks" data-min-version="1.2">Environment Variables</a>
+                <a href="/{{ v }}/tasks/command/" class="sidebar-link pl-6" data-section="tasks">Command Section</a>
+                <a href="/{{ v }}/tasks/outputs/" class="sidebar-link pl-6" data-section="tasks">Task Outputs</a>
+                <a href="/{{ v }}/tasks/evaluation/" class="sidebar-link pl-6" data-section="tasks">Evaluation</a>
+                <a href="/{{ v }}/tasks/requirements/" class="sidebar-link pl-6" data-section="tasks" data-min-version="1.2">Requirements</a>
+                <a href="/{{ v }}/tasks/hints/" class="sidebar-link pl-6" data-section="tasks" data-min-version="1.2">Hints</a>
+                <a href="/{{ v }}/tasks/runtime/" class="sidebar-link pl-6" data-section="tasks">Runtime</a>
+                <a href="/{{ v }}/tasks/metadata/" class="sidebar-link pl-6" data-section="tasks">Metadata</a>
+                <a href="/{{ v }}/tasks/runtime-access/" class="sidebar-link pl-6" data-section="tasks" data-min-version="1.2">Runtime Access</a>
+            </div>
+        </div>
+
+        <div class="sidebar-section" data-section="workflows">
+            <div class="flex items-center justify-between sidebar-row">
+                <a href="/{{ v }}/workflows/" class="sidebar-link flex-1" data-section="workflows">Workflows</a>
+                <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle Workflows submenu">
+                    <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
+                </button>
+            </div>
+            <div class="sidebar-content hidden">
+                <a href="/{{ v }}/workflows/elements/" class="sidebar-link pl-6" data-section="workflows">Workflow Elements</a>
+                <a href="/{{ v }}/workflows/evaluation/" class="sidebar-link pl-6" data-section="workflows">Evaluation</a>
+                <a href="/{{ v }}/workflows/qualified-names/" class="sidebar-link pl-6" data-section="workflows">Qualified Names</a>
+                <a href="/{{ v }}/workflows/inputs/" class="sidebar-link pl-6" data-section="workflows">Workflow Inputs</a>
+                <a href="/{{ v }}/workflows/outputs/" class="sidebar-link pl-6" data-section="workflows">Workflow Outputs</a>
+                <a href="/{{ v }}/workflows/hints/" class="sidebar-link pl-6" data-section="workflows" data-min-version="1.2">Workflow Hints</a>
+                <a href="/{{ v }}/workflows/call/" class="sidebar-link pl-6" data-section="workflows">Call Statement</a>
+                <a href="/{{ v }}/workflows/scatter/" class="sidebar-link pl-6" data-section="workflows">Scatter</a>
+                <a href="/{{ v }}/workflows/conditional/" class="sidebar-link pl-6" data-section="workflows">Conditional</a>
+            </div>
+        </div>
+
+        <div class="sidebar-section" data-section="standard-library">
+            <div class="flex items-center justify-between sidebar-row">
+                <a href="/{{ v }}/standard-library/" class="sidebar-link flex-1" data-section="standard-library">Standard Library</a>
+                <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle Standard Library submenu">
+                    <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
+                </button>
+            </div>
+            <div class="sidebar-content hidden">
+                <div class="sidebar-section" data-section="numeric-functions">
+                    <div class="flex items-center justify-between sidebar-row">
+                        <a href="/{{ v }}/standard-library/numeric-functions/" class="sidebar-link flex-1 pl-6" data-section="numeric-functions">Numeric Functions</a>
+                        <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle Numeric Functions submenu">
+                            <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar-content hidden">
+                        <a href="/{{ v }}/standard-library/numeric-functions/floor/" class="sidebar-link pl-12" data-section="numeric-functions">floor</a>
+                        <a href="/{{ v }}/standard-library/numeric-functions/ceil/" class="sidebar-link pl-12" data-section="numeric-functions">ceil</a>
+                        <a href="/{{ v }}/standard-library/numeric-functions/round/" class="sidebar-link pl-12" data-section="numeric-functions">round</a>
+                        <a href="/{{ v }}/standard-library/numeric-functions/min/" class="sidebar-link pl-12" data-section="numeric-functions" data-min-version="1.1">min</a>
+                        <a href="/{{ v }}/standard-library/numeric-functions/max/" class="sidebar-link pl-12" data-section="numeric-functions" data-min-version="1.1">max</a>
+                    </div>
+                </div>
+                <div class="sidebar-section" data-section="string-functions">
+                    <div class="flex items-center justify-between sidebar-row">
+                        <a href="/{{ v }}/standard-library/string-functions/" class="sidebar-link flex-1 pl-6" data-section="string-functions">String Functions</a>
+                        <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle String Functions submenu">
+                            <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar-content hidden">
+                        <a href="/{{ v }}/standard-library/string-functions/find/" class="sidebar-link pl-12" data-section="string-functions" data-min-version="1.2">find</a>
+                        <a href="/{{ v }}/standard-library/string-functions/matches/" class="sidebar-link pl-12" data-section="string-functions" data-min-version="1.2">matches</a>
+                        <a href="/{{ v }}/standard-library/string-functions/sub/" class="sidebar-link pl-12" data-section="string-functions">sub</a>
+                    </div>
+                </div>
+                <div class="sidebar-section" data-section="file-functions">
+                    <div class="flex items-center justify-between sidebar-row">
+                        <a href="/{{ v }}/standard-library/file-functions/" class="sidebar-link flex-1 pl-6" data-section="file-functions">File Functions</a>
+                        <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle File Functions submenu">
+                            <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar-content hidden">
+                        <a href="/{{ v }}/standard-library/file-functions/basename/" class="sidebar-link pl-12" data-section="file-functions">basename</a>
+                        <a href="/{{ v }}/standard-library/file-functions/join_paths/" class="sidebar-link pl-12" data-section="file-functions" data-min-version="1.2">join_paths</a>
+                        <a href="/{{ v }}/standard-library/file-functions/glob/" class="sidebar-link pl-12" data-section="file-functions" data-min-version="1.1">glob</a>
+                        <a href="/{{ v }}/standard-library/file-functions/size/" class="sidebar-link pl-12" data-section="file-functions">size</a>
+                        <a href="/{{ v }}/standard-library/file-functions/stdout/" class="sidebar-link pl-12" data-section="file-functions">stdout</a>
+                        <a href="/{{ v }}/standard-library/file-functions/stderr/" class="sidebar-link pl-12" data-section="file-functions">stderr</a>
+                        <a href="/{{ v }}/standard-library/file-functions/read_string/" class="sidebar-link pl-12" data-section="file-functions">read_string</a>
+                        <a href="/{{ v }}/standard-library/file-functions/read_int/" class="sidebar-link pl-12" data-section="file-functions">read_int</a>
+                        <a href="/{{ v }}/standard-library/file-functions/read_float/" class="sidebar-link pl-12" data-section="file-functions">read_float</a>
+                        <a href="/{{ v }}/standard-library/file-functions/read_boolean/" class="sidebar-link pl-12" data-section="file-functions">read_boolean</a>
+                        <a href="/{{ v }}/standard-library/file-functions/read_lines/" class="sidebar-link pl-12" data-section="file-functions">read_lines</a>
+                        <a href="/{{ v }}/standard-library/file-functions/write_lines/" class="sidebar-link pl-12" data-section="file-functions">write_lines</a>
+                        <a href="/{{ v }}/standard-library/file-functions/read_tsv/" class="sidebar-link pl-12" data-section="file-functions">read_tsv</a>
+                        <a href="/{{ v }}/standard-library/file-functions/write_tsv/" class="sidebar-link pl-12" data-section="file-functions">write_tsv</a>
+                        <a href="/{{ v }}/standard-library/file-functions/read_map/" class="sidebar-link pl-12" data-section="file-functions">read_map</a>
+                        <a href="/{{ v }}/standard-library/file-functions/write_map/" class="sidebar-link pl-12" data-section="file-functions">write_map</a>
+                        <a href="/{{ v }}/standard-library/file-functions/read_json/" class="sidebar-link pl-12" data-section="file-functions">read_json</a>
+                        <a href="/{{ v }}/standard-library/file-functions/write_json/" class="sidebar-link pl-12" data-section="file-functions">write_json</a>
+                        <a href="/{{ v }}/standard-library/file-functions/read_object/" class="sidebar-link pl-12" data-section="file-functions">read_object</a>
+                        <a href="/{{ v }}/standard-library/file-functions/read_objects/" class="sidebar-link pl-12" data-section="file-functions">read_objects</a>
+                        <a href="/{{ v }}/standard-library/file-functions/write_object/" class="sidebar-link pl-12" data-section="file-functions">write_object</a>
+                        <a href="/{{ v }}/standard-library/file-functions/write_objects/" class="sidebar-link pl-12" data-section="file-functions">write_objects</a>
+                    </div>
+                </div>
+                <div class="sidebar-section" data-section="array-string-functions">
+                    <div class="flex items-center justify-between sidebar-row">
+                        <a href="/{{ v }}/standard-library/array-string-functions/" class="sidebar-link flex-1 pl-6" data-section="array-string-functions">String Array Functions</a>
+                        <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle String Array Functions submenu">
+                            <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar-content hidden">
+                        <a href="/{{ v }}/standard-library/array-string-functions/prefix/" class="sidebar-link pl-12" data-section="array-string-functions">prefix</a>
+                        <a href="/{{ v }}/standard-library/array-string-functions/suffix/" class="sidebar-link pl-12" data-section="array-string-functions" data-min-version="1.1">suffix</a>
+                        <a href="/{{ v }}/standard-library/array-string-functions/quote/" class="sidebar-link pl-12" data-section="array-string-functions" data-min-version="1.1">quote</a>
+                        <a href="/{{ v }}/standard-library/array-string-functions/squote/" class="sidebar-link pl-12" data-section="array-string-functions" data-min-version="1.1">squote</a>
+                        <a href="/{{ v }}/standard-library/array-string-functions/sep/" class="sidebar-link pl-12" data-section="array-string-functions" data-min-version="1.1">sep</a>
+                    </div>
+                </div>
+                <div class="sidebar-section" data-section="array-functions">
+                    <div class="flex items-center justify-between sidebar-row">
+                        <a href="/{{ v }}/standard-library/array-functions/" class="sidebar-link flex-1 pl-6" data-section="array-functions">Array Functions</a>
+                        <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle Array Functions submenu">
+                            <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar-content hidden">
+                        <a href="/{{ v }}/standard-library/array-functions/range/" class="sidebar-link pl-12" data-section="array-functions">range</a>
+                        <a href="/{{ v }}/standard-library/array-functions/transpose/" class="sidebar-link pl-12" data-section="array-functions">transpose</a>
+                        <a href="/{{ v }}/standard-library/array-functions/cross/" class="sidebar-link pl-12" data-section="array-functions">cross</a>
+                        <a href="/{{ v }}/standard-library/array-functions/zip/" class="sidebar-link pl-12" data-section="array-functions">zip</a>
+                        <a href="/{{ v }}/standard-library/array-functions/unzip/" class="sidebar-link pl-12" data-section="array-functions" data-min-version="1.1">unzip</a>
+                        <a href="/{{ v }}/standard-library/array-functions/contains/" class="sidebar-link pl-12" data-section="array-functions" data-min-version="1.2">contains</a>
+                        <a href="/{{ v }}/standard-library/array-functions/chunk/" class="sidebar-link pl-12" data-section="array-functions" data-min-version="1.2">chunk</a>
+                        <a href="/{{ v }}/standard-library/array-functions/flatten/" class="sidebar-link pl-12" data-section="array-functions">flatten</a>
+                        <a href="/{{ v }}/standard-library/array-functions/length/" class="sidebar-link pl-12" data-section="array-functions" data-max-version="1.1">length</a>
+                        <a href="/{{ v }}/standard-library/array-functions/select_first/" class="sidebar-link pl-12" data-section="array-functions">select_first</a>
+                        <a href="/{{ v }}/standard-library/array-functions/select_all/" class="sidebar-link pl-12" data-section="array-functions">select_all</a>
+                    </div>
+                </div>
+                <div class="sidebar-section" data-section="map-functions" data-min-version="1.1">
+                    <div class="flex items-center justify-between sidebar-row">
+                        <a href="/{{ v }}/standard-library/map-functions/" class="sidebar-link flex-1 pl-6" data-section="map-functions">Map Functions</a>
+                        <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle Map Functions submenu">
+                            <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar-content hidden">
+                        <a href="/{{ v }}/standard-library/map-functions/as_pairs/" class="sidebar-link pl-12" data-section="map-functions">as_pairs</a>
+                        <a href="/{{ v }}/standard-library/map-functions/as_map/" class="sidebar-link pl-12" data-section="map-functions">as_map</a>
+                        <a href="/{{ v }}/standard-library/map-functions/keys/" class="sidebar-link pl-12" data-section="map-functions">keys</a>
+                        <a href="/{{ v }}/standard-library/map-functions/contains_key/" class="sidebar-link pl-12" data-section="map-functions" data-min-version="1.2">contains_key</a>
+                        <a href="/{{ v }}/standard-library/map-functions/values/" class="sidebar-link pl-12" data-section="map-functions" data-min-version="1.2">values</a>
+                        <a href="/{{ v }}/standard-library/map-functions/collect_by_key/" class="sidebar-link pl-12" data-section="map-functions">collect_by_key</a>
+                    </div>
+                </div>
+                <div class="sidebar-section" data-section="enum-functions" data-min-version="1.3">
+                    <div class="flex items-center justify-between sidebar-row">
+                        <a href="/{{ v }}/standard-library/enum-functions/" class="sidebar-link flex-1 pl-6" data-section="enum-functions">Enum Functions</a>
+                        <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle Enum Functions submenu">
+                            <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar-content hidden">
+                        <a href="/{{ v }}/standard-library/enum-functions/value/" class="sidebar-link pl-12" data-section="enum-functions">value</a>
+                    </div>
+                </div>
+                <div class="sidebar-section" data-section="other-functions">
+                    <div class="flex items-center justify-between sidebar-row">
+                        <a href="/{{ v }}/standard-library/other-functions/" class="sidebar-link flex-1 pl-6" data-section="other-functions">Other Functions</a>
+                        <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle Other Functions submenu">
+                            <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar-content hidden">
+                        <a href="/{{ v }}/standard-library/other-functions/defined/" class="sidebar-link pl-12" data-section="other-functions">defined</a>
+                        <a href="/{{ v }}/standard-library/other-functions/length/" class="sidebar-link pl-12" data-section="other-functions" data-min-version="1.2">length</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="sidebar-section" data-section="input-output">
+            <div class="flex items-center justify-between sidebar-row">
+                <a href="/{{ v }}/input-output/" class="sidebar-link flex-1" data-section="input-output">Input/Output Formats</a>
+                <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle Input/Output submenu">
+                    <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
+                </button>
+            </div>
+            <div class="sidebar-content hidden">
+                <a href="/{{ v }}/input-output/json-input-format/" class="sidebar-link pl-6" data-section="input-output">JSON Input Format</a>
+                <a href="/{{ v }}/input-output/json-output-format/" class="sidebar-link pl-6" data-section="input-output" data-min-version="1.1">JSON Output Format</a>
+                <a href="/{{ v }}/input-output/extended-format/" class="sidebar-link pl-6" data-section="input-output" data-min-version="1.2">Extended Format</a>
+                <a href="/{{ v }}/input-output/json-serialization/" class="sidebar-link pl-6" data-section="input-output" data-min-version="1.1">JSON Serialization</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <div class="text-xs font-semibold text-gray-700 dark:text-gray-100 uppercase tracking-wide mb-2">Appendices</div>
+    <div class="space-y-0.5">
+        <a href="/{{ v }}/appendices/appendix-a/" class="sidebar-link" data-section="appendices">Appendix A: Serialization</a>
+        <a href="/{{ v }}/appendices/appendix-b/" class="sidebar-link" data-section="appendices">Appendix B: Namespaces</a>
+        <a href="/{{ v }}/appendices/appendix-c/" class="sidebar-link" data-section="appendices" data-min-version="1.1">Appendix C: Example Data</a>
+    </div>
+</div>
