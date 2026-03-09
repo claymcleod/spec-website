@@ -10,11 +10,11 @@
         The page you're looking for doesn't exist, or it may not exist in this version of the specification.
     </p>
     <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 w-full px-4 sm:px-0">
-        <a href="/{{ config.extra.current_version }}/introduction/" class="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 bg-teal-500 hover:bg-teal-600 text-gray-900 font-semibold rounded-md transition-colors">
+        <a href="{{ get_url(path=config.extra.current_version ~ '/introduction/') }}" class="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 bg-teal-500 hover:bg-teal-600 text-gray-900 font-semibold rounded-md transition-colors">
             <span>📖</span>
             Read the Spec
         </a>
-        <a href="/" class="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-500 text-gray-800 dark:text-gray-100 font-semibold rounded-md border border-gray-300 dark:border-gray-600 transition-colors">
+        <a href="{{ get_url(path='/') }}" class="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-3 bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-500 text-gray-800 dark:text-gray-100 font-semibold rounded-md border border-gray-300 dark:border-gray-600 transition-colors">
             <i class="fa-solid fa-house"></i>
             Go Home
         </a>

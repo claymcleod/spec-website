@@ -1,5 +1,11 @@
 // Version handling
 const defaultVersion = window.DEFAULT_VERSION || '1.2';
+const basePath = (() => {
+    try { return new URL(window.BASE_URL).pathname.replace(/\/$/, ''); }
+    catch { return ''; }
+})();
+const versionPattern = new RegExp('^' + basePath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '/([\\d.]+)/');
+
 
 function compareVersions(a, b) {
     const partsA = a.split('.').map(Number);
@@ -13,15 +19,15 @@ function compareVersions(a, b) {
 }
 
 function getVersionFromUrl() {
-    const match = window.location.pathname.match(/^\/([\d.]+)\//);
+    const match = window.location.pathname.match(versionPattern);
     return match ? match[1] : null;
 }
 
 function rewriteVersionedLinks(targetVersion) {
     document.querySelectorAll('a[href]').forEach(link => {
         const href = link.getAttribute('href');
-        if (/^\/([\d.]+)\//.test(href)) {
-            link.setAttribute('href', href.replace(/^\/([\d.]+)\//, '/' + targetVersion + '/'));
+        if (versionPattern.test(href)) {
+            link.setAttribute('href', href.replace(versionPattern, basePath + '/' + targetVersion + '/'));
         }
     });
 }
@@ -119,7 +125,7 @@ function selectVersion(btn) {
     localStorage.setItem('wdl-version', newVersion);
     closeAllVersionMenus();
     if (urlVersion) {
-        window.location.href = window.location.pathname.replace(/^\/([\d.]+)\//, '/' + newVersion + '/');
+        window.location.href = window.location.pathname.replace(versionPattern, basePath + '/' + newVersion + '/');
     } else {
         rewriteVersionedLinks(newVersion);
         updateVersionVisibility(newVersion);
