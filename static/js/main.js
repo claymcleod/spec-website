@@ -5,6 +5,7 @@ const basePath = (() => {
     catch { return ''; }
 })();
 const versionPattern = new RegExp('^' + basePath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '/([\\d.]+)/');
+const contentFrameId = 'content-frame';
 
 
 function compareVersions(a, b) {
@@ -78,17 +79,6 @@ function updateVersionVisibility(version) {
     }
 }
 
-// Determine active version: URL wins, then localStorage, then default
-const urlVersion = getVersionFromUrl();
-const currentVersion = urlVersion || localStorage.getItem('wdl-version') || defaultVersion;
-localStorage.setItem('wdl-version', currentVersion);
-
-// Rewrite all versioned links to match active version
-if (currentVersion !== defaultVersion) {
-    rewriteVersionedLinks(currentVersion);
-}
-updateVersionVisibility(currentVersion);
-
 // Sync dropdown display to match active version
 const latestVersion = window.LATEST_VERSION || defaultVersion;
 function updateDropdownDisplay(version) {
@@ -106,7 +96,6 @@ function updateDropdownDisplay(version) {
         });
     });
 }
-updateDropdownDisplay(currentVersion);
 
 // Version dropdown
 function toggleVersionMenu(btn) {
@@ -124,6 +113,7 @@ function selectVersion(btn) {
     const newVersion = btn.getAttribute('data-version');
     localStorage.setItem('wdl-version', newVersion);
     closeAllVersionMenus();
+    const urlVersion = getVersionFromUrl();
     if (urlVersion) {
         window.location.href = window.location.pathname.replace(versionPattern, basePath + '/' + newVersion + '/');
     } else {
@@ -142,164 +132,169 @@ document.addEventListener('click', (e) => {
     if (!e.target.closest('.version-dropdown')) closeAllVersionMenus();
 });
 
-// Theme toggle
-const themeToggle = document.getElementById('theme-toggle');
-const themeIconDark = document.getElementById('theme-icon-dark');
-const themeIconLight = document.getElementById('theme-icon-light');
-
-function updateThemeIcons() {
-    const isDark = document.documentElement.classList.contains('dark');
-    // Show sun in dark mode (to switch to light), moon in light mode (to switch to dark)
-    themeIconDark?.classList.toggle('hidden', isDark);
-    themeIconLight?.classList.toggle('hidden', !isDark);
+function initThemeToggle() {
+    const themeToggle = document.getElementById('theme-toggle');
+    if (!themeToggle || themeToggle.dataset.bound === 'true') return;
+    themeToggle.dataset.bound = 'true';
+    themeToggle.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
 }
-
-updateThemeIcons();
-
-themeToggle?.addEventListener('click', () => {
-    const isDark = document.documentElement.classList.toggle('dark');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    updateThemeIcons();
-});
 
 // Mobile sidebar toggle
-const mobileMenuButton = document.getElementById('mobile-menu-button');
-const mobileSidebar = document.getElementById('mobile-sidebar');
-const mobileSidebarClose = document.getElementById('mobile-sidebar-close');
-const mobileSidebarOverlay = document.getElementById('mobile-sidebar-overlay');
+function initMobileSidebar() {
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileSidebar = document.getElementById('mobile-sidebar');
+    const mobileSidebarClose = document.getElementById('mobile-sidebar-close');
+    const mobileSidebarOverlay = document.getElementById('mobile-sidebar-overlay');
 
-function openMobileSidebar() {
-  mobileSidebar?.classList.remove('hidden');
-  sessionStorage.setItem('mobileSidebarOpen', 'true');
+    if (sessionStorage.getItem('mobileSidebarOpen') === 'true') {
+        mobileSidebar?.classList.remove('hidden');
+    }
+
+    const openMobileSidebar = () => {
+        mobileSidebar?.classList.remove('hidden');
+        sessionStorage.setItem('mobileSidebarOpen', 'true');
+    };
+
+    const closeMobileSidebar = () => {
+        mobileSidebar?.classList.add('hidden');
+        sessionStorage.removeItem('mobileSidebarOpen');
+    };
+
+    if (mobileMenuButton && mobileMenuButton.dataset.bound !== 'true') {
+        mobileMenuButton.dataset.bound = 'true';
+        mobileMenuButton.addEventListener('click', openMobileSidebar);
+    }
+    if (mobileSidebarClose && mobileSidebarClose.dataset.bound !== 'true') {
+        mobileSidebarClose.dataset.bound = 'true';
+        mobileSidebarClose.addEventListener('click', closeMobileSidebar);
+    }
+    if (mobileSidebarOverlay && mobileSidebarOverlay.dataset.bound !== 'true') {
+        mobileSidebarOverlay.dataset.bound = 'true';
+        mobileSidebarOverlay.addEventListener('click', closeMobileSidebar);
+    }
 }
-
-function closeMobileSidebar() {
-  mobileSidebar?.classList.add('hidden');
-  sessionStorage.removeItem('mobileSidebarOpen');
-}
-
-// Restore sidebar state on page load
-if (sessionStorage.getItem('mobileSidebarOpen') === 'true') {
-  mobileSidebar?.classList.remove('hidden');
-}
-
-mobileMenuButton?.addEventListener('click', openMobileSidebar);
-mobileSidebarClose?.addEventListener('click', closeMobileSidebar);
-mobileSidebarOverlay?.addEventListener('click', closeMobileSidebar);
 
 // Active navigation highlighting
-const currentPath = window.location.pathname;
-const navLinks = document.querySelectorAll('.sidebar-link[href]');
+function initSidebarNavigation() {
+    const currentPath = window.location.pathname;
+    const navLinks = document.querySelectorAll('.sidebar-link[href]');
+    navLinks.forEach(link => link.setAttribute('data-turbo-frame', contentFrameId));
+    document.querySelectorAll('.sidebar-link-active').forEach(link => link.classList.remove('sidebar-link-active'));
 
-const activeSections = new Set();
+    const activeSections = new Set();
+    const normalizedCurrentPath = currentPath.endsWith('/') ? currentPath : currentPath + '/';
 
-// Normalize path by ensuring it has a trailing slash
-const normalizedCurrentPath = currentPath.endsWith('/') ? currentPath : currentPath + '/';
-
-// Check regular links
-navLinks.forEach(link => {
-  // Get the pathname from the link's href (handles base URL automatically)
-  const linkPath = new URL(link.href).pathname;
-  const normalizedLinkPath = linkPath.endsWith('/') ? linkPath : linkPath + '/';
-
-  // Only highlight if exact match
-  if (normalizedCurrentPath === normalizedLinkPath) {
-    link.classList.add('sidebar-link-active');
-
-    // Walk up the DOM tree and collect all parent sections
-    let element = link;
-    while (element) {
-      element = element.parentElement;
-      if (element && element.classList && element.classList.contains('sidebar-section')) {
-        const sectionName = element.getAttribute('data-section');
-        if (sectionName) {
-          activeSections.add(sectionName);
+    navLinks.forEach(link => {
+        const linkPath = new URL(link.href).pathname;
+        const normalizedLinkPath = linkPath.endsWith('/') ? linkPath : linkPath + '/';
+        if (normalizedCurrentPath === normalizedLinkPath) {
+            link.classList.add('sidebar-link-active');
+            let element = link;
+            while (element) {
+                element = element.parentElement;
+                if (element && element.classList && element.classList.contains('sidebar-section')) {
+                    const sectionName = element.getAttribute('data-section');
+                    if (sectionName) activeSections.add(sectionName);
+                }
+            }
         }
-      }
-    }
-  }
-});
+    });
 
-// Sidebar accordion functionality
-const sidebarSections = document.querySelectorAll('.sidebar-section');
+    document.querySelectorAll('.sidebar-section').forEach(section => {
+        const chevronButton = section.querySelector('.chevron-toggle');
+        const content = section.querySelector('.sidebar-content');
+        const chevron = section.querySelector('.sidebar-chevron');
+        const sectionName = section.getAttribute('data-section');
+        if (!content || !chevron) return;
 
-sidebarSections.forEach(section => {
-  const chevronButton = section.querySelector('.chevron-toggle');
-  const content = section.querySelector('.sidebar-content');
-  const chevron = section.querySelector('.sidebar-chevron');
-  const sectionName = section.getAttribute('data-section');
+        if (activeSections.has(sectionName)) {
+            content.classList.remove('hidden');
+            chevron.classList.remove('chevron-closed');
+            chevron.classList.add('chevron-open');
+            chevron.style.transition = 'none';
+            setTimeout(() => {
+                chevron.style.transition = '';
+            }, 0);
+        } else {
+            chevron.classList.remove('chevron-open');
+            chevron.classList.add('chevron-closed');
+        }
 
-  // Open the section if it or any of its ancestors are active
-  if (activeSections.has(sectionName)) {
-    content.classList.remove('hidden');
-    // When open, chevron should point down
-    chevron.classList.remove('chevron-closed');
-    chevron.classList.add('chevron-open');
-    chevron.style.transition = 'none';
-    setTimeout(() => {
-      chevron.style.transition = '';
-    }, 0);
-  } else {
-    // When closed, chevron should point right
-    chevron.classList.remove('chevron-open');
-    chevron.classList.add('chevron-closed');
-  }
-
-  chevronButton.addEventListener('click', (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    const isOpen = !content.classList.contains('hidden');
-
-    if (isOpen) {
-      // Closing: hide content and point chevron right
-      content.classList.add('hidden');
-      chevron.classList.remove('chevron-open');
-      chevron.classList.add('chevron-closed');
-    } else {
-      // Opening: show content and point chevron down
-      content.classList.remove('hidden');
-      chevron.classList.remove('chevron-closed');
-      chevron.classList.add('chevron-open');
-    }
-  });
-});
+        if (chevronButton && chevronButton.dataset.bound !== 'true') {
+            chevronButton.dataset.bound = 'true';
+            chevronButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const isOpen = !content.classList.contains('hidden');
+                if (isOpen) {
+                    content.classList.add('hidden');
+                    chevron.classList.remove('chevron-open');
+                    chevron.classList.add('chevron-closed');
+                } else {
+                    content.classList.remove('hidden');
+                    chevron.classList.remove('chevron-closed');
+                    chevron.classList.add('chevron-open');
+                }
+            });
+        }
+    });
+}
 
 // Smooth scroll for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-    const hash = this.getAttribute('href');
-    const target = document.querySelector(hash);
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' });
-      history.pushState(null, '', hash);
-    }
-  });
-});
+function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        if (anchor.dataset.bound === 'true') return;
+        anchor.dataset.bound = 'true';
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const hash = this.getAttribute('href');
+            const target = document.querySelector(hash);
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+                history.pushState(null, '', hash);
+            }
+        });
+    });
+}
 
 // Copy code button functionality
-document.querySelectorAll('pre code').forEach((block) => {
-  const button = document.createElement('button');
-  button.className = 'absolute top-2 right-2 px-2 py-1 text-xs text-gray-400 hover:text-teal-400 bg-gray-900 rounded transition-colors';
-  button.textContent = 'Copy';
-
-  block.parentElement.style.position = 'relative';
-  block.parentElement.appendChild(button);
-
-  button.addEventListener('click', () => {
-    navigator.clipboard.writeText(block.textContent);
-    button.textContent = 'Copied!';
-    setTimeout(() => {
-      button.textContent = 'Copy';
-    }, 2000);
-  });
-});
+function initCopyButtons() {
+    document.querySelectorAll('pre code').forEach((block) => {
+        if (block.parentElement.querySelector('.copy-code-button')) return;
+        const button = document.createElement('button');
+        button.className = 'copy-code-button absolute top-2 right-2 px-2 py-1 text-xs text-gray-400 hover:text-teal-400 bg-gray-900 rounded transition-colors';
+        button.textContent = 'Copy';
+        block.parentElement.style.position = 'relative';
+        block.parentElement.appendChild(button);
+        button.addEventListener('click', () => {
+            navigator.clipboard.writeText(block.textContent);
+            button.textContent = 'Copied!';
+            setTimeout(() => {
+                button.textContent = 'Copy';
+            }, 2000);
+        });
+    });
+}
 
 // Search functionality
-const searchInput = document.getElementById('search-input');
-const searchResults = document.getElementById('search-results');
+let searchInput = null;
+let searchResults = null;
 let searchIndex = null;
 let selectedIndex = -1;
+
+function getActiveVersion() {
+    return getVersionFromUrl() || localStorage.getItem('wdl-version') || defaultVersion;
+}
+
+function isResultInVersion(resultUrl, version) {
+    const path = resultUrl.replace(/^https?:\/\/[^\/]+/, '');
+    const normalizedPath = path.endsWith('/') ? path : `${path}/`;
+    const versionPrefix = `${basePath}/${version}/`.replace(/\/{2,}/g, '/');
+    return normalizedPath.startsWith(versionPrefix);
+}
 
 async function loadSearchIndex() {
     if (searchIndex) return;
@@ -329,15 +324,17 @@ async function loadSearchIndex() {
 }
 
 function performSearch(query) {
+    if (!searchResults) return;
     if (!searchIndex || !query.trim()) {
         hideResults();
         return;
     }
 
+    const activeVersion = getActiveVersion();
     const results = searchIndex.search(query, {
         fields: { title: { boost: 2 }, body: { boost: 1 } },
         expand: true
-    }).slice(0, 8);
+    }).filter((result) => isResultInVersion(result.ref, activeVersion)).slice(0, 8);
 
     if (results.length === 0) {
         searchResults.innerHTML = '<div class="px-4 py-3 text-sm text-gray-500 dark:text-gray-100" role="status">No results found</div>';
@@ -366,7 +363,7 @@ function performSearch(query) {
         const path = url.replace(/^https?:\/\/[^\/]+/, '');
 
         return `
-            <a href="${path}" class="search-result block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-100 dark:focus:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-teal-500 border-b border-gray-200 dark:border-gray-700 last:border-0 ${index === selectedIndex ? 'bg-gray-100 dark:bg-gray-700' : ''}" data-index="${index}" role="option" aria-selected="${index === selectedIndex}" tabindex="0">
+            <a href="${path}" data-turbo-frame="${contentFrameId}" class="search-result block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-100 dark:focus:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-teal-500 border-b border-gray-200 dark:border-gray-700 last:border-0 ${index === selectedIndex ? 'bg-gray-100 dark:bg-gray-700' : ''}" data-index="${index}" role="option" aria-selected="${index === selectedIndex}" tabindex="0">
                 <div class="font-medium text-gray-900 dark:text-gray-100 text-sm">${title}</div>
                 ${snippet ? `<div class="text-xs text-gray-500 dark:text-gray-100 mt-1 line-clamp-2">${snippet}</div>` : `<div class="text-xs text-gray-500 dark:text-gray-100 mt-1">${path}</div>`}
             </a>
@@ -395,67 +392,72 @@ function updateSelection(results) {
     });
 }
 
-searchInput?.addEventListener('focus', loadSearchIndex);
-
 let debounceTimer;
-searchInput?.addEventListener('input', (e) => {
-    clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(() => performSearch(e.target.value), 300);
-});
+function initSearch() {
+    searchInput = document.getElementById('search-input');
+    searchResults = document.getElementById('search-results');
 
-searchInput?.addEventListener('keydown', (e) => {
-    const results = searchResults?.querySelectorAll('.search-result') || [];
-    if (results.length === 0) return;
-
-    if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        selectedIndex = Math.min(selectedIndex + 1, results.length - 1);
-        updateSelection(results);
-        results[selectedIndex]?.focus();
-    } else if (e.key === 'ArrowUp') {
-        e.preventDefault();
-        selectedIndex = Math.max(selectedIndex - 1, 0);
-        updateSelection(results);
-        results[selectedIndex]?.focus();
-    } else if (e.key === 'Enter' && selectedIndex >= 0) {
-        e.preventDefault();
-        results[selectedIndex].click();
-    } else if (e.key === 'Escape') {
-        hideResults();
-        searchInput.blur();
+    if (searchInput && searchInput.dataset.bound !== 'true') {
+        searchInput.dataset.bound = 'true';
+        searchInput.addEventListener('focus', loadSearchIndex);
+        searchInput.addEventListener('input', (e) => {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => performSearch(e.target.value), 300);
+        });
+        searchInput.addEventListener('keydown', (e) => {
+            const results = searchResults?.querySelectorAll('.search-result') || [];
+            if (results.length === 0) return;
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                selectedIndex = Math.min(selectedIndex + 1, results.length - 1);
+                updateSelection(results);
+                results[selectedIndex]?.focus();
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                selectedIndex = Math.max(selectedIndex - 1, 0);
+                updateSelection(results);
+                results[selectedIndex]?.focus();
+            } else if (e.key === 'Enter' && selectedIndex >= 0) {
+                e.preventDefault();
+                results[selectedIndex].click();
+            } else if (e.key === 'Escape') {
+                hideResults();
+                searchInput.blur();
+            }
+        });
     }
-});
 
-// Allow arrow key navigation within search results
-searchResults?.addEventListener('keydown', (e) => {
-    const results = searchResults?.querySelectorAll('.search-result') || [];
-    if (results.length === 0) return;
-
-    const currentIndex = Array.from(results).findIndex(el => el === document.activeElement);
-    if (currentIndex === -1) return;
-
-    if (e.key === 'ArrowDown') {
-        e.preventDefault();
-        const nextIndex = Math.min(currentIndex + 1, results.length - 1);
-        results[nextIndex]?.focus();
-        selectedIndex = nextIndex;
-        updateSelection(results);
-    } else if (e.key === 'ArrowUp') {
-        e.preventDefault();
-        if (currentIndex === 0) {
-            searchInput?.focus();
-            selectedIndex = -1;
-        } else {
-            const prevIndex = currentIndex - 1;
-            results[prevIndex]?.focus();
-            selectedIndex = prevIndex;
-            updateSelection(results);
-        }
-    } else if (e.key === 'Escape') {
-        hideResults();
-        searchInput?.focus();
+    if (searchResults && searchResults.dataset.bound !== 'true') {
+        searchResults.dataset.bound = 'true';
+        searchResults.addEventListener('keydown', (e) => {
+            const results = searchResults?.querySelectorAll('.search-result') || [];
+            if (results.length === 0) return;
+            const currentIndex = Array.from(results).findIndex(el => el === document.activeElement);
+            if (currentIndex === -1) return;
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                const nextIndex = Math.min(currentIndex + 1, results.length - 1);
+                results[nextIndex]?.focus();
+                selectedIndex = nextIndex;
+                updateSelection(results);
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                if (currentIndex === 0) {
+                    searchInput?.focus();
+                    selectedIndex = -1;
+                } else {
+                    const prevIndex = currentIndex - 1;
+                    results[prevIndex]?.focus();
+                    selectedIndex = prevIndex;
+                    updateSelection(results);
+                }
+            } else if (e.key === 'Escape') {
+                hideResults();
+                searchInput?.focus();
+            }
+        });
     }
-});
+}
 
 document.addEventListener('click', (e) => {
     if (!searchInput?.contains(e.target) && !searchResults?.contains(e.target)) {
@@ -472,3 +474,30 @@ document.addEventListener('keydown', (e) => {
         loadSearchIndex();
     }
 });
+
+function initializePage() {
+    const urlVersion = getVersionFromUrl();
+    const currentVersion = urlVersion || localStorage.getItem('wdl-version') || defaultVersion;
+    localStorage.setItem('wdl-version', currentVersion);
+    if (currentVersion !== defaultVersion) rewriteVersionedLinks(currentVersion);
+    updateVersionVisibility(currentVersion);
+    updateDropdownDisplay(currentVersion);
+    initThemeToggle();
+    initMobileSidebar();
+    initSidebarNavigation();
+    initSmoothScroll();
+    initCopyButtons();
+    initSearch();
+}
+
+initializePage();
+document.addEventListener('turbo:load', initializePage);
+document.addEventListener('turbo:frame-load', (event) => {
+    if (event.target.id !== contentFrameId) return;
+    const currentVersion = getVersionFromUrl() || localStorage.getItem('wdl-version') || defaultVersion;
+    updateVersionVisibility(currentVersion);
+    initSidebarNavigation();
+    initSmoothScroll();
+    initCopyButtons();
+});
+document.addEventListener('turbo:before-cache', hideResults);

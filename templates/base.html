@@ -94,9 +94,11 @@
             </header>
 
             <main class="flex-1 overflow-y-auto">
-                <div class="max-w-4xl mx-auto px-6 py-12">
-                    {% block content %}{% endblock content %}
-                </div>
+                <turbo-frame id="content-frame" data-turbo-action="advance" class="block">
+                    <div class="max-w-4xl mx-auto px-6 py-12">
+                        {% block content %}{% endblock content %}
+                    </div>
+                </turbo-frame>
             </main>
 
             <footer class="border-t border-gray-200 dark:border-gray-600 px-6 py-6">
@@ -152,6 +154,7 @@
 
     <script src="{{ get_url(path='elasticlunr.min.js', trailing_slash=false) }}"></script>
     <script>window.BASE_URL = "{{ config.base_url | safe }}"; window.DEFAULT_VERSION = "{{ v }}"; window.LATEST_VERSION = "{{ config.extra.current_version }}";</script>
+    <script src="https://cdn.jsdelivr.net/npm/@hotwired/turbo@8.0.13/dist/turbo.es2017-umd.js"></script>
     <script src="{{ get_url(path='js/main.js', trailing_slash=false) }}"></script>
     {% block extra_scripts %}{% endblock extra_scripts %}
 </body>
