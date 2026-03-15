@@ -1,6 +1,6 @@
 +++
 title = "Task Definition"
-description = "Defining atomic units of computation in WDL"
+description = "How to define units of computation that run commands"
 sort_by = "weight"
 weight = 40
 +++

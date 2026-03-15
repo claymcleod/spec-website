@@ -11,9 +11,8 @@ An `Object` is an unordered associative array of name-value pairs, where values 
 
 An `Object` can be initialized using an object literal value, which begins with the `object` keyword followed by a comma-separated list of name-value pairs in braces (`{}`), where name-value pairs are delimited by `:`. The member names in an object literal are not quoted. The value of a specific member of an `Object` value can be accessed by placing a `.` followed by the member name after the identifier.
 
-<details>
-<summary>
 Example: test_object.wdl
+
 
 ```wdl
 version 1.1
@@ -28,8 +27,12 @@ workflow test_object {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -47,7 +50,8 @@ Example output:
   "test_object.i": 10
 }
 ```
-</p>
+
+
 </details>
 
 Due to the lack of explicitness in the typing of `Object` being at odds with the goal of being able to know the type information of all WDL declarations, the use of the `Object` type and the `object` literal syntax have been deprecated. In WDL 2.0, `Object` will become a [hidden type](@/1.1/types/hidden-types.md) that may only be instantiated by the execution engine. `Object` declarations can be replaced with use of [structs](@/1.1/types/compound-types/structs.md).

@@ -3,9 +3,6 @@ title = "as_map"
 description = "Convert array of pairs to map"
 weight = 20
 +++
-
-<span class="wdl-badge wdl-badge-new">New in 1.1</span>
-
 ```
 Map[P, Y] as_map(Array[Pair[P, Y]])
 ```
@@ -18,9 +15,8 @@ Converts an `Array` of `Pair`s into a `Map` in which the left elements of the `P
 
 **Returns**: `Map[P, Y]` of the elements in the input array.
 
-<details>
-<summary>
 Example: test_as_map.wdl
+
 
 ```wdl
 version 1.1
@@ -39,8 +35,12 @@ workflow test_as_map {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -55,12 +55,12 @@ Example output:
   "test_as_map.is_true2": true
 }
 ```
-</p>
+
+
 </details>
 
-<details>
-<summary>
 Example: test_as_map_fail.wdl
+
 
 ```wdl
 version 1.1
@@ -70,8 +70,12 @@ workflow test_as_map_fail {
   Boolean bad = as_map([("a", 1), ("a", 2)])
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -91,5 +95,6 @@ Test config:
   "fail": true
 }
 ```
-</p>
+
+
 </details>

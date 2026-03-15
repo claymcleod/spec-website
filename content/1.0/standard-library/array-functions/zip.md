@@ -17,8 +17,6 @@ Given any two arrays, the `zip` function returns the dot product of those arrays
 
 **Returns**: An `Array[Pair[X,Y]]` where each element pairs corresponding elements from the two input arrays.
 
-<details>
-<summary>
 Example: zip_example.wdl
 
 ```wdl
@@ -27,5 +25,4 @@ Array[String] ys = [ "a", "b", "c" ]
 
 Array[Pair[Int, String]] zipped = zip(xs, ys)     # i.e.  zipped = [ (1, "a"), (2, "b"), (3, "c") ]
 ```
-</summary>
-</details>
+

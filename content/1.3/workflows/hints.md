@@ -24,9 +24,8 @@ A call input value is eligible to be set at runtime if it corresponds to a subwo
 
 The execution engine may refuse to execute a workflow when `allow_nested_inputs` is set to `false` and the user attempts to specify a value for a nested input, but if it does execute the workflow and ignore the user-specified value then it should show a warning.
 
-<details>
-<summary>
 Example: test_allow_nested_inputs.wdl
+
 
 ```wdl
 version 1.3
@@ -60,8 +59,12 @@ workflow test_allow_nested_inputs {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -87,14 +90,14 @@ Test config:
   "capabilities": ["allow_nested_inputs"]
 }
 ```
-</p>
+
+
 </details>
 
 Setting `allow_nested_inputs` to `false` in a workflow has the effect of also setting it to `false` in any nested subworkflows called by that workflow. In the following example, `allow_nested_inputs` is set to `false` in the top-level workflow (`multi_nested_inputs`), which overrides the value of `true` in the subworkflow (`test_allow_nested_inputs`).
 
-<details>
-<summary>
 Example: multi_nested_inputs.wdl
+
 
 ```wdl
 version 1.3
@@ -113,8 +116,12 @@ workflow multi_nested_inputs {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -131,5 +138,6 @@ Test config:
   "fail": true
 }
 ```
-</p>
+
+
 </details>

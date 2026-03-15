@@ -1,6 +1,6 @@
 +++
 title = "Expressions"
-description = "WDL expression syntax and evaluation"
+description = "Expression syntax, operators, and evaluation rules"
 sort_by = "weight"
 weight = 25
 +++

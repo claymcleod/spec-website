@@ -4,13 +4,12 @@ description = "String interpolation, placeholder coercion, and optional value co
 weight = 70
 +++
 
-Any WDL string expression may contain one or more "placeholders" of the form `~{*expression*}`, each of which contains a single expression. Placeholders of the form `${*expression*}` may also be used interchangably, but their use is discouraged for reasons discussed in the [command section](@/1.1/tasks/command.md#expression-placeholders) and may be deprecated in a future version of the specification.
+Any WDL string expression may contain one or more "placeholders" of the form `~{*expression*}`, each of which contains a single expression. Placeholders of the form `${*expression*}` may also be used interchangably, but their use is discouraged for reasons discussed in the [command section](@/1.1/tasks/command.md) and may be deprecated in a future version of the specification.
 
 When a string expression is evaluated, its placeholders are evaluated first, and their values are then substituted for the placeholders in the containing string.
 
-<details>
-<summary>
 Example: placeholders.wdl
+
 
 ```wdl
 version 1.1
@@ -29,8 +28,12 @@ workflow placeholders {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -49,7 +52,8 @@ Example output:
   "placeholders.s": "4"
 }
 ```
-</p>
+
+
 </details>
 
 In the above example, `command` would be parsed and evaluated as:
@@ -64,9 +68,8 @@ In the above example, `command` would be parsed and evaluated as:
 
 Placeholders may contain other placeholders to any level of nesting, and placeholders are evaluated recursively in a depth-first manner. Placeholder expressions are anonymous, i.e., they have no name and thus cannot be referenced by other expressions, but they can reference declarations and call outputs.
 
-<details>
-<summary>
 Example: nested_placeholders.wdl
+
 
 ```wdl
 version 1.1
@@ -82,8 +85,12 @@ workflow nested_placeholders {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -100,7 +107,8 @@ Example output:
   "nested_placeholders.s": "4"
 }
 ```
-</p>
+
+
 </details>
 
 ## Expression Placeholder Coercion
@@ -117,9 +125,8 @@ Compound types cannot be implicitly converted to strings. To convert an `Array` 
 
 If an expression within a placeholder evaluates to `None`, then the placeholder is replaced by the empty string.
 
-<details>
-<summary>
 Example: placeholder_coercion.wdl
+
 
 ```wdl
 version 1.1
@@ -142,8 +149,12 @@ workflow placeholder_coercion {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -165,16 +176,16 @@ Example output:
   "placeholder_coercion.is_true7": true
 }
 ```
-</p>
+
+
 </details>
 
 ## Concatenation of Optional Values
 
 Within expression placeholders the string concatenation operator (`+`) gains the ability to operate on optional values. When applied to two non-optional operands, the result is a non-optional `String`. However, if either operand has an optional type, then the concatenation has type `String?`, and the runtime result is `None` if either operand is `None` (which is then replaced with the empty string).
 
-<details>
-<summary>
 Example: concat_optional.wdl
+
 
 ```wdl
 version 1.1
@@ -197,8 +208,12 @@ workflow concat_optional {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -213,14 +228,14 @@ Example output:
   "concat_optional.greeting2": "hello Fred, nice to meet you!"
 }
 ```
-</p>
+
+
 </details>
 
 Among other uses, concatenation of optionals can be used to facilitate the formulation of command-line flags.
 
-<details>
-<summary>
 Example: flags_task.wdl
+
 
 ```wdl
 version 1.1
@@ -248,8 +263,12 @@ task flags {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -266,5 +285,6 @@ Example output:
   "flags.num_matches": 2
 }
 ```
-</p>
+
+
 </details>

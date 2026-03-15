@@ -1,6 +1,6 @@
 +++
 title = "Types"
-description = "WDL type system and type declarations"
+description = "The WDL type system and how types are declared"
 sort_by = "weight"
 weight = 20
 +++

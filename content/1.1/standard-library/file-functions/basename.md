@@ -3,25 +3,23 @@ title = "basename"
 description = "Get base filename"
 weight = 10
 +++
-
 ```
-String basename(String, [String])
+String basename(File, [String])
 ```
 
-Returns the "basename" of a file - the name after the last directory separator in the path.
+Returns the "basename" of a file - the name after the last directory separator in the file's path. 
 
-The optional second parameter specifies a literal suffix to remove from the file name. If the file name does not end with the specified suffix then it is ignored.
+The optional second parameter specifies a literal suffix to remove from the file name.
 
 **Parameters**
 
-1. `String`: Path of the file. The argument can be a `File` or `String`.
+1. `File`: Path of the file to read.
 2. `String`: (Optional) Suffix to remove from the file name.
-
+ 
 **Returns**: The file's basename as a `String`.
 
-<details>
-<summary>
 Example: test_basename.wdl
+
 
 ```wdl
 version 1.1
@@ -33,8 +31,12 @@ workflow test_basename {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -49,5 +51,6 @@ Example output:
   "test_basename.is_true2": true
 }
 ```
-</p>
+
+
 </details>

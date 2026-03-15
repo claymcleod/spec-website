@@ -16,9 +16,8 @@ Filters the input `Array` of optional values by removing all `None` values. The 
 
 **Returns**: an `Array` of all non-`None` values in the input array.
 
-<details>
-<summary>
 Example: test_select_all.wdl
+
 
 ```wdl
 version 1.3
@@ -39,8 +38,12 @@ workflow test_select_all {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -54,5 +57,6 @@ Example output:
   "test_select_all.is_true": true
 }
 ```
-</p>
+
+
 </details>

@@ -16,9 +16,8 @@ Transposes a two-dimensional array according to the standard matrix transpositio
 
 **Returns**: A `N*M` two-dimensional array (`Array[Array[X]]`) containing the transposed input array.
 
-<details>
-<summary>
 Example: test_transpose.wdl
+
 
 ```wdl
 version 1.1
@@ -37,8 +36,12 @@ workflow test_transpose {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -54,5 +57,6 @@ Example output:
   "test_transpose.is_true": true
 }
 ```
-</p>
+
+
 </details>

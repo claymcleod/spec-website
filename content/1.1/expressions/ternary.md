@@ -6,9 +6,8 @@ weight = 50
 
 This operator takes three arguments: a condition expression, an if-true expression, and an if-false expression. The condition is always evaluated. If the condition is `true` then the if-true value is evaluated and returned. If the condition is `false`, the if-false expression is evaluated and returned. The if-true and if-false expressions must return values of the same type, such that the value of the if-then-else is the same regardless of which side is evaluated.
 
-<details>
-<summary>
 Example: ternary.wdl
+
 
 ```wdl
 version 1.1
@@ -43,8 +42,12 @@ workflow ternary {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -60,5 +63,6 @@ Example output:
   "ternary.greeting": "good morning"
 }
 ```
-</p>
+
+
 </details>

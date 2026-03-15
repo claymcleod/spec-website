@@ -16,9 +16,8 @@ Rounds a floating point number **up** to the next higher integer.
 
 **Returns**: An integer.
 
-<details>
-<summary>
 Example: test_ceil.wdl
+
 
 ```wdl
 version 1.2
@@ -37,8 +36,12 @@ workflow test_ceil {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -54,6 +57,7 @@ Example output:
   "test_ceil.all_true": [true, true]
 }
 ```
-</p>
+
+
 </details>
 

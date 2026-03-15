@@ -3,9 +3,6 @@ title = "contains_key"
 description = "Check if map contains key"
 weight = 40
 +++
-
-<span class="wdl-badge wdl-badge-new">New in 1.2</span>
-
 ```
 * Boolean contains_key(Map[P, Y], P)
 * Boolean contains_key(Object, String)
@@ -31,11 +28,11 @@ For example, if the first argument is a `Map[String, Map[String, Int]]` and the 
 
 **Returns**: `true` if the collection contains the key, otherwise false.
 
-**Example**
+Example
 
-<details>
-  <summary>
-  Example: test_contains_key.wdl
+Example: test_contains_key.wdl
+
+
   
   ```wdl
   version 1.2
@@ -64,9 +61,13 @@ For example, if the first argument is a `Map[String, Map[String, Int]]` and the 
     }
   }
   ```
-  </summary>
-  <p>
-  Example input:
+
+
+<details>
+<summary></summary>
+
+
+Example input:
 
   ```json
   {
@@ -96,7 +97,7 @@ For example, if the first argument is a `Map[String, Map[String, Int]]` and the 
     "test_contains_key.phone1": "123-456-7890",
     "test_contains_key.phone2": null
   }
-  ``` 
-  </p>
-</details>
+  ```
 
+
+</details>

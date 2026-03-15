@@ -20,9 +20,8 @@ The second row specifies the object member values corresponding to the names in 
 
 **Returns**: An `Object`, with as many members as there are unique names in the TSV.
 
-<details>
-<summary>
 Example: read_object_task.wdl
+
 
 ```wdl
 version 1.1
@@ -44,8 +43,12 @@ task read_object {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -63,7 +66,8 @@ Example output:
   }
 }
 ```
-</p>
+
+
 </details>
 
 The command outputs the following lines to stdout:

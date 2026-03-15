@@ -17,9 +17,8 @@ Adds a prefix to each element of the input array of primitive values. Equivalent
 
 **Returns**: An `Array[String]` with the prefixed elements of the input array.
 
-<details>
-<summary>
 Example: test_prefix.wdl
+
 
 ```wdl
 version 1.2
@@ -34,8 +33,12 @@ workflow test_prefix {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -50,12 +53,12 @@ Example output:
   "test_prefix.env2_prefixed": ["-f 1", "-f 2", "-f 3"]
 }
 ```
-</p>
+
+
 </details>
 
-<details>
-<summary>
 Example: test_prefix_fail.wdl
+
 
 ```wdl
 version 1.2
@@ -66,8 +69,12 @@ workflow test_prefix_fail {
   Array[String] bad = prefix("-x ", env3)
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -87,6 +94,7 @@ Test config:
   "fail": true
 }
 ```
-</p>
+
+
 </details>
 

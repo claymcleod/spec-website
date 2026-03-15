@@ -29,8 +29,8 @@ If the entire contents of the file can not be read for any reason, the calling t
 
 **Returns**: A WDL value corresponding to the JSON data structure.
 
-<details>
-<summary>
+For example, if I write a task that outputs a file to `./results/file_list.json`, and my task is defined as:
+
 Example: read_json_task.wdl
 
 ```wdl
@@ -46,5 +46,6 @@ task do_stuff {
   }
 }
 ```
-</summary>
-</details>
+
+
+Then when the task finishes, to fulfull the `output_table` variable, `./results/file_list.json` must be a valid JSON file or an error will be reported.

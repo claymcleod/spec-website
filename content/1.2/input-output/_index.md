@@ -1,7 +1,8 @@
 +++
 title = "Input and Output Formats"
-weight = 70
+description = "How inputs and outputs are specified for WDL workflows"
 sort_by = "weight"
+weight = 70
 +++
 
 WDL uses [JSON](https://www.json.org) as its native serialization format for task and workflow inputs and outputs. The specifics of these formats are described below.

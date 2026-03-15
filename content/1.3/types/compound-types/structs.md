@@ -10,9 +10,8 @@ A declaration with a custom type can be initialized with a struct literal, which
 
 The value of a specific member of a struct value can be accessed by placing a `.` followed by the member name after the identifier.
 
-<details>
-<summary>
 Example: test_struct.wdl
+
 
 ```wdl
 version 1.3
@@ -46,8 +45,12 @@ workflow test_struct {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -72,12 +75,11 @@ Example output:
 }
 ```
 
-</p>
+
 </details>
 
-<details>
-<summary>
 Example: incomplete_struct_fail.wdl
+
 
 ```wdl
 version 1.3
@@ -110,8 +112,12 @@ workflow incomplete_struct {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -131,7 +137,8 @@ Test config:
   "fail": true
 }
 ```
-</p>
+
+
 </details>
 
 <div class="flex items-center gap-1 my-4">
@@ -156,9 +163,8 @@ A struct is defined using the `struct` keyword, followed by a name that is uniqu
 
 A `struct` definition may include a `meta` section with metadata about the struct, and a `parameter_meta` section with metadata about any of the struct's members. These sections have identical sematics to task and workflow [`meta` and `parameter_meta` sections](@/1.3/tasks/metadata.md). Any key in the `parameter_meta` section *must* correspond to a member of the `struct`.
 
-<details>
-<summary>
 Example: person_struct_task.wdl
+
 
 ```wdl
 version 1.3
@@ -215,8 +221,12 @@ task greet_person {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -247,7 +257,8 @@ Example output:
 ```
 
 Test config:
-</p>
+
+
 </details>
 
 An invalid struct:

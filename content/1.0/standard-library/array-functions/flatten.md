@@ -16,9 +16,8 @@ Given an array of arrays, the `flatten` function concatenates all the member arr
 
 **Returns**: An `Array[X]` containing all elements from the nested arrays in order.
 
-<details>
-<summary>
 Example: flatten_example.wdl
+
 
 ```wdl
 Array[Array[Integer]] ai2D = [[1, 2, 3], [1], [21, 22]]
@@ -31,10 +30,13 @@ Array[Array[Pair[Float,String]]] aap2D = [[(0.1, "mouse")], [(3, "cat"), (15, "d
 
 Array[Pair[Float,String]] ap = flatten(aap2D) # [(0.1, "mouse"), (3, "cat"), (15, "dog")]
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
 
 The last example (`aap2D`) is useful because `Map[X, Y]` can be coerced to `Array[Pair[X, Y]]`.
 
-</p>
+
 </details>

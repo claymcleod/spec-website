@@ -18,9 +18,8 @@ If the file contains any internal newline characters, they are left in tact.
 
 **Returns**: A `String`.
 
-<details>
-<summary>
 Example: read_string_task.wdl
+
 
 ```wdl
 version 1.3
@@ -39,8 +38,12 @@ task read_string {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -54,5 +57,6 @@ Example output:
   "read_string.s": "this\nfile\nhas\nfive\nlines"
 }
 ```
-</p>
+
+
 </details>

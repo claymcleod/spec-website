@@ -20,9 +20,8 @@ If the file is empty, an empty array is returned.
 
 **Returns**: An `Array[String]` representation of the lines in the file.
 
-<details>
-<summary>
 Example: grep_task.wdl
+
 
 ```wdl
 version 1.2
@@ -46,8 +45,12 @@ task grep {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -67,6 +70,7 @@ Example output:
   ]
 }
 ```
-</p>
+
+
 </details>
 

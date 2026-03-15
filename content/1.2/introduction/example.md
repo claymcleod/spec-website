@@ -6,9 +6,8 @@ weight = 10
 
 Below is the code for the "Hello World" workflow in WDL. This is just meant to give a flavor of WDL syntax and capabilities - all WDL elements are described in detail in the [Language Specification](@/1.2/types/_index.md).
 
-<details>
-  <summary>
-  Example: hello.wdl
+Example: hello.wdl
+
 
   ```wdl
   version 1.2
@@ -47,9 +46,13 @@ Below is the code for the "Hello World" workflow in WDL. This is just meant to g
     }
   }
   ```
-  </summary>
-  <p>
-  Example input:
+
+
+<details>
+<summary></summary>
+
+
+Example input:
 
   ```json
   {
@@ -65,10 +68,13 @@ Below is the code for the "Hello World" workflow in WDL. This is just meant to g
     "hello.matches": ["hello world", "hello nurse"]
   }
   ```
-  </p>
+
+
 </details>
 
-*Note*: you can click the arrow next to the name of any example to expand it and see supplementary information, such as example inputs and outputs.
+{% admonition(type="note", title="Note") %}
+You can click the arrow next to the name of any example to expand it and see supplementary information, such as example inputs and outputs.
+{% end %}
 
 This WDL document describes a task, called `hello_task`, and a workflow, called `hello`.
 

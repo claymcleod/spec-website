@@ -47,3 +47,10 @@ $meta_kv = $identifier $ws* '=' $ws* $meta_value
 ```
 
 This purely optional section contains key/value pairs for any additional meta data that should be stored with the task. For example, author, contact email, or engine authorization policies.
+
+```wdl
+  meta {
+    author: "Joe Somebody"
+    email: "joe@company.org"
+  }
+```

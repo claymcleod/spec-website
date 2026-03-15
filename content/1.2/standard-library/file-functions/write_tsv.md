@@ -35,9 +35,8 @@ If the entire contents of the file can not be written for any reason, the callin
 
 **Returns**: A `File`.
 
-<details>
-<summary>
 Example: write_tsv_task.wdl
+
 
 ```wdl
 version 1.2
@@ -89,8 +88,12 @@ task write_tsv {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -110,7 +113,8 @@ Example output:
 
 }
 ```
-</p>
+
+
 </details>
 
 The actual command line might look like:

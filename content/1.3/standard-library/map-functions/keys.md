@@ -21,9 +21,8 @@ When the input `Map` or `Object` is empty, an empty array is returned.
 
 **Returns**: `Array[P]` of the input collection's keys. If the input is a `Struct` or `Object`, then the returned array will be of type `Array[String]`.
 
-<details>
-<summary>
 Example: test_keys.wdl
+
 
 ```wdl
 version 1.3
@@ -61,8 +60,12 @@ workflow test_keys {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -78,5 +81,6 @@ Example output:
   "test_keys.is_true3": true
 }
 ```
-</p>
+
+
 </details>

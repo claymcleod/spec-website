@@ -16,9 +16,8 @@ Given something with any type, this writes the JSON equivalent to a file. See th
 
 **Returns**: A `File` containing the JSON representation of the input value.
 
-<details>
-<summary>
 Example: write_json_task.wdl
+
 
 ```wdl
 task example {
@@ -30,8 +29,11 @@ task example {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
 
 If this task were run, the command might look like:
 
@@ -48,5 +50,5 @@ And `/local/fs/tmp/map.json` would contain:
 }
 ```
 
-</p>
+
 </details>

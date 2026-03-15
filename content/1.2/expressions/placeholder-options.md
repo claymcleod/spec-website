@@ -31,9 +31,8 @@ Requirements:
 
 The `sep` option can be replaced with a call to the `sep` function:
 
-<details>
-<summary>
 Example: sep_option_to_function.wdl
+
 
 ```wdl
 version 1.2
@@ -50,8 +49,12 @@ workflow sep_option_to_function {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -77,7 +80,8 @@ Test config:
   "tags": ["deprecated"]
 }
 ```
-</p>
+
+
 </details>
 
 ## `true` and `false`
@@ -96,9 +100,8 @@ Requirements:
 
 The `true` and `false` options can be replaced with the use of an if-then-else expression:
 
-<details>
-<summary>
 Example: true_false_ternary_task.wdl
+
 
 ```wdl
 version 1.2
@@ -120,8 +123,12 @@ task true_false_ternary {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -146,7 +153,8 @@ Test config:
   "tags": ["deprecated"]
 }
 ```
-</p>
+
+
 </details>
 
 ## `default`
@@ -160,9 +168,8 @@ Requirements:
 
 The `default` option can be replaced in several ways - most commonly with an `if-then-else` expression or with a call to the [`select_first`](@/1.2/standard-library/array-functions/select_first.md) function.
 
-<details>
-<summary>
 Example: default_option_task.wdl
+
 
 ```wdl
 version 1.2
@@ -184,8 +191,12 @@ task default_option {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -200,5 +211,6 @@ Example output:
   "default_option.is_true2": true
 }
 ```
-</p>
+
+
 </details>

@@ -16,9 +16,8 @@ Flattens a nested `Array[Array[X]]` by concatenating all of the element arrays, 
 
 **Returns**: An `Array[X]` containing the concatenated elements of the input array.
 
-<details>
-<summary>
 Example: test_flatten.wdl
+
 
 ```wdl
 version 1.2
@@ -46,8 +45,12 @@ workflow test_flatten {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -65,6 +68,7 @@ Example output:
   "test_flatten.is_true5": true
 }
 ```
-</p>
+
+
 </details>
 

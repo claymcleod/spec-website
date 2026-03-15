@@ -20,8 +20,8 @@ If the entire contents of the file can not be read for any reason, the calling t
 
 **Returns**: An `Array[Array[String]]` representing the table from the TSV file.
 
-<details>
-<summary>
+For example, if I write a task that outputs a file to `./results/file_list.tsv`, and my task is defined as:
+
 Example: read_tsv_task.wdl
 
 ```wdl
@@ -37,5 +37,6 @@ task do_stuff {
   }
 }
 ```
-</summary>
-</details>
+
+
+Then when the task finishes, to fulfull the `outputs_table` variable, `./results/file_list.tsv` must be a valid TSV file or an error will be reported.

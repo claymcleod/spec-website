@@ -1,11 +1,14 @@
 // Version handling
 const defaultVersion = window.DEFAULT_VERSION || '1.2';
 const basePath = (() => {
-    try { return new URL(window.BASE_URL).pathname.replace(/\/$/, ''); }
+    try { return new URL(window.BASE_URL || '/', window.location.origin).pathname.replace(/\/$/, ''); }
     catch { return ''; }
 })();
-const versionPattern = new RegExp('^' + basePath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '/([\\d.]+)/');
+const escapedBasePath = basePath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const versionPattern = new RegExp('^' + escapedBasePath + '/([\\d.]+)/');
+const versionPatternFull = new RegExp('(^https?://[^/]*)?' + escapedBasePath + '/([\\d.]+)/');
 const contentFrameId = 'content-frame';
+const versionDiffCache = new Map();
 
 
 function compareVersions(a, b) {
@@ -27,8 +30,10 @@ function getVersionFromUrl() {
 function rewriteVersionedLinks(targetVersion) {
     document.querySelectorAll('a[href]').forEach(link => {
         const href = link.getAttribute('href');
-        if (versionPattern.test(href)) {
-            link.setAttribute('href', href.replace(versionPattern, basePath + '/' + targetVersion + '/'));
+        if (versionPatternFull.test(href)) {
+            link.setAttribute('href', href.replace(versionPatternFull, (match, origin) => {
+                return (origin || '') + basePath + '/' + targetVersion + '/';
+            }));
         }
     });
 }
@@ -260,6 +265,20 @@ function initSmoothScroll() {
     });
 }
 
+// Example label headers for code blocks
+function initExampleLabels() {
+    const patterns = ['Example:', 'Example input:', 'Example output:', 'Test config:'];
+    document.querySelectorAll('.prose p').forEach(p => {
+        if (p.classList.contains('example-label')) return;
+        const text = p.textContent.trim();
+        if (!patterns.some(pat => text.startsWith(pat))) return;
+        const next = p.nextElementSibling;
+        if (!next || next.tagName !== 'PRE') return;
+        p.classList.add('example-label');
+        next.classList.add('example-code');
+    });
+}
+
 // Copy code button functionality
 function initCopyButtons() {
     document.querySelectorAll('pre code').forEach((block) => {
@@ -277,6 +296,287 @@ function initCopyButtons() {
             }, 2000);
         });
     });
+}
+
+function escapeHtml(value) {
+    return value
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
+function normalizeArticleHtmlForDiff(html) {
+    const parsed = new DOMParser().parseFromString(`<div id="diff-root">${html}</div>`, 'text/html');
+    const root = parsed.getElementById('diff-root');
+    if (!root) return html;
+
+    root.querySelectorAll('.copy-code-button').forEach((button) => button.remove());
+    root.querySelectorAll('pre[style]').forEach((pre) => {
+        const style = pre.getAttribute('style') || '';
+        const cleaned = style.replace(/position\s*:\s*relative;?/gi, '').trim();
+        if (cleaned) {
+            pre.setAttribute('style', cleaned);
+        } else {
+            pre.removeAttribute('style');
+        }
+    });
+
+    return root.innerHTML;
+}
+
+function getCurrentDiffContext() {
+    const pageProse = document.querySelector('article > .prose');
+    if (pageProse) return { container: pageProse, sectionMode: false };
+    const sectionProse = document.querySelector('article.prose');
+    if (sectionProse) return { container: sectionProse, sectionMode: true };
+    return null;
+}
+
+function extractComparableArticleHtml(root) {
+    const pageProse = root.querySelector('article > .prose');
+    if (pageProse) return normalizeArticleHtmlForDiff(pageProse.innerHTML);
+
+    const sectionProse = root.querySelector('article.prose');
+    if (sectionProse) {
+        const clone = sectionProse.cloneNode(true);
+        clone.querySelector('header.not-prose')?.remove();
+        return normalizeArticleHtmlForDiff(clone.innerHTML);
+    }
+
+    return null;
+}
+
+function getCurrentArticleHtml() {
+    const context = getCurrentDiffContext();
+    if (!context) return '';
+
+    const { container, sectionMode } = context;
+    if (!sectionMode) {
+        return normalizeArticleHtmlForDiff(container.dataset.originalHtml || container.innerHTML);
+    }
+
+    if (container.dataset.originalDiffHtml) {
+        return normalizeArticleHtmlForDiff(container.dataset.originalDiffHtml);
+    }
+    const clone = container.cloneNode(true);
+    clone.querySelector('header.not-prose')?.remove();
+    return normalizeArticleHtmlForDiff(clone.innerHTML);
+}
+
+function restoreInlineArticleContent() {
+    const context = getCurrentDiffContext();
+    if (!context || !context.container.dataset.originalHtml) return;
+    context.container.innerHTML = context.container.dataset.originalHtml;
+    delete context.container.dataset.originalHtml;
+    delete context.container.dataset.originalDiffHtml;
+}
+
+function buildComparePath(targetVersion) {
+    const currentPath = window.location.pathname;
+    if (!versionPattern.test(currentPath)) return null;
+    return currentPath.replace(versionPattern, `${basePath}/${targetVersion}/`.replace(/\/{2,}/g, '/'));
+}
+
+async function getCompareVersionDiffLines(targetVersion) {
+    const comparePath = buildComparePath(targetVersion);
+    if (!comparePath) throw new Error('Current page does not include a version in the URL.');
+    const absoluteCompareUrl = new URL(comparePath, window.location.origin).toString();
+
+    const cacheKey = `${targetVersion}:${comparePath}`;
+    if (versionDiffCache.has(cacheKey)) return versionDiffCache.get(cacheKey);
+
+    const response = await fetch(absoluteCompareUrl, { headers: { 'Accept': 'text/html' } });
+    if (!response.ok) throw new Error(`Could not load prior version page at ${absoluteCompareUrl}`);
+
+    const html = await response.text();
+    const parsed = new DOMParser().parseFromString(html, 'text/html');
+    const compareHtml = extractComparableArticleHtml(parsed);
+    if (!compareHtml) throw new Error(`No comparable article content found at ${absoluteCompareUrl}`);
+
+    versionDiffCache.set(cacheKey, compareHtml);
+    return compareHtml;
+}
+
+function renderInlineArticleDiff(diffHtml) {
+    const context = getCurrentDiffContext();
+    if (!context) return;
+    const { container, sectionMode } = context;
+
+    if (!container.dataset.originalHtml) {
+        container.dataset.originalHtml = container.innerHTML;
+        if (sectionMode) {
+            const clone = container.cloneNode(true);
+            clone.querySelector('header.not-prose')?.remove();
+            container.dataset.originalDiffHtml = clone.innerHTML;
+        }
+    }
+
+    if (sectionMode) {
+        const header = container.querySelector('header.not-prose');
+        const headerHtml = header ? header.outerHTML : '';
+        container.innerHTML = `${headerHtml}${diffHtml}`;
+        return;
+    }
+
+    container.innerHTML = diffHtml;
+}
+
+function countDiffMarkers(diffHtml) {
+    const parsed = new DOMParser().parseFromString(diffHtml, 'text/html');
+    return {
+        added: parsed.querySelectorAll('ins, .diffins').length,
+        removed: parsed.querySelectorAll('del, .diffdel').length
+    };
+}
+
+function initVersionDiff() {
+    const controls = document.getElementById('version-diff-controls');
+    const popoverTrigger = document.getElementById('version-diff-popover-trigger');
+    const popoverPanel = document.getElementById('version-diff-popover-panel');
+    const toggle = document.getElementById('version-diff-toggle');
+    const compareSelect = document.getElementById('version-diff-compare-version');
+    const results = document.getElementById('version-diff-results');
+    if (!controls || !popoverTrigger || !popoverPanel || !toggle || !compareSelect || !results) return;
+    restoreInlineArticleContent();
+
+    const currentVersion = getActiveVersion();
+    const availableVersions = Array.from(new Set(
+        Array.from(document.querySelectorAll('.version-dropdown-item'))
+            .map((item) => item.getAttribute('data-version'))
+            .filter(Boolean)
+    )).sort((a, b) => compareVersions(b, a));
+    const compareOptions = availableVersions.filter((version) => version !== currentVersion);
+    const hasComparableVersion = compareOptions.length > 0 && Boolean(getVersionFromUrl());
+    const diffStateKeys = {
+        open: 'wdl-diff-open',
+        applied: 'wdl-diff-applied',
+        compareVersion: 'wdl-diff-compare-version'
+    };
+    const getDiffState = (key) => sessionStorage.getItem(key) || '';
+    const setDiffState = (key, value) => sessionStorage.setItem(key, value);
+
+    popoverPanel.classList.add('hidden');
+    popoverTrigger.setAttribute('aria-expanded', 'false');
+    if (hasComparableVersion) {
+        compareSelect.innerHTML = compareOptions
+            .map((version) => `<option value="${escapeHtml(version)}">Version ${escapeHtml(version)}</option>`)
+            .join('');
+        const storedCompareVersion = getDiffState(diffStateKeys.compareVersion);
+        compareSelect.value = compareOptions.includes(storedCompareVersion) ? storedCompareVersion : compareOptions[0];
+        setDiffState(diffStateKeys.compareVersion, compareSelect.value);
+    } else {
+        compareSelect.innerHTML = '<option value="">No compare version available</option>';
+        setDiffState(diffStateKeys.applied, 'false');
+    }
+    compareSelect.disabled = !hasComparableVersion;
+    results.classList.add('hidden');
+    toggle.disabled = !hasComparableVersion;
+    toggle.textContent = hasComparableVersion ? 'Show changes' : 'Unavailable';
+    toggle.setAttribute('aria-pressed', 'false');
+    toggle.classList.toggle('opacity-60', !hasComparableVersion);
+    toggle.classList.toggle('cursor-not-allowed', !hasComparableVersion);
+
+    const closePopover = () => {
+        popoverPanel.classList.add('hidden');
+        popoverTrigger.setAttribute('aria-expanded', 'false');
+        results.classList.add('hidden');
+        toggle.textContent = hasComparableVersion ? 'Show changes' : 'Unavailable';
+        toggle.setAttribute('aria-pressed', 'false');
+        setDiffState(diffStateKeys.open, 'false');
+        setDiffState(diffStateKeys.applied, 'false');
+        restoreInlineArticleContent();
+    };
+
+    popoverTrigger.onclick = () => {
+        const isClosed = popoverPanel.classList.contains('hidden');
+        if (isClosed) {
+            popoverPanel.classList.remove('hidden');
+            popoverTrigger.setAttribute('aria-expanded', 'true');
+            setDiffState(diffStateKeys.open, 'true');
+            if (!hasComparableVersion) {
+                results.classList.remove('hidden');
+                results.innerHTML = '<div class="text-xs text-gray-700 dark:text-gray-100">Diff is available on versioned spec pages.</div>';
+            }
+            return;
+        }
+        closePopover();
+    };
+
+    const loadAndRenderDiff = async () => {
+        const selectedVersion = compareSelect.value;
+        setDiffState(diffStateKeys.compareVersion, selectedVersion);
+        results.classList.remove('hidden');
+        results.innerHTML = '<div class="text-sm text-gray-700 dark:text-gray-100">Loading diff...</div>';
+        const currentHtml = getCurrentArticleHtml();
+        try {
+            if (!window.HtmlDiff || typeof window.HtmlDiff.execute !== 'function') {
+                throw new Error('Diff library failed to load.');
+            }
+            const compareHtml = await getCompareVersionDiffLines(selectedVersion);
+            const diffHtml = window.HtmlDiff.execute(compareHtml, currentHtml);
+            renderInlineArticleDiff(diffHtml);
+            const markerCounts = countDiffMarkers(diffHtml);
+            results.innerHTML = `<div class="text-xs text-gray-700 dark:text-gray-100">Inline diff vs v${escapeHtml(selectedVersion)}: <span class="text-green-700 dark:text-green-300">+${markerCounts.added}</span> <span class="text-red-700 dark:text-red-300">-${markerCounts.removed}</span></div>`;
+            setDiffState(diffStateKeys.applied, 'true');
+            setDiffState(diffStateKeys.open, 'true');
+        } catch (error) {
+            const errorMessage = error?.message || 'Could not build diff.';
+            const priorPageUnavailable = errorMessage.includes('Could not load prior version page at') || errorMessage.includes('No comparable article content found at');
+            if (priorPageUnavailable && window.HtmlDiff && typeof window.HtmlDiff.execute === 'function') {
+                const allAddedHtml = window.HtmlDiff.execute('', currentHtml);
+                renderInlineArticleDiff(allAddedHtml);
+                const markerCounts = countDiffMarkers(allAddedHtml);
+                results.innerHTML = `<div class="text-xs text-gray-700 dark:text-gray-100">Inline diff vs v${escapeHtml(selectedVersion)}: <span class="text-green-700 dark:text-green-300">+${markerCounts.added}</span> <span class="text-red-700 dark:text-red-300">-0</span></div>`;
+                setDiffState(diffStateKeys.applied, 'true');
+                setDiffState(diffStateKeys.open, 'true');
+                return;
+            }
+            results.innerHTML = `<div class="text-sm text-red-700 dark:text-red-300">${escapeHtml(errorMessage)}</div>`;
+            setDiffState(diffStateKeys.applied, 'false');
+        }
+    };
+
+    toggle.onclick = async () => {
+        if (!hasComparableVersion) return;
+        const isVisible = !results.classList.contains('hidden');
+        if (isVisible) {
+            results.classList.add('hidden');
+            toggle.textContent = 'Show changes';
+            toggle.setAttribute('aria-pressed', 'false');
+            setDiffState(diffStateKeys.applied, 'false');
+            setDiffState(diffStateKeys.open, 'true');
+            restoreInlineArticleContent();
+            return;
+        }
+        toggle.textContent = 'Hide changes';
+        toggle.setAttribute('aria-pressed', 'true');
+        await loadAndRenderDiff();
+    };
+
+    compareSelect.onchange = async () => {
+        if (!hasComparableVersion) return;
+        setDiffState(diffStateKeys.compareVersion, compareSelect.value);
+        if (results.classList.contains('hidden')) return;
+        await loadAndRenderDiff();
+    };
+
+    const shouldOpen = getDiffState(diffStateKeys.open) === 'true';
+    const shouldApply = getDiffState(diffStateKeys.applied) === 'true';
+    if (shouldOpen) {
+        popoverPanel.classList.remove('hidden');
+        popoverTrigger.setAttribute('aria-expanded', 'true');
+        if (!hasComparableVersion) {
+            results.classList.remove('hidden');
+            results.innerHTML = '<div class="text-xs text-gray-700 dark:text-gray-100">Diff is available on versioned spec pages.</div>';
+        }
+    }
+    if (shouldApply && hasComparableVersion) {
+        toggle.textContent = 'Hide changes';
+        toggle.setAttribute('aria-pressed', 'true');
+        loadAndRenderDiff();
+    }
 }
 
 // Search functionality
@@ -308,8 +608,7 @@ async function loadSearchIndex() {
     // Dynamically load the search index script
     return new Promise((resolve, reject) => {
         const script = document.createElement('script');
-        const baseUrl = window.BASE_URL || '';
-        script.src = baseUrl + '/search_index.en.js';
+        script.src = `${basePath}/search_index.en.js`.replace(/\/{2,}/g, '/');
         script.onload = () => {
             if (window.searchIndex) {
                 searchIndex = elasticlunr.Index.load(window.searchIndex);
@@ -487,6 +786,8 @@ function initializePage() {
     initSidebarNavigation();
     initSmoothScroll();
     initCopyButtons();
+    initExampleLabels();
+    initVersionDiff();
     initSearch();
 }
 
@@ -495,9 +796,16 @@ document.addEventListener('turbo:load', initializePage);
 document.addEventListener('turbo:frame-load', (event) => {
     if (event.target.id !== contentFrameId) return;
     const currentVersion = getVersionFromUrl() || localStorage.getItem('wdl-version') || defaultVersion;
+    rewriteVersionedLinks(currentVersion);
     updateVersionVisibility(currentVersion);
+    updateDropdownDisplay(currentVersion);
     initSidebarNavigation();
     initSmoothScroll();
     initCopyButtons();
+    initExampleLabels();
+    initVersionDiff();
 });
-document.addEventListener('turbo:before-cache', hideResults);
+document.addEventListener('turbo:before-cache', () => {
+    hideResults();
+    restoreInlineArticleContent();
+});

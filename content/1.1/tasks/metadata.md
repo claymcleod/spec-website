@@ -41,9 +41,8 @@ This section contains task-level metadata. For example: author and contact email
 
 This section contains metadata specific to input and output parameters. Any key in this section *must* correspond to a task input or output.
 
-<details>
-<summary>
 Example: ex_paramter_meta_task.wdl
+
 
 ```wdl
 version 1.1
@@ -85,8 +84,12 @@ task ex_paramter_meta {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -103,5 +106,6 @@ Example output:
   "ex_paramter_meta.result": 3
 }
 ```
-</p>
+
+
 </details>

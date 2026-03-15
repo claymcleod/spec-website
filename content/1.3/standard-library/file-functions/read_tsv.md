@@ -30,9 +30,8 @@ If the entire contents of the file can not be read for any reason, the calling t
 
 **Returns**: An `Array` of rows in the TSV file, where each row is an `Array[String]` of fields or an `Object` with keys determined by the second and third parameters and `String` values.
 
-<details>
-<summary>
 Example: read_tsv_task.wdl
+
 
 ```wdl
 version 1.3
@@ -61,8 +60,12 @@ task read_tsv {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -122,5 +125,6 @@ Example output:
   ]
 }
 ```
-</p>
+
+
 </details>

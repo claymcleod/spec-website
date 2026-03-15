@@ -1,5 +1,6 @@
 +++
 title = "Compound Types"
+description = "Array, Pair, Map, and Struct types"
 sort_by = "weight"
 weight = 40
 +++

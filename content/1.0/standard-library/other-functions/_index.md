@@ -1,7 +1,7 @@
 +++
 title = "Other Functions"
 sort_by = "weight"
-description = "Additional utility functions"
+description = "Utility functions for common operations"
 weight = 60
 transparent = true
 +++

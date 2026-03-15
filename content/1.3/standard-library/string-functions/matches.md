@@ -27,9 +27,8 @@ Boolean has_tab = matches("hello\tBob", "\\t")
 
 **Returns**: `true` if `pattern` matches `input` at least once, otherwise `false`.
 
-<details>
-<summary>
 Example: test_matches_task.wdl
+
 
 ```wdl
 version 1.3
@@ -44,8 +43,12 @@ workflow contains_string {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -62,5 +65,6 @@ Example output:
   "contains_string.is_read1": false
 }
 ```
-</p>
+
+
 </details>

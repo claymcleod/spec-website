@@ -16,9 +16,8 @@ Given something that's compatible with `Array[Array[String]]`, this writes a TSV
 
 **Returns**: A `File` containing the data in TSV format.
 
-<details>
-<summary>
 Example: write_tsv_task.wdl
+
 
 ```wdl
 task example {
@@ -28,8 +27,11 @@ task example {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
 
 If this task were run, the command might look like:
 
@@ -44,5 +46,5 @@ one	two	three
 un	deux	trois
 ```
 
-</p>
+
 </details>

@@ -3,9 +3,6 @@ title = "sep"
 description = "Join array elements with separator"
 weight = 50
 +++
-
-<span class="wdl-badge wdl-badge-new">New in 1.1</span>
-
 ```
 String sep(String, Array[P])
 ```
@@ -14,14 +11,13 @@ Concatenates the elements of an array together into a string with the given sepa
 
 **Parameters**
 
-1. `String`: Separator string.
+1. `String`: Separator string. 
 2. `Array[P]`: Array of strings to concatenate.
 
 **Returns**: A `String` with the concatenated elements of the array delimited by the separator string.
 
-<details>
-<summary>
 Example: test_sep.wdl
+
 
 ```wdl
 version 1.1
@@ -40,8 +36,12 @@ workflow test_sep {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -55,5 +55,6 @@ Example output:
   "test_sep.all_true": [true, true, true, true]
 }
 ```
-</p>
+
+
 </details>

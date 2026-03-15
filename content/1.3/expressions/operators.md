@@ -9,9 +9,8 @@ A "literal" expression is one that consists only of a literal value. For example
 
 A "simple" expression is one that can be evaluated unambiguously without any knowledge of the runtime context. Literal expressions, operations on literals (e.g., `1 + 2`), and function calls with literal arguments (excluding any functions that read or create `File`s) are all simple expressions. A simple expression cannot refer to any declarations (i.e., it cannot contain identifiers). An execution engine may choose to replace a simple expression with its literal value during static analysis.
 
-<details>
-<summary>
 Example: expressions_task.wdl
+
 
 ```wdl
 version 1.3
@@ -38,8 +37,12 @@ task expressions {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -63,7 +66,8 @@ Example output:
   "expressions.s": "hello"
 }
 ```
-</p>
+
+
 </details>
 
 ## Built-in Operators
@@ -173,9 +177,8 @@ WDL `String`s are compared by the unicode values of their corresponding characte
 
 When comparing a `File` or `Directory` to a `String`, the `String` is first coerced to `File` or `Directory` (and thus canonicalized) before the comparison is performed.
 
-<details>
-<summary>
 Example: file_directory_equality.wdl
+
 
 ```wdl
 version 1.3
@@ -237,8 +240,12 @@ workflow file_directory_equality {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -260,7 +267,8 @@ Example output:
   "file_directory_equality.task_dirs_equal": true
 }
 ```
-</p>
+
+
 </details>
 
 In this example, `file_a` and `file_b` use different string representations (`tests/data/hello.txt` vs `tests/data/../data/hello.txt`) but both canonicalize to the same path and compare as equal at workflow scope. When passed to the task, the execution engine localizes the file once, and both `file_a` and `file_b` in the task reference the same localized path. Similarly, `dir_a` includes a trailing slash while `dir_b` does not, but they canonicalize to the same directory and are localized once.
@@ -290,9 +298,8 @@ In general, two compound values are equal if-and-only-if all of the following ar
 
 Since `Array`s and `Map`s are ordered, the order of their elements are also compared. For example:
 
-<details>
-<summary>
 Example: array_map_equality.wdl
+
 
 ```wdl
 version 1.3
@@ -309,8 +316,12 @@ workflow array_map_equality {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -327,14 +338,14 @@ Example output:
   "array_map_equality.is_false2": false
 }
 ```
-</p>
+
+
 </details>
 
 Type coercion can be employed to compare values of different but compatible types.
 
-<details>
-<summary>
 Example: compare_coerced.wdl
+
 
 ```wdl
 version 1.3
@@ -350,8 +361,12 @@ workflow compare_coerced {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -365,16 +380,16 @@ Example output:
   "compare_coerced.is_true": true
 }
 ```
-</p>
+
+
 </details>
 
 ### Equality and Inequality Comparison of Optional Types
 
 The equality and inequality operators are exceptions to the general rules on coercion of optional types. Either or both operands of an equality or inequality comparison can be optional, considering that `None` is equal to itself but no other value.
 
-<details>
-<summary>
 Example: compare_optionals.wdl
+
 
 ```wdl
 version 1.3
@@ -395,8 +410,12 @@ workflow compare_optionals {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -413,5 +432,6 @@ Example output:
   "compare_optionals.is_false2": false
 }
 ```
-</p>
+
+
 </details>

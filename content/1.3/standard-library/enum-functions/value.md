@@ -16,9 +16,8 @@ Returns the underlying value associated with an enum choice.
 
 **Returns**: The choice's associated value.
 
-<details>
-<summary>
 Example: test_enum_value.wdl
+
 
 ```wdl
 version 1.3
@@ -50,8 +49,12 @@ workflow test_enum_value {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -72,5 +75,6 @@ Example output:
   "test_enum_value.choices_equal": true
 }
 ```
-</p>
+
+
 </details>

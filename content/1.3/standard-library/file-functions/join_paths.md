@@ -31,9 +31,8 @@ A relative path does not start with `/` and indicates the path is relative to it
 
 **Returns**: A `String` representing an absolute path that results from joining all the paths in order (left-to-right), and resolving the resulting path against the default parent directory if it is relative.
 
-<details>
-<summary>
 Example: join_paths_task.wdl
+
 
 ```wdl
 version 1.3
@@ -65,8 +64,12 @@ task join_paths {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -81,5 +84,6 @@ Example output:
   "join_paths.result": "hello"
 }
 ```
-</p>
+
+
 </details>

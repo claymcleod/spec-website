@@ -19,9 +19,8 @@ If the size cannot be represented in the specified unit because the resulting va
 
 **Returns**: The size of the file(s) as a `Float`.
 
-<details>
-<summary>
 Example: file_sizes_task.wdl
+
 
 ```wdl
 version 1.1
@@ -45,8 +44,12 @@ task file_sizes {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -63,5 +66,6 @@ Example output:
   "file_sizes.multi_file_kb": 0.022
 }
 ```
-</p>
+
+
 </details>

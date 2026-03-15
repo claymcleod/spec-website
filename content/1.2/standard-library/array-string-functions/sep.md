@@ -17,9 +17,8 @@ Concatenates the elements of an array together into a string with the given sepa
 
 **Returns**: A `String` with the concatenated elements of the array delimited by the separator string.
 
-<details>
-<summary>
 Example: test_sep.wdl
+
 
 ```wdl
 version 1.2
@@ -38,8 +37,12 @@ workflow test_sep {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -53,6 +56,7 @@ Example output:
   "test_sep.all_true": [true, true, true, true]
 }
 ```
-</p>
+
+
 </details>
 

@@ -16,9 +16,8 @@ Converts an `Array` of `Pair`s into a `Map` in which the left elements of the `P
 
 **Returns**: `Map[P, Y]` of the elements in the input array.
 
-<details>
-<summary>
 Example: test_as_map.wdl
+
 
 ```wdl
 version 1.3
@@ -37,8 +36,12 @@ workflow test_as_map {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -53,12 +56,12 @@ Example output:
   "test_as_map.is_true2": true
 }
 ```
-</p>
+
+
 </details>
 
-<details>
-<summary>
 Example: test_as_map_fail.wdl
+
 
 ```wdl
 version 1.3
@@ -68,8 +71,12 @@ workflow test_as_map_fail {
   Boolean bad = as_map([("a", 1), ("a", 2)])
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -89,5 +96,6 @@ Test config:
   "fail": true
 }
 ```
-</p>
+
+
 </details>

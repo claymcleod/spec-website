@@ -16,9 +16,8 @@ Given something that's compatible with `Map[String, String]`, this writes a TSV 
 
 **Returns**: A `File` containing the map data in two-column TSV format.
 
-<details>
-<summary>
 Example: write_map_task.wdl
+
 
 ```wdl
 task example {
@@ -28,8 +27,11 @@ task example {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
 
 If this task were run, the command might look like:
 
@@ -44,5 +46,5 @@ key1	value1
 key2	value2
 ```
 
-</p>
+
 </details>

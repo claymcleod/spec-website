@@ -18,9 +18,8 @@ If the entire contents of the file can not be read for any reason, the calling t
 
 **Returns**: An `Object` with attributes and values from the file.
 
-<details>
-<summary>
 Example: read_object_task.wdl
+
 
 ```wdl
 task test {
@@ -35,8 +34,11 @@ task test {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
 
 The command will output to stdout the following:
 
@@ -53,5 +55,5 @@ Which would be turned into an `Object` in WDL that would look like this:
 |key_2|"value_2"|
 |key_3|"value_3"|
 
-</p>
+
 </details>

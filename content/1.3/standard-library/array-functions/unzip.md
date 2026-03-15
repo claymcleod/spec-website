@@ -16,9 +16,8 @@ Creates a `Pair` of `Arrays`, the first containing the elements from the `left` 
 
 **Returns**: A `Pair[Array[X], Array[Y]]` where each `Array` is of length `N`.
 
-<details>
-<summary>
 Example: test_unzip.wdl
+
 
 ```wdl
 version 1.3
@@ -38,8 +37,12 @@ workflow test_unzip {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -55,5 +58,6 @@ Example output:
   "test_unzip.is_true3": true
 }
 ```
-</p>
+
+
 </details>

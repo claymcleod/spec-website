@@ -25,9 +25,8 @@ As with patterns, backslashes in the replace string must be double-escaped. For 
 
 **Returns**: the input string, with all occurrences of the pattern replaced by the replacement string.
 
-<details>
-<summary>
 Example: test_sub.wdl
+
 
 ```wdl
 version 1.2
@@ -47,8 +46,12 @@ workflow test_sub {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -68,14 +71,14 @@ Example output:
   "test_sub.new_question": "chocolate, when?"
 }
 ```
-</p>
+
+
 </details>
 
 Any arguments are allowed so long as they can be coerced to `String`s. For example, this can be useful to swap the extension of a filename:
 
-<details>
-<summary>
 Example: change_extension_task.wdl
+
 
 ```wdl
 version 1.2
@@ -101,8 +104,12 @@ task change_extension {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -127,6 +134,7 @@ Test config:
   "exclude_outputs": ["change_extension.data_file"]
 }
 ```
-</p>
+
+
 </details>
 

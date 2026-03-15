@@ -11,6 +11,8 @@ String sub(String, String, String)
 Given three String parameters `input`, `pattern`, `replace`, this function replaces all non-overlapping occurrences of `pattern` in `input` by `replace`. `pattern` is a [regular expression](https://en.wikipedia.org/wiki/Regular_expression) and is evaluated as a [POSIX Extended Regular Expression (ERE)](https://en.wikipedia.org/wiki/Regular_expression#POSIX_basic_and_extended).
 Regular expressions are written using regular WDL strings, so backslash characters need to be double-escaped (e.g., `"\\t"`).
 
+<span class="wdl-badge wdl-badge-deprecated">Deprecated</span> The option for execution engines to allow other regular expression grammars besides POSIX ERE is deprecated.
+
 The replacement string `replace` supports the special sequence `\n` (where `n` is a digit 1-9) is replaced by the text matched by the `n`th capturing group from the pattern, or an empty string if the capturing group did not participate in the match. Only `\1` through `\9` are supported as capturing group references, matching the limit of POSIX ERE. Named capture groups are not currently supported.
 
 As with patterns, backslashes in the replace string must be double-escaped. For example, to reference the first capturing group in a WDL workflow, write `"\\1"` (which becomes `\1` when evaluated).
@@ -23,9 +25,8 @@ As with patterns, backslashes in the replace string must be double-escaped. For 
 
 **Returns**: the input string, with all occurrences of the pattern replaced by the replacement string.
 
-<details>
-<summary>
 Example: test_sub.wdl
+
 
 ```wdl
 version 1.3
@@ -45,8 +46,12 @@ workflow test_sub {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -66,14 +71,14 @@ Example output:
   "test_sub.new_question": "chocolate, when?"
 }
 ```
-</p>
+
+
 </details>
 
 Any arguments are allowed so long as they can be coerced to `String`s. For example, this can be useful to swap the extension of a filename:
 
-<details>
-<summary>
 Example: change_extension_task.wdl
+
 
 ```wdl
 version 1.3
@@ -99,8 +104,12 @@ task change_extension {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -125,5 +134,6 @@ Test config:
   "exclude_outputs": ["change_extension.data_file"]
 }
 ```
-</p>
+
+
 </details>

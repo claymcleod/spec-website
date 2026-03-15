@@ -16,9 +16,8 @@ Reads a file that contains a single line containing only a boolean value and (op
 
 **Returns**: A `Boolean`.
 
-<details>
-<summary>
 Example: read_bool_task.wdl
+
 
 ```wdl
 version 1.3
@@ -35,8 +34,12 @@ task read_bool {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -51,5 +54,6 @@ Example output:
   "read_bool.b2": false
 }
 ```
-</p>
+
+
 </details>

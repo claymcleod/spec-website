@@ -39,9 +39,8 @@ The following members of the `task` variable are only available in the `output` 
 
 * `return_code`: An `Int` with the value of the `command`'s return code.
 
-<details>
-<summary>
 Example: test_runtime_info_task.wdl
+
 
 ```wdl
 version 1.3
@@ -72,8 +71,12 @@ task test_runtime_info {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -96,14 +99,14 @@ Test config:
   "capabilities": ["cpu", "memory"]
 }
 ```
-</p>
+
+
 </details>
 
 Only a limited subset of the `task` variable members (`name`, `id`, `attempt`, `previous`, `meta`, `parameter_meta`, and `ext`) are available in pre-evaluation contexts (`requirements`, `hints`, and the deprecated `runtime` sections). The full set of members, including all computed requirements, are available in post-evaluation contexts (`command` and `output` sections).
 
-<details>
-<summary>
 Example: test_task_previous.wdl
+
 
 ```wdl
 version 1.3
@@ -140,8 +143,12 @@ task test_task_previous {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -159,7 +166,8 @@ Example output:
   "test_task_previous.previous_memory": 256000000
 }
 ```
-</p>
+
+
 </details>
 
 If a task is using the deprecated [`runtime`](@/1.3/tasks/runtime.md) section rather than `requirements` and `hints`, then the runtime values of the reserved `runtime` attributes (i.e., the ones that appear in the `requirements` section) are populated in the `requirements` member.

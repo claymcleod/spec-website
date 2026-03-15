@@ -12,9 +12,8 @@ WDL has a special value `None` whose meaning is "an undefined value". The `None`
 
 An optional declaration has a default initialization of `None`, which indicates that it is undefined. An optional declaration may be initialized to any literal or expression of the correct type, including the special `None` value.
 
-<details>
-  <summary>
-  Example: optionals.wdl
+Example: optionals.wdl
+
 
   ```wdl
   version 1.3
@@ -38,9 +37,13 @@ An optional declaration has a default initialization of `None`, which indicates 
     }
   }
   ```
-  </summary>
-  <p>
-  Example input:
+
+
+<details>
+<summary></summary>
+
+
+Example input:
 
   ```json
   {}
@@ -57,7 +60,8 @@ An optional declaration has a default initialization of `None`, which indicates 
     "optionals.test_non_equal": true
   }
   ```
-  </p>
+
+
 </details>
 
 For more details, see the sections on [Input Type Constraints](@/1.3/tasks/inputs.md) and [Optional Inputs with Defaults](@/1.3/tasks/inputs.md).

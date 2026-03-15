@@ -11,9 +11,8 @@ A `call` has an optional body in braces (`{}`), which may contain a comma-delimi
 
 If a call input has the same name as a declaration from the current scope, the name of the input may appear alone (without an expression) to implicitly bind the value of that declaration. For example, if a workflow and task both have inputs `x` and `z` of the same types, then `call mytask {x, y=b, z}` is equivalent to `call mytask {x=x, y=b, z=z}`.
 
-<details>
-<summary>
 Example: call_example.wdl
+
 
 ```wdl
 version 1.3
@@ -76,8 +75,12 @@ workflow call_example {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -98,14 +101,14 @@ Example output:
   "call_example.results2": null
 }
 ```
-</p>
+
+
 </details>
 
 For historical reasons, the keyword `input:` may optionally precede the list of inputs inside the braces. In the following example, all the `call` statements are equivalent.
 
-<details>
-<summary>
 Example: test_input_keyword.wdl
+
 
 ```wdl
 version 1.3
@@ -140,8 +143,12 @@ workflow test_input_keyword {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -160,16 +167,16 @@ Example output:
   "test_input_keyword.lines4": ["default", "default"]
 }
 ```
-</p>
+
+
 </details>
 
 The execution engine may execute a `call` as soon as all its inputs are available. If `call x`'s inputs are based on `call y`'s outputs (i.e., `x` depends on `y`), `x` can be run as soon as - but not before - `y` has completed.
 
 An `after` clause can be used to create an explicit dependency between `x` and `y` (i.e., one that isn't based on the availability of `y`'s outputs). For example, `call x after y after z`. An explicit dependency is only required if `x` must not execute until after `y` and `x` doesn't already depend on output from `y`.
 
-<details>
-<summary>
 Example: test_after.wdl
+
 
 ```wdl
 version 1.3
@@ -199,8 +206,12 @@ workflow test_after {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -216,14 +227,14 @@ Example output:
   "test_after.lines3": ["default", "default", "default"]
 }
 ```
-</p>
+
+
 </details>
 
 A `call`'s outputs are available to be used as inputs to other calls in the workflow or as workflow outputs immediately after the execution of the call has completed. The only task declarations that are accessible outside of the task are its output declarations; call inputs and private declarations cannot be referenced by the calling workflow. To expose a call input, add an output to the task that simply copies the input. Note that the output must use a different name since every declaration in a task or workflow must have a unique name.
 
-<details>
-<summary>
 Example: copy_input.wdl
+
 
 ```wdl
 version 1.3
@@ -255,8 +266,12 @@ workflow copy_input {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -273,7 +288,8 @@ Example output:
   "copy_input.msg": "Hello Billy, nice to meet you!"
 }
 ```
-</p>
+
+
 </details>
 
 #### Computing Call Inputs
@@ -295,9 +311,8 @@ Previously, setting `allow_nested_inputs` to `true` also allowed for required ta
 
 The ability to set `allowNestedInputs` in the workflow's `meta` section is deprecated and will be removed in WDL 2.0.
 
-<details>
-<summary>
 Example: allow_nested.wdl
+
 
 ```wdl
 version 1.3
@@ -357,8 +372,12 @@ workflow allow_nested {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -380,7 +399,8 @@ Example output:
   "allow_nested.incrs": [2, 3, 4]
 }
 ```
-</p>
+
+
 </details>
 
 In the preceding example, the workflow calling `repeat2` does not provide a value for the optional input `i`. Normally this would cause the task to fail, since `i` must have a value `>= 1` and its default value is `0`. However, if the execution engine supports `allow_nested_inputs`, then specifying `allow_nested_inputs: true` in the workflow's `hints` section means that `repeat2.i` may be set by the caller of the workflow, e.g., by including `"allow_nested.repeat2.i": 2,` in the input JSON.
@@ -389,9 +409,8 @@ It is not allowed to *override* a call input at runtime, even if nested inputs a
 
 The `allow_nested_inputs` directive only applies to user-supplied inputs. There is no mechanism for the workflow itself to set a value for a nested input when calling a subworkflow. For example, the following workflow is invalid:
 
-<details>
-<summary>
 Example: call_subworkflow_fail.wdl
+
 
 ```wdl
 version 1.3
@@ -407,8 +426,12 @@ workflow call_subworkflow {
   call copy.copy_input { greet.greeting = "hola" }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -428,5 +451,6 @@ Test config:
   "fail": true
 }
 ```
-</p>
+
+
 </details>

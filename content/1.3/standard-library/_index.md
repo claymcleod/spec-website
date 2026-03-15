@@ -1,7 +1,7 @@
 +++
 title = "Standard Library"
 sort_by = "weight"
-description = "Built-in functions available in WDL"
+description = "Built-in functions available in WDL expressions"
 weight = 60
 +++
 
@@ -14,3 +14,5 @@ A function may be generic, which means that one or more of its parameters and/or
 A function may be polymorphic, which means it is actually multiple functions ("choices") with the same name but different signatures. Such a function may be defined using `|` to denote the set of alternative valid types for one or more of its parameters, or it may have each choice defined separately.
 
 Functions are grouped by their argument types and restrictions. Some functions may be restricted as to where they may be used. An unrestricted function may be used in any expression.
+
+Functions that are new in this version of the specification are denoted by <span class="wdl-badge wdl-badge-new">New in WDL 1.3</span>, and deprecated functions are denoted by <span class="wdl-badge wdl-badge-deprecated">Deprecated</span>.

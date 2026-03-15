@@ -18,9 +18,8 @@ The `input` and `output` types are similar to Structs whose member names are ide
 
 The following hints are reserved. An implementation is not required to support these attributes, but if it does support a reserved attribute it must enforce the semantics and allowed values defined below. The purpose of reserving these hints is to encourage interoperability of tasks and workflows between different execution engines.
 
-<details>
-<summary>
 Example: test_hints_task.wdl
+
 
 ```wdl
 version 1.3
@@ -55,8 +54,12 @@ task test_hints {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -73,7 +76,7 @@ Example output:
 }
 ```
 
-</p>
+
 </details>
 
 ##### `max_cpu`
@@ -137,9 +140,8 @@ For example, a task that processes its input file once in linear fashion could h
 
 Provides input-specific hints. Each key must refer to a parameter defined in the task's [`input`](@/1.3/tasks/inputs.md) section. A key may also used dotted notation to refer to a specific member of a struct input.
 
-<details>
-<summary>
 Example: input_hint_task.wdl
+
 
 ```wdl
 version 1.3
@@ -181,8 +183,12 @@ task input_hint {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -200,7 +206,8 @@ Example output:
   "input_hint.experience": []
 }
 ```
-</p>
+
+
 </details>
 
 Reserved input-specific attributes:

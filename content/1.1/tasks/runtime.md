@@ -14,9 +14,8 @@ There are a set of reserved attributes (described below) that must be supported 
 
 The value of a `runtime` attribute can be any expression that evaluates to the expected type - and in some cases matches the accepted format - for that attribute. Expressions in the `runtime` section may reference (non-output) declarations in the task:
 
-<details>
-<summary>
 Example: runtime_container_task.wdl
+
 
 ```wdl
 version 1.1
@@ -39,8 +38,12 @@ task runtime_container {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -56,7 +59,8 @@ Example output:
   "runtime_container.is_true": true
 }
 ```
-</p>
+
+
 </details>
 
 ## Units of Storage
@@ -94,9 +98,8 @@ Container source locations should use the syntax defined by the individual conta
 
 The `container` key also accepts an array of URI strings. All of the locations must point to images that are equivalent, i.e. they must always produce the same final results when the task is run with the same inputs. It is the responsibility of the execution engine to define the specific image sources it supports, and to determine which image is the "best" one to use at runtime. The ordering of the array does not imply any implicit preference or ordering of the containers. All images are expected to be the same, and therefore any choice would be equally valid. Defining multiple images enables greater portability across a broad range of execution environments.
 
-<details>
-<summary>
 Example: test_containers.wdl
+
 
 ```wdl
 version 1.1
@@ -134,8 +137,12 @@ workflow test_containers {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -150,7 +157,8 @@ Example output:
   "test_containers.multi_greeting": "hello"
 }
 ```
-</p>
+
+
 </details>
 
 The execution engine must cause the task to fail immediately if none of the container URIs can be successfully resolved to a runnable image.
@@ -166,9 +174,8 @@ The execution engine must cause the task to fail immediately if none of the cont
 
 The `cpu` attribute defines the _minimum_ number of CPU cores required for this task, which must be available prior to instantiating the command. The execution engine must provision at least the requested number of CPU cores, but it may provision more. For example, if the request is `cpu: 0.5` but only discrete values are supported, then the execution engine might choose to provision `1.0` CPU instead.
 
-<details>
-<summary>
 Example: test_cpu_task.wdl
+
 
 ```wdl
 version 1.1
@@ -188,8 +195,12 @@ task test_cpu {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -211,7 +222,8 @@ Test config:
   "capabilities": ["cpu"]
 }
 ```
-</p>
+
+
 </details>
 
 ### `memory`
@@ -223,9 +235,8 @@ Test config:
 
 The `memory` attribute defines the _minimum_ memory (RAM) required for this task, which must be available prior to instantiating the command. The execution engine must provision at least the requested amount of memory, but it may provision more. For example, if the request is `1 GB` but only blocks of `4 GB` are available, then the execution engine might choose to provision `4.0 GB` instead.
 
-<details>
-<summary>
 Example: test_memory_task.wdl
+
 
 ```wdl
 version 1.1
@@ -244,8 +255,12 @@ task test_memory {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -267,7 +282,8 @@ Test config:
   "capabilities": ["memory"]
 }
 ```
-</p>
+
+
 </details>
 
 ### `gpu`
@@ -279,9 +295,8 @@ The `gpu` attribute provides a way to accommodate modern workflows that are incr
 
 This attribute *cannot* request any specific quantity or types of GPUs to make available to the task. Any such information should be provided using an execution engine-specific attribute.
 
-<details>
-<summary>
 Example: test_gpu_task.wdl
+
 
 ```wdl
 version 1.1
@@ -301,8 +316,12 @@ task test_gpu {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -325,7 +344,8 @@ Test config:
   "ignore": true
 }
 ```
-</p>
+
+
 </details>
 
 ### `disks`
@@ -346,9 +366,8 @@ This property does not specify exactly what type of persistent volume is being r
 
 If a disk specification string is used to specify a mount point, then the mount point must be an absolute path to a location on the host machine. If the mount point is omitted, it is assumed to be a persistent volume mounted at the root of the execution directory within a task.
 
-<details>
-<summary>
 Example: one_mount_point_task.wdl
+
 
 ```wdl
 version 1.1
@@ -367,8 +386,12 @@ task one_mount_point {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -390,14 +413,14 @@ Test config:
   "capabilities": ["disks"]
 }
 ```
-</p>
+
+
 </details>
 
 If an array of disk specifications is used to specify multiple disk mounts, only one of them is allowed to omit the mount point.
 
-<details>
-<summary>
 Example: multi_mount_points_task.wdl
+
 
 ```wdl
 version 1.1
@@ -417,8 +440,12 @@ task multi_mount_points {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -440,7 +467,8 @@ Test config:
   "capabilities": ["disks"]
 }
 ```
-</p>
+
+
 </details>
 
 ### `maxRetries`
@@ -473,9 +501,8 @@ task maxRetries_test {
 
 The `returnCodes` attribute provides a mechanism to specify the return code, or set of return codes, that indicates a successful execution of a task. The engine must honor the return codes specified within the `runtime` section and set the tasks status appropriately.
 
-<details>
-<summary>
 Example: single_return_code_task.wdl
+
 
 ```wdl
 version 1.1
@@ -490,8 +517,12 @@ task single_return_code {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -511,12 +542,12 @@ Test config:
   "return_code": 0
 }
 ```
-</p>
+
+
 </details>
 
-<details>
-<summary>
 Example: multi_return_code_fail_task.wdl
+
 
 ```wdl
 version 1.1
@@ -531,8 +562,12 @@ task multi_return_code {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -553,12 +588,12 @@ Test config:
   "return_code": 42
 }
 ```
-</p>
+
+
 </details>
 
-<details>
-<summary>
 Example: all_return_codes_task.wdl
+
 
 ```wdl
 version 1.1
@@ -573,8 +608,12 @@ task all_return_codes {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -594,7 +633,8 @@ Test config:
   "return_code": 0
 }
 ```
-</p>
+
+
 </details>
 
 ## Reserved `runtime` hints
@@ -603,9 +643,8 @@ The following attributes are considered "hints" rather than requirements. They a
 
 Note: in a future version of WDL, these attributes will move to a new `hints` section.
 
-<details>
-<summary>
 Example: test_hints_task.wdl
+
 
 ```wdl
 version 1.1
@@ -637,8 +676,12 @@ task test_hints {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -655,7 +698,7 @@ Example output:
 }
 ```
 
-</p>
+
 </details>
 
 ### `maxCpu`
@@ -684,9 +727,8 @@ A `Boolean` value, for which `true` indicates that, if possible, any `File` inpu
 
 Provides input-specific hints in the form of an object. Each key within this hint should refer to an actual input defined for the current task. A key may also refer to a specific member of a struct/object input.
 
-<details>
-<summary>
 Example: input_hint_task.wdl
+
 
 ```wdl
 version 1.1
@@ -722,8 +764,12 @@ task input_hint {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -741,7 +787,8 @@ Example output:
   "input_hint.experience": []
 }
 ```
-</p>
+
+
 </details>
 
 Reserved input-specific attributes:

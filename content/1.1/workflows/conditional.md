@@ -12,9 +12,8 @@ The scoping rules for conditionals are similar to those for scatters - declarati
 
 In the example below, `Int j` is accessible anywhere in the conditional body, and `Int? j` is an optional that is accessible outside of the conditional anywhere in `workflow test_conditional`.
 
-<details>
-<summary>
 Example: test_conditional.wdl
+
 
 ```wdl
 version 1.1
@@ -70,8 +69,12 @@ workflow test_conditional {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -87,14 +90,14 @@ Example output:
   "test_conditional.j_out": 2
 }
 ```
-</p>
+
+
 </details>
 
 WDL has no `else` keyword. To mimic an `if-else` statement, you would simply use two conditionals with inverted boolean expressions. A common idiom is to use `select_first` to select a value from either the `if` or the `if not` body, whichever one is defined.
 
-<details>
-<summary>
 Example: if_else.wdl
+
 
 ```wdl
 version 1.1
@@ -133,8 +136,12 @@ workflow if_else {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -148,14 +155,14 @@ Example output:
   "if_else.greeting": "Good afternoon buddy!"
 }
 ```
-</p>
+
+
 </details>
 
 It is impossible to have a multi-level optional type, e.g., `Int??`. The outputs of a conditional are only ever single-level optionals, even when there are nested conditionals.
 
-<details>
-<summary>
 Example: nested_if.wdl
+
 
 ```wdl
 version 1.1
@@ -184,8 +191,12 @@ workflow nested_if {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -203,5 +214,6 @@ Example output:
   "nested_if.greeting": "hi"
 }
 ```
-</p>
+
+
 </details>

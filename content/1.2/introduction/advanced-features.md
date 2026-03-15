@@ -6,9 +6,8 @@ weight = 30
 
 WDL also provides features for implementing more complex workflows. For example, `hello_task` introduced in the previous example can be called in parallel across many different input files using the well-known [scatter-gather](https://en.wikipedia.org/wiki/Vectored_I/O#:~:text=In%20computing%2C%20vectored%20I%2FO,in%20a%20vector%20of%20buffers) pattern:
 
-<details>
-  <summary>
-  Example: hello_parallel.wdl
+Example: hello_parallel.wdl
+
 
   ```wdl
   version 1.2
@@ -37,9 +36,13 @@ WDL also provides features for implementing more complex workflows. For example,
     }
   }
   ```
-  </summary>
-  <p>
-  Example input:
+
+
+<details>
+<summary></summary>
+
+
+Example input:
 
   ```json
   {
@@ -55,5 +58,6 @@ WDL also provides features for implementing more complex workflows. For example,
     "hello_parallel.all_matches": [["hi_world"], ["hello"]]
   }
   ```
-  </p>
+
+
 </details>

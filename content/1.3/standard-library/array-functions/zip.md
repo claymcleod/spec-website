@@ -17,9 +17,8 @@ Creates an array of `Pair`s containing the [dot product](https://en.wikipedia.or
 
 **Returns**: An `Array[Pair[X, Y]]` of length `N`.
 
-<details>
-<summary>
 Example: test_zip.wdl
+
 
 ```wdl
 version 1.3
@@ -34,8 +33,12 @@ workflow test_zip {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -49,12 +52,12 @@ Example output:
   "test_zip.is_true": true
 }
 ```
-</p>
+
+
 </details>
 
-<details>
-<summary>
 Example: test_zip_fail.wdl
+
 
 ```wdl
 version 1.3
@@ -66,8 +69,12 @@ workflow test_zip_fail {
   Array[Pair[Int, String]] bad = zip(xs, zs)
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -87,5 +94,6 @@ Test config:
   "fail": true
 }
 ```
-</p>
+
+
 </details>

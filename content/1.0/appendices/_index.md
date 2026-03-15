@@ -1,5 +1,6 @@
 +++
 title = "Appendices"
+description = "Supplementary reference material for the specification"
 sort_by = "weight"
 weight = 80
 +++

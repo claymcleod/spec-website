@@ -2,7 +2,6 @@
 title = "Appendix C: Example Data"
 weight = 30
 +++
-
 This appendix contains example data files that are used in conformance tests throughout the specification.
 
 <details>

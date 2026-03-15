@@ -6,9 +6,8 @@ weight = 40
 
 The syntax `x.y` refers to member access. `x` must be a [Struct](@/1.2/types/compound-types/structs.md) or [Object](@/1.2/types/compound-types/object.md) value, or a [call](@/1.2/workflows/call.md) in a workflow. A call can be thought of as a struct where the members are the outputs of the called task.
 
-<details>
-<summary>
 Example: member_access.wdl
+
 
 ```wdl
 version 1.2
@@ -38,8 +37,12 @@ workflow member_access {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -54,14 +57,14 @@ Example output:
   "member_access.hello": "hello"
 }
 ```
-</p>
+
+
 </details>
 
 Access to elements of compound members can be chained into a single expression.
 
-<details>
-<summary>
 Example: nested_access.wdl
+
 
 ```wdl
 version 1.2
@@ -90,8 +93,12 @@ workflow nested_access {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -127,14 +134,14 @@ Example output:
   "nested_access.subject_name_from_first_experiment": "Pinky"
 }
 ```
-</p>
+
+
 </details>
 
 Attempting to access a non-existent member of an object, struct, or call results in an error.
 
-<details>
-<summary>
 Example: illegal_access_fail.wdl
+
 
 ```wdl
 version 1.2
@@ -155,8 +162,12 @@ workflow illegal_access {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -176,5 +187,6 @@ Test config:
   "fail": true
 }
 ```
-</p>
+
+
 </details>

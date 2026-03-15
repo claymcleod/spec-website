@@ -1,6 +1,6 @@
 +++
 title = "Workflows"
-description = "WDL workflow definitions and structure"
+description = "How to define workflows that coordinate tasks"
 sort_by = "weight"
 weight = 50
 +++

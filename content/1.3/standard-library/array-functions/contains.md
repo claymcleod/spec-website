@@ -20,11 +20,10 @@ Tests whether the given array contains at least one occurrence of the given valu
 
 **Returns**: `true` if the array contains at least one occurrence of the value, otherwise `false`.
 
-**Example**
+Example
 
-<details>
-<summary>
 Example: test_contains.wdl
+
 
 ```wdl
 version 1.3
@@ -66,8 +65,12 @@ workflow test_contains {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -84,5 +87,6 @@ Example output:
   "test_contains.samples_are_valid": false
 }
 ```
-</p>
+
+
 </details>

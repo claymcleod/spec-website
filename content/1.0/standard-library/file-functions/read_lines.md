@@ -20,8 +20,8 @@ If the entire contents of the file can not be read for any reason, the calling t
 
 **Returns**: An `Array[String]` representation of the lines in the file.
 
-<details>
-<summary>
+This task would `grep` through a file and return all strings that matched the pattern:
+
 Example: grep_task.wdl
 
 ```wdl
@@ -38,5 +38,4 @@ task do_stuff {
   }
 }
 ```
-</summary>
-</details>
+

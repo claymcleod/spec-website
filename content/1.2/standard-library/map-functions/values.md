@@ -3,9 +3,6 @@ title = "values"
 description = "Get map values"
 weight = 50
 +++
-
-<span class="wdl-badge wdl-badge-new">New in 1.2</span>
-
 ```
 Array[Y] values(Map[P, Y])
 ```
@@ -18,11 +15,10 @@ Returns an `Array` of the values from the input `Map`, in the same order as the 
 
 **Returns**: `Array[Y]` of the input `Map`s values.
 
-**Example**
+Example
 
-<details>
-<summary>
 Example: test_values.wdl
+
 
 ```wdl
 version 1.2
@@ -61,8 +57,12 @@ workflow test_values {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -76,6 +76,6 @@ Example output:
   "test_values.sums": [3, 7]
 }
 ```
-</p>
-</details>
 
+
+</details>

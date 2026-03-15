@@ -3,7 +3,6 @@ title = "glob"
 description = "Find files matching pattern"
 weight = 20
 +++
-
 ```
 Array[File] glob(String)
 ```
@@ -12,9 +11,7 @@ Returns the Bash expansion of the [glob string](https://en.wikipedia.org/wiki/Gl
 
 `glob` finds all of the files (but not the directories) in the same order as would be matched by running `echo <glob>` in Bash from the task's execution directory.
 
-Symlinks are handled by following them to their target. Symlinks that point to files are included in the results, while symlinks that point to directories are excluded. Broken symlinks (those that point to non-existent targets) are included.
-
-At least in standard Bash, glob expressions are not evaluated recursively, i.e., files in nested directories are not included.
+At least in standard Bash, glob expressions are not evaluated recursively, i.e., files in nested directories are not included. 
 
 **Parameters**:
 
@@ -22,9 +19,8 @@ At least in standard Bash, glob expressions are not evaluated recursively, i.e.,
 
 **Returns**: A array of all files matched by the glob.
 
-<details>
-<summary>
 Example: gen_files_task.wdl
+
 
 ```wdl
 version 1.1
@@ -42,14 +38,18 @@ task gen_files {
     touch a_dir/a_inner.txt
   >>>
 
-  output {
+  output {  
     Array[File] files = glob("a_*")
     Int glob_len = length(files)
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -73,7 +73,8 @@ Test config:
   "exclude_outputs": ["gen_files.files"]
 }
 ```
-</p>
+
+
 </details>
 
 This command generates the following directory structure:

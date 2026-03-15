@@ -16,9 +16,8 @@ Tests whether the given optional value is defined, i.e., has a non-`None` value.
 
 **Returns**: `false` if the input value is `None`, otherwise `true`.
 
-<details>
-<summary>
 Example: is_defined.wdl
+
 
 ```wdl
 version 1.3
@@ -49,8 +48,12 @@ task say_hello {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -66,5 +69,6 @@ Example output:
   "is_defined.greeting": "Hello John"
 }
 ```
-</p>
+
+
 </details>

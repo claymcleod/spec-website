@@ -40,6 +40,7 @@
                     </div>
                     <div class="sidebar-content hidden">
                         <a href="{{ base }}/{{ v }}/types/primitive-types/strings/" class="sidebar-link pl-12" data-section="primitive-types">Strings</a>
+                        <a href="{{ base }}/{{ v }}/types/primitive-types/files-and-directories/" class="sidebar-link pl-12" data-section="primitive-types" data-min-version="1.2">Files and Directories</a>
                     </div>
                 </div>
                 <a href="{{ base }}/{{ v }}/types/optional-types/" class="sidebar-link pl-6" data-section="types">Optional Types</a>
@@ -83,8 +84,8 @@
 
         <div class="sidebar-section" data-section="wdl-documents">
             <div class="flex items-center justify-between sidebar-row">
-                <a href="{{ base }}/{{ v }}/wdl-documents/" class="sidebar-link flex-1" data-section="wdl-documents">WDL Documents</a>
-                <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle WDL Documents submenu">
+                <a href="{{ base }}/{{ v }}/wdl-documents/" class="sidebar-link flex-1" data-section="wdl-documents">Documents</a>
+                <button class="p-1.5 mr-1 rounded transition-colors chevron-toggle" aria-label="Toggle Documents submenu">
                     <i class="fa-solid fa-chevron-right text-xs transition-transform sidebar-chevron"></i>
                 </button>
             </div>
@@ -181,27 +182,27 @@
                     </div>
                     <div class="sidebar-content hidden">
                         <a href="{{ base }}/{{ v }}/standard-library/file-functions/basename/" class="sidebar-link pl-12" data-section="file-functions">basename</a>
-                        <a href="{{ base }}/{{ v }}/standard-library/file-functions/join_paths/" class="sidebar-link pl-12" data-section="file-functions" data-min-version="1.2">join_paths</a>
+                        <a href="{{ base }}/{{ v }}/standard-library/file-functions/join-paths/" class="sidebar-link pl-12" data-section="file-functions" data-min-version="1.2">join_paths</a>
                         <a href="{{ base }}/{{ v }}/standard-library/file-functions/glob/" class="sidebar-link pl-12" data-section="file-functions" data-min-version="1.1">glob</a>
                         <a href="{{ base }}/{{ v }}/standard-library/file-functions/size/" class="sidebar-link pl-12" data-section="file-functions">size</a>
                         <a href="{{ base }}/{{ v }}/standard-library/file-functions/stdout/" class="sidebar-link pl-12" data-section="file-functions">stdout</a>
                         <a href="{{ base }}/{{ v }}/standard-library/file-functions/stderr/" class="sidebar-link pl-12" data-section="file-functions">stderr</a>
-                        <a href="{{ base }}/{{ v }}/standard-library/file-functions/read_string/" class="sidebar-link pl-12" data-section="file-functions">read_string</a>
-                        <a href="{{ base }}/{{ v }}/standard-library/file-functions/read_int/" class="sidebar-link pl-12" data-section="file-functions">read_int</a>
-                        <a href="{{ base }}/{{ v }}/standard-library/file-functions/read_float/" class="sidebar-link pl-12" data-section="file-functions">read_float</a>
-                        <a href="{{ base }}/{{ v }}/standard-library/file-functions/read_boolean/" class="sidebar-link pl-12" data-section="file-functions">read_boolean</a>
-                        <a href="{{ base }}/{{ v }}/standard-library/file-functions/read_lines/" class="sidebar-link pl-12" data-section="file-functions">read_lines</a>
-                        <a href="{{ base }}/{{ v }}/standard-library/file-functions/write_lines/" class="sidebar-link pl-12" data-section="file-functions">write_lines</a>
-                        <a href="{{ base }}/{{ v }}/standard-library/file-functions/read_tsv/" class="sidebar-link pl-12" data-section="file-functions">read_tsv</a>
-                        <a href="{{ base }}/{{ v }}/standard-library/file-functions/write_tsv/" class="sidebar-link pl-12" data-section="file-functions">write_tsv</a>
-                        <a href="{{ base }}/{{ v }}/standard-library/file-functions/read_map/" class="sidebar-link pl-12" data-section="file-functions">read_map</a>
-                        <a href="{{ base }}/{{ v }}/standard-library/file-functions/write_map/" class="sidebar-link pl-12" data-section="file-functions">write_map</a>
-                        <a href="{{ base }}/{{ v }}/standard-library/file-functions/read_json/" class="sidebar-link pl-12" data-section="file-functions">read_json</a>
-                        <a href="{{ base }}/{{ v }}/standard-library/file-functions/write_json/" class="sidebar-link pl-12" data-section="file-functions">write_json</a>
-                        <a href="{{ base }}/{{ v }}/standard-library/file-functions/read_object/" class="sidebar-link pl-12" data-section="file-functions">read_object</a>
-                        <a href="{{ base }}/{{ v }}/standard-library/file-functions/read_objects/" class="sidebar-link pl-12" data-section="file-functions">read_objects</a>
-                        <a href="{{ base }}/{{ v }}/standard-library/file-functions/write_object/" class="sidebar-link pl-12" data-section="file-functions">write_object</a>
-                        <a href="{{ base }}/{{ v }}/standard-library/file-functions/write_objects/" class="sidebar-link pl-12" data-section="file-functions">write_objects</a>
+                        <a href="{{ base }}/{{ v }}/standard-library/file-functions/read-string/" class="sidebar-link pl-12" data-section="file-functions">read_string</a>
+                        <a href="{{ base }}/{{ v }}/standard-library/file-functions/read-int/" class="sidebar-link pl-12" data-section="file-functions">read_int</a>
+                        <a href="{{ base }}/{{ v }}/standard-library/file-functions/read-float/" class="sidebar-link pl-12" data-section="file-functions">read_float</a>
+                        <a href="{{ base }}/{{ v }}/standard-library/file-functions/read-boolean/" class="sidebar-link pl-12" data-section="file-functions">read_boolean</a>
+                        <a href="{{ base }}/{{ v }}/standard-library/file-functions/read-lines/" class="sidebar-link pl-12" data-section="file-functions">read_lines</a>
+                        <a href="{{ base }}/{{ v }}/standard-library/file-functions/write-lines/" class="sidebar-link pl-12" data-section="file-functions">write_lines</a>
+                        <a href="{{ base }}/{{ v }}/standard-library/file-functions/read-tsv/" class="sidebar-link pl-12" data-section="file-functions">read_tsv</a>
+                        <a href="{{ base }}/{{ v }}/standard-library/file-functions/write-tsv/" class="sidebar-link pl-12" data-section="file-functions">write_tsv</a>
+                        <a href="{{ base }}/{{ v }}/standard-library/file-functions/read-map/" class="sidebar-link pl-12" data-section="file-functions">read_map</a>
+                        <a href="{{ base }}/{{ v }}/standard-library/file-functions/write-map/" class="sidebar-link pl-12" data-section="file-functions">write_map</a>
+                        <a href="{{ base }}/{{ v }}/standard-library/file-functions/read-json/" class="sidebar-link pl-12" data-section="file-functions">read_json</a>
+                        <a href="{{ base }}/{{ v }}/standard-library/file-functions/write-json/" class="sidebar-link pl-12" data-section="file-functions">write_json</a>
+                        <a href="{{ base }}/{{ v }}/standard-library/file-functions/read-object/" class="sidebar-link pl-12" data-section="file-functions">read_object</a>
+                        <a href="{{ base }}/{{ v }}/standard-library/file-functions/read-objects/" class="sidebar-link pl-12" data-section="file-functions">read_objects</a>
+                        <a href="{{ base }}/{{ v }}/standard-library/file-functions/write-object/" class="sidebar-link pl-12" data-section="file-functions">write_object</a>
+                        <a href="{{ base }}/{{ v }}/standard-library/file-functions/write-objects/" class="sidebar-link pl-12" data-section="file-functions">write_objects</a>
                     </div>
                 </div>
                 <div class="sidebar-section" data-section="array-string-functions">
@@ -236,8 +237,8 @@
                         <a href="{{ base }}/{{ v }}/standard-library/array-functions/chunk/" class="sidebar-link pl-12" data-section="array-functions" data-min-version="1.2">chunk</a>
                         <a href="{{ base }}/{{ v }}/standard-library/array-functions/flatten/" class="sidebar-link pl-12" data-section="array-functions">flatten</a>
                         <a href="{{ base }}/{{ v }}/standard-library/array-functions/length/" class="sidebar-link pl-12" data-section="array-functions" data-max-version="1.1">length</a>
-                        <a href="{{ base }}/{{ v }}/standard-library/array-functions/select_first/" class="sidebar-link pl-12" data-section="array-functions">select_first</a>
-                        <a href="{{ base }}/{{ v }}/standard-library/array-functions/select_all/" class="sidebar-link pl-12" data-section="array-functions">select_all</a>
+                        <a href="{{ base }}/{{ v }}/standard-library/array-functions/select-first/" class="sidebar-link pl-12" data-section="array-functions">select_first</a>
+                        <a href="{{ base }}/{{ v }}/standard-library/array-functions/select-all/" class="sidebar-link pl-12" data-section="array-functions">select_all</a>
                     </div>
                 </div>
                 <div class="sidebar-section" data-section="map-functions" data-min-version="1.1">
@@ -248,12 +249,12 @@
                         </button>
                     </div>
                     <div class="sidebar-content hidden">
-                        <a href="{{ base }}/{{ v }}/standard-library/map-functions/as_pairs/" class="sidebar-link pl-12" data-section="map-functions">as_pairs</a>
-                        <a href="{{ base }}/{{ v }}/standard-library/map-functions/as_map/" class="sidebar-link pl-12" data-section="map-functions">as_map</a>
+                        <a href="{{ base }}/{{ v }}/standard-library/map-functions/as-pairs/" class="sidebar-link pl-12" data-section="map-functions">as_pairs</a>
+                        <a href="{{ base }}/{{ v }}/standard-library/map-functions/as-map/" class="sidebar-link pl-12" data-section="map-functions">as_map</a>
                         <a href="{{ base }}/{{ v }}/standard-library/map-functions/keys/" class="sidebar-link pl-12" data-section="map-functions">keys</a>
-                        <a href="{{ base }}/{{ v }}/standard-library/map-functions/contains_key/" class="sidebar-link pl-12" data-section="map-functions" data-min-version="1.2">contains_key</a>
+                        <a href="{{ base }}/{{ v }}/standard-library/map-functions/contains-key/" class="sidebar-link pl-12" data-section="map-functions" data-min-version="1.2">contains_key</a>
                         <a href="{{ base }}/{{ v }}/standard-library/map-functions/values/" class="sidebar-link pl-12" data-section="map-functions" data-min-version="1.2">values</a>
-                        <a href="{{ base }}/{{ v }}/standard-library/map-functions/collect_by_key/" class="sidebar-link pl-12" data-section="map-functions">collect_by_key</a>
+                        <a href="{{ base }}/{{ v }}/standard-library/map-functions/collect-by-key/" class="sidebar-link pl-12" data-section="map-functions">collect_by_key</a>
                     </div>
                 </div>
                 <div class="sidebar-section" data-section="enum-functions" data-min-version="1.3">

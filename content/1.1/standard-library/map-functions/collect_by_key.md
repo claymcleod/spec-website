@@ -20,9 +20,8 @@ The order of the keys in the output `Map` is the same as the order of their firs
 
 **Returns**: `Map` of keys to `Array`s of values.
 
-<details>
-<summary>
 Example: test_collect_by_key.wdl
+
 
 ```wdl
 version 1.1
@@ -48,8 +47,12 @@ workflow test_collect_by_key {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -64,5 +67,6 @@ Example output:
   "test_collect_by_key.is_true2": true
 }
 ```
-</p>
+
+
 </details>

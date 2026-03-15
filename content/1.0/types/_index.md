@@ -1,6 +1,6 @@
 +++
 title = "Types"
-description = "WDL type system and type declarations"
+description = "The WDL type system and how types are declared"
 sort_by = "weight"
 weight = 20
 +++
@@ -37,3 +37,5 @@ Types can also have a postfix quantifier (either `?` or `+`):
 * `+` can only be applied to `Array` types, and it signifies that the array is required to be non-empty.
 
 For more details on the postfix quantifiers, see the section on [Optional Parameters & Type Constraints](@/1.0/types/optional-types.md).
+
+For more information on type and how they are used to construct commands and define outputs of tasks, see the [Data Types & Serialization](@/1.0/types/type-conversion.md) section.

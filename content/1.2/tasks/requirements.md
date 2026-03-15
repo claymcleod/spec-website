@@ -12,9 +12,8 @@ All attributes of the `requirements` section have well-defined meanings and defa
 
 The value of a `requirements` attribute may be any expression that evaluates to the expected type - and, in some cases, matches the accepted format - for that attribute. Expressions in the `requirements` section may reference input and private declarations.
 
-<details>
-<summary>
 Example: dynamic_container_task.wdl
+
 
 ```wdl
 version 1.2
@@ -37,8 +36,12 @@ task dynamic_container {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -54,7 +57,8 @@ Example output:
   "dynamic_container.is_true": true
 }
 ```
-</p>
+
+
 </details>
 
 #### Units of Storage
@@ -94,9 +98,8 @@ The `container` attribute also accepts an unordered array of URI strings. All th
 
 If the value is a `String` or `Array[String]` and none of the specified containers can be sucessfully resolved by the exeution engine, the task fails with an error.
 
-<details>
-<summary>
 Example: test_containers.wdl
+
 
 ```wdl
 version 1.2
@@ -134,8 +137,12 @@ workflow test_containers {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -150,7 +157,8 @@ Example output:
   "test_containers.multi_greeting": "hello"
 }
 ```
-</p>
+
+
 </details>
 
 The execution engine must cause the task to fail immediately if it is not able to resolve at least one of the URIs to a runnable container.
@@ -166,9 +174,8 @@ The execution engine must cause the task to fail immediately if it is not able t
 
 The `cpu` attribute defines the _minimum_ number of CPU cores required for this task, which must be available prior to instantiating the command. The execution engine must provision at least the requested number of CPU cores, but it may provision more. For example, if the request is `cpu: 0.5` but only discrete values are supported, then the execution engine might choose to provision `1.0` CPU instead.
 
-<details>
-<summary>
 Example: test_cpu_task.wdl
+
 
 ```wdl
 version 1.2
@@ -188,8 +195,12 @@ task test_cpu {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -211,7 +222,8 @@ Test config:
   "capabilities": ["cpu"]
 }
 ```
-</p>
+
+
 </details>
 
 ##### `memory`
@@ -223,9 +235,8 @@ Test config:
 
 The `memory` attribute defines the _minimum_ memory (RAM) required for this task, which must be available prior to instantiating the command. The execution engine must provision at least the requested amount of memory, but it may provision more. For example, if the request is `1 GB` but only blocks of `4 GB` are available, then the execution engine might choose to provision `4.0 GB` instead.
 
-<details>
-<summary>
 Example: test_memory_task.wdl
+
 
 ```wdl
 version 1.2
@@ -244,8 +255,12 @@ task test_memory {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -267,7 +282,8 @@ Test config:
   "capabilities": ["memory"]
 }
 ```
-</p>
+
+
 </details>
 
 ##### Hardware Accelerators (`gpu` and ✨ `fpga`)
@@ -279,9 +295,8 @@ The `gpu` and `fpga` attributes indicate to the execution engine whether a task 
 
 The [`gpu` and `fpga` hints](@/1.2/tasks/hints.md#sparkles-gpu-and-sparkles-fpga) can be used to request specific attributes for the provisioned accelerators (e.g., quantity, model, driver version).
 
-<details>
-<summary>
 Example: test_gpu_task.wdl
+
 
 ```wdl
 version 1.2
@@ -301,8 +316,12 @@ task test_gpu {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -325,7 +344,8 @@ Test config:
   "ignore": true
 }
 ```
-</p>
+
+
 </details>
 
 ##### `disks`
@@ -348,9 +368,8 @@ If a mount point is specified, then it must be an absolute path to a location in
 
 The execution engine is free to provision any class(es) of persistent volume it has available (e.g., SSD or HDD). The [`disks` hint](@/1.2/tasks/hints.md#sparkles-disks) hint can be used to request specific attributes for the provisioned disks.
 
-<details>
-<summary>
 Example: one_mount_point_task.wdl
+
 
 ```wdl
 version 1.2
@@ -370,8 +389,12 @@ task one_mount_point {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -393,14 +416,14 @@ Test config:
   "capabilities": ["disks"]
 }
 ```
-</p>
+
+
 </details>
 
 If an array of disk specifications is used to specify multiple disk mounts, only one of them is allowed to omit the mount point.
 
-<details>
-<summary>
 Example: multi_mount_points_task.wdl
+
 
 ```wdl
 version 1.2
@@ -420,8 +443,12 @@ task multi_mount_points {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -443,7 +470,8 @@ Test config:
   "capabilities": ["disks"]
 }
 ```
-</p>
+
+
 </details>
 
 ##### `max_retries`
@@ -478,9 +506,8 @@ task max_retries_test {
 
 The `return_codes` attribute specifies the return code, or set of return codes, that indicates a successful execution of a task. If the task exits with one of the specified return codes, it must be considered successful if possible (i.e., assuming all output expressions are evaluated successfully). 
 
-<details>
-<summary>
 Example: single_return_code_task.wdl
+
 
 ```wdl
 version 1.2
@@ -495,8 +522,12 @@ task single_return_code {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -516,12 +547,12 @@ Test config:
   "return_code": 0
 }
 ```
-</p>
+
+
 </details>
 
-<details>
-<summary>
 Example: multi_return_code_fail_task.wdl
+
 
 ```wdl
 version 1.2
@@ -536,8 +567,12 @@ task multi_return_code {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -558,12 +593,12 @@ Test config:
   "return_code": 42
 }
 ```
-</p>
+
+
 </details>
 
-<details>
-<summary>
 Example: all_return_codes_task.wdl
+
 
 ```wdl
 version 1.2
@@ -578,8 +613,12 @@ task all_return_codes {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -599,6 +638,7 @@ Test config:
   "return_code": 0
 }
 ```
-</p>
+
+
 </details>
 

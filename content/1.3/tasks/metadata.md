@@ -22,9 +22,8 @@ A meta object is similar to a struct literal, except:
 
 Note that, unlike the WDL `Object` type, metadata objects are not deprecated and will continue to be supported in future versions.
 
-<details>
-<summary>
 Example: test_meta_values.wdl
+
 
 ```wdl
 version 1.3
@@ -40,8 +39,12 @@ workflow test_meta_values {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -53,7 +56,8 @@ Example output:
 ```json
 {}
 ```
-</p>
+
+
 </details>
 
 #### Task Metadata Section
@@ -64,9 +68,8 @@ This section contains task-level metadata. For example: author and contact email
 
 This section contains metadata specific to input and output parameters. Any key in this section *must* correspond to a task input or output.
 
-<details>
-<summary>
 Example: ex_paramter_meta_task.wdl
+
 
 ```wdl
 version 1.3
@@ -108,8 +111,12 @@ task ex_paramter_meta {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -126,5 +133,6 @@ Example output:
   "ex_paramter_meta.result": 3
 }
 ```
-</p>
+
+
 </details>

@@ -10,9 +10,8 @@ A declaration with a custom type can be initialized with a struct literal, which
 
 The value of a specific member of a struct value can be accessed by placing a `.` followed by the member name after the identifier.
 
-<details>
-<summary>
 Example: test_struct.wdl
+
 
 ```wdl
 version 1.1
@@ -46,8 +45,12 @@ workflow test_struct {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -72,12 +75,11 @@ Example output:
 }
 ```
 
-</p>
+
 </details>
 
-<details>
-<summary>
 Example: incomplete_struct_fail.wdl
+
 
 ```wdl
 version 1.1
@@ -110,8 +112,12 @@ workflow incomplete_struct {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -131,7 +137,8 @@ Test config:
   "fail": true
 }
 ```
-</p>
+
+
 </details>
 
 <span class="wdl-badge wdl-badge-deprecated">Deprecated</span> It is also possible to assign an `Object` or `Map[String, X]` value to a `Struct` declaration. In the either case:
@@ -150,9 +157,8 @@ A `Struct` type is a user-defined data type. Structs enable the creation of comp
 
 A struct is defined using the `struct` keyword, followed by a name that is unique within the WDL document, and a body containing the member declarations. A struct member may be of any type, including compound types and even other `Struct` types. A struct member may be optional. Declarations in a struct body differ from those in a task or workflow in that struct members cannot have default initializers.
 
-<details>
-<summary>
 Example: person_struct_task.wdl
+
 
 ```wdl
 version 1.1
@@ -198,8 +204,12 @@ task greet_person {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -228,7 +238,8 @@ Example output:
   "greet_person.message": "Hello Richard! You have 1 test result(s) available.\nPlease transfer USD 500 to continue"
 }
 ```
-</p>
+
+
 </details>
 
 An invalid struct:

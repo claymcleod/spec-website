@@ -16,9 +16,8 @@ Given any `Object`, this will write out a 2-row, n-column TSV file with the obje
 
 **Returns**: A `File` containing the object's attributes as headers and values as data in TSV format.
 
-<details>
-<summary>
 Example: write_object_task.wdl
+
 
 ```wdl
 task test {
@@ -31,8 +30,11 @@ task test {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
 
 If `input` were to have the value:
 
@@ -55,5 +57,5 @@ key_1	key_2	key_3
 value_1	value_2	value_3
 ```
 
-</p>
+
 </details>

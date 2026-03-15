@@ -3,9 +3,6 @@ title = "as_pairs"
 description = "Convert map to pairs"
 weight = 10
 +++
-
-<span class="wdl-badge wdl-badge-new">New in 1.1</span>
-
 ```
 Array[Pair[P, Y]] as_pairs(Map[P, Y])
 ```
@@ -18,9 +15,8 @@ Converts a `Map` into an `Array` of `Pair`s. Since `Map`s are ordered, the outpu
 
 **Returns**: Ordered `Array` of `Pair`s, where each pair contains the key (left) and value (right) of a `Map` element.
 
-<details>
-<summary>
 Example: test_as_pairs.wdl
+
 
 ```wdl
 version 1.1
@@ -37,7 +33,7 @@ workflow test_as_pairs {
     Pair[File, File] files = item.right
     Pair[File, String] bams = (files.left, s)
   }
-
+  
   Map[File, String] bam_to_name = as_map(bams)
 
   output {
@@ -47,8 +43,12 @@ workflow test_as_pairs {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -64,5 +64,6 @@ Example output:
   "test_as_pairs.is_true3": true
 }
 ```
-</p>
+
+
 </details>

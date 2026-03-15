@@ -1,7 +1,7 @@
 +++
 title = "Workflow Definition"
 sort_by = "weight"
-description = "Orchestrating tasks into workflows"
+description = "How to define workflows that coordinate tasks"
 weight = 50
 +++
 

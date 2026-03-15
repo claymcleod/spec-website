@@ -8,9 +8,8 @@ A task can have declarations that are intended as intermediate values rather tha
 
 For example, this task takes an input and then performs a calculation, using a private declaration, that can then be referenced in the command template:
 
-<details>
-<summary>
 Example: private_declaration_task.wdl
+
 
 ```wdl
 version 1.1
@@ -32,8 +31,12 @@ task private_declaration {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -49,14 +52,14 @@ Example output:
   "private_declaration.out_lines": ["A", "B", "C"]
 }
 ```
-</p>
+
+
 </details>
 
 The value of a private declaration may *not* be specified by the task caller, nor is it accessible outside of the task [scope](@/1.1/appendices/appendix-b.md#task-scope).
 
-<details>
-<summary>
 Example: private_declaration_fail.wdl
+
 
 ```wdl
 version 1.1
@@ -85,8 +88,12 @@ workflow private_declaration_fail {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -106,5 +113,6 @@ Test config:
   "fail": true
 }
 ```
-</p>
+
+
 </details>

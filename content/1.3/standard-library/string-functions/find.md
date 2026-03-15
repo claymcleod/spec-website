@@ -21,9 +21,8 @@ String? first_match = find("hello\tBob", "\\t")
 
 **Returns**: The contents of the first match, or `None` if `pattern` does not match `input`.
 
-<details>
-<summary>
 Example: test_find_task.wdl
+
 
 ```wdl
 version 1.3
@@ -40,8 +39,12 @@ workflow find_string {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -56,5 +59,6 @@ Example output:
   "find_string.match2": null
 }
 ```
-</p>
+
+
 </details>

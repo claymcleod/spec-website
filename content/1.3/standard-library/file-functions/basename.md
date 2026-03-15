@@ -20,9 +20,8 @@ The optional second parameter specifies a literal suffix to remove from the file
 
 **Returns**: The file's basename as a `String`.
 
-<details>
-<summary>
 Example: test_basename.wdl
+
 
 ```wdl
 version 1.3
@@ -35,8 +34,12 @@ workflow test_basename {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -52,5 +55,6 @@ Example output:
   "test_basename.is_true3": true
 }
 ```
-</p>
+
+
 </details>

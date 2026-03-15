@@ -17,9 +17,8 @@ Adds a suffix to each element of the input array of primitive values. Equivalent
 
 **Returns**: An `Array[String]` the suffixed elements of the input array.
 
-<details>
-<summary>
 Example: test_suffix.wdl
+
 
 ```wdl
 version 1.3
@@ -34,8 +33,12 @@ workflow test_suffix {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -50,12 +53,12 @@ Example output:
   "test_suffix.env2_suffix": ["1.0", "2.0", "3.0"]
 }
 ```
-</p>
+
+
 </details>
 
-<details>
-<summary>
 Example: test_suffix_fail.wdl
+
 
 ```wdl
 version 1.3
@@ -66,8 +69,12 @@ workflow test_suffix_fail {
   Array[String] bad = suffix("-z", env3)
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -87,5 +94,6 @@ Test config:
   "fail": true
 }
 ```
-</p>
+
+
 </details>

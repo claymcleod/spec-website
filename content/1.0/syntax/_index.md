@@ -1,6 +1,6 @@
 +++
 title = "Syntax"
-description = "WDL syntax rules: whitespace, comments, keywords, and literals"
+description = "Whitespace, comments, keywords, literals, and other syntactic rules"
 sort_by = "weight"
 weight = 15
 +++

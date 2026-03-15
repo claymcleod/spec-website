@@ -16,9 +16,8 @@ Adds double-quotes (`"`) around each element of the input array of primitive val
 
 **Returns**: An `Array[String]` the double-quoted elements of the input array.
 
-<details>
-<summary>
 Example: test_quote.wdl
+
 
 ```wdl
 version 1.2
@@ -33,8 +32,12 @@ workflow test_quote {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -49,6 +52,7 @@ Example output:
   "test_quote.env2_quoted": ["\"1\"", "\"2\"", "\"3\""]
 }
 ```
-</p>
+
+
 </details>
 

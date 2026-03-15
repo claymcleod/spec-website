@@ -19,9 +19,8 @@ Given `Array[X]` of length `M`, and `Array[Y]` of length `N`, the cross product 
 
 **Returns**: An `Array[Pair[X, Y]]` of length `M*N`.
 
-<details>
-<summary>
 Example: test_cross.wdl
+
 
 ```wdl
 version 1.3
@@ -38,8 +37,12 @@ workflow test_cross {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -53,5 +56,6 @@ Example output:
   "test_cross.is_true": true
 }
 ```
-</p>
+
+
 </details>

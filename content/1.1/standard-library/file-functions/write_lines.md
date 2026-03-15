@@ -16,9 +16,8 @@ Writes a file with one line for each element in a `Array[String]`. All lines are
 
 **Returns**: A `File`.
 
-<details>
-<summary>
 Example: write_lines_task.wdl
+
 
 ```wdl
 version 1.1
@@ -41,8 +40,12 @@ task write_lines {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -56,7 +59,8 @@ Example output:
   "write_lines.s": "first\tsecond\tthird"
 }
 ```
-</p>
+
+
 </details>
 
 The actual command line might look like:

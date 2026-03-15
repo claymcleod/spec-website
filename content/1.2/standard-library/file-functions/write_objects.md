@@ -20,9 +20,8 @@ The member values must be serializable to strings, meaning that only primitive t
 
 **Returns**: A `File`.
 
-<details>
-<summary>
 Example: write_objects_task.wdl
+
 
 ```wdl
 version 1.2
@@ -41,8 +40,12 @@ task write_objects {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -74,7 +77,8 @@ Example output:
   "write_objects.results": ["key_1", "value_1", "value_4", "value_7"]
 }
 ```
-</p>
+
+
 </details>
 
 The actual command line might look like:

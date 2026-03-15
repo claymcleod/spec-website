@@ -3,9 +3,6 @@ title = "join_paths"
 description = "Join file paths"
 weight = 20
 +++
-
-<span class="wdl-badge wdl-badge-new">New in 1.2</span>
-
 ```
 String join_paths(Directory, String)
 String join_paths(Directory, Array[String]+)
@@ -31,9 +28,8 @@ A relative path does not start with `/` and indicates the path is relative to it
 
 **Returns**: A `String` representing an absolute path that results from joining all the paths in order (left-to-right), and resolving the resulting path against the default parent directory if it is relative.
 
-<details>
-<summary>
 Example: join_paths_task.wdl
+
 
 ```wdl
 version 1.2
@@ -44,8 +40,6 @@ task join_paths {
     String abs_str = "/usr"
     String rel_dir_str = "bin"
     String rel_file = "echo"
-    Directory rel_dir_file = "mydir"
-    String rel_str = "mydata.txt"
   }
 
   # these are all equivalent to '/usr/bin/echo'
@@ -53,21 +47,13 @@ task join_paths {
   String bin2 = join_paths(abs_str, [rel_dir_str, rel_file])
   String bin3 = join_paths([abs_str, rel_dir_str, rel_file])
 
-  # the default behavior is that this resolves to
-  # '<working dir>/mydir/mydata.txt'
-  String data = join_paths(rel_dir, rel_str)
-
-  # this resolves to '<working dir>/bin/echo', which is non-existent
-  File doesnt_exist = join_paths([rel_dir_str, rel_file])
   command <<<
-    mkdir ~{rel_dir}
-    ~{bin1} -n "hello" > ~{data}
+    ~{bin1} -n "hello" > output.txt
   >>>
 
   output {
     Boolean bins_equal = (bin1 == bin2) && (bin1 == bin3)
-    String result = read_string(data)
-    String missing_path = doesnt_exist
+    String result = read_string("output.txt")
   }
   
   runtime {
@@ -75,8 +61,12 @@ task join_paths {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -90,7 +80,7 @@ Example output:
   "join_paths.bins_equal": true,
   "join_paths.result": "hello"
 }
-``` 
-</p>
-</details>
+```
 
+
+</details>

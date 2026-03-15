@@ -20,8 +20,6 @@ Given 3 String parameters `input`, `pattern`, `replace`, this function will repl
 
 The `sub` function will also accept `input` and `replace` parameters that can be coerced to a `String` (e.g. `File`). This can be useful to swap the extension of a filename for example.
 
-<details>
-<summary>
 Example 1:
 
 ```wdl
@@ -31,11 +29,8 @@ String chocolove = sub(chocolike, "like", "love") # I love chocolate when it's l
 String chocoearly = sub(chocolike, "late", "early") # I like chocoearly when it's early
 String chocolate = sub(chocolike, "late$", "early") # I like chocolate when it's early
 ```
-</summary>
-</details>
 
-<details>
-<summary>
+
 Example 2: Swapping a file extension
 
 ```wdl
@@ -53,5 +48,4 @@ task example {
   }
 }
 ```
-</summary>
-</details>
+

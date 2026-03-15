@@ -22,9 +22,8 @@ At least in standard Bash, glob expressions are not evaluated recursively, i.e.,
 
 **Returns**: A array of all files matched by the glob.
 
-<details>
-<summary>
 Example: gen_files_task.wdl
+
 
 ```wdl
 version 1.2
@@ -48,8 +47,12 @@ task gen_files {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -73,7 +76,8 @@ Test config:
   "exclude_outputs": ["gen_files.files"]
 }
 ```
-</p>
+
+
 </details>
 
 This command generates the following directory structure:

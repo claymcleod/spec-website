@@ -3,9 +3,6 @@ title = "quote"
 description = "Double-quote array elements"
 weight = 30
 +++
-
-<span class="wdl-badge wdl-badge-new">New in 1.1</span>
-
 ```
 Array[String] quote(Array[P])
 ```
@@ -18,9 +15,8 @@ Adds double-quotes (`"`) around each element of the input array of primitive val
 
 **Returns**: An `Array[String]` the double-quoted elements of the input array.
 
-<details>
-<summary>
 Example: test_quote.wdl
+
 
 ```wdl
 version 1.1
@@ -35,8 +31,12 @@ workflow test_quote {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -51,5 +51,6 @@ Example output:
   "test_quote.env2_quoted": ["\"1\"", "\"2\"", "\"3\""]
 }
 ```
-</p>
+
+
 </details>

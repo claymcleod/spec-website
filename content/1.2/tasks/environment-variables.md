@@ -21,9 +21,8 @@ If such limitations exist, it is the engine's responsibility to provide clear do
 The environment variable should be evaluated by the engine prior to injecting it into the execution environment. if the task is run in a container the env var is "injected" into the container and not applied to the shell on the host that runs the container.
 
 
-<details>
-<summary>
 Example: environment_variable_should_echo.wdl
+
 
 ```wdl
 version 1.2
@@ -56,8 +55,12 @@ workflow environment_variable_should_echo {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
   ```json
@@ -73,7 +76,8 @@ Example input:
     "environment_variable_should_echo.out": "hello"
   }
   ```
-</p>
+
+
 </details>
 
 ## String Escaping and Injection Prevention

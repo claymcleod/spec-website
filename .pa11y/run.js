@@ -32,6 +32,10 @@ async function main() {
             urls.push(`${url}${separator}theme=${theme}`);
         }
 
+        // Add the 404 page (using a URL that doesn't exist)
+        const baseUrl = sitemapUrl.replace(/\/sitemap\.xml$/, '');
+        urls.push(`${baseUrl}/this-page-does-not-exist/?theme=${theme}`);
+
         if (urls.length === 0) {
             console.error('No URLs found in sitemap');
             process.exit(1);

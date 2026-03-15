@@ -1,7 +1,7 @@
 +++
 title = "Numeric Functions"
 sort_by = "weight"
-description = "Functions for numeric operations"
+description = "Functions for numeric conversions and comparisons"
 weight = 10
 transparent = true
 +++

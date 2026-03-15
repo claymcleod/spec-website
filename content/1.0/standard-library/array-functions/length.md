@@ -16,8 +16,6 @@ Given an Array, the `length` function returns the number of elements in the Arra
 
 **Returns**: An `Integer` representing the number of elements in the array.
 
-<details>
-<summary>
 Example: length_example.wdl
 
 ```wdl
@@ -29,5 +27,4 @@ Integer xlen = length(xs) # 3
 Integer ylen = length(ys) # 3
 Integer zlen = length(zs) # 0
 ```
-</summary>
-</details>
+

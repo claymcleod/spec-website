@@ -22,9 +22,8 @@ Returns the larger of two values. If both values are `Int`s, the return value is
 
 **Returns**: The larger of the two arguments.
 
-<details>
-<summary>
 Example: test_max.wdl
+
 
 ```wdl
 version 1.3
@@ -42,8 +41,12 @@ workflow test_max {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -61,5 +64,6 @@ Example output:
   "test_max.max2": 2.0
 }
 ```
-</p>
+
+
 </details>

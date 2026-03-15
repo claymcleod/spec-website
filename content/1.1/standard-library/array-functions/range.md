@@ -16,9 +16,8 @@ Creates an array of the given length containing sequential integers starting fro
 
 **Returns**: An `Array[Int]` containing integers `0..(N-1)`.
 
-<details>
-<summary>
 Example: test_range.wdl
+
 
 ```wdl
 version 1.1
@@ -50,8 +49,12 @@ workflow test_range {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -67,5 +70,6 @@ Example output:
   "test_range.result": [0, 2, 4, 6, 8]
 }
 ```
-</p>
+
+
 </details>

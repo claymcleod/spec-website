@@ -1,7 +1,7 @@
 +++
 title = "String Array Functions"
 sort_by = "weight"
-description = "Functions for array of strings operations"
+description = "Functions that convert arrays to strings"
 weight = 40
 transparent = true
 +++

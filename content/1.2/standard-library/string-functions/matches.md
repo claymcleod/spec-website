@@ -3,9 +3,6 @@ title = "matches"
 description = "Test if string matches pattern"
 weight = 20
 +++
-
-<span class="wdl-badge wdl-badge-new">New in 1.2</span>
-
 Given two `String` parameters `input` and `pattern`, tests whether `pattern` matches `input` at least once. `pattern` is a [regular expression](https://en.wikipedia.org/wiki/Regular_expression) and is evaluated as a [POSIX Extended Regular Expression (ERE)](https://en.wikipedia.org/wiki/Regular_expression#POSIX_basic_and_extended).
 
 To test whether `pattern` matches the entire `input`, make sure to begin and end the pattern with anchors. For example:
@@ -27,9 +24,8 @@ Boolean has_tab = matches("hello\tBob", "\\t")
 
 **Returns**: `true` if `pattern` matches `input` at least once, otherwise `false`.
 
-<details>
-<summary>
 Example: test_matches_task.wdl
+
 
 ```wdl
 version 1.2
@@ -43,8 +39,12 @@ workflow test_matches {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -61,6 +61,6 @@ Example output:
   "test_matches.is_read1": false
 }
 ```
-</p>
-</details>
 
+
+</details>

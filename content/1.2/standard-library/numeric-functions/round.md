@@ -16,9 +16,8 @@ Rounds a floating point number to the nearest integer based on standard rounding
 
 **Returns**: An integer.
 
-<details>
-<summary>
 Example: test_round.wdl
+
 
 ```wdl
 version 1.2
@@ -37,8 +36,12 @@ workflow test_round {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -54,6 +57,7 @@ Example output:
   "test_round.all_true": [true, true]
 }
 ```
-</p>
+
+
 </details>
 

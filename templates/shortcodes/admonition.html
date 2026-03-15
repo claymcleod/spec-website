@@ -1,0 +1,13 @@
+<div class="admonition admonition-{{ type | default(value="note") }}">
+  <div class="admonition-title">
+    {% if type is undefined or type == "note" %}
+      <i class="fa-solid fa-circle-info"></i>
+    {% elif type == "warning" %}
+      <i class="fa-solid fa-triangle-exclamation"></i>
+    {% elif type == "tip" %}
+      <i class="fa-solid fa-lightbulb"></i>
+    {% endif %}
+    {{ title | default(value="Note") }}
+  </div>
+  <div class="admonition-body">{{ body }}</div>
+</div>

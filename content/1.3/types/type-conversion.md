@@ -20,9 +20,8 @@ String new_path = "~{path}_2"  # can still use `path` here
 
 Primitive types can always be converted to `String` using [string interpolation](@/1.3/expressions/string-interpolation.md). See [Expression Placeholder Coercion](@/1.3/expressions/string-interpolation.md#expression-placeholder-coercion) for details.
 
-<details>
-<summary>
 Example: primitive_to_string.wdl
+
 
 ```wdl
 version 1.3
@@ -37,8 +36,12 @@ workflow primitive_to_string {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -54,7 +57,8 @@ Example output:
   "primitive_to_string.istring": "3"
 }
 ```
-</p>
+
+
 </details>
 
 ## Type Coercion
@@ -63,9 +67,8 @@ There are some pairs of WDL types for which there is an obvious, unambiguous con
 
 For example, file paths are always represented as strings, making the conversion from `String` to `File` obvious and unambiguous.
 
-<details>
-<summary>
 Example: string_to_file.wdl
+
 
 ```wdl
 version 1.3
@@ -85,8 +88,12 @@ workflow string_to_file {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -102,14 +109,14 @@ Example output:
   "string_to_file.paths_equal": true
 }
 ```
-</p>
+
+
 </details>
 
 Attempting to use a declaration that is both of the wrong type and for which there is no coercion to the correct type results in an error.
 
-<details>
-<summary>
 Example: coercion_fail.wdl
+
 
 ```wdl
 version 1.3
@@ -125,8 +132,12 @@ workflow coercion_fail {
   contains(strings, foobar)
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -146,7 +157,8 @@ Test config:
   "fail": true
 }
 ```
-</p>
+
+
 </details>
 
 The table below lists all globally valid coercions. The "target" type is the type being coerced to (this is often called the "left-hand side" or "LHS" of the coercion) and the "source" type is the type being coerced from (the "right-hand side" or "RHS").
@@ -235,9 +247,8 @@ There are two exceptions where coercion from `T?` to `T` is allowed:
 
 `Struct`s and `Object`s can be coerced from map literals, but beware the difference between `Map` keys (expressions) and `Struct`/`Object` member names.
 
-<details>
-<summary>
 Example: map_to_struct.wdl
+
 
 ```wdl
 version 1.3
@@ -270,8 +281,12 @@ workflow map_to_struct {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -294,7 +309,8 @@ Example output:
   }
 }
 ```
-</p>
+
+
 </details>
 
 - If a `Struct` (or `Object`) declaration is initialized using the struct-literal (or object-literal) syntax `Words literal_syntax = Words { a: ...` then the keys will be `"a"`, `"b"` and `"c"`.
@@ -308,9 +324,8 @@ Two `Struct` types are considered compatible when the following are true:
 2. Their members' names are identical.
 3. The type of each member in the source struct is coercible to the type of the member with the same name in the target struct.
 
-<details>
-<summary>
 Example: struct_to_struct.wdl
+
 
 ```wdl
 version 1.3
@@ -348,8 +363,12 @@ workflow struct_to_struct {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -368,7 +387,8 @@ Example output:
   }
 }
 ```
-</p>
+
+
 </details>
 
 <div class="flex items-center gap-1 my-4">

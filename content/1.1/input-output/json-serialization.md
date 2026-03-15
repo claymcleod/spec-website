@@ -40,9 +40,8 @@ There is no natural or unambiguous serialization of a `Pair` to JSON. Attempting
 
 A `Pair[X, X]` may be converted to a two-element array.
 
-<details>
-<summary>
 Example: pair_to_array.wdl
+
 
 ```wdl
 version 1.1
@@ -58,8 +57,12 @@ workflow pair_to_array {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -73,16 +76,16 @@ Example output:
   "pair_to_array.aout": [1, 2]
 }
 ```
-</p>
+
+
 </details>
 
 #### Pair to Struct
 
 A `Pair[X, Y]` may be converted to a struct with two members `X left` and `Y right`.
 
-<details>
-<summary>
 Example: pair_to_struct.wdl
+
 
 ```wdl
 version 1.1
@@ -106,8 +109,12 @@ workflow pair_to_struct {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -124,7 +131,8 @@ Example output:
   }
 }
 ```
-</p>
+
+
 </details>
 
 ### Map
@@ -137,9 +145,8 @@ There is no natural or unambiguous serialization of a `Map` with a non-`String` 
 
 A `Map[X, Y]` can be converted to a `Struct` with two array members: `Array[X] keys` and `Array[Y] values`. This is the suggested approach.
 
-<details>
-<summary>
 Example: map_to_struct2.wdl
+
 
 ```wdl
 version 1.1
@@ -168,8 +175,12 @@ workflow map_to_struct2 {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -187,16 +198,16 @@ Example output:
   "map_to_struct2.is_equal": true
 }
 ```
-</p>
+
+
 </details>
 
 #### Map to Array
 
 A `Map[X, X]` can be converted to an array of `Pair`s. Each pair can then be converted to a serializable format using one of the methods described in the previous section. This approach is less desirable as it requires the use of a `scatter`.
 
-<details>
-<summary>
 Example: map_to_array.wdl
+
 
 ```wdl
 version 1.1
@@ -214,8 +225,12 @@ workflow map_to_array {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -229,5 +244,6 @@ Example output:
   "map_to_array.aout": [[0, 7], [1, 42]]
 }
 ```
-</p>
+
+
 </details>

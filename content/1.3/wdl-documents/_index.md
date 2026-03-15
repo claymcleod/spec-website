@@ -1,6 +1,6 @@
 +++
 title = "WDL Documents"
-description = "WDL document structure, versioning, and imports"
+description = "Document structure, versioning, and import statements"
 sort_by = "weight"
 weight = 35
 +++

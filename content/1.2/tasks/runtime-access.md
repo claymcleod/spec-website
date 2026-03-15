@@ -32,9 +32,8 @@ This information is provided by the `task` variable, which is implicitly defined
 
 If the runtime engine is not able to provide the actual value of a requirement, then it must provide the requested value instead, or the default value if no specific value was requested.
 
-<details>
-<summary>
 Example: test_runtime_info_task.wdl
+
 
 ```wdl
 version 1.2
@@ -65,8 +64,12 @@ task test_runtime_info {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -89,7 +92,8 @@ Test config:
   "capabilities": ["cpu", "memory"]
 }
 ```
-</p>
+
+
 </details>
 
 If a task is using the deprecated [`runtime`](@/1.2/tasks/runtime.md) section rather than `requirements` and `hints`, then the runtime values of the reserved `runtime` attributes (i.e., the ones that appear in the `requirements` section) are populated in the `requirements` member.

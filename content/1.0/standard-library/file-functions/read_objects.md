@@ -18,9 +18,8 @@ If the entire contents of the file can not be read for any reason, the calling t
 
 **Returns**: An `Array[Object]` with each data row represented as an Object.
 
-<details>
-<summary>
 Example: read_objects_task.wdl
+
 
 ```wdl
 task test {
@@ -37,8 +36,11 @@ task test {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
 
 The command will output to stdout the following:
 
@@ -63,5 +65,5 @@ Which would be turned into an `Array[Object]` in WDL that would look like this:
 | |key_2|"value_2"|
 | |key_3|"value_3"|
 
-</p>
+
 </details>

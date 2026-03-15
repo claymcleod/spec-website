@@ -6,9 +6,8 @@ weight = 10
 
 A task's `input` section declares its input parameters. The values for declarations within the `input` section may be specified by the caller of the task. An input declaration may be initialized to a default expression that will be used when the caller does not specify a value. Input declarations may also be optional, in which case a value may be specified but is not required. If an input declaration is not optional and does not have an initialization, then it is a required input, meaning the caller must specify a value.
 
-<details>
-<summary>
 Example: task_inputs_task.wdl
+
 
 ```wdl
 version 1.1
@@ -30,8 +29,12 @@ task task_inputs {
   >>>
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -45,7 +48,8 @@ Example output:
 ```json
 {}
 ```
-</p>
+
+
 </details>
 
 ## Task Input Localization
@@ -99,9 +103,8 @@ Recall that a type may have a quantifier:
 
 The following task has several inputs with type quantifiers:
 
-<details>
-<summary>
 Example: input_type_quantifiers_task.wdl
+
 
 ```wdl
 version 1.1
@@ -138,8 +141,12 @@ task input_type_quantifiers {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -157,7 +164,8 @@ Example output:
   "input_type_quantifiers.lines": ["A", "B", "C"]
 }
 ```
-</p>
+
+
 </details>
 
 If these input values are provided:
@@ -203,9 +211,8 @@ cat /tmp/file3 >> result
 
 It *is* possible to provide a default to an optional input type. This may be desirable in the case where you want to have a defined value by default, but you want the caller to be able to override the default and set the value to undefined (`None`).
 
-<details>
-<summary>
 Example: optional_with_default.wdl
+
 
 ```wdl
 version 1.1
@@ -248,8 +255,12 @@ workflow optional_with_default {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -266,5 +277,6 @@ Example output:
   "optional_with_default.greeting": "John"
 }
 ```
-</p>
+
+
 </details>

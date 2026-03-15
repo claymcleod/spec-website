@@ -31,11 +31,10 @@ For example, if the first argument is a `Map[String, Map[String, Int]]` and the 
 
 **Returns**: `true` if the collection contains the key, otherwise false.
 
-**Example**
+Example
 
-<details>
-  <summary>
-  Example: test_contains_key.wdl
+Example: test_contains_key.wdl
+
 
   ```wdl
   version 1.3
@@ -64,9 +63,13 @@ For example, if the first argument is a `Map[String, Map[String, Int]]` and the 
     }
   }
   ```
-  </summary>
-  <p>
-  Example input:
+
+
+<details>
+<summary></summary>
+
+
+Example input:
 
   ```json
   {
@@ -97,5 +100,6 @@ For example, if the first argument is a `Map[String, Map[String, Int]]` and the 
     "test_contains_key.phone2": null
   }
   ```
-  </p>
+
+
 </details>

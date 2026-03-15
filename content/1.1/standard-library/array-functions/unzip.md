@@ -3,9 +3,6 @@ title = "unzip"
 description = "Split array of pairs into pair of arrays"
 weight = 60
 +++
-
-<span class="wdl-badge wdl-badge-new">New in 1.1</span>
-
 ```
 Pair[Array[X], Array[Y]] unzip(Array[Pair[X, Y]])
 ```
@@ -18,9 +15,8 @@ Creates a `Pair` of `Arrays`, the first containing the elements from the `left` 
 
 **Returns**: A `Pair[Array[X], Array[Y]]` where each `Array` is of length `N`.
 
-<details>
-<summary>
 Example: test_unzip.wdl
+
 
 ```wdl
 version 1.1
@@ -32,7 +28,7 @@ workflow test_unzip {
   Pair[Array[Int], Array[String]] expected1 = ([0, 42], ["hello", "goodbye"])
   Array[String] expected_keys = ["a", "b", "c"]
   Array[Int] expected_values = [0, 1, 2]
-
+  
   output {
     Boolean is_true1 = unzip(int_str_arr) == expected1
     Boolean is_true2 = keys_and_values.left == expected_keys
@@ -40,8 +36,12 @@ workflow test_unzip {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -57,5 +57,6 @@ Example output:
   "test_unzip.is_true3": true
 }
 ```
-</p>
+
+
 </details>

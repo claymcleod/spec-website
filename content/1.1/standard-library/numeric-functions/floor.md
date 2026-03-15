@@ -16,9 +16,8 @@ Rounds a floating point number **down** to the next lower integer.
 
 **Returns**: An integer.
 
-<details>
-<summary>
 Example: test_floor.wdl
+
 
 ```wdl
 version 1.1
@@ -37,8 +36,12 @@ workflow test_floor {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -54,5 +57,6 @@ Example output:
   "test_floor.all_true": [true, true]
 }
 ```
-</p>
+
+
 </details>

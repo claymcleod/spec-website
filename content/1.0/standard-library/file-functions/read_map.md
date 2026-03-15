@@ -18,8 +18,8 @@ If the entire contents of the file can not be read for any reason, the calling t
 
 **Returns**: A `Map[String, String]` of the data in the file.
 
-<details>
-<summary>
+The following task would write a two-column TSV to standard out and that would be interpreted as a `Map[String, String]`:
+
 Example: read_map_task.wdl
 
 ```wdl
@@ -36,5 +36,4 @@ task do_stuff {
   }
 }
 ```
-</summary>
-</details>
+

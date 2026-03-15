@@ -16,9 +16,8 @@ Reads a file that contains a single line containing only an integer and (optiona
 
 **Returns**: An `Int`.
 
-<details>
-<summary>
 Example: read_int_task.wdl
+
 
 ```wdl
 version 1.1
@@ -33,8 +32,12 @@ task read_int {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -48,5 +51,6 @@ Example output:
   "read_int.i": 1
 }
 ```
-</p>
+
+
 </details>

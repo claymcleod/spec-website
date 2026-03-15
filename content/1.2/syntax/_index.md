@@ -1,6 +1,6 @@
 +++
 title = "Syntax"
-description = "WDL syntax rules: whitespace, comments, keywords, and literals"
+description = "Whitespace, comments, keywords, literals, and other syntactic rules"
 sort_by = "weight"
 weight = 15
 +++
@@ -26,9 +26,8 @@ Comments can be used to provide helpful information such as workflow usage, requ
 
 There is no special syntax for multi-line comments - simply use a `#` at the start of each line.
 
-<details>
-  <summary>
-  Example: workflow_with_comments.wdl
+Example: workflow_with_comments.wdl
+
 
   ```wdl
   # Comments are allowed before version
@@ -72,9 +71,13 @@ There is no special syntax for multi-line comments - simply use a `#` at the sta
     }
   }
   ```
-  </summary>
-  <p>
-  Example input:
+
+
+<details>
+<summary></summary>
+
+
+Example input:
 
   ```json
   {
@@ -89,7 +92,8 @@ There is no special syntax for multi-line comments - simply use a `#` at the sta
     "workflow_with_comments.result": 2
   }
   ```
-  </p>
+
+
 </details>
 
 ## Reserved Keywords

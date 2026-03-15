@@ -16,9 +16,8 @@ For example: `ns.ns2.mytask` is a fully-qualified name - `ns.ns2` is the parent 
 
 When a [call statement](@/1.1/workflows/call.md) needs to refer to a task or workflow in another namespace, then it must use the fully-qualified name of that task or workflow. When an [expression](@/1.1/types/_index.md) needs to refer to a declaration in another namespace, it must use a *namespaced identifier*, which is an identifier consisting of a fully-qualified name.
 
-<details>
-<summary>
 Example: call_imported.wdl
+
 
 ```wdl
 version 1.1
@@ -39,8 +38,12 @@ workflow call_imported {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -56,16 +59,16 @@ Example output:
   "call_imported.result": 20
 }
 ```
-</p>
+
+
 </details>
 
 The workflow in the above example imports the WDL file from the previous section using an alias. The import creates the namespace `ns1`, and the workflow calls a task in the imported namespace using its fully qualified name, `ns1.double`. Each call is aliased, and the alias is used to refer to the output of the task, e.g., `d1.out` (see the [Call Statement](@/1.1/workflows/call.md) section for details on call aliasing).
 
 In the following more extensive example, all of the fully-qualified names that exist within the top-level workflow are listed exhaustively.
 
-<details>
-<summary>
 Example: main.wdl
+
 
 ```wdl
 version 1.1
@@ -113,8 +116,12 @@ workflow main {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -130,12 +137,12 @@ Example output:
   "main.echo_array": ["a", "b", "c"]
 }
 ```
-</p>
+
+
 </details>
 
-<details>
-<summary>
 Example: other.wdl
+
 
 ```wdl
 version 1.1
@@ -173,8 +180,12 @@ workflow other {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -191,7 +202,8 @@ Example output:
   "other.results": 3
 }
 ```
-</p>
+
+
 </details>
 
 The following fully-qualified names exist when calling `workflow main` in `main.wdl`:
@@ -230,4 +242,4 @@ The following fully-qualified names exist when calling `workflow main` in `main.
 | `main.foobar_results`         | `Int` result from call to `foobar`                                                          | Anywhere in `main`'s output section and by the caller of `main` |
 | `main.echo_array`             | Array of `String` contents of `File` results from calls to `echo` in the scatter            | Anywhere in `main`'s output section and by the caller of `main` |
 
-\* Task inputs are accessible to be set by the caller of `main` if the workflow `meta` section contains `allowNestedInputs: true`.
+\* Task inputs are accessible to be set by the caller of `main` if the workflow is called with [`allowNestedInputs: true`](@/1.1/workflows/call.md#computing-call-inputs) in its `meta` section.

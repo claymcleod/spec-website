@@ -3,9 +3,6 @@ title = "min"
 description = "Return minimum of two numbers"
 weight = 40
 +++
-
-<span class="wdl-badge wdl-badge-new">New in 1.1</span>
-
 This function has four variants:
 
 ```
@@ -24,9 +21,8 @@ Returns the smaller of two values. If both values are `Int`s, the return value i
 
 **Returns**: The smaller of the two arguments.
 
-<details>
-<summary>
 Example: test_min.wdl
+
 
 ```wdl
 version 1.1
@@ -44,8 +40,12 @@ workflow test_min {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -63,5 +63,6 @@ Example output:
   "test_min.min2": 1.0
 }
 ```
-</p>
+
+
 </details>

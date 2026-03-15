@@ -3,9 +3,6 @@ title = "chunk"
 description = "Split array into chunks"
 weight = 70
 +++
-
-<span class="wdl-badge wdl-badge-new">New in 1.2</span>
-
 ```
 Array[Array[X]] chunk(Array[X], Int)
 ```
@@ -19,9 +16,8 @@ Given an array and a length *n*, splits the array into consecutive, non-overlapp
 
 **Returns**: An array of sub-arrays, where each sub-array is of length `N` except possibly the last one.
 
-<details>
-<summary>
 Example: chunk_array.wdl
+
 
 ```wdl
 version 1.2
@@ -45,8 +41,12 @@ workflow chunk_array {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -64,7 +64,7 @@ Example output:
   "chunk_array.o4": [],
   "chunk_array.concats": ["abc", "def"]
 }
-``` 
-</p>
-</details>
+```
 
+
+</details>

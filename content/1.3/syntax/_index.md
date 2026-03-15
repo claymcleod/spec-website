@@ -1,6 +1,6 @@
 +++
 title = "Syntax"
-description = "WDL syntax rules: whitespace, comments, keywords, and literals"
+description = "Whitespace, comments, keywords, literals, and other syntactic rules"
 sort_by = "weight"
 weight = 15
 +++
@@ -26,9 +26,8 @@ Comments can be used to provide helpful information such as workflow usage, requ
 
 There is no special syntax for multi-line comments - simply use a `#` at the start of each line.
 
-<details>
-  <summary>
-  Example: workflow_with_comments.wdl
+Example: workflow_with_comments.wdl
+
 
   ```wdl
   # Comments are allowed before version
@@ -72,9 +71,13 @@ There is no special syntax for multi-line comments - simply use a `#` at the sta
     }
   }
   ```
-  </summary>
-  <p>
-  Example input:
+
+
+<details>
+<summary></summary>
+
+
+Example input:
 
   ```json
   {
@@ -89,7 +92,8 @@ There is no special syntax for multi-line comments - simply use a `#` at the sta
     "workflow_with_comments.result": 2
   }
   ```
-  </p>
+
+
 </details>
 
 ## Reserved Keywords
@@ -140,9 +144,3 @@ workflow
 ## Literals
 
 Task and workflow inputs may be passed in from an external source, or they may be specified in the WDL document itself using literal values. Input, output, and other declaration values may also be constructed at runtime using [expressions](@/1.3/expressions/_index.md) that consist of literals, identifiers (references to [declarations](@/1.3/expressions/declarations.md) or [call](@/1.3/workflows/call.md) outputs), built-in [operators](@/1.3/expressions/operator-precedence.md), and [standard library functions](@/1.3/standard-library/_index.md).
-
-## Types
-
-A [declaration](@/1.3/expressions/declarations.md) is a name that the user reserves in a given scope to hold a value of a certain type. In WDL *all* declarations (including inputs and outputs) must be typed. This means that the information about the type of data that may be held by each declarations must be specified explicitly.
-
-In WDL *all* types represent immutable values. For example, a `File` represents a logical "snapshot" of the file at the time when the value was created. It is impossible for a task to change an upstream value that has been provided as an input - even if it modifies its local copy, the original value is unaffected.

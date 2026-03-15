@@ -20,9 +20,8 @@ If the file is empty, an empty map is returned.
 
 **Returns**: A `Map[String, String]`, with one element for each row in the TSV file.
 
-<details>
-<summary>
 Example: read_map_task.wdl
+
 
 ```wdl
 version 1.3
@@ -38,8 +37,12 @@ task read_map {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -56,5 +59,6 @@ Example output:
   }
 }
 ```
-</p>
+
+
 </details>

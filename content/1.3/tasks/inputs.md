@@ -6,9 +6,8 @@ weight = 10
 
 A task's `input` section declares its input parameters. The values for declarations within the `input` section may be specified by the caller of the task. An input declaration may be initialized to a default expression to use when the caller does not supply a value. Input declarations with the optional type quantifier `?` also may be omitted by the caller even when there is no default initializer. If an input declaration has neither an optional type nor a default initializer, then it is a required input, meaning the caller must specify a value.
 
-<details>
-<summary>
 Example: task_inputs_task.wdl
+
 
 ```wdl
 version 1.3
@@ -31,8 +30,12 @@ task task_inputs {
   >>>
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -40,7 +43,8 @@ Example input:
   "task_inputs.i": 1
 }
 ```
-</p>
+
+
 </details>
 
 ## Task Input Localization
@@ -48,7 +52,7 @@ Example input:
 `File` and `Directory` inputs may require localization to the execution environment. For example, a file located on a remote web server that is provided to the execution engine as an `https://` URL must first be downloaded to the machine where the task is being executed.
 
 - `File`s and `Directory`s are localized into the execution environment prior to evaluating any expressions. This means that references to `File` or `Directory` declarations in input declaration expressions, private declaration expressions, and the command section are always replaced with the local paths to those files/directories.
-- When multiple input declarations refer to the same canonicalized `File` or `Directory` (i.e., they [compare as equal](@/1.3/types/primitive-types/_index.md#path-canonicalization-and-validation)), the execution engine should localize the resource once, and all references to those declarations should resolve to the same localized path.
+- When multiple input declarations refer to the same canonicalized `File` or `Directory` (i.e., they [compare as equal](@/1.3/types/primitive-types/files-and-directories.md#path-canonicalization-and-validation)), the execution engine should localize the resource once, and all references to those declarations should resolve to the same localized path.
 - When localizing a `File` or `Directory`, the engine may choose to place the local resource wherever it likes so long as it adheres to these rules:
   - The original file/directory name (the "basename") must be preserved even if the path to it has changed.
   - Two distinct input files with the same basename must be located separately, to avoid name collision. Note that this refers to two different files (that would not compare as equal), not to multiple input declarations that reference the same underlying file.
@@ -122,9 +126,8 @@ Recall that a type may have a quantifier:
 
 The following task has several inputs with type quantifiers:
 
-<details>
-<summary>
 Example: input_type_quantifiers_task.wdl
+
 
 ```wdl
 version 1.3
@@ -161,8 +164,12 @@ task input_type_quantifiers {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -180,7 +187,8 @@ Example output:
   "input_type_quantifiers.lines": ["A", "B", "C"]
 }
 ```
-</p>
+
+
 </details>
 
 If these input values are provided:
@@ -234,9 +242,8 @@ In detail, if a caller omits an input from the call `input:` section, then the d
 | call input: `x = None` | 1           | `None`       | `None`   | *error* |
 | call input: *omitted*  | 1           | 1            | `None`   | *error* |
 
-<details>
-<summary>
 Example: optional_with_default.wdl
+
 
 ```wdl
 version 1.3
@@ -276,8 +283,12 @@ workflow optional_with_default {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -294,5 +305,6 @@ Example output:
   "optional_with_default.greeting": "John"
 }
 ```
-</p>
+
+
 </details>

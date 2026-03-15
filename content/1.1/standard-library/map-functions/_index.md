@@ -1,7 +1,7 @@
 +++
 title = "Map Functions"
 sort_by = "weight"
-description = "Functions for map operations"
+description = "Functions for creating and manipulating maps"
 weight = 60
 transparent = true
 +++

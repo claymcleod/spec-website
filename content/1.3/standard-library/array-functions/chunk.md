@@ -19,9 +19,8 @@ Given an array and a length *n*, splits the array into consecutive, non-overlapp
 
 **Returns**: An array of sub-arrays, where each sub-array is of length `N` except possibly the last one.
 
-<details>
-<summary>
 Example: chunk_array.wdl
+
 
 ```wdl
 version 1.3
@@ -45,8 +44,12 @@ workflow chunk_array {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -65,5 +68,6 @@ Example output:
   "chunk_array.concats": ["abc", "def"]
 }
 ```
-</p>
+
+
 </details>

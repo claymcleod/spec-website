@@ -21,9 +21,8 @@ WDL primitive values are naturally converted to string values. This is described
 
 Deserialization of primitive values is done via one of the `read_*` functions, each of which deserializes a different type of primitive value from a file. The file must contain a single value of the expected type, with optional whitespace. The value is read as a string and then converted to the appropriate type, or raises an error if the value cannot be converted.
 
-<details>
-<summary>
 Example: read_write_primitives_task.wdl
+
 
 ```wdl
 version 1.1
@@ -52,8 +51,12 @@ task read_write_primitives {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -72,7 +75,8 @@ Example output:
   "read_write_primitives.iout": 42
 }
 ```
-</p>
+
+
 </details>
 
 ## Compound Values
@@ -100,9 +104,8 @@ Specific examples of serializing and deserializing each type of compound value a
 
 This method applies to an array of a primitive type. Each element of the array is coerced to a string, and the strings are then joined into a single string separated by a delimiter. This is done using the [`sep`](@/1.1/standard-library/array-string-functions/sep.md) function.
 
-<details>
-<summary>
 Example: serialize_array_delim_task.wdl
+
 
 ```wdl
 version 1.1
@@ -130,8 +133,12 @@ task serialize_array_delim {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -152,7 +159,8 @@ Example output:
   ]
 }
 ```
-</p>
+
+
 </details>
 
 Given an array `[1, 2]`, the instantiated command would be:
@@ -167,9 +175,8 @@ done
 
 This method applies to an array of a primitive type. Using `write_lines`, Each element of the array is coerced to a string, and the strings are written to a file, one element per line. Using `read_lines`, each line of the file is read as a `String` and coerced to the target type.
 
-<details>
-<summary>
 Example: serde_array_lines_task.wdl
+
 
 ```wdl
 version 1.1
@@ -191,8 +198,12 @@ task serde_array_lines {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -209,7 +220,8 @@ Example output:
   "serde_array_lines.matches": ["2", "2"]
 }
 ```
-</p>
+
+
 </details>
 
 Given an array of patterns `["hello", "world"]`, the instantiated command would be:
@@ -231,9 +243,8 @@ world
 
 This method applies to an array of any type that can be serialized to JSON. Calling [`write_json`](@/1.1/standard-library/file-functions/write_json.md) with an `Array` parameter results in the creation of a file containing a JSON array.
 
-<details>
-<summary>
 Example: serde_array_json_task.wdl
+
 
 ```wdl
 version 1.1
@@ -262,8 +273,12 @@ task serde_array_json {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -282,7 +297,8 @@ Example output:
   "serde_array_json.keys": ["a", "b"]
 }
 ```
-</p>
+
+
 </details>
 
 Given the `Map` `{"a": 1, "b": 2}`, the instantiated command would be:
@@ -310,9 +326,8 @@ A `Pair` cannot be directly serialized to a `String`, nor can it be deserialized
 
 The most common approach to `Pair` serialization is to serialize the `left` and `right` values separately, e.g., by converting each to a `String` or writing each to a separate file using one of the `write_*` functions. Similarly, two values can be deserialized independently and then used to create a `Pair`.
 
-<details>
-<summary>
 Example: serde_pair.wdl
+
 
 ```wdl
 version 1.1
@@ -349,8 +364,12 @@ workflow serde_pair {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -371,16 +390,16 @@ Example output:
   }
 }
 ```
-</p>
+
+
 </details>
 
 #### Homogeneous Pair serialization/deserialization as Array
 
 A homogeneous `Pair[X, X]` can be converted to/from an `Array` and then serialized/deserialized by any of the methods in the previous section.
 
-<details>
-<summary>
 Example: serde_homogeneous_pair.wdl
+
 
 ```wdl
 version 1.1
@@ -415,8 +434,12 @@ workflow serde_homogeneous_pair {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -435,7 +458,8 @@ Example output:
   "serde_homogeneous_pair.ints": ["1", "2", "3", "4"]
 }
 ```
-</p>
+
+
 </details>
 
 #### Pair serialization/deserialization using `read_json`/`write_json`
@@ -448,9 +472,8 @@ A `Pair[X, Y]` can be [converted to JSON](#pair) and then serialized using [`wri
 
 A `Map` is a common way to represent a set of arguments that need to be passed to a command. Each key/value pair can be converted to a `String` using a `scatter`, or the keys and value can be independently converted to Bash arrays and referenced by index.
 
-<details>
-<summary>
 Example: serialize_map.wdl
+
 
 ```wdl
 version 1.1
@@ -517,8 +540,12 @@ workflow serialize_map {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -540,16 +567,16 @@ Example output:
   "serialize_map.results2": ["hello world", "hi_world"]
 }
 ```
-</p>
+
+
 </details>
 
 #### Map serialization/deserialization using `write_map()`/`read_map()`
 
 A `Map[String, String]` value can be serialized as a two-column TSV file using [`write_map`](@/1.1/standard-library/file-functions/write_map.md), and deserialized from a two-column TSV file using [`read_map`](@/1.1/standard-library/file-functions/read_map.md).
 
-<details>
-<summary>
 Example: serde_map_tsv_task.wdl
+
 
 ```wdl
 version 1.1
@@ -572,8 +599,12 @@ task serde_map_tsv {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -597,7 +628,8 @@ Example output:
   }
 }
 ```
-</p>
+
+
 </details>
 
 Given a `Map` `{ "a": "b", "c": "d", "e": "f" }`, the instantiated command would be:
@@ -630,9 +662,8 @@ Which is deserialized to the `Map` `{"a": "c", "e": "b", "d": "f"}`.
 
 A `Map[String, Y]` value can be serialized as a JSON `object` using [`write_json`](@/1.1/standard-library/file-functions/write_json.md), and a JSON object can be read into a `Map[String, Y]` using [`read_json`](@/1.1/standard-library/file-functions/read_json.md) so long as all the values of the JSON object are coercible to `Y`.
 
-<details>
-<summary>
 Example: serde_map_json_task.wdl
+
 
 ```wdl
 version 1.1
@@ -663,8 +694,12 @@ task serde_map_json {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -688,7 +723,8 @@ Example output:
   }
 }
 ```
-</p>
+
+
 </details>
 
 Given a `Map` `{ "read1": 32, "read2": 41, "read3": 55 }`, the instantiated command would be:

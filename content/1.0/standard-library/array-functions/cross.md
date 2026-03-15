@@ -17,8 +17,6 @@ Given any two arrays, the `cross` function returns the cross product of those ar
 
 **Returns**: An `Array[Pair[X,Y]]` containing every possible pairing of elements from the two input arrays.
 
-<details>
-<summary>
 Example: cross_example.wdl
 
 ```wdl
@@ -27,5 +25,4 @@ Array[String] zs = [ "d", "e" ]
 
 Array[Pair[Int, String]] crossed = cross(xs, zs) # i.e. crossed = [ (1, "d"), (1, "e"), (2, "d"), (2, "e"), (3, "d"), (3, "e") ]
 ```
-</summary>
-</details>
+

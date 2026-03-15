@@ -16,9 +16,8 @@ Given something that's compatible with `Array[String]`, this writes each element
 
 **Returns**: A `File` containing each element of the array on its own line.
 
-<details>
-<summary>
 Example: write_lines_task.wdl
+
 
 ```wdl
 task example {
@@ -28,8 +27,11 @@ task example {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
 
 If this task were run, the command might look like:
 
@@ -45,5 +47,5 @@ second
 third
 ```
 
-</p>
+
 </details>

@@ -3,9 +3,6 @@ title = "find"
 description = "Find substring matches"
 weight = 10
 +++
-
-<span class="wdl-badge wdl-badge-new">New in 1.2</span>
-
 Given two `String` parameters `input` and `pattern`, searches for the occurrence of `pattern` within `input` and returns the first match or `None` if there are no matches. `pattern` is a [regular expression](https://en.wikipedia.org/wiki/Regular_expression) and is evaluated as a [POSIX Extended Regular Expression (ERE)](https://en.wikipedia.org/wiki/Regular_expression#POSIX_basic_and_extended).
 
 Note that regular expressions are written using regular WDL strings, so backslash characters need to be double-escaped. For example:
@@ -21,9 +18,8 @@ String? first_match = find("hello\tBob", "\\t")
 
 **Returns**: The contents of the first match, or `None` if `pattern` does not match `input`.
 
-<details>
-<summary>
 Example: test_find_task.wdl
+
 
 ```wdl
 version 1.2
@@ -39,8 +35,12 @@ workflow test_find {
   }  
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -55,6 +55,6 @@ Example output:
   "test_find.match2": null
 }
 ```
-</p>
-</details>
 
+
+</details>

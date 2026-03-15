@@ -16,9 +16,8 @@ Reads a file that contains only a numeric value and (optional) whitespace. If th
 
 **Returns**: A `Float`.
 
-<details>
-<summary>
 Example: read_float_task.wdl
+
 
 ```wdl
 version 1.3
@@ -35,8 +34,12 @@ task read_float {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -51,5 +54,6 @@ Example output:
   "read_float.f2": 2.0
 }
 ```
-</p>
+
+
 </details>

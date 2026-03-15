@@ -17,8 +17,6 @@ Given a `String` and an `Array[X]` where `X` is a primitive type, the `prefix` f
 
 **Returns**: An `Array[String]` with the prefixed elements of the input array.
 
-<details>
-<summary>
 Example: prefix_example.wdl
 
 ```wdl
@@ -28,5 +26,4 @@ Array[String] env_param = prefix("-e ", env) # ["-e key1=value1", "-e key2=value
 Array[Integer] env2 = [1, 2, 3]
 Array[String] env2_param = prefix("-f ", env2) # ["-f 1", "-f 2", "-f 3"]
 ```
-</summary>
-</details>
+

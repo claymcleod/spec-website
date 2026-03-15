@@ -3,9 +3,6 @@ title = "keys"
 description = "Extract keys from a map"
 weight = 30
 +++
-
-<span class="wdl-badge wdl-badge-new">New in 1.1</span>
-
 ```
 Array[P] keys(Map[P, Y])
 ```
@@ -18,9 +15,8 @@ Creates an `Array` of the keys from the input `Map`, in the same order as the el
 
 **Returns**: `Array[P]` of the input `Map`s keys.
 
-<details>
-<summary>
 Example: test_keys.wdl
+
 
 ```wdl
 version 1.1
@@ -47,8 +43,12 @@ workflow test_keys {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -63,5 +63,6 @@ Example output:
   "test_keys.is_true2": true
 }
 ```
-</p>
+
+
 </details>

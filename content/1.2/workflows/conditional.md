@@ -3,7 +3,6 @@ title = "Conditional Statement"
 description = "Conditional execution of workflow elements"
 weight = 90
 +++
-
 A conditional statement consists of the `if` keyword, followed by a `Boolean` expression and a body of (potentially nested) statements. The conditional body is only evaluated if the conditional expression evaluates to `true`.
 
 After evaluation of the conditional has completed, each declaration or call output in the conditional body is exposed in the enclosing context as an optional declaration. In other words, for a declaration or call output `T <name>` within a conditional body, a declaration `T? <name>` is implicitly available outside of the conditional body. If the expression evaluated to `true`, and thus the body of the conditional was evaluated, then the value of each exposed declaration is the same as its original value inside the conditional body. If the expression evaluated to `false` and thus the body of the conditional was not evaluated, then the value of each exposed declaration is `None`.
@@ -12,9 +11,8 @@ The scoping rules for conditionals are similar to those for scatters - declarati
 
 In the example below, `Int j` is accessible anywhere in the conditional body, and `Int? j` is an optional that is accessible outside of the conditional anywhere in `workflow test_conditional`.
 
-<details>
-<summary>
 Example: test_conditional.wdl
+
 
 ```wdl
 version 1.2
@@ -70,8 +68,12 @@ workflow test_conditional {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -87,14 +89,14 @@ Example output:
   "test_conditional.j_out": 2
 }
 ```
-</p>
+
+
 </details>
 
 WDL has no `else` keyword. To mimic an `if-else` statement, you would simply use two conditionals with inverted boolean expressions. A common idiom is to use `select_first` to select a value from either the `if` or the `if not` body, whichever one is defined.
 
-<details>
-<summary>
 Example: if_else.wdl
+
 
 ```wdl
 version 1.2
@@ -133,8 +135,12 @@ workflow if_else {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -148,14 +154,14 @@ Example output:
   "if_else.greeting": "Good afternoon buddy!"
 }
 ```
-</p>
+
+
 </details>
 
 It is impossible to have a multi-level optional type, e.g., `Int??`. The outputs of a conditional are only ever single-level optionals, even when there are nested conditionals.
 
-<details>
-<summary>
 Example: nested_if.wdl
+
 
 ```wdl
 version 1.2
@@ -184,8 +190,12 @@ workflow nested_if {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -203,20 +213,6 @@ Example output:
   "nested_if.greeting": "hi"
 }
 ```
-</p>
+
+
 </details>
-
-# Standard Library
-
-The following functions are available to be called in WDL expressions. The signature of each function is given as `R func_name(T1, T2, ...)`, where `R` is the return type and `T1`, `T2`, ... are the parameter types. All function parameters must be specified in order, and all function parameters are required, with the exception that the last parameter(s) of some functions is optional (denoted by the type in brackets `[]`).
-
-A function is called using the following syntax: `R' val = func_name(arg1, arg2, ...)`, where `R'` is a type that is coercible from `R`, and `arg1`, `arg2`, ... are expressions whose types are coercible to `T1`, `T2`, ...
-
-A function may be generic, which means that one or more of its parameters and/or its return type are generic. These functions are defined using letters (e.g. `X`, `Y`) for the type parameters, and the bounds of each type parameter is specified in the function description.
-
-A function may be polymorphic, which means it is actually multiple functions ("variants") with the same name but different signatures. Such a function may be defined using `|` to denote the set of alternative valid types for one or more of its parameters, or it may have each variant defined separately.
-
-Functions are grouped by their argument types and restrictions. Some functions may be restricted as to where they may be used. An unrestricted function may be used in any expression.
-
-Functions that are new in this version of the specification are denoted by ✨, and deprecated functions are denoted by 🗑.
-

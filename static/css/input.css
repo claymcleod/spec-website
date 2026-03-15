@@ -101,6 +101,25 @@
 }
 
 @layer components {
+  .spec-home-link {
+    @apply block text-sm font-semibold text-teal-900 text-center transition-colors;
+    background: var(--color-teal-200);
+    padding: 0.625rem 1rem;
+  }
+
+  .spec-home-link:hover {
+    background: var(--color-teal-300);
+  }
+
+  :is(.dark) .spec-home-link {
+    @apply text-teal-100;
+    background: var(--color-teal-800);
+  }
+
+  :is(.dark) .spec-home-link:hover {
+    background: var(--color-teal-700);
+  }
+
   .sidebar-link {
     @apply block px-2 py-1.5 text-sm text-gray-500 rounded transition-colors;
   }
@@ -253,8 +272,13 @@
 
   .wdl-badge-new {
     background-color: rgba(79, 209, 197, 0.15);
+    color: var(--color-teal-800);
+    border: 1px solid var(--color-teal-700);
+  }
+
+  :is(.dark) .wdl-badge-new {
     color: var(--color-teal-400);
-    border: 1px solid rgba(79, 209, 197, 0.3);
+    border-color: rgba(79, 209, 197, 0.3);
   }
 
   .wdl-badge-deprecated {
@@ -292,28 +316,107 @@
   }
 
 
+  /* Admonition styling */
+  .admonition {
+    margin: 1.5rem 0;
+    border: 1px solid var(--color-teal-700);
+    border-radius: 0.75rem;
+    overflow: hidden;
+  }
+
+  .admonition-title {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-teal-900);
+    background: var(--color-teal-100);
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid var(--color-teal-700);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  :is(.dark) .admonition {
+    border-color: var(--color-teal-600);
+  }
+
+  :is(.dark) .admonition-title {
+    color: var(--color-teal-300);
+    background: rgba(20, 184, 166, 0.1);
+    border-bottom-color: var(--color-teal-600);
+  }
+
+  /* Warning admonition - orange */
+  .admonition-warning {
+    border-color: #c2410c;
+  }
+
+  .admonition-warning .admonition-title {
+    color: #9a3412;
+    background: #fff7ed;
+    border-bottom-color: #c2410c;
+  }
+
+  :is(.dark) .admonition-warning {
+    border-color: #ea580c;
+  }
+
+  :is(.dark) .admonition-warning .admonition-title {
+    color: #fdba74;
+    background: rgba(234, 88, 12, 0.1);
+    border-bottom-color: #ea580c;
+  }
+
+  /* Tip admonition - green */
+  .admonition-tip {
+    border-color: #15803d;
+  }
+
+  .admonition-tip .admonition-title {
+    color: #14532d;
+    background: #f0fdf4;
+    border-bottom-color: #15803d;
+  }
+
+  :is(.dark) .admonition-tip {
+    border-color: #16a34a;
+  }
+
+  :is(.dark) .admonition-tip .admonition-title {
+    color: #86efac;
+    background: rgba(22, 163, 74, 0.1);
+    border-bottom-color: #16a34a;
+  }
+
+  .admonition-body {
+    padding: 1rem;
+    font-size: 0.875rem;
+    color: var(--color-gray-600);
+  }
+
+  :is(.dark) .admonition-body {
+    color: var(--color-gray-200);
+  }
+
   /* Details/summary styling - Technical documentation accordion */
   details {
     margin: 1.5rem 0;
-    border: 1px solid var(--color-gray-200);
+    border: 1px solid var(--color-teal-700);
     border-radius: 0.75rem;
     overflow: hidden;
   }
 
   :is(.dark) details {
-    border-color: var(--color-gray-500);
+    border-color: var(--color-teal-600);
   }
 
   details summary {
     cursor: pointer;
-    font-weight: 600;
-    color: var(--color-gray-700);
     user-select: none;
-    padding: 0.875rem 1rem;
+    padding: 0;
     background: transparent;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+    display: block;
     list-style: none;
     position: relative;
   }
@@ -322,30 +425,38 @@
     display: none;
   }
 
+  details summary:focus-visible {
+    outline: 2px solid var(--color-teal-500);
+    outline-offset: -2px;
+  }
+
   /* Clickable toggle bar */
   details summary::before {
     content: "▸ Show example input/output";
     font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
     font-size: 0.75rem;
     font-weight: 500;
-    color: var(--color-teal-700);
-    background: var(--color-teal-50);
+    color: var(--color-teal-900);
+    background: var(--color-teal-100);
     border: none;
-    border-bottom: 1px solid var(--color-teal-200);
-    margin: -0.875rem -1rem 0.625rem -1rem;
+    margin: 0;
     padding: 0.5rem 1rem;
     display: block;
-    transition: all 0.15s ease;
+    transition: color 0.15s ease, background 0.15s ease;
   }
 
   details[open] summary::before {
     content: "▾ Hide example input/output";
+    border-bottom: 1px solid var(--color-teal-700);
   }
 
   :is(.dark) details summary::before {
     color: var(--color-teal-300);
     background: rgba(20, 184, 166, 0.1);
-    border-bottom-color: rgba(20, 184, 166, 0.2);
+  }
+
+  :is(.dark) details[open] summary::before {
+    border-bottom-color: var(--color-teal-600);
   }
 
   :is(.dark) details summary {
@@ -360,10 +471,14 @@
     background: rgba(20, 184, 166, 0.15);
   }
 
-  /* Expanded content section labels */
+  /* Space between summary bar and content */
+  details[open] > summary {
+    margin-bottom: 1rem;
+  }
+
   details > p,
   details > div {
-    padding: 0.75rem 1rem 0.125rem;
+    padding: 0.75rem 1.25rem 0.125rem;
     margin: 0;
     font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
     font-weight: 500;
@@ -394,11 +509,32 @@
     color: var(--color-teal-400);
   }
 
+  /* Example labels inside details override the default details > p styling */
+  details > p.example-label {
+    display: block;
+    padding: 0.375rem 1rem;
+    margin: 0 1.25rem;
+    margin-bottom: 0;
+    border: none;
+    border-radius: 0.5rem 0.5rem 0 0;
+  }
+
+  details > p.example-label::before {
+    content: none;
+  }
+
   /* Code blocks inside expanded content */
   details > pre {
-    margin: 0.25rem 1rem 0.75rem;
+    margin: 0.25rem 1.25rem 0.75rem;
     border-radius: 0.5rem;
-    border: 1px solid var(--color-gray-200);
+    border: none;
+  }
+
+  details > pre.example-code {
+    margin-top: 0;
+    border: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
   }
 
   :is(.dark) details > pre {
@@ -406,7 +542,7 @@
   }
 
   details > pre:last-of-type {
-    margin-bottom: 1.25rem;
+    margin-bottom: 1rem;
   }
 
   details summary pre,
@@ -465,6 +601,15 @@
   .prose :where(details > p pre:last-child):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
     margin-bottom: 0;
   }
+
+  .prose :where(details > pre):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    margin-top: 0.25rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .prose :where(details > pre.example-code):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    margin-top: 0;
+  }
 }
 
 @layer utilities {
@@ -474,6 +619,32 @@
 
   :is(.dark) pre[data-lang] {
     @apply border-gray-800 bg-gray-900;
+  }
+
+  /* Example label as code block header */
+  .example-label {
+    font-family: 'Martian Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-gray-400);
+    background: rgb(15, 17, 26);
+    border: 1px solid rgb(35, 38, 52);
+    border-bottom: 1px solid rgb(35, 38, 52);
+    border-radius: 0.5rem 0.5rem 0 0;
+    padding: 0.5rem 1rem;
+    margin-bottom: 0 !important;
+  }
+
+  :is(.dark) .example-label {
+    background: var(--color-gray-600);
+    border-color: var(--color-gray-800);
+    color: var(--color-gray-200);
+  }
+
+  .prose :where(p.example-label + pre):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+    margin-top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
   }
 
   /* Override syntax highlighting comment color for better contrast
@@ -488,5 +659,25 @@
   
   .chevron-closed {
     transform: rotate(0deg);
+  }
+
+  .prose ins,
+  .prose .diffins {
+    @apply bg-green-100 text-green-900 rounded-sm px-0.5 no-underline;
+  }
+
+  .prose del,
+  .prose .diffdel {
+    @apply bg-red-100 text-red-900 rounded-sm px-0.5;
+  }
+
+  :is(.dark) .prose ins,
+  :is(.dark) .prose .diffins {
+    @apply bg-green-900/40 text-green-200;
+  }
+
+  :is(.dark) .prose del,
+  :is(.dark) .prose .diffdel {
+    @apply bg-red-900/40 text-red-200;
   }
 }

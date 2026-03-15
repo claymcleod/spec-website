@@ -16,9 +16,8 @@ Adds single-quotes (`'`) around each element of the input array of primitive val
 
 **Returns**: An `Array[String]` the single-quoted elements of the input array.
 
-<details>
-<summary>
 Example: test_squote.wdl
+
 
 ```wdl
 version 1.3
@@ -33,8 +32,12 @@ workflow test_squote {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -49,5 +52,6 @@ Example output:
   "test_squote.env2_quoted": ["'1'", "'2'", "'3'"]
 }
 ```
-</p>
+
+
 </details>

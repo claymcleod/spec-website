@@ -27,8 +27,6 @@ Varieties of the `size` function also exist for the following compound types. Th
 - `Float size(Array[File], [String])`: Returns the sum of sizes of the files in the array.
 - `Float size(Array[File?], [String])`: Returns the sum of sizes of all specified files in the array.
 
-<details>
-<summary>
 Example: file_size_task.wdl
 
 ```wdl
@@ -48,5 +46,4 @@ task example {
   }
 }
 ```
-</summary>
-</details>
+

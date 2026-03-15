@@ -1,6 +1,6 @@
 +++
 title = "Compound Types"
-description = "Compound types in WDL: Array, Pair, and Map"
+description = "Array, Pair, Map, and Struct types"
 sort_by = "weight"
 weight = 40
 transparent = true
@@ -14,9 +14,8 @@ An `Array` represents an ordered list of elements that are all of the same type.
 
 An array value can be initialized with an array literal - a comma-separated list of values in brackets (`[]`). A specific zero-based index of an `Array` can be accessed by placing the index in brackets after the declaration name. Accessing a non-existent index of an `Array` results in an error.
 
-<details>
-  <summary>
-  Example: array_access.wdl
+Example: array_access.wdl
+
 
   ```wdl
   version 1.3
@@ -32,9 +31,13 @@ An array value can be initialized with an array literal - a comma-separated list
     }
   }
   ```
-  </summary>
-  <p>
-  Example input:
+
+
+<details>
+<summary></summary>
+
+
+Example input:
 
   ```json
   {
@@ -50,12 +53,12 @@ An array value can be initialized with an array literal - a comma-separated list
     "array_access.s": "hello"
   }
   ```
-  </p>
+
+
 </details>
 
-<details>
-  <summary>
-  Example: empty_array_fail.wdl
+Example: empty_array_fail.wdl
+
 
   ```wdl
   version 1.3
@@ -69,9 +72,13 @@ An array value can be initialized with an array literal - a comma-separated list
     }
   }
   ```
-  </summary>
-  <p>
-  Example input:
+
+
+<details>
+<summary></summary>
+
+
+Example input:
 
   ```json
   {}
@@ -90,14 +97,14 @@ An array value can be initialized with an array literal - a comma-separated list
     "fail": true
   }
   ```
-  </p>
+
+
 </details>
 
 An `Array` may have an empty value (i.e. an array of length zero), unless it is declared using `+`, the non-empty postfix quantifier, which represents a constraint that the `Array` value must contain one-or-more elements. For example, the following task operates on an `Array` of `String`s and it requires at least one string to function:
 
-<details>
-<summary>
 Example: sum_task.wdl
+
 
 ```wdl
 version 1.3
@@ -116,8 +123,12 @@ task sum {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -133,16 +144,16 @@ Example output:
   "sum.total": 3
 }
 ```
-</p>
+
+
 </details>
 
 Recall that a type may have an optional postfix quantifier (`?`), which means that its value may be undefined. The `+` and `?` postfix quantifiers can be combined to declare an `Array` that is either undefined or non-empty, i.e. it can have any value *except* the empty array.
 
 Attempting to assign an empty array literal to a non-empty `Array` declaration results in an error. Otherwise, the non-empty assertion is only checked at runtime: binding an empty array to an `Array[T]+` input or function argument is a runtime error.
 
-<details>
-<summary>
 Example: non_empty_optional.wdl
+
 
 ```wdl
 version 1.3
@@ -159,8 +170,12 @@ workflow non_empty_optional {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -177,12 +192,12 @@ Example output:
   "non_empty_optional.nonempty4": [0]
 }
 ```
-</p>
+
+
 </details>
 
-<details>
-<summary>
 Example: non_empty_optional_fail.wdl
+
 
 ```wdl
 version 1.3
@@ -193,8 +208,12 @@ workflow non_empty_optional_fail {
   Array[Int]+? nonempty6 = []
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -214,7 +233,8 @@ Test config:
   "fail": true
 }
 ```
-</p>
+
+
 </details>
 
 For more details see the section on [Input Type Constraints](@/1.3/tasks/inputs.md).
@@ -225,9 +245,8 @@ A `Pair` represents two associated values, which may be of different types. In o
 
 A `Pair` can be initialized with a pair literal - a comma-separated pair of values in parentheses (`()`). The components of a `Pair` value are accessed using its `left` and `right` accessors.
 
-<details>
-<summary>
 Example: test_pairs.wdl
+
 
 ```wdl
 version 1.3
@@ -241,8 +260,12 @@ workflow test_pairs {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -257,7 +280,8 @@ Example output:
   "test_pairs.hello": "hello"
 }
 ```
-</p>
+
+
 </details>
 
 ## Map[P, Y]
@@ -266,9 +290,8 @@ A `Map` represents an associative array of key-value pairs. All of the keys must
 
 A `Map` can be initialized with a map literal - a comma-separated list of key-value pairs in braces (`{}`), where key-value pairs are delimited by `:`. The value of a specific key can be accessed by placing the key in brackets after the declaration name. Accessing a non-existent key of a `Map` results in an error.
 
-<details>
-<summary>
 Example: test_map.wdl
+
 
 ```wdl
 version 1.3
@@ -288,8 +311,12 @@ workflow test_map {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -305,12 +332,12 @@ Example output:
   "test_map.ints": [0, 1, 2]
 }
 ```
-</p>
+
+
 </details>
 
-<details>
-<summary>
 Example: test_map_fail.wdl
+
 
 ```wdl
 version 1.3
@@ -320,8 +347,12 @@ workflow test_map_fail {
   Int c = string_to_int["c"]  # error - "c" is not a key in the map
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -341,14 +372,14 @@ Test config:
   "fail": true
 }
 ```
-</p>
+
+
 </details>
 
 A `Map` is insertion-ordered, meaning the order in which elements are added to the `Map` is preserved, for example when [converting a `Map` to an array of `Pair`s](@/1.3/standard-library/map-functions/as_pairs.md).
 
-<details>
-<summary>
 Example: test_map_ordering.wdl
+
 
 ```wdl
 version 1.3
@@ -367,8 +398,12 @@ workflow test_map_ordering {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -382,5 +417,6 @@ Example output:
   "test_map_ordering.ints": [[2, 5], [1, 10]]
 }
 ```
-</p>
+
+
 </details>

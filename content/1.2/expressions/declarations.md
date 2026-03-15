@@ -8,9 +8,8 @@ A declaration reserves a name that can be referenced anywhere in the [scope](@/1
 
 A [task](@/1.2/tasks/_index.md) or [workflow](@/1.2/workflows/_index.md) may declare input parameters within its `input` section and output parameters within its `output` section. If a non-optional input declaration does not have an initialization, it is considered a "required" parameter, and its value must be provided by the user before the workflow or task may be run. Declarations may also appear in the body of a task or workflow. All non-input declarations must be initialized.
 
-<details>
-<summary>
 Example: declarations.wdl
+
 
 ```wdl
 version 1.2
@@ -31,8 +30,12 @@ workflow declarations {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -48,14 +51,14 @@ Example output:
   "declarations.pi": 3.14
 }
 ```
-</p>
+
+
 </details>
 
 A declaration may be initialized with an [expression](@/1.2/expressions/_index.md), which includes the ability to refer to elements that are outputs of tasks.
 
-<details>
-<summary>
 Example: task_outputs.wdl
+
 
 ```wdl
 version 1.2
@@ -107,8 +110,12 @@ workflow task_outputs {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -122,16 +129,16 @@ Example output:
   "task_outputs.num_greetings": 2
 }
 ```
-</p>
+
+
 </details>
 
 In this example, `greetings` is undefined until both `call greet as x` and `call greet as y` have successfully completed, at which point it is assigned the result of evaluating its expression. If either of the two tasks fail, the workflow would also fail and `greetings` would never be initialized.
 
 It must be possible to organize all of the statements within a scope into a directed acyclic graph (DAG); thus, circular references between declarations are not allowed. The following example would result in an error due to the presence of a circular reference.
 
-<details>
-<summary>
 Example: circular.wdl
+
 
 ```wdl
 version 1.2
@@ -141,8 +148,12 @@ workflow circular {
   Int j = i - 2
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -162,5 +173,6 @@ Test config:
   "fail": true
 }
 ```
-</p>
+
+
 </details>

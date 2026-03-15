@@ -1,9 +1,13 @@
 +++
 title = "Introduction"
-description = "Overview of the Workflow Description Language specification"
+description = "An overview of WDL and this version of the specification"
 sort_by = "weight"
 weight = 10
 +++
+
+This is the Workflow Description Language (WDL) specification for WDL `version 1.0`. WDL is meant to be a *human readable and writable* way to express tasks and workflows. For an execution engine to be considered compliant with WDL 1.0, it must pass 100% of the compliance tests using [`spectool`](https://github.com/openwdl/spectool).
+
+## Overview
 
 WDL is meant to be a *human readable and writable* way to express tasks and workflows. The "Hello World" tool in WDL would look like this:
 

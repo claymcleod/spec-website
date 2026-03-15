@@ -6,9 +6,8 @@ weight = 20
 
 As with tasks, declarations can appear in the body of a workflow in any order. Expressions in workflows can reference the outputs of calls, including in input declarations. For example:
 
-<details>
-<summary>
 Example: input_ref_call.wdl
+
 
 ```wdl
 version 1.2
@@ -39,8 +38,12 @@ workflow input_ref_call {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -56,7 +59,8 @@ Example output:
   "input_ref_call.result": 20
 }
 ```
-</p>
+
+
 </details>
 
 The control flow of this workflow changes depending on whether the value of `y` is provided as an input or it's initializer expression is evaluated:

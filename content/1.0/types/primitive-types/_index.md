@@ -1,5 +1,6 @@
 +++
 title = "Primitive Types"
+description = "Boolean, Int, Float, String, File, and Directory types"
 sort_by = "weight"
 weight = 10
 +++

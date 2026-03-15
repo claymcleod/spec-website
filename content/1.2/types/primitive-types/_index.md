@@ -1,7 +1,7 @@
 +++
 title = "Primitive Types"
 sort_by = "weight"
-description = "Basic data types in WDL: Boolean, Int, Float, String, File, and Directory"
+description = "Boolean, Int, Float, String, File, and Directory types"
 weight = 10
 transparent = true
 +++
@@ -15,9 +15,8 @@ The following primitive types exist in WDL:
 * A `File` represents a file (or file-like object).
 * <span class="wdl-badge wdl-badge-new">New in 1.2</span> A `Directory` represents a (possibly nested) directory of files.
 
-<details>
-  <summary>
-  Example: primitive_literals.wdl
+Example: primitive_literals.wdl
+
 
   ```wdl
   version 1.2
@@ -47,9 +46,13 @@ The following primitive types exist in WDL:
     }
   }
   ```
-  </summary>
-  <p>
-  Example input:
+
+
+<details>
+<summary></summary>
+
+
+Example input:
 
   ```json
   {}
@@ -67,5 +70,22 @@ The following primitive types exist in WDL:
     "primitive_literals.d": "testdir"
   }
   ```
-  </p>
+
+
 </details>
+
+All primitive WDL types serialize naturally to JSON values:
+
+| WDL Type | JSON Type |
+|-|-|
+| `Int` | `number` |
+| `Float` | `number` |
+| `Boolean` | `boolean` |
+| `String` | `string` |
+| `File` | `string` |
+| `Directory` | `string` |
+| `None` | `null` |
+
+JSON has a single numeric type - it does not differentiate between integral and floating point values. A JSON `number` is always deserialized to a WDL `Float`, which may then be [coerced](@/1.2/types/type-conversion.md#type-coercion) to an `Int` if necessary.
+
+JSON does not have a specific type for filesystem paths, but a WDL `String` may be coerced to a `File` if necessary.

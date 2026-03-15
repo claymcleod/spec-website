@@ -22,9 +22,8 @@ If the file is empty or contains only a header line, an empty array is returned.
 
 **Returns**: An `Array[Object]`, with `N-1` elements, where `N` is the number of rows in the file.
 
-<details>
-<summary>
 Example: read_objects_task.wdl
+
 
 ```wdl
 version 1.2
@@ -48,8 +47,12 @@ task read_objects {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -79,7 +82,8 @@ Example output:
   ]
 }
 ```
-</p>
+
+
 </details>
 
 The command outputs the following lines to stdout:

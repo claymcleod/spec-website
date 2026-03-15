@@ -26,9 +26,8 @@ Strings can also contain the following types of escape sequences:
 
 Strings that begin with `<<<` and end with `>>>` may span multiple lines.
 
-<details>
-  <summary>
-  Example: multiline_strings1.wdl
+Example: multiline_strings1.wdl
+
 
   ```wdl
   version 1.3
@@ -42,9 +41,13 @@ Strings that begin with `<<<` and end with `>>>` may span multiple lines.
     }
   }
   ```
-  </summary>
-  <p>
-  Example input:
+
+
+<details>
+<summary></summary>
+
+
+Example input:
 
   ```json
   {}
@@ -57,7 +60,8 @@ Strings that begin with `<<<` and end with `>>>` may span multiple lines.
     "multiline_strings1.s": "This is a\nmulti-line string!"
   }
   ```
-  </p>
+
+
 </details>
 
 In multi-line strings, leading *whitespace* is removed according to the following rules. In the context of multi-line strings, whitespace refers to space (`\x20`) and tab characters only and is treated differently from newline characters.
@@ -74,9 +78,8 @@ In multi-line strings, leading *whitespace* is removed according to the followin
    * Each whitespace character is counted once regardless of whether it is a space or tab (so care should be taken when mixing whitespace characters).
 5. Remove common leading whitespace from each line.
 
-<details>
-  <summary>
-  Example: multiline_strings2.wdl
+Example: multiline_strings2.wdl
+
 
   ```wdl
   version 1.3
@@ -113,9 +116,13 @@ In multi-line strings, leading *whitespace* is removed according to the followin
     }
   }
   ```
-  </summary>
-  <p>
-  Example input:
+
+
+<details>
+<summary></summary>
+
+
+Example input:
 
   ```json
   {}
@@ -135,14 +142,14 @@ In multi-line strings, leading *whitespace* is removed according to the followin
     "multiline_strings2.not_equivalent": "hello \\\n  world"
   }
   ```
-  </p>
+
+
 </details>
 
 Common leading whitespace is also removed from blank lines that contain whitespace characters; newlines are *not* removed from blank lines. This means blank lines may be used to ensure that a multi-line string begins/ends with a newline.
 
-<details>
-  <summary>
-  Example: multiline_strings3.wdl
+Example: multiline_strings3.wdl
+
 
   ```wdl
   version 1.3
@@ -184,9 +191,13 @@ Common leading whitespace is also removed from blank lines that contain whitespa
     }
   }
   ```
-  </summary>
-  <p>
-  Example input:
+
+
+<details>
+<summary></summary>
+
+
+Example input:
 
   ```json
   {}
@@ -202,14 +213,14 @@ Common leading whitespace is also removed from blank lines that contain whitespa
     "multiline_strings3.multi_line_D": "\nthis is a\n\n  multi-line string\n"
   }
   ```
-  </p>
+
+
 </details>
 
 Single- and double-quotes do not need to be escaped within a multi-line string.
 
-<details>
-  <summary>
-  Example: multiline_strings4.wdl
+Example: multiline_strings4.wdl
+
 
   ```wdl
   version 1.3
@@ -223,9 +234,13 @@ Single- and double-quotes do not need to be escaped within a multi-line string.
     }
   }
   ```
-  </summary>
-  <p>
-  Example input:
+
+
+<details>
+<summary></summary>
+
+
+Example input:
 
   ```json
   {}
@@ -238,5 +253,6 @@ Single- and double-quotes do not need to be escaped within a multi-line string.
     "multiline_strings4.multi_line_with_quotes": "multi-line string with 'single' and \"double\" quotes"
   }
   ```
-  </p>
+
+
 </details>

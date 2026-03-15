@@ -16,9 +16,8 @@ Converts a `Map` into an `Array` of `Pair`s. Since `Map`s are ordered, the outpu
 
 **Returns**: Ordered `Array` of `Pair`s, where each pair contains the key (left) and value (right) of a `Map` element.
 
-<details>
-<summary>
 Example: test_as_pairs.wdl
+
 
 ```wdl
 version 1.3
@@ -45,8 +44,12 @@ workflow test_as_pairs {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -62,5 +65,6 @@ Example output:
   "test_as_pairs.is_true3": true
 }
 ```
-</p>
+
+
 </details>

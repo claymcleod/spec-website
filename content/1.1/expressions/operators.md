@@ -122,9 +122,8 @@ In general, two compound values are equal if-and-only-if all of the following ar
 
 Since `Array`s and `Map`s are ordered, the order of their elements are also compared. For example:
 
-<details>
-<summary>
 Example: array_map_equality.wdl
+
 
 ```wdl
 version 1.1
@@ -141,8 +140,12 @@ workflow array_map_equality {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -159,14 +162,14 @@ Example output:
   "array_map_equality.is_false2": false
 }
 ```
-</p>
+
+
 </details>
 
 [Type coercion](@/1.1/types/type-conversion.md#type-coercion) can be employed to compare values of different but compatible types.
 
-<details>
-<summary>
 Example: compare_coerced.wdl
+
 
 ```wdl
 version 1.1
@@ -182,8 +185,12 @@ workflow compare_coerced {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -197,16 +204,16 @@ Example output:
   "compare_coerced.is_true": true
 }
 ```
-</p>
+
+
 </details>
 
 ## Equality and Inequality Comparison of Optional Types
 
 The equality and inequality operators are exceptions to the general rules on [coercion of optional types](@/1.1/types/type-conversion.md#coercion-of-optional-types). Either or both operands of an equality or inequality comparison can be optional, considering that `None` is equal to itself but no other value.
 
-<details>
-<summary>
 Example: compare_optionals.wdl
+
 
 ```wdl
 version 1.1
@@ -227,8 +234,12 @@ workflow compare_optionals {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -245,5 +256,6 @@ Example output:
   "compare_optionals.is_false2": false
 }
 ```
-</p>
+
+
 </details>

@@ -16,9 +16,8 @@ Writes a tab-separated value (TSV) file with one line for each element in a `Arr
 
 **Returns**: A `File`.
 
-<details>
-<summary>
 Example: write_tsv_task.wdl
+
 
 ```wdl
 version 1.1
@@ -41,8 +40,12 @@ task write_tsv {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -56,7 +59,8 @@ Example output:
   "write_tsv.ones": ["one", "un"]
 }
 ```
-</p>
+
+
 </details>
 
 The actual command line might look like:

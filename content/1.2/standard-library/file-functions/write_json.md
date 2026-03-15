@@ -31,9 +31,8 @@ When serializing compound types, all nested types must be serializable or an err
 
 **Returns**: A `File`.
 
-<details>
-<summary>
 Example: write_json_fail.wdl
+
 
 ```wdl
 version 1.2
@@ -44,8 +43,12 @@ workflow write_json_fail {
   File f = write_json(x)
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -65,12 +68,12 @@ Test config:
   "fail": true
 }
 ```
-</p>
+
+
 </details>
 
-<details>
-<summary>
 Example: write_json_task.wdl
+
 
 ```wdl
 version 1.2
@@ -99,8 +102,12 @@ task write_json {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -114,7 +121,8 @@ Example output:
   "write_json.keys": ["key1", "key2"]
 }
 ```
-</p>
+
+
 </details>
 
 The actual command line might look like:

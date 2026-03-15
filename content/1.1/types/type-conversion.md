@@ -10,11 +10,10 @@ The execution engine is also responsible for converting (or "serializing") input
 
 ## Primitive Conversion to String
 
-Primitive types can always be converted to `String` using [string interpolation](@/1.1/tasks/command.md#expression-placeholders). See Expression Placeholder Coercion for details.
+Primitive types can always be converted to `String` using [string interpolation](@/1.1/tasks/command.md). See Expression Placeholder Coercion for details.
 
-<details>
-<summary>
 Example: primitive_to_string.wdl
+
 
 ```wdl
 version 1.1
@@ -29,8 +28,12 @@ workflow primitive_to_string {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -46,7 +49,8 @@ Example output:
   "primitive_to_string.istring": "3"
 }
 ```
-</p>
+
+
 </details>
 
 ## Type Coercion
@@ -55,9 +59,8 @@ There are some pairs of WDL types for which there is an obvious, unambiguous con
 
 For example, file paths are always represented as strings, making the conversion from `String` to `File` obvious and unambiguous.
 
-<details>
-<summary>
 Example: string_to_file.wdl
+
 
 ```wdl
 version 1.1
@@ -77,8 +80,12 @@ workflow string_to_file {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -94,7 +101,8 @@ Example output:
   "string_to_file.paths_equal": true
 }
 ```
-</p>
+
+
 </details>
 
 The table below lists all globally valid coercions. The "target" type is the type being coerced to (this is often called the "left-hand side" or "LHS" of the coercion) and the "source" type is the type being coerced from (the "right-hand side" or "RHS").
@@ -179,9 +187,8 @@ There are two exceptions where coercion from `T?` to `T` is allowed:
 
 `Struct`s and `Object`s can be coerced from map literals, but beware the difference between `Map` keys (expressions) and `Struct`/`Object` member names.
 
-<details>
-<summary>
 Example: map_to_struct.wdl
+
 
 ```wdl
 version 1.1
@@ -214,8 +221,12 @@ workflow map_to_struct {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -238,7 +249,8 @@ Example output:
   }
 }
 ```
-</p>
+
+
 </details>
 
 - If a `Struct` (or `Object`) declaration is initialized using the struct-literal (or object-literal) syntax `Words literal_syntax = Words { a: ...` then the keys will be `"a"`, `"b"` and `"c"`.

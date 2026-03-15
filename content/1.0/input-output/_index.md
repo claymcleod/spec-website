@@ -1,6 +1,6 @@
 +++
 title = "Input/Output Formats"
-description = "Specifying inputs and outputs for WDL workflows"
+description = "How inputs and outputs are specified for WDL workflows"
 sort_by = "weight"
 weight = 70
 +++

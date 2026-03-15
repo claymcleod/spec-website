@@ -1,9 +1,11 @@
 +++
 title = "Map Functions"
 sort_by = "weight"
-description = "Functions for map operations"
+description = "Functions for creating and manipulating maps"
 weight = 60
 transparent = true
 +++
 
-Functions for performing operations on map operations
+These functions are generic and take a `Map` as input and/or return a `Map`.
+
+**Restrictions**: None

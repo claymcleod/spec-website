@@ -18,9 +18,8 @@ Since `Map`s are ordered, the order of the lines in the file is guaranteed to be
 
 **Returns**: A `File`.
 
-<details>
-<summary>
 Example: write_map_task.wdl
+
 
 ```wdl
 version 1.2
@@ -43,8 +42,12 @@ task write_map {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -58,7 +61,8 @@ Example output:
   "write_map.keys": ["key1", "key2"]
 }
 ```
-</p>
+
+
 </details>
 
 The actual command line might look like:

@@ -33,9 +33,8 @@ Note that an empty file is not valid according to the JSON specification, and so
 
 **Returns**: A value whose type is dependent on the contents of the JSON file.
 
-<details>
-<summary>
 Example: read_person.wdl
+
 
 ```wdl
 version 1.2
@@ -55,8 +54,12 @@ workflow read_person {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -75,6 +78,7 @@ Example output:
   }
 }
 ```
-</p>
+
+
 </details>
 

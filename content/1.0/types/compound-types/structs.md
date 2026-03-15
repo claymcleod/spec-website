@@ -113,7 +113,7 @@ struct Experiment {
 }
 ```
 
-**Example 1:**
+Example 1:
 
 Accessing the nth element of `experimentFiles` and any element in `experimentData` would look like:
 
@@ -125,7 +125,7 @@ workflow workflow_a {
 }
 ```
 
-**Example 2:**
+Example 2:
 
 If the struct itself is a member of an `Array` or another type:
 

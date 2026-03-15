@@ -1,7 +1,7 @@
 +++
 title = "Primitive Types"
 sort_by = "weight"
-description = "Basic data types in WDL: Boolean, Int, Float, String, and File"
+description = "Boolean, Int, Float, String, File, and Directory types"
 weight = 10
 transparent = true
 +++
@@ -22,9 +22,8 @@ The following primitive types exist in WDL:
       * Remote files must be treated as read-only.
       * A remote file is only required to be vaild at the time that the execution engine needs to localize it.
 
-<details>
-  <summary>
-  Example: primitive_literals.wdl
+Example: primitive_literals.wdl
+
 
   ```wdl
   version 1.1
@@ -51,9 +50,13 @@ The following primitive types exist in WDL:
     }
   }
   ```
-  </summary>
-  <p>
-  Example input:
+
+
+<details>
+<summary></summary>
+
+
+Example input:
 
   ```json
   {}
@@ -70,5 +73,6 @@ The following primitive types exist in WDL:
     "primitive_literals.x": "hello.txt"
   }
   ```
-  </p>
+
+
 </details>

@@ -20,9 +20,8 @@ If the file is empty, an empty array is returned.
 
 **Returns**: An `Array` of rows in the TSV file, where each row is an `Array[String]` of fields.
 
-<details>
-<summary>
 Example: read_tsv_task.wdl
+
 
 ```wdl
 version 1.1
@@ -41,8 +40,12 @@ task read_tsv {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -60,5 +63,6 @@ Example output:
   ]
 }
 ```
-</p>
+
+
 </details>

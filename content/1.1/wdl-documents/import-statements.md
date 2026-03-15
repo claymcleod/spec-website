@@ -59,9 +59,8 @@ A document may import two or more struct definitions with the same name so long 
 
 A struct may be imported with a different name using an `alias` clause of the form `alias <source name> as <new name>`. If two structs have the same name but are not identical, at least one of them must be imported with a unique alias. To alias multiple structs, simply add more alias clauses to the `import` statement. If aliases are used for some structs in an imported WDL but not others, the unaliased structs are still imported under their original names.
 
-<details>
-<summary>
 Example: import_structs.wdl
+
 
 ```wdl
 version 1.1
@@ -162,8 +161,12 @@ workflow import_structs {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -179,7 +182,8 @@ Example output:
   "import_structs.bill": 175000.0
 }
 ```
-</p>
+
+
 </details>
 
 When a struct `A` in document `X` is imported with alias `B` in document `Y`, any other structs imported from `X` into `Y` with members of type `A` are updated to replace `A` with `B` when copying them into `Y`'s namespace. The execution engine is responsible for maintaining mappings between structs in different namespaces, such that when a task or workflow in `X` with an input of type `A` is called from `Y` with a value of type `B` it is coerced appropriately.

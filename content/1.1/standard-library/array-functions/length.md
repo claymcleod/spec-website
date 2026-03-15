@@ -15,9 +15,8 @@ Returns the number of elements in an array as an `Int`.
 
 **Returns**: The length of the array as an `Int`.
 
-<details>
-<summary>
 Example: test_length.wdl
+
 
 ```wdl
 version 1.1
@@ -34,8 +33,12 @@ workflow test_length {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -51,5 +54,6 @@ Example output:
   "test_length.zlen": 0
 }
 ```
-</p>
+
+
 </details>

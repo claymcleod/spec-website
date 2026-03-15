@@ -16,9 +16,8 @@ Given any `Array[Object]`, this will write out a 2+ row, n-column TSV file with 
 
 **Returns**: A `File` containing the objects' attributes as headers and values as data rows in TSV format.
 
-<details>
-<summary>
 Example: write_objects_task.wdl
+
 
 ```wdl
 task test {
@@ -33,8 +32,11 @@ task test {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
 
 If `in` were to have the value:
 
@@ -65,5 +67,5 @@ value_4	value_5	value_6
 value_7	value_8	value_9
 ```
 
-</p>
+
 </details>

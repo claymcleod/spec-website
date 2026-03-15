@@ -16,9 +16,8 @@ Selects the first - i.e. left-most - non-`None` value from an `Array` of optiona
 
 **Returns**: The first non-`None` value in the input array.
 
-<details>
-<summary>
 Example: test_select_first.wdl
+
 
 ```wdl
 version 1.1
@@ -37,8 +36,12 @@ workflow test_select_first {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -53,12 +56,12 @@ Example output:
   "test_select_first.five2": 5
 }
 ```
-</p>
+
+
 </details>
 
-<details>
-<summary>
 Example: select_first_only_none_fail.wdl
+
 
 ```wdl
 version 1.1
@@ -68,8 +71,12 @@ workflow select_first_only_none_fail {
   Int result = select_first([maybe_four_but_is_not])  # error! array contains only None values
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -89,12 +96,12 @@ Test config:
   "fail": true
 }
 ```
-</p>
+
+
 </details>
 
-<details>
-<summary>
 Example: select_first_empty_fail.wdl
+
 
 ```wdl
 version 1.1
@@ -103,8 +110,12 @@ workflow select_first_empty_fail {
   Int check = select_first([])  # error! array is empty
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -124,5 +135,6 @@ Test config:
   "fail": true
 }
 ```
-</p>
+
+
 </details>

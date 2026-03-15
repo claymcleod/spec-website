@@ -1,6 +1,6 @@
 +++
 title = "Expressions"
-description = "WDL expression syntax and evaluation"
+description = "Expression syntax, operators, and evaluation rules"
 weight = 25
 sort_by = "weight"
 +++
@@ -11,9 +11,8 @@ A "literal" expression is one that consists only of a literal value. For example
 
 A "simple" expression is one that can be evaluated unambiguously without any knowledge of the runtime context. Literal expressions, operations on literals (e.g., `1 + 2`), and function calls with literal arguments (excluding any functions that read or create `File`s) are all simple expressions. A simple expression cannot refer to any declarations (i.e., it cannot contain identifiers). An execution engine may choose to replace a simple expression with its literal value during static analysis.
 
-<details>
-<summary>
 Example: expressions_task.wdl
+
 
 ```wdl
 version 1.1
@@ -40,8 +39,12 @@ task expressions {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -65,5 +68,6 @@ Example output:
   "expressions.s": "hello"
 }
 ```
-</p>
+
+
 </details>

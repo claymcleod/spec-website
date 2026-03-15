@@ -3,7 +3,6 @@ title = "select_first"
 description = "Select first defined value"
 weight = 90
 +++
-
 ```
 X select_first(Array[X?]+)
 X select_first(Array[X?], X)
@@ -18,9 +17,8 @@ Selects the first - i.e., left-most - non-`None` value from an `Array` of option
 
 **Returns**: The first non-`None` value in the input array, or the default value if it is provided and the array does not contain any non-`None` values.
 
-<details>
-<summary>
 Example: test_select_first.wdl
+
 
 ```wdl
 version 1.2
@@ -41,8 +39,12 @@ workflow test_select_first {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -59,23 +61,27 @@ Example output:
   "test_select_first.fiveD": 5
 }
 ```
-</p>
+
+
 </details>
 
-<details>
-<summary>
 Example: select_first_only_none_fail.wdl
+
 
 ```wdl
 version 1.2
 
 workflow select_first_only_none_fail {
   Int? maybe_four_but_is_not = None
-  select_first([maybe_four_but_is_not])  # error! array contains only None values
+  Int result = select_first([maybe_four_but_is_not])  # error! array contains only None values
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -95,22 +101,26 @@ Test config:
   "fail": true
 }
 ```
-</p>
+
+
 </details>
 
-<details>
-<summary>
 Example: select_first_empty_fail.wdl
+
 
 ```wdl
 version 1.2
 
 workflow select_first_empty_fail {
-  select_first([])  # error! array is empty
+  Int check = select_first([])  # error! array is empty
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -130,6 +140,6 @@ Test config:
   "fail": true
 }
 ```
-</p>
-</details>
 
+
+</details>

@@ -1,6 +1,6 @@
 +++
 title = "Standard Library"
-description = "Built-in functions available in WDL"
+description = "Built-in functions available in WDL expressions"
 sort_by = "weight"
 weight = 60
 +++

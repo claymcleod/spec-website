@@ -21,9 +21,8 @@ Returns the length of the input argument as an `Int`:
 
 **Returns**: The length of the collection/string as an `Int`.
 
-<details>
-<summary>
 Example: test_length.wdl
+
 
 ```wdl
 version 1.3
@@ -44,8 +43,12 @@ workflow test_length {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -63,5 +66,6 @@ Example output:
   "test_length.slen": 5
 }
 ```
-</p>
+
+
 </details>

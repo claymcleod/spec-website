@@ -23,9 +23,8 @@ If the size cannot be represented in the specified unit because the resulting va
 
 **Returns**: The size of the files/directories as a `Float`.
 
-<details>
-<summary>
 Example: file_sizes_task.wdl
+
 
 ```wdl
 version 1.2
@@ -55,8 +54,12 @@ task file_sizes {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -78,6 +81,7 @@ Example output:
   "file_sizes.nested_bytes": 22.0
 }
 ```
-</p>
+
+
 </details>
 

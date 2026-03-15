@@ -3,9 +3,6 @@ title = "max"
 description = "Return maximum of two numbers"
 weight = 50
 +++
-
-<span class="wdl-badge wdl-badge-new">New in 1.1</span>
-
 This function has four variants:
 
 ```
@@ -24,9 +21,8 @@ Returns the larger of two values. If both values are `Int`s, the return value is
 
 **Returns**: The larger of the two arguments.
 
-<details>
-<summary>
 Example: test_max.wdl
+
 
 ```wdl
 version 1.1
@@ -44,8 +40,12 @@ workflow test_max {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -63,5 +63,6 @@ Example output:
   "test_max.max2": 2.0
 }
 ```
-</p>
+
+
 </details>

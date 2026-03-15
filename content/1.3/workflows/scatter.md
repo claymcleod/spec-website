@@ -13,9 +13,8 @@ WDL provides a mechanism for scatter/gather using the `scatter` statement. A `sc
 
 After evaluation has completed for all iterations of a `scatter`, each declaration or call output in the scatter body (except for the scatter variable) is collected into an array, and those array declarations are exposed in the enclosing context. In other words, for a declaration or call output `T <name>` within a scatter body, a declaration `Array[T] <name>` is implicitly available outside of the scatter body. The ordering of an exported array is guaranteed to match the ordering of the input array. In the example below, `String greeting` is accessible anywhere in the `scatter` body, and `Array[String] greeting` is a collection of all the values of `greeting` - in the same order as `name_array` - that is accessible outside of the `scatter` anywhere in `workflow test_scatter`.
 
-<details>
-<summary>
 Example: test_scatter.wdl
+
 
 ```wdl
 version 1.3
@@ -55,8 +54,12 @@ workflow test_scatter {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -74,7 +77,8 @@ Example output:
   ]
 }
 ```
-</p>
+
+
 </details>
 
 In this example, the scatter body is evaluated three times - once for each value in `name_array`. On a multi-core computer, these evaluations might happen in parallel, with each evaluation running in a separate thread or subprocess; on a cloud platform, each of these evaluations might take place in a different virtual machine.
@@ -83,9 +87,8 @@ The scatter body is a nested scope in which the scatter variable is accessible, 
 
 If scatters are nested to multiple levels, the output types are also nested to the same number of levels.
 
-<details>
-<summary>
 Example: nested_scatter.wdl
+
 
 ```wdl
 version 1.3
@@ -169,8 +172,12 @@ workflow nested_scatter {
   }
 }
 ```
-</summary>
-<p>
+
+
+<details>
+<summary></summary>
+
+
 Example input:
 
 ```json
@@ -198,5 +205,6 @@ Example output:
   "nested_scatter.used_honorifics": ["Mr.", "Wizard", "Mr."]
 }
 ```
-</p>
+
+
 </details>
