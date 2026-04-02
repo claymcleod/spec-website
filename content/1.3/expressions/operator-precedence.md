@@ -1,5 +1,6 @@
 +++
 title = "Operator Precedence"
+description = "Evaluation order and associativity of operators"
 weight = 25
 +++
 

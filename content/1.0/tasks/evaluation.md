@@ -1,5 +1,6 @@
 +++
 title = "Evaluation"
+description = "Order and timing of task declaration evaluation"
 weight = 50
 +++
 

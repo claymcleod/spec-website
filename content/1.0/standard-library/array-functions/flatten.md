@@ -1,7 +1,7 @@
 +++
 title = "flatten"
 description = "Flatten a nested array"
-weight = 60
+weight = 5080
 +++
 
 ```

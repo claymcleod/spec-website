@@ -1,7 +1,7 @@
 +++
 title = "suffix"
 description = "Append a suffix to each element of an array"
-weight = 20
+weight = 4020
 +++
 
 ```

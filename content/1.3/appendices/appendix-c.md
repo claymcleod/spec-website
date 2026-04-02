@@ -1,5 +1,6 @@
 +++
 title = "Appendix C: Example Data"
+description = "Sample data used in standard library function examples"
 weight = 30
 +++
 This appendix contains example data files that are used in conformance tests throughout the specification.

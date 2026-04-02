@@ -1,7 +1,7 @@
 +++
 title = "quote"
 description = "Double-quote each element of an array"
-weight = 30
+weight = 4030
 +++
 
 ```

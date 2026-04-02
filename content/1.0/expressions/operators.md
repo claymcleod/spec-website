@@ -1,5 +1,6 @@
 +++
 title = "Operators"
+description = "Arithmetic, logical, comparison, and string operators"
 weight = 20
 +++
 

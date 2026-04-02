@@ -1,7 +1,7 @@
 +++
 title = "Files and Directories"
-description = "File and Directory types, path canonicalization, validation, and relative/absolute paths"
-weight = 20
+description = "<code>File</code> and <code>Directory</code> types, path canonicalization, validation, and relative/absolute paths"
+weight = 120
 +++
 
 A `File` or `Directory` declaration may have have a string value indicating a relative or absolute path on the local file system.

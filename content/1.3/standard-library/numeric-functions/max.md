@@ -1,7 +1,7 @@
 +++
 title = "max"
 description = "Return the larger of two values"
-weight = 50
+weight = 1050
 +++
 
 This function has four choices:

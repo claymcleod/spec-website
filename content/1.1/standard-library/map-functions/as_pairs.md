@@ -1,7 +1,7 @@
 +++
 title = "as_pairs"
 description = "Convert map to pairs"
-weight = 10
+weight = 6010
 +++
 ```
 Array[Pair[P, Y]] as_pairs(Map[P, Y])

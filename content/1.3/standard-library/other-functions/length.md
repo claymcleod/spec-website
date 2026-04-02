@@ -1,7 +1,7 @@
 +++
 title = "length"
 description = "Get the length of a collection or string"
-weight = 20
+weight = 7020
 +++
 
 ```

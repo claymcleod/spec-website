@@ -1,7 +1,7 @@
 +++
 title = "basename"
 description = "Get the basename of a file or directory path"
-weight = 10
+weight = 3010
 +++
 
 ```

@@ -1,7 +1,7 @@
 +++
 title = "contains"
 description = "Check if array contains value"
-weight = 60
+weight = 5060
 +++
 ```
 Boolean contains(Array[P], P)

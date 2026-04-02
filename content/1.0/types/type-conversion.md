@@ -1,6 +1,7 @@
 +++
 title = "Type Conversion"
-weight = 50
+description = "Converting values between different WDL types"
+weight = 500
 +++
 
 WDL values can be created from either JSON values or from native language values. The below table references String-like, Integer-like, etc to refer to values in a particular programming language. For example, "String-like" could mean a `java.io.String` in the Java context or a `str` in Python. An "Array-like" could refer to a `Seq` in Scala or a `list` in Python.

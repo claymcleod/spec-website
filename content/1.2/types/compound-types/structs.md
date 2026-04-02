@@ -1,7 +1,7 @@
 +++
 title = "Custom Types (Structs)"
 description = "User-defined struct types in WDL"
-weight = 20
+weight = 320
 +++
 
 WDL provides the ability to define custom compound types called structs. `Struct` types are defined directly in the WDL document and are usable like any other type. A struct is defined using the `struct` keyword, followed by a unique name, followed by member declarations within braces. A struct definition contains any number of declarations of any types, including other `Struct`s.

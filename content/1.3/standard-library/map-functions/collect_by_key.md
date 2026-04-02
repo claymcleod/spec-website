@@ -1,7 +1,7 @@
 +++
 title = "collect_by_key"
 description = "Group array of pairs into a map by key"
-weight = 60
+weight = 6060
 +++
 
 ```

@@ -1,7 +1,7 @@
 +++
 title = "read_tsv"
 description = "Read a tab-separated value file"
-weight = 70
+weight = 3130
 +++
 
 ```

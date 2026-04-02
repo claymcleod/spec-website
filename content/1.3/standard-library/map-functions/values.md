@@ -1,7 +1,7 @@
 +++
 title = "values"
 description = "Get the values from a map"
-weight = 50
+weight = 6050
 +++
 
 *as of version 1.2*

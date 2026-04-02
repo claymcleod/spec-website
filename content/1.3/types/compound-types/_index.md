@@ -1,6 +1,6 @@
 +++
 title = "Compound Types"
-description = "Array, Pair, Map, and Struct types"
+description = "<code>Array</code>, <code>Pair</code>, <code>Map</code>, and <code>Struct</code> types"
 sort_by = "weight"
 weight = 40
 transparent = true

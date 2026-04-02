@@ -1,7 +1,7 @@
 +++
 title = "select_first"
 description = "Select first non-None value from array"
-weight = 80
+weight = 5100
 +++
 
 ```

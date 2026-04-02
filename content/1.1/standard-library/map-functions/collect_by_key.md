@@ -1,7 +1,7 @@
 +++
 title = "collect_by_key"
 description = "Group array of pairs by key"
-weight = 40
+weight = 6060
 +++
 
 <span class="wdl-badge wdl-badge-new">New in 1.1</span>

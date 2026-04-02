@@ -1,7 +1,7 @@
 +++
 title = "unzip"
 description = "Split array of pairs into pair of arrays"
-weight = 60
+weight = 5050
 +++
 ```
 Pair[Array[X], Array[Y]] unzip(Array[Pair[X, Y]])

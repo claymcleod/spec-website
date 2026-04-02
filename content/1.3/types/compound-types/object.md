@@ -1,7 +1,7 @@
 +++
 title = "Object"
-description = "The deprecated Object type in WDL"
-weight = 10
+description = "The deprecated <code>Object</code> type in WDL"
+weight = 310
 +++
 
 <div class="flex items-center gap-1 my-4">

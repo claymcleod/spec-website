@@ -1,5 +1,6 @@
 +++
 title = "JSON Output Format"
+description = "Format for workflow and task output JSON files"
 weight = 20
 +++
 

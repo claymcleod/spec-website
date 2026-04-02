@@ -1,7 +1,7 @@
 +++
 title = "read_object"
 description = "Read object from file"
-weight = 190
+weight = 3190
 +++
 
 ```

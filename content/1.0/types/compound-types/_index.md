@@ -1,8 +1,9 @@
 +++
 title = "Compound Types"
-description = "Array, Pair, Map, and Struct types"
+description = "<code>Array</code>, <code>Pair</code>, <code>Map</code>, and <code>Struct</code> types"
 sort_by = "weight"
 weight = 40
+transparent = true
 +++
 
 A compound type is one that is parameterized by other types. In the examples below `P` represents any of the primitive types, and `X` and `Y` represent any valid type (even nested compound types).

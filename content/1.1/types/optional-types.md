@@ -1,7 +1,7 @@
 +++
 title = "Optional Types and None"
-description = "Optional type declarations and the None value in WDL"
-weight = 20
+description = "Optional type declarations and the <code>None</code> value in WDL"
+weight = 200
 +++
 
 A type may have a `?` postfix quantifier, which means that its value is allowed to be undefined without causing an error. A declaration with an optional type can only be used in calls or functions that accept optional values.

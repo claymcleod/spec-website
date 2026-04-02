@@ -1,7 +1,7 @@
 +++
 title = "chunk"
 description = "Split array into chunks"
-weight = 70
+weight = 5070
 +++
 ```
 Array[Array[X]] chunk(Array[X], Int)

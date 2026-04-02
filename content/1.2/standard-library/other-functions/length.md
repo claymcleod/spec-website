@@ -1,7 +1,7 @@
 +++
 title = "length"
 description = "Get length of collection"
-weight = 20
+weight = 7020
 +++
 ```
 Int length(Array[X]|Map[X, Y]|Object|String)

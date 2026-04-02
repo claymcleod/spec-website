@@ -1,7 +1,7 @@
 +++
 title = "collect_by_key"
 description = "Collect values by key"
-weight = 60
+weight = 6060
 +++
 
 ```

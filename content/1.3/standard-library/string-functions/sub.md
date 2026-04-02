@@ -1,7 +1,7 @@
 +++
 title = "sub"
 description = "Replace occurrences of a pattern in a string"
-weight = 30
+weight = 2030
 +++
 
 ```

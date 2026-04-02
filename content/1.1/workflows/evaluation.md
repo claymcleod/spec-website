@@ -1,7 +1,7 @@
 +++
 title = "Evaluation of Workflow Elements"
 description = "Order and timing of workflow evaluation"
-weight = 40
+weight = 20
 +++
 
 As with tasks, declarations can appear in the body of a workflow in any order. Expressions in workflows can reference the outputs of calls, including in input declarations. For example:

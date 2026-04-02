@@ -1,7 +1,7 @@
 +++
 title = "read_json"
 description = "Read a JSON file"
-weight = 80
+weight = 3170
 +++
 
 ```

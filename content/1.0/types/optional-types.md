@@ -1,6 +1,7 @@
 +++
 title = "Optional Types"
-weight = 30
+description = "Optional type declarations and the <code>None</code> value in WDL"
+weight = 200
 +++
 
 [Types](@/1.0/types/_index.md) can be optionally suffixed with a `?` or `+` in certain cases.

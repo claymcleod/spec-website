@@ -1,5 +1,6 @@
 +++
 title = "Private Declarations"
+description = "Intermediate values within task scope"
 weight = 20
 +++
 

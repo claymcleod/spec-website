@@ -1,5 +1,6 @@
 +++
 title = "JSON Serialization of WDL Types"
+description = "Rules for serializing WDL types to and from JSON"
 weight = 40
 +++
 

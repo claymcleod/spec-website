@@ -1,7 +1,7 @@
 +++
 title = "find"
 description = "Find first regex match in a string"
-weight = 10
+weight = 2010
 +++
 
 *as of version 1.2*

@@ -1,5 +1,6 @@
 +++
 title = "Command Section"
+description = "Defining the Bash script template for task execution"
 weight = 30
 +++
 

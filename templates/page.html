@@ -27,7 +27,7 @@
             {% if page.extra.deprecated %}<span class="wdl-badge wdl-badge-deprecated">Deprecated</span>{% endif %}
         </h1>
         {% if page.description %}
-        <p class="text-xl text-gray-600 dark:text-gray-100">{{ page.description }}</p>
+        <p class="text-xl text-gray-600 dark:text-gray-100">{{ page.description | safe }}</p>
         {% endif %}
     </header>
 
@@ -36,29 +36,164 @@
     </div>
 </article>
 
+{# ==================== Linear Navigation ==================== #}
+{# DFS pre-order with transparent section boundary detection #}
+{% set nav_next = false %}
+{% set nav_prev = false %}
+{% set parent = get_section(path=page.ancestors | last) %}
+
+{# Determine which transparent subsection this page belongs to (if any) #}
+{% set my_section = false %}
+{% set my_section_path = "" %}
+{% for s in parent.subsections %}
+    {% set sub = get_section(path=s) %}
+    {% if page.path is starting_with(sub.path) %}
+        {% set_global my_section = sub %}
+        {% set_global my_section_path = sub.path %}
+    {% endif %}
+{% endfor %}
+
+{# --- NEXT --- #}
+{% if page.higher %}
+    {# Check if page.higher crosses into a different transparent section #}
+    {% set higher_section_path = "" %}
+    {% set higher_section = false %}
+    {% for s in parent.subsections %}
+        {% set sub = get_section(path=s) %}
+        {% if page.higher.path is starting_with(sub.path) %}
+            {% set_global higher_section = sub %}
+            {% set_global higher_section_path = sub.path %}
+        {% endif %}
+    {% endfor %}
+
+    {% if higher_section_path != "" and higher_section_path != my_section_path %}
+        {# Next page enters a new transparent section — go to section page #}
+        {% set_global nav_next = higher_section %}
+    {% else %}
+        {% set_global nav_next = page.higher %}
+    {% endif %}
+{% else %}
+    {# Last page in parent — find parent's next sibling #}
+    {% if parent.ancestors | length > 1 %}
+        {% set grandparent = get_section(path=parent.ancestors | last) %}
+        {% set found_parent = false %}
+        {% for s in grandparent.subsections %}
+            {% set sub = get_section(path=s) %}
+            {% if found_parent and not nav_next %}
+                {% set_global nav_next = sub %}
+            {% endif %}
+            {% if sub.path == parent.path %}
+                {% set_global found_parent = true %}
+            {% endif %}
+        {% endfor %}
+
+        {# Check grandparent pages after all subsections #}
+        {% if not nav_next and grandparent.pages | length > 0 %}
+            {% set_global nav_next = grandparent.pages | first %}
+        {% endif %}
+
+        {# If still nothing, try great-grandparent #}
+        {% if not nav_next and grandparent.ancestors | length > 1 %}
+            {% set great_grandparent = get_section(path=grandparent.ancestors | last) %}
+            {% set found_gp = false %}
+            {% for s in great_grandparent.subsections %}
+                {% set sub = get_section(path=s) %}
+                {% if found_gp and not nav_next %}
+                    {% set_global nav_next = sub %}
+                {% endif %}
+                {% if sub.path == grandparent.path %}
+                    {% set_global found_gp = true %}
+                {% endif %}
+            {% endfor %}
+
+            {# Check great-grandparent pages #}
+            {% if not nav_next and great_grandparent.pages | length > 0 %}
+                {% set_global nav_next = great_grandparent.pages | first %}
+            {% endif %}
+        {% endif %}
+    {% endif %}
+{% endif %}
+
+{# --- PREVIOUS --- #}
+{% if page.lower %}
+    {# Check if we're at the boundary of a transparent section #}
+    {% set lower_section_path = "" %}
+    {% for s in parent.subsections %}
+        {% set sub = get_section(path=s) %}
+        {% if page.lower.path is starting_with(sub.path) %}
+            {% set_global lower_section_path = sub.path %}
+        {% endif %}
+    {% endfor %}
+
+    {% if my_section_path != "" and lower_section_path != my_section_path %}
+        {# Previous page is outside our transparent section — go to section page #}
+        {% set_global nav_prev = my_section %}
+    {% else %}
+        {% set_global nav_prev = page.lower %}
+    {% endif %}
+{% else %}
+    {# First page in parent #}
+    {% if my_section %}
+        {# In a transparent section — go to the section page #}
+        {% set_global nav_prev = my_section %}
+    {% elif parent.subsections | length > 0 %}
+        {# Go to last subsection's deepest last descendant #}
+        {% set last_sub = get_section(path=parent.subsections | last) %}
+        {# For transparent last subsection, find its last page in parent.pages #}
+        {% set last_transparent_page = false %}
+        {% for p in parent.pages %}
+            {% if p.path is starting_with(last_sub.path) %}
+                {% set_global last_transparent_page = p %}
+            {% endif %}
+        {% endfor %}
+        {% if last_transparent_page %}
+            {% set_global nav_prev = last_transparent_page %}
+        {% elif last_sub.pages | length > 0 %}
+            {% set_global nav_prev = last_sub.pages | last %}
+        {% elif last_sub.subsections | length > 0 %}
+            {% set deeper = get_section(path=last_sub.subsections | last) %}
+            {% if deeper.pages | length > 0 %}
+                {% set_global nav_prev = deeper.pages | last %}
+            {% else %}
+                {% set_global nav_prev = deeper %}
+            {% endif %}
+        {% else %}
+            {% set_global nav_prev = last_sub %}
+        {% endif %}
+    {% else %}
+        {# No subsections — go to parent (unless version root) #}
+        {% if not parent.title is starting_with("WDL ") %}
+            {% set_global nav_prev = parent %}
+        {% endif %}
+    {% endif %}
+{% endif %}
+
+{# --- Render navigation --- #}
+{% if nav_prev or nav_next %}
 <nav class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-600 grid grid-cols-1 sm:grid-cols-2 gap-4">
-    {% if page.lower %}
-    <a href="{{ page.lower.permalink }}" class="group block p-4 sm:p-6 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg hover:border-teal-500 transition-colors">
+    {% if nav_prev %}
+    <a href="{{ nav_prev.permalink }}" class="group block p-4 sm:p-6 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg hover:border-teal-500 transition-colors">
         <div class="text-xs text-gray-500 dark:text-gray-100 mb-1 sm:mb-2">Previous</div>
-        <h3 class="text-base sm:text-lg font-semibold text-gray-900 dark:text-gray-50 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">{{ page.lower.title }}</h3>
-        {% if page.lower.description %}
-        <p class="text-sm text-gray-600 dark:text-gray-100 mt-1 sm:mt-2 hidden sm:block">{{ page.lower.description }}</p>
+        <h3 class="text-base sm:text-lg font-semibold text-gray-900 dark:text-gray-50 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">{{ nav_prev.title }}</h3>
+        {% if nav_prev.description %}
+        <p class="text-sm text-gray-600 dark:text-gray-100 mt-1 sm:mt-2 hidden sm:block">{{ nav_prev.description | safe }}</p>
         {% endif %}
     </a>
     {% else %}
     <div class="hidden sm:block"></div>
     {% endif %}
 
-    {% if page.higher %}
-    <a href="{{ page.higher.permalink }}" class="group block p-4 sm:p-6 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg hover:border-teal-500 transition-colors sm:text-right">
+    {% if nav_next %}
+    <a href="{{ nav_next.permalink }}" class="group block p-4 sm:p-6 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg hover:border-teal-500 transition-colors sm:text-right">
         <div class="text-xs text-gray-500 dark:text-gray-100 mb-1 sm:mb-2">Next</div>
-        <h3 class="text-base sm:text-lg font-semibold text-gray-900 dark:text-gray-50 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">{{ page.higher.title }}</h3>
-        {% if page.higher.description %}
-        <p class="text-sm text-gray-600 dark:text-gray-100 mt-1 sm:mt-2 hidden sm:block">{{ page.higher.description }}</p>
+        <h3 class="text-base sm:text-lg font-semibold text-gray-900 dark:text-gray-50 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">{{ nav_next.title }}</h3>
+        {% if nav_next.description %}
+        <p class="text-sm text-gray-600 dark:text-gray-100 mt-1 sm:mt-2 hidden sm:block">{{ nav_next.description | safe }}</p>
         {% endif %}
     </a>
     {% else %}
     <div class="hidden sm:block"></div>
     {% endif %}
 </nav>
+{% endif %}
 {% endblock content %}

@@ -1,7 +1,7 @@
 +++
 title = "max"
 description = "Return maximum of two numbers"
-weight = 50
+weight = 1050
 +++
 
 This function has four variants:

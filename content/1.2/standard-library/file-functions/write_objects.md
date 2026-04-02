@@ -1,7 +1,7 @@
 +++
 title = "write_objects"
 description = "Write objects to file"
-weight = 220
+weight = 3220
 +++
 
 ```

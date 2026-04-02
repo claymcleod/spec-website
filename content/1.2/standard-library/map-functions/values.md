@@ -1,7 +1,7 @@
 +++
 title = "values"
 description = "Get map values"
-weight = 50
+weight = 6050
 +++
 ```
 Array[Y] values(Map[P, Y])

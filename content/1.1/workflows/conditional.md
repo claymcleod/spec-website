@@ -1,7 +1,7 @@
 +++
 title = "Conditional Statement"
 description = "Conditional execution of workflow elements"
-weight = 90
+weight = 60
 +++
 
 A conditional statement consists of the `if` keyword, followed by a `Boolean` expression and a body of (potentially nested) statements. The conditional body is only evaluated if the conditional expression evaluates to `true`.

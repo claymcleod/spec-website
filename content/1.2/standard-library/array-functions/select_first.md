@@ -1,7 +1,7 @@
 +++
 title = "select_first"
 description = "Select first defined value"
-weight = 90
+weight = 5100
 +++
 ```
 X select_first(Array[X?]+)

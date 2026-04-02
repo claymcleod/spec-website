@@ -1,5 +1,6 @@
 +++
 title = "Function Calls"
+description = "Calling standard library functions within expressions"
 weight = 40
 +++
 

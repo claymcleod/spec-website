@@ -1,7 +1,7 @@
 +++
 title = "size"
 description = "Determine the size of a file or directory"
-weight = 25
+weight = 3040
 +++
 
 ```

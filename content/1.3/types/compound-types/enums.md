@@ -1,7 +1,7 @@
 +++
 title = "Enumeration Types (Enums)"
 description = "Enumeration types in WDL"
-weight = 30
+weight = 330
 +++
 
 An enumeration (or "enum") is a closed set of enumerated values (known as "choices") that are considered semantically valid in a specific context. An enum is defined at the top-level of the WDL document and can be used as a declaration type anywhere in the document.

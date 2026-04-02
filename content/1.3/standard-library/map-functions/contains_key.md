@@ -1,7 +1,7 @@
 +++
 title = "contains_key"
 description = "Test whether a collection contains a key"
-weight = 40
+weight = 6040
 +++
 
 *as of version 1.2*

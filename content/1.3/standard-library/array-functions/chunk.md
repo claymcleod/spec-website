@@ -1,7 +1,7 @@
 +++
 title = "chunk"
 description = "Split an array into sub-arrays of a given size"
-weight = 57
+weight = 5070
 +++
 
 *as of version 1.2*

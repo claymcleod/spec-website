@@ -1,5 +1,6 @@
 +++
 title = "Evaluation"
+description = "Order of evaluation for workflow declarations"
 weight = 20
 +++
 

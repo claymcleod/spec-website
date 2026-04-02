@@ -1,7 +1,7 @@
 +++
 title = "write_tsv"
 description = "Write a 2D array as a TSV file"
-weight = 140
+weight = 3140
 +++
 
 ```

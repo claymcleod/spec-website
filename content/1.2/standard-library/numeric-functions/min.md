@@ -1,7 +1,7 @@
 +++
 title = "min"
 description = "Return minimum of two numbers"
-weight = 40
+weight = 1040
 +++
 
 This function has four variants:

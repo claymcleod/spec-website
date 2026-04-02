@@ -1,7 +1,7 @@
 +++
 title = "write_objects"
 description = "Write an Array of Objects as a TSV file"
-weight = 170
+weight = 3220
 +++
 
 ```

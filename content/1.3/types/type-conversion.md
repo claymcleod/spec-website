@@ -1,7 +1,7 @@
 +++
 title = "Type Conversion"
 description = "Converting values between different WDL types"
-weight = 50
+weight = 500
 +++
 
 WDL has some limited facilities for converting a value of one type to another type. Some of these are explicitly provided by [standard library](@/1.3/standard-library/_index.md) functions, while others are [implicit](#type-coercion). When converting between types, it is best to be explicit whenever possible, even if an implicit conversion is allowed.

@@ -1,7 +1,7 @@
 +++
 title = "write_map"
 description = "Write a map to a two-column TSV file"
-weight = 85
+weight = 3160
 +++
 
 ```

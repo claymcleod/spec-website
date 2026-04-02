@@ -1,7 +1,7 @@
 +++
 title = "quote"
 description = "Double-quote array elements"
-weight = 30
+weight = 4030
 +++
 ```
 Array[String] quote(Array[P])

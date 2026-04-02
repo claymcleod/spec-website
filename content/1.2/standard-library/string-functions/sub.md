@@ -1,7 +1,7 @@
 +++
 title = "sub"
 description = "Substitute substring"
-weight = 30
+weight = 2030
 +++
 
 ```

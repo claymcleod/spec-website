@@ -1,7 +1,7 @@
 +++
 title = "stdout"
 description = "Get the stdout output of a command"
-weight = 30
+weight = 3050
 +++
 
 ```

@@ -1,6 +1,7 @@
 +++
 title = "Strings"
-weight = 10
+description = "String types, escape sequences, and multi-line strings in WDL"
+weight = 110
 +++
 
 A string literal may contain any characters between single or double-quotes. The string grammar is defined in the [Syntax](@/1.0/syntax/_index.md) section.

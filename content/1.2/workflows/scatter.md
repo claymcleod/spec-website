@@ -1,7 +1,7 @@
 +++
 title = "Scatter Statement"
 description = "Parallel execution over collections"
-weight = 80
+weight = 50
 +++
 
 Scatter/gather is a common parallelization pattern in computer science. Given a collection of inputs (such as an array), the "scatter" step executes a set of operations on each input in parallel. In the "gather" step, the outputs of all the individual scatter-tasks are collected into the final output.

@@ -311,8 +311,8 @@
   }
 
   :is(.dark) :not(pre) > code {
-    background-color: var(--color-gray-800);
-    border: 1px solid var(--color-gray-700);
+    background-color: var(--color-gray-600);
+    border: 1px solid var(--color-gray-500);
   }
 
 

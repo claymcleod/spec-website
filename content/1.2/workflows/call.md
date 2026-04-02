@@ -1,7 +1,7 @@
 +++
 title = "Call Statement"
 description = "Invoking tasks and sub-workflows"
-weight = 70
+weight = 40
 +++
 
 A workflow calls other tasks/workflows via the `call` keyword. A `call` is followed by the name of the task or subworkflow to run. If a task is defined in the same WDL document as the calling workflow, it may be called using just the task name. A task or workflow in an imported WDL must be called using its [fully-qualified name](@/1.2/workflows/qualified-names.md).

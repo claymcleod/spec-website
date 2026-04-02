@@ -1,7 +1,7 @@
 +++
 title = "defined"
 description = "Check if value is defined"
-weight = 10
+weight = 7010
 +++
 
 ```

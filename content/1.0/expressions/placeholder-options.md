@@ -1,5 +1,6 @@
 +++
 title = "Placeholder Options"
+description = "Deprecated placeholder formatting options"
 weight = 70
 +++
 

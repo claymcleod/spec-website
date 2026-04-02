@@ -1,6 +1,7 @@
 +++
 title = "Ternary (if-then-else)"
-weight = 30
+description = "Conditional expressions using <code>if</code>-<code>then</code>-<code>else</code>"
+weight = 35
 +++
 
 ## If then else

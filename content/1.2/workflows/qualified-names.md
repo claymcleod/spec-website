@@ -1,7 +1,7 @@
 +++
 title = "Fully Qualified Names & Namespaced Identifiers"
 description = "Naming and scoping in workflows"
-weight = 30
+weight = 25
 +++
 
 A fully qualified name is the unique identifier of any particular call, input, or output, and has the following structure:

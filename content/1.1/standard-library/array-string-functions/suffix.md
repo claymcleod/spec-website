@@ -1,7 +1,7 @@
 +++
 title = "suffix"
 description = "Add suffix to strings"
-weight = 20
+weight = 4020
 +++
 ```
 Array[String] suffix(String, Array[P])

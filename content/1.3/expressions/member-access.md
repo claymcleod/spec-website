@@ -1,5 +1,6 @@
 +++
 title = "Member Access"
+description = "Accessing members of compound types with dot notation"
 weight = 30
 +++
 

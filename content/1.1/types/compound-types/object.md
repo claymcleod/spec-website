@@ -1,7 +1,7 @@
 +++
 title = "Object"
-description = "Object type in WDL"
-weight = 40
+description = "<code>Object</code> type in WDL"
+weight = 310
 
 [extra]
 deprecated = true

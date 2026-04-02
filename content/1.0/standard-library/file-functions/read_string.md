@@ -1,7 +1,7 @@
 +++
 title = "read_string"
 description = "Read a string from a file"
-weight = 100
+weight = 3070
 +++
 
 ```

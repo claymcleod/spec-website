@@ -1,7 +1,7 @@
 +++
 title = "basename"
 description = "Get base filename"
-weight = 10
+weight = 3010
 +++
 ```
 String basename(File, [String])

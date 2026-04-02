@@ -1,7 +1,7 @@
 +++
 title = "keys"
 description = "Extract keys from a map"
-weight = 30
+weight = 6030
 +++
 ```
 Array[P] keys(Map[P, Y])

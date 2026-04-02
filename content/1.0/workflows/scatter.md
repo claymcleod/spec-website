@@ -1,5 +1,6 @@
 +++
 title = "Scatter"
+description = "Parallel execution over arrays using <code>scatter</code> blocks"
 weight = 50
 +++
 

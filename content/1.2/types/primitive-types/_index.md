@@ -1,7 +1,7 @@
 +++
 title = "Primitive Types"
 sort_by = "weight"
-description = "Boolean, Int, Float, String, File, and Directory types"
+description = "<code>Boolean</code>, <code>Int</code>, <code>Float</code>, <code>String</code>, <code>File</code>, and <code>Directory</code> types"
 weight = 10
 transparent = true
 +++

@@ -1,5 +1,6 @@
 +++
 title = "Appendix B: WDL Namespaces and Scopes"
+description = "How names are resolved across namespaces and scopes"
 weight = 20
 +++
 

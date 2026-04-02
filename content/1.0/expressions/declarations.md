@@ -1,5 +1,6 @@
 +++
 title = "Declarations"
+description = "Declaring typed variables and binding values to them"
 weight = 10
 +++
 

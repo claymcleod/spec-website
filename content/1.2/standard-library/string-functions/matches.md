@@ -1,7 +1,7 @@
 +++
 title = "matches"
 description = "Test if string matches pattern"
-weight = 20
+weight = 2020
 +++
 Given two `String` parameters `input` and `pattern`, tests whether `pattern` matches `input` at least once. `pattern` is a [regular expression](https://en.wikipedia.org/wiki/Regular_expression) and is evaluated as a [POSIX Extended Regular Expression (ERE)](https://en.wikipedia.org/wiki/Regular_expression#POSIX_basic_and_extended).
 

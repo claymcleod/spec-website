@@ -1,5 +1,6 @@
 +++
 title = "Conditional"
+description = "Conditionally executing workflow elements with <code>if</code> blocks"
 weight = 60
 +++
 

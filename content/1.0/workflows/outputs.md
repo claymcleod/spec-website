@@ -1,6 +1,7 @@
 +++
 title = "Workflow Outputs"
-weight = 30
+description = "Declaring output values produced by workflows"
+weight = 35
 +++
 
 ### Outputs

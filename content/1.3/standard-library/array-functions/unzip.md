@@ -1,7 +1,7 @@
 +++
 title = "unzip"
 description = "Split an array of pairs into a pair of arrays"
-weight = 50
+weight = 5050
 +++
 
 ```

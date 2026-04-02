@@ -1,7 +1,7 @@
 +++
 title = "ceil"
 description = "Round up to nearest integer"
-weight = 20
+weight = 1020
 +++
 
 ```

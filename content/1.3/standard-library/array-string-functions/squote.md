@@ -1,7 +1,7 @@
 +++
 title = "squote"
 description = "Single-quote each element of an array"
-weight = 40
+weight = 4040
 +++
 
 ```

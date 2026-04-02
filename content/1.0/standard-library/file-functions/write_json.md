@@ -1,7 +1,7 @@
 +++
 title = "write_json"
 description = "Write a value as a JSON file"
-weight = 180
+weight = 3180
 +++
 
 ```

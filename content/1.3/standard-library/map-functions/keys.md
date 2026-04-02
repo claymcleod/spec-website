@@ -1,7 +1,7 @@
 +++
 title = "keys"
 description = "Get the keys from a map, struct, or object"
-weight = 30
+weight = 6030
 +++
 
 ```

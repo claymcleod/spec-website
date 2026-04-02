@@ -1,7 +1,7 @@
 +++
 title = "write_object"
 description = "Write an object or struct to a two-row TSV file"
-weight = 110
+weight = 3210
 +++
 
 ```

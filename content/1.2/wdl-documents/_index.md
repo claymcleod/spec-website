@@ -1,5 +1,5 @@
 +++
-title = "WDL Documents"
+title = "Documents"
 description = "Document structure, versioning, and import statements"
 sort_by = "weight"
 weight = 35

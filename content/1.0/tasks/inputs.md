@@ -1,5 +1,6 @@
 +++
 title = "Task Inputs"
+description = "Declaring and managing task input parameters"
 weight = 10
 +++
 

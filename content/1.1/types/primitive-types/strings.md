@@ -1,7 +1,7 @@
 +++
 title = "Strings"
 description = "String literals and escape sequences in WDL"
-weight = 10
+weight = 110
 +++
 
 A string literal may contain any unicode characters between single or double-quotes, with the exception of a few special characters that must be escaped:

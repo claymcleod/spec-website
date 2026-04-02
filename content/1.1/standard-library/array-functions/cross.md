@@ -1,7 +1,7 @@
 +++
 title = "cross"
 description = "Compute cross product of two arrays"
-weight = 40
+weight = 5030
 +++
 
 ```

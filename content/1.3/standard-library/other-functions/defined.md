@@ -1,7 +1,7 @@
 +++
 title = "defined"
 description = "Test whether an optional value is defined"
-weight = 10
+weight = 7010
 +++
 
 ```

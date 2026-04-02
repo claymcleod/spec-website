@@ -24,65 +24,186 @@
     <header class="not-prose mb-12">
         <h1 class="text-5xl font-bold text-gray-700 dark:text-gray-50 mb-4 flex items-center gap-3">{{ section.title }}</h1>
         {% if section.description %}
-        <p class="text-xl text-gray-600 dark:text-gray-100">{{ section.description }}</p>
+        <p class="text-xl text-gray-600 dark:text-gray-100">{{ section.description | safe }}</p>
         {% endif %}
     </header>
 
     {{ section.content | safe }}
 </article>
 
-{% if section.pages %}
-<div class="flex justify-end mt-12">
-    <a href="{{ section.pages[0].permalink }}" class="group block p-4 sm:p-6 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg hover:border-teal-500 transition-colors w-full sm:w-auto sm:max-w-md">
-        <h3 class="text-base sm:text-lg font-semibold text-gray-900 dark:text-gray-50 mb-1 sm:mb-2">
-            {{ section.pages[0].title }}
-        </h3>
-        {% if section.pages[0].description %}
-        <p class="text-sm text-gray-600 dark:text-gray-100 hidden sm:block">{{ section.pages[0].description }}</p>
-        {% endif %}
-    </a>
-</div>
+{# ==================== Linear Navigation ==================== #}
+{# DFS pre-order with transparent section support #}
+{% set nav_next = false %}
+{% set nav_prev = false %}
+
+{# --- NEXT: first child → next sibling → parent's next sibling --- #}
+{% if section.subsections | length > 0 %}
+    {% set_global nav_next = get_section(path=section.subsections | first) %}
+{% elif section.pages | length > 0 %}
+    {% set_global nav_next = section.pages | first %}
 {% endif %}
 
+{# Transparent section with no direct children — find pages in parent #}
+{% if not nav_next and section.ancestors %}
+    {% set parent = get_section(path=section.ancestors | last) %}
+    {% for p in parent.pages %}
+        {% if not nav_next and p.path is starting_with(section.path) %}
+            {% set_global nav_next = p %}
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+{# If still no children, find next sibling in parent #}
+{% if not nav_next and section.ancestors %}
+    {% set parent = get_section(path=section.ancestors | last) %}
+
+    {# Find next sibling subsection #}
+    {% set found_self = false %}
+    {% for s in parent.subsections %}
+        {% set sub = get_section(path=s) %}
+        {% if found_self and not nav_next %}
+            {% set_global nav_next = sub %}
+        {% endif %}
+        {% if sub.path == section.path %}
+            {% set_global found_self = true %}
+        {% endif %}
+    {% endfor %}
+
+    {# Check parent pages after all subsections #}
+    {% if not nav_next and parent.pages | length > 0 %}
+        {# Find first parent page that doesn't belong to any subsection #}
+        {% for p in parent.pages %}
+            {% if not nav_next %}
+                {% set belongs_to_sub = false %}
+                {% for s in parent.subsections %}
+                    {% set sub = get_section(path=s) %}
+                    {% if p.path is starting_with(sub.path) %}
+                        {% set_global belongs_to_sub = true %}
+                    {% endif %}
+                {% endfor %}
+                {% if not belongs_to_sub %}
+                    {% set_global nav_next = p %}
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+    {# If no next sibling, try grandparent #}
+    {% if not nav_next and parent.ancestors | length > 1 %}
+        {% set grandparent = get_section(path=parent.ancestors | last) %}
+        {% set found_parent = false %}
+        {% for s in grandparent.subsections %}
+            {% set sub = get_section(path=s) %}
+            {% if found_parent and not nav_next %}
+                {% set_global nav_next = sub %}
+            {% endif %}
+            {% if sub.path == parent.path %}
+                {% set_global found_parent = true %}
+            {% endif %}
+        {% endfor %}
+
+        {# Check grandparent pages #}
+        {% if not nav_next and grandparent.pages | length > 0 %}
+            {% set_global nav_next = grandparent.pages | first %}
+        {% endif %}
+
+        {# Try great-grandparent #}
+        {% if not nav_next and grandparent.ancestors | length > 1 %}
+            {% set great_grandparent = get_section(path=grandparent.ancestors | last) %}
+            {% set found_gp = false %}
+            {% for s in great_grandparent.subsections %}
+                {% set sub = get_section(path=s) %}
+                {% if found_gp and not nav_next %}
+                    {% set_global nav_next = sub %}
+                {% endif %}
+                {% if sub.path == grandparent.path %}
+                    {% set_global found_gp = true %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    {% endif %}
+{% endif %}
+
+{# --- PREVIOUS: last item before this section in DFS order --- #}
 {% if section.ancestors %}
-{% set parent_section = get_section(path=section.ancestors | last) %}
-{% set prev_section = false %}
-{% set next_section = false %}
-{% set found = false %}
-{% set temp_prev = false %}
+    {% set parent = get_section(path=section.ancestors | last) %}
 
-{% for s in parent_section.subsections %}
-    {% if found and not next_section %}
-        {% set_global next_section = get_section(path=s) %}
-    {% endif %}
-    {% if s == section.path %}
-        {% set_global found = true %}
-        {% set_global prev_section = temp_prev %}
-    {% endif %}
-    {% if s != section.path %}
-        {% set_global temp_prev = get_section(path=s) %}
-    {% endif %}
-{% endfor %}
+    {# Find previous sibling #}
+    {% set prev_sibling = false %}
+    {% set temp = false %}
+    {% for s in parent.subsections %}
+        {% set sub = get_section(path=s) %}
+        {% if sub.path == section.path %}
+            {% set_global prev_sibling = temp %}
+        {% endif %}
+        {% set_global temp = sub %}
+    {% endfor %}
 
+    {% if prev_sibling %}
+        {# Find last page in parent.pages before this section's first page #}
+        {% set last_before = false %}
+        {% set found_mine = false %}
+        {% for p in parent.pages %}
+            {% if not found_mine %}
+                {% if p.path is starting_with(section.path) %}
+                    {% set_global found_mine = true %}
+                {% else %}
+                    {% set_global last_before = p %}
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+
+        {% if last_before %}
+            {# A page (from prev sibling or direct) comes right before us #}
+            {% set_global nav_prev = last_before %}
+        {% elif prev_sibling.pages | length > 0 %}
+            {% set_global nav_prev = prev_sibling.pages | last %}
+        {% elif prev_sibling.subsections | length > 0 %}
+            {% set last_sub = get_section(path=prev_sibling.subsections | last) %}
+            {% if last_sub.pages | length > 0 %}
+                {% set_global nav_prev = last_sub.pages | last %}
+            {% elif last_sub.subsections | length > 0 %}
+                {% set deeper = get_section(path=last_sub.subsections | last) %}
+                {% if deeper.pages | length > 0 %}
+                    {% set_global nav_prev = deeper.pages | last %}
+                {% else %}
+                    {% set_global nav_prev = deeper %}
+                {% endif %}
+            {% else %}
+                {% set_global nav_prev = last_sub %}
+            {% endif %}
+        {% else %}
+            {% set_global nav_prev = prev_sibling %}
+        {% endif %}
+    {% else %}
+        {# No previous sibling — go to parent (unless version root) #}
+        {% if not parent.title is starting_with("WDL ") %}
+            {% set_global nav_prev = parent %}
+        {% endif %}
+    {% endif %}
+{% endif %}
+
+{# --- Render navigation --- #}
+{% if nav_prev or nav_next %}
 <nav class="mt-16 pt-8 border-t border-gray-200 dark:border-gray-600 grid grid-cols-1 sm:grid-cols-2 gap-4">
-    {% if prev_section %}
-    <a href="{{ prev_section.permalink }}" class="group block p-4 sm:p-6 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg hover:border-teal-500 transition-colors">
+    {% if nav_prev %}
+    <a href="{{ nav_prev.permalink }}" class="group block p-4 sm:p-6 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg hover:border-teal-500 transition-colors">
         <div class="text-xs text-gray-500 dark:text-gray-100 mb-1 sm:mb-2">Previous</div>
-        <h3 class="text-base sm:text-lg font-semibold text-gray-900 dark:text-gray-50 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">{{ prev_section.title }}</h3>
-        {% if prev_section.description %}
-        <p class="text-sm text-gray-600 dark:text-gray-100 mt-1 sm:mt-2 hidden sm:block">{{ prev_section.description }}</p>
+        <h3 class="text-base sm:text-lg font-semibold text-gray-900 dark:text-gray-50 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">{{ nav_prev.title }}</h3>
+        {% if nav_prev.description %}
+        <p class="text-sm text-gray-600 dark:text-gray-100 mt-1 sm:mt-2 hidden sm:block">{{ nav_prev.description | safe }}</p>
         {% endif %}
     </a>
     {% else %}
     <div class="hidden sm:block"></div>
     {% endif %}
 
-    {% if next_section %}
-    <a href="{{ next_section.permalink }}" class="group block p-4 sm:p-6 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg hover:border-teal-500 transition-colors sm:text-right">
+    {% if nav_next %}
+    <a href="{{ nav_next.permalink }}" class="group block p-4 sm:p-6 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg hover:border-teal-500 transition-colors sm:text-right">
         <div class="text-xs text-gray-500 dark:text-gray-100 mb-1 sm:mb-2">Next</div>
-        <h3 class="text-base sm:text-lg font-semibold text-gray-900 dark:text-gray-50 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">{{ next_section.title }}</h3>
-        {% if next_section.description %}
-        <p class="text-sm text-gray-600 dark:text-gray-100 mt-1 sm:mt-2 hidden sm:block">{{ next_section.description }}</p>
+        <h3 class="text-base sm:text-lg font-semibold text-gray-900 dark:text-gray-50 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">{{ nav_next.title }}</h3>
+        {% if nav_next.description %}
+        <p class="text-sm text-gray-600 dark:text-gray-100 mt-1 sm:mt-2 hidden sm:block">{{ nav_next.description | safe }}</p>
         {% endif %}
     </a>
     {% else %}

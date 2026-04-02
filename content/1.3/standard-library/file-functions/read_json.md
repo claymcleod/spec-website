@@ -1,7 +1,7 @@
 +++
 title = "read_json"
 description = "Read a JSON file into a WDL value"
-weight = 90
+weight = 3170
 +++
 
 ```

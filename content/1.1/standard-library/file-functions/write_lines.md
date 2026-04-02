@@ -1,7 +1,7 @@
 +++
 title = "write_lines"
 description = "Write array of strings to file"
-weight = 120
+weight = 3120
 +++
 
 ```

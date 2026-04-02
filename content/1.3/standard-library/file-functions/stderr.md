@@ -1,7 +1,7 @@
 +++
 title = "stderr"
 description = "Get the stderr output of a command"
-weight = 35
+weight = 3060
 +++
 
 ```

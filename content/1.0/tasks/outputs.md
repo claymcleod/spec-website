@@ -1,5 +1,6 @@
 +++
 title = "Task Outputs"
+description = "Declaring and evaluating task output parameters"
 weight = 40
 +++
 

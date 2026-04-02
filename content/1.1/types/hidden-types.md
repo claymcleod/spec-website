@@ -1,7 +1,7 @@
 +++
 title = "Hidden Types"
 description = "Types that can only be instantiated by the execution engine"
-weight = 40
+weight = 400
 +++
 
 A hidden type is one that may only be instantiated by the execution engine, and cannot be used in a declaration within a WDL file. There is currently only one hidden type, `Union`; however, in WDL 2.0, `Object` will also become a hidden type.

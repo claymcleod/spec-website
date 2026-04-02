@@ -1,7 +1,7 @@
 +++
 title = "glob"
 description = "Find files matching a glob pattern"
-weight = 20
+weight = 3030
 +++
 
 ```

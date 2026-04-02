@@ -1,5 +1,6 @@
 +++
 title = "Appendix A: Serialization"
+description = "Rules for serializing and deserializing WDL values"
 weight = 10
 +++
 

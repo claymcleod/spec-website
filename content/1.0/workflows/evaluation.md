@@ -1,6 +1,7 @@
 +++
 title = "Evaluation"
-weight = 70
+description = "Order of evaluation for workflow declarations"
+weight = 20
 +++
 
 ## Workflow-Level Resolution

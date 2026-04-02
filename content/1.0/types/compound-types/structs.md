@@ -1,6 +1,7 @@
 +++
 title = "Structs"
-weight = 20
+description = "User-defined struct types in WDL"
+weight = 320
 +++
 
 WDL provides the ability to define custom compound types called `Structs`. `Structs` are defined directly in the WDL and are usable like any other type.

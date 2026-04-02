@@ -1,7 +1,7 @@
 +++
 title = "size"
 description = "Get file size"
-weight = 190
+weight = 3040
 +++
 
 ```

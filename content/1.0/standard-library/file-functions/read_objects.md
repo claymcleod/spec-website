@@ -1,7 +1,7 @@
 +++
 title = "read_objects"
 description = "Read a multi-row TSV as an Array of Objects"
-weight = 70
+weight = 3200
 +++
 
 ```

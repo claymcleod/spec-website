@@ -1,7 +1,7 @@
 +++
 title = "sub"
 description = "Substitute substring"
-weight = 10
+weight = 2030
 +++
 ```
 String sub(String, String, String)

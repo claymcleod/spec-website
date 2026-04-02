@@ -1,5 +1,6 @@
 +++
 title = "String Interpolation"
+description = "String interpolation, placeholder syntax, and expression coercion"
 weight = 60
 +++
 

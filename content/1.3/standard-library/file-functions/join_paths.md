@@ -1,7 +1,7 @@
 +++
 title = "join_paths"
 description = "Join path components together"
-weight = 15
+weight = 3020
 +++
 
 *as of version 1.2*

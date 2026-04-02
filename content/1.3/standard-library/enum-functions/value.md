@@ -1,7 +1,7 @@
 +++
 title = "value"
 description = "Get the underlying value of an enum choice"
-weight = 10
+weight = 6510
 +++
 
 ```

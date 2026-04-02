@@ -1,5 +1,6 @@
 +++
 title = "Conditional Statement"
+description = "Conditionally executing workflow elements with <code>if</code> blocks"
 weight = 60
 +++
 A conditional statement consists of one or more conditional clauses, each having an associated body. The types of conditional statement clauses are:

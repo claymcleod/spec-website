@@ -1,6 +1,7 @@
 +++
 title = "Qualified Names"
-weight = 80
+description = "Referencing outputs from calls and scoped declarations"
+weight = 25
 +++
 
 ### Fully Qualified Names & Namespaced Identifiers

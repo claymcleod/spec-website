@@ -1,7 +1,7 @@
 +++
 title = "join_paths"
 description = "Join file paths"
-weight = 20
+weight = 3020
 +++
 ```
 String join_paths(Directory, String)

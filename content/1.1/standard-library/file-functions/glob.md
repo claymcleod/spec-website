@@ -1,7 +1,7 @@
 +++
 title = "glob"
 description = "Find files matching pattern"
-weight = 20
+weight = 3030
 +++
 ```
 Array[File] glob(String)

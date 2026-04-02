@@ -1,7 +1,7 @@
 +++
 title = "read_boolean"
 description = "Read a file as a boolean"
-weight = 55
+weight = 3100
 +++
 
 ```

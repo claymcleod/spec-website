@@ -1,7 +1,7 @@
 +++
 title = "Workflow Outputs"
 description = "Declaring workflow output parameters"
-weight = 50
+weight = 35
 +++
 
 The workflow and [task `output` sections](@/1.2/tasks/outputs.md) have identical semantics.

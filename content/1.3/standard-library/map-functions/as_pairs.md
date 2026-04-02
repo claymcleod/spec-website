@@ -1,7 +1,7 @@
 +++
 title = "as_pairs"
 description = "Convert a map to an array of pairs"
-weight = 10
+weight = 6010
 +++
 
 ```

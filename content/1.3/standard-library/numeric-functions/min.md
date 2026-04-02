@@ -1,7 +1,7 @@
 +++
 title = "min"
 description = "Return the smaller of two values"
-weight = 40
+weight = 1040
 +++
 
 This function has four choices:

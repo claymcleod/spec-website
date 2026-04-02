@@ -1,7 +1,7 @@
 +++
 title = "Hidden and Scoped Types"
 description = "Types that can only be instantiated by the execution engine"
-weight = 40
+weight = 400
 +++
 
 A hidden type is one that may only be instantiated by the execution engine, and cannot be used in a declaration within a WDL file.

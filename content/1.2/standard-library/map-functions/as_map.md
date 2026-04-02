@@ -1,7 +1,7 @@
 +++
 title = "as_map"
 description = "Convert pairs to map"
-weight = 20
+weight = 6020
 +++
 
 ```

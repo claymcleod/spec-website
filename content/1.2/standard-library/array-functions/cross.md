@@ -1,7 +1,7 @@
 +++
 title = "cross"
 description = "Cross product of arrays"
-weight = 30
+weight = 5030
 +++
 
 ```

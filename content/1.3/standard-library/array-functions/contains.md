@@ -1,7 +1,7 @@
 +++
 title = "contains"
 description = "Test whether an array contains a value"
-weight = 55
+weight = 5060
 +++
 
 *as of version 1.2*

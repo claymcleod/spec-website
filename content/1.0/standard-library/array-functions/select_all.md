@@ -1,7 +1,7 @@
 +++
 title = "select_all"
 description = "Select all defined values"
-weight = 80
+weight = 5110
 +++
 
 ```

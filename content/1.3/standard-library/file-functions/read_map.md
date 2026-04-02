@@ -1,7 +1,7 @@
 +++
 title = "read_map"
 description = "Read a two-column TSV file as a map"
-weight = 80
+weight = 3150
 +++
 
 ```

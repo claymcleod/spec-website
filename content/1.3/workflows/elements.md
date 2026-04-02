@@ -1,5 +1,6 @@
 +++
 title = "Workflow Elements"
+description = "The building blocks of workflow definitions"
 weight = 10
 +++
 

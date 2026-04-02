@@ -1,7 +1,7 @@
 +++
 title = "select_all"
 description = "Select all non-None values from an array"
-weight = 80
+weight = 5110
 +++
 
 ```

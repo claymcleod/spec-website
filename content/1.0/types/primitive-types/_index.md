@@ -1,8 +1,9 @@
 +++
 title = "Primitive Types"
-description = "Boolean, Int, Float, String, File, and Directory types"
+description = "<code>Boolean</code>, <code>Int</code>, <code>Float</code>, <code>String</code>, <code>File</code>, and <code>Directory</code> types"
 sort_by = "weight"
 weight = 10
+transparent = true
 +++
 
 The following primitive types exist in WDL:

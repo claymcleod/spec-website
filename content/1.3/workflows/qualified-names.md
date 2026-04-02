@@ -1,5 +1,6 @@
 +++
 title = "Qualified Names"
+description = "Referencing outputs from calls and scoped declarations"
 weight = 25
 +++
 

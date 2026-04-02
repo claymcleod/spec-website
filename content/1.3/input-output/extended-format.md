@@ -1,5 +1,6 @@
 +++
 title = "Extended File/Directory Input/Output Format"
+description = "Extended input/output format for <code>File</code> and <code>Directory</code> types"
 weight = 30
 +++
 

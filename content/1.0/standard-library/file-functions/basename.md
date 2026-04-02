@@ -1,7 +1,7 @@
 +++
 title = "basename"
 description = "Get file basename"
-weight = 200
+weight = 3010
 +++
 
 ```

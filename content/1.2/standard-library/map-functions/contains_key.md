@@ -1,7 +1,7 @@
 +++
 title = "contains_key"
 description = "Check if map contains key"
-weight = 40
+weight = 6040
 +++
 ```
 * Boolean contains_key(Map[P, Y], P)

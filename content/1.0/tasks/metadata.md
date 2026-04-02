@@ -1,5 +1,6 @@
 +++
 title = "Metadata"
+description = "Task and parameter-level metadata"
 weight = 70
 +++
 

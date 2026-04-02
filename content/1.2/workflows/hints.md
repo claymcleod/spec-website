@@ -1,7 +1,7 @@
 +++
 title = "Workflow Hints"
 description = "Providing hints for workflow execution"
-weight = 60
+weight = 37
 +++
 
 The `hints` section is optional and may contain any number of attributes (key/value pairs) that provide hints to the execution engine. Some workflow hint keys are reserved and have well-defined values.

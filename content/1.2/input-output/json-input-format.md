@@ -1,5 +1,6 @@
 +++
 title = "JSON Input Format"
+description = "Providing workflow and task inputs via JSON"
 weight = 10
 +++
 

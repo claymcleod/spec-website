@@ -1,7 +1,7 @@
 +++
 title = "squote"
 description = "Single-quote array elements"
-weight = 40
+weight = 4040
 +++
 ```
 Array[String] squote(Array[P])

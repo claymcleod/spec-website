@@ -1,7 +1,7 @@
 +++
 title = "write_tsv"
 description = "Write a tab-separated value file"
-weight = 75
+weight = 3140
 +++
 
 ```

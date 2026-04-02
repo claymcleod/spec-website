@@ -1,6 +1,7 @@
 +++
 title = "Workflow Inputs"
-weight = 20
+description = "Declaring input parameters for workflows"
+weight = 30
 +++
 
 ### Workflow Inputs

@@ -1,7 +1,7 @@
 +++
 title = "zip"
 description = "Zip two arrays into pairs"
-weight = 30
+weight = 5040
 +++
 
 ```

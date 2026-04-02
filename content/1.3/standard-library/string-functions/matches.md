@@ -1,7 +1,7 @@
 +++
 title = "matches"
 description = "Test whether a pattern matches a string"
-weight = 20
+weight = 2020
 +++
 
 *as of version 1.2*

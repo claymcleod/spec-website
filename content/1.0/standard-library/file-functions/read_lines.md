@@ -1,7 +1,7 @@
 +++
 title = "read_lines"
 description = "Read file as array of lines"
-weight = 30
+weight = 3110
 +++
 
 ```

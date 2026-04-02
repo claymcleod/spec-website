@@ -1,7 +1,7 @@
 +++
 title = "squote"
 description = "Single-quote strings"
-weight = 40
+weight = 4040
 +++
 
 ```
