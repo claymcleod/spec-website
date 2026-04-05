@@ -1,0 +1,51 @@
+{% set v = section.extra.spec_version | default(value=config.extra.current_version) %}
+{% set base = get_url(path="/") | trim_end_matches(pat="/") %}
+{% set version_section = get_section(path=v ~ "/_index.md") %}
+
+<div class="mb-4">
+    <div class="text-xs font-semibold text-gray-700 dark:text-gray-100 uppercase tracking-wide mb-3">Full Specification</div>
+</div>
+
+<div class="space-y-1 full-spec-toc" data-full-spec-toc>
+{% for sub_path in version_section.subsections %}
+    {% set sub = get_section(path=sub_path) %}
+    {% set sub_slug = sub.path | trim_start_matches(pat="/") | trim_end_matches(pat="/") | split(pat="/") | last %}
+    {% if sub_slug != "full" %}
+
+    {# Collect page paths from subsections so we can skip transparent duplicates #}
+    {% set_global subsection_page_paths = [] %}
+    {% for subsub_path in sub.subsections %}
+        {% set subsub_tmp = get_section(path=subsub_path) %}
+        {% for page in subsub_tmp.pages %}
+            {% set_global subsection_page_paths = subsection_page_paths | concat(with=page.path) %}
+        {% endfor %}
+    {% endfor %}
+
+    <a href="#{{ sub_slug }}" class="sidebar-link font-semibold full-spec-toc-item" data-target="{{ sub_slug }}" data-section-path="/{{ v }}/{{ sub_slug }}/">{{ sub.title }}</a>
+
+    {% for page in sub.pages %}
+        {% set_global is_subsection_page = false %}
+        {% for sp in subsection_page_paths %}
+            {% if sp == page.path %}
+                {% set_global is_subsection_page = true %}
+            {% endif %}
+        {% endfor %}
+        {% if not is_subsection_page %}
+            {% set page_slug = page.path | trim_start_matches(pat="/") | trim_end_matches(pat="/") | split(pat="/") | last %}
+            <a href="#{{ sub_slug }}-{{ page_slug }}" class="sidebar-link pl-6 full-spec-toc-item" data-target="{{ sub_slug }}-{{ page_slug }}" data-section-path="/{{ v }}/{{ sub_slug }}/{{ page_slug }}/">{{ page.title }}</a>
+        {% endif %}
+    {% endfor %}
+
+    {% for subsub_path in sub.subsections %}
+        {% set subsub = get_section(path=subsub_path) %}
+        {% set subsub_slug = subsub.path | trim_start_matches(pat="/") | trim_end_matches(pat="/") | split(pat="/") | last %}
+        <a href="#{{ sub_slug }}-{{ subsub_slug }}" class="sidebar-link pl-6 full-spec-toc-item" data-target="{{ sub_slug }}-{{ subsub_slug }}" data-section-path="/{{ v }}/{{ sub_slug }}/{{ subsub_slug }}/">{{ subsub.title }}</a>
+
+        {% for page in subsub.pages %}
+            {% set page_slug = page.path | trim_start_matches(pat="/") | trim_end_matches(pat="/") | split(pat="/") | last %}
+            <a href="#{{ sub_slug }}-{{ subsub_slug }}-{{ page_slug }}" class="sidebar-link pl-12 full-spec-toc-item" data-target="{{ sub_slug }}-{{ subsub_slug }}-{{ page_slug }}" data-section-path="/{{ v }}/{{ sub_slug }}/{{ subsub_slug }}/{{ page_slug }}/">{{ page.title }}</a>
+        {% endfor %}
+    {% endfor %}
+    {% endif %}
+{% endfor %}
+</div>

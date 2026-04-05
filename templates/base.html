@@ -72,24 +72,60 @@
 
         <div class="flex-1 flex flex-col min-w-0">
             <header class="sticky top-0 z-10 bg-white/95 dark:bg-gray-900/95 backdrop-blur border-b border-gray-200 dark:border-gray-600">
-                <div class="px-4 sm:px-6 py-4 flex items-center justify-between gap-3">
-                    <button id="mobile-menu-button" class="lg:hidden p-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100" aria-label="Open navigation menu">
-                        <i class="fa-solid fa-bars text-xl" aria-hidden="true"></i>
-                    </button>
+                <div class="px-4 sm:px-6 py-4 flex flex-col gap-2">
+                    <div class="flex items-center justify-between gap-3">
+                        <button id="mobile-menu-button" class="lg:hidden p-2 text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100" aria-label="Open navigation menu">
+                            <i class="fa-solid fa-bars text-xl" aria-hidden="true"></i>
+                        </button>
 
-                    <div class="flex-1 flex justify-center">
-                        <div class="relative w-full max-w-md">
-                            <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 text-sm pointer-events-none"></i>
-                            <input type="search" id="search-input" placeholder="Search documentation..." aria-label="Search documentation" aria-autocomplete="list" aria-controls="search-results" aria-expanded="false" class="w-full pl-9 pr-16 py-2 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md text-sm text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-500">
-                            <kbd class="hidden sm:block absolute right-3 top-1/2 -translate-y-1/2 px-1.5 py-0.5 text-xs font-mono text-gray-500 dark:text-gray-400 bg-gray-200 dark:bg-gray-700 rounded border border-gray-400 dark:border-gray-500 pointer-events-none">/</kbd>
-                            <div id="search-results" role="listbox" aria-label="Search results" class="hidden absolute top-full left-0 right-0 mt-1 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md shadow-lg max-h-96 overflow-y-auto z-50"></div>
+                        <div class="flex-1 flex justify-center">
+                            <div class="relative w-full max-w-md">
+                                <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 text-sm pointer-events-none"></i>
+                                <input type="search" id="search-input" placeholder="Search documentation..." aria-label="Search documentation" aria-autocomplete="list" aria-controls="search-results" aria-expanded="false" class="w-full pl-9 pr-16 py-2 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md text-sm text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-100 focus:outline-none focus:ring-2 focus:ring-teal-500">
+                                <kbd class="hidden sm:block absolute right-3 top-1/2 -translate-y-1/2 px-1.5 py-0.5 text-xs font-mono text-gray-500 dark:text-gray-400 bg-gray-200 dark:bg-gray-700 rounded border border-gray-400 dark:border-gray-500 pointer-events-none">/</kbd>
+                                <div id="search-results" role="listbox" aria-label="Search results" class="hidden absolute top-full left-0 right-0 mt-1 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md shadow-lg max-h-96 overflow-y-auto z-50"></div>
+                            </div>
+                        </div>
+
+                        <div class="relative" id="settings-dropdown">
+                            <button id="settings-toggle" class="p-2 text-gray-600 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white" aria-label="View settings" aria-expanded="false">
+                                <i class="fa-solid fa-sliders text-lg" aria-hidden="true"></i>
+                            </button>
+                            <div id="settings-panel" class="hidden absolute right-0 top-full mt-2 w-72 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg shadow-lg p-4 z-50 space-y-4">
+                                <div>
+                                    <div class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">View Mode</div>
+                                    <div id="view-switcher" class="hidden sm:hidden items-center rounded-lg bg-gray-100 dark:bg-gray-700 p-1" role="tablist" aria-label="Specification view mode">
+                                        <a id="view-sections" role="tab"
+                                           class="view-switch-btn flex items-center justify-center gap-1.5 flex-1 px-3 py-1.5 text-sm rounded-md transition-all duration-150"
+                                           aria-label="View as individual sections">
+                                            <i class="fa-solid fa-list text-[11px]" aria-hidden="true"></i>
+                                            <span>Sections</span>
+                                        </a>
+                                        <a id="view-full" role="tab"
+                                           class="view-switch-btn flex items-center justify-center gap-1.5 flex-1 px-3 py-1.5 text-sm rounded-md transition-all duration-150"
+                                           aria-label="View full specification on one page">
+                                            <i class="fa-solid fa-file-lines text-[11px]" aria-hidden="true"></i>
+                                            <span>Full Spec</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide mb-2">Theme</div>
+                                    <div id="theme-switcher" class="flex items-center rounded-lg bg-gray-100 dark:bg-gray-700 p-1">
+                                        <button id="theme-light" class="flex items-center justify-center gap-1.5 flex-1 px-3 py-1.5 text-sm rounded-md transition-all duration-150">
+                                            <i class="fa-regular fa-sun text-[11px]" aria-hidden="true"></i>
+                                            <span>Light</span>
+                                        </button>
+                                        <button id="theme-dark" class="flex items-center justify-center gap-1.5 flex-1 px-3 py-1.5 text-sm rounded-md transition-all duration-150">
+                                            <i class="fa-regular fa-moon text-[11px]" aria-hidden="true"></i>
+                                            <span>Dark</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <button id="theme-toggle" class="p-2 text-gray-600 hover:text-gray-900 dark:text-gray-100 dark:hover:text-white" aria-label="Toggle dark mode">
-                        <i class="fa-regular fa-moon text-lg block dark:!hidden" aria-hidden="true"></i>
-                        <i class="fa-regular fa-sun text-lg !hidden dark:!block" aria-hidden="true"></i>
-                    </button>
                 </div>
             </header>
 

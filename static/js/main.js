@@ -114,13 +114,24 @@ function toggleVersionMenu(btn) {
     }
 }
 
-function selectVersion(btn) {
+async function selectVersion(btn) {
     const newVersion = btn.getAttribute('data-version');
     localStorage.setItem('wdl-version', newVersion);
     closeAllVersionMenus();
     const urlVersion = getVersionFromUrl();
     if (urlVersion) {
-        window.location.href = window.location.pathname.replace(versionPattern, basePath + '/' + newVersion + '/');
+        const newUrl = window.location.pathname.replace(versionPattern, basePath + '/' + newVersion + '/');
+        const hash = window.location.hash;
+        try {
+            const resp = await fetch(newUrl + (hash || ''), { method: 'HEAD' });
+            if (resp.ok) {
+                window.location.href = newUrl + hash;
+            } else {
+                window.location.href = basePath + '/' + newVersion + '/introduction/';
+            }
+        } catch {
+            window.location.href = basePath + '/' + newVersion + '/introduction/';
+        }
     } else {
         rewriteVersionedLinks(newVersion);
         updateVersionVisibility(newVersion);
@@ -138,13 +149,41 @@ document.addEventListener('click', (e) => {
 });
 
 function initThemeToggle() {
-    const themeToggle = document.getElementById('theme-toggle');
-    if (!themeToggle || themeToggle.dataset.bound === 'true') return;
-    themeToggle.dataset.bound = 'true';
-    themeToggle.addEventListener('click', () => {
-        const isDark = document.documentElement.classList.toggle('dark');
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    });
+    const lightBtn = document.getElementById('theme-light');
+    const darkBtn = document.getElementById('theme-dark');
+    if (!lightBtn || !darkBtn) return;
+
+    const activeClasses = ['bg-white', 'dark:bg-gray-600', 'text-gray-900', 'dark:text-white', 'font-medium', 'shadow-sm'];
+    const inactiveClasses = ['text-gray-500', 'dark:text-gray-400', 'hover:text-gray-700', 'dark:hover:text-gray-200'];
+    const allClasses = [...activeClasses, ...inactiveClasses];
+
+    const updateThemeButtons = () => {
+        const isDark = document.documentElement.classList.contains('dark');
+        [lightBtn, darkBtn].forEach(btn => btn.classList.remove(...allClasses));
+        const [active, inactive] = isDark ? [darkBtn, lightBtn] : [lightBtn, darkBtn];
+        active.classList.add(...activeClasses);
+        inactive.classList.add(...inactiveClasses);
+    };
+
+    updateThemeButtons();
+
+    if (lightBtn.dataset.bound !== 'true') {
+        lightBtn.dataset.bound = 'true';
+        lightBtn.addEventListener('click', () => {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+            updateThemeButtons();
+        });
+    }
+
+    if (darkBtn.dataset.bound !== 'true') {
+        darkBtn.dataset.bound = 'true';
+        darkBtn.addEventListener('click', () => {
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+            updateThemeButtons();
+        });
+    }
 }
 
 // Mobile sidebar toggle
@@ -193,6 +232,8 @@ function initSidebarNavigation() {
     const normalizedCurrentPath = currentPath.endsWith('/') ? currentPath : currentPath + '/';
 
     navLinks.forEach(link => {
+        const rawHref = link.getAttribute('href');
+        if (rawHref && rawHref.startsWith('#')) return;
         const linkPath = new URL(link.href).pathname;
         const normalizedLinkPath = linkPath.endsWith('/') ? linkPath : linkPath + '/';
         if (normalizedCurrentPath === normalizedLinkPath) {
@@ -439,6 +480,13 @@ function initVersionDiff() {
     const compareSelect = document.getElementById('version-diff-compare-version');
     const results = document.getElementById('version-diff-results');
     if (!controls || !popoverTrigger || !popoverPanel || !toggle || !compareSelect || !results) return;
+
+    // Hide diff controls on full spec page
+    const version = getVersionFromUrl();
+    if (version && window.location.pathname.includes('/' + version + '/full')) {
+        controls.style.display = 'none';
+        return;
+    }
     restoreInlineArticleContent();
 
     const currentVersion = getActiveVersion();
@@ -774,6 +822,212 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+// Deduplicate heading IDs in full spec view by prefixing with chapter slug
+function deduplicateFullSpecIds() {
+    const content = document.querySelector('.full-spec-content');
+    if (!content) return;
+
+    const seen = new Set();
+    content.querySelectorAll('[id]').forEach(el => {
+        if (!seen.has(el.id)) {
+            seen.add(el.id);
+            return;
+        }
+        // Find the closest chapter or section ancestor to build a prefix
+        const chapter = el.closest('.full-spec-chapter');
+        if (!chapter) return;
+        const section = el.closest('section[id]');
+        const prefix = section ? section.id : chapter.id;
+        const newId = prefix + '-' + el.id;
+        // Update any anchor links pointing to this id
+        const anchor = el.querySelector('a.zola-anchor[href="#' + el.id + '"]');
+        if (anchor) anchor.setAttribute('href', '#' + newId);
+        el.id = newId;
+    });
+}
+
+// Full spec scroll-spy
+function initFullSpecScrollSpy() {
+    const toc = document.querySelector('[data-full-spec-toc]');
+    if (!toc) return;
+
+    const tocItems = toc.querySelectorAll('.full-spec-toc-item');
+    if (!tocItems.length) return;
+
+    const entries = [];
+    tocItems.forEach(item => {
+        const id = item.getAttribute('data-target');
+        const el = document.getElementById(id);
+        if (el) entries.push({ el, tocItem: item });
+    });
+
+    if (!entries.length) return;
+
+    const activeClass = 'text-teal-600';
+    const darkActiveClass = 'dark:text-teal-400';
+    let current = null;
+
+    const update = () => {
+        let best = null;
+        for (const entry of entries) {
+            const rect = entry.el.getBoundingClientRect();
+            if (rect.top <= 100) {
+                best = entry;
+            } else {
+                break;
+            }
+        }
+        if (!best) best = entries[0];
+        if (best && best.tocItem !== current) {
+            if (current) {
+                current.classList.remove(activeClass, darkActiveClass, 'font-medium');
+            }
+            best.tocItem.classList.add(activeClass, darkActiveClass, 'font-medium');
+            current = best.tocItem;
+            current.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+            const id = best.el.id;
+            if (id && window.location.hash !== '#' + id) {
+                history.replaceState(null, '', '#' + id);
+            }
+        }
+    };
+
+    let ticking = false;
+    const onScroll = () => {
+        if (!ticking) {
+            requestAnimationFrame(() => { update(); ticking = false; });
+            ticking = true;
+        }
+    };
+    window.addEventListener('scroll', onScroll);
+    document.querySelector('main')?.addEventListener('scroll', onScroll);
+    update();
+}
+
+// View switcher (Sections <-> Full Spec)
+function initViewSwitcher() {
+    const switcher = document.getElementById('view-switcher');
+    const sectionsBtn = document.getElementById('view-sections');
+    const fullBtn = document.getElementById('view-full');
+    if (!switcher || !sectionsBtn || !fullBtn) return;
+
+    const path = window.location.pathname;
+    const version = getVersionFromUrl();
+    if (!version) return;
+
+    const isFullSpec = path.includes('/' + version + '/full');
+    const versionBase = basePath + '/' + version;
+
+    switcher.classList.remove('sm:hidden');
+    switcher.classList.add('sm:flex');
+
+    const activeClasses = ['bg-gray-200', 'dark:bg-gray-600', 'text-gray-900', 'dark:text-white', 'font-medium', 'shadow-sm'];
+    const inactiveClasses = ['text-gray-500', 'dark:text-gray-400', 'hover:text-gray-700', 'dark:hover:text-gray-200'];
+    const allClasses = [...activeClasses, ...inactiveClasses];
+
+    // Reset both buttons before applying new state
+    [sectionsBtn, fullBtn].forEach(btn => {
+        btn.classList.remove(...allClasses);
+        btn.removeAttribute('aria-selected');
+        btn.style.cursor = '';
+        btn.setAttribute('tabindex', '0');
+    });
+
+    const [activeBtn, inactiveBtn] = isFullSpec ? [fullBtn, sectionsBtn] : [sectionsBtn, fullBtn];
+    activeBtn.classList.add(...activeClasses);
+    activeBtn.setAttribute('aria-selected', 'true');
+    activeBtn.setAttribute('tabindex', '0');
+    activeBtn.removeAttribute('href');
+    activeBtn.style.cursor = 'default';
+    inactiveBtn.classList.add(...inactiveClasses);
+    inactiveBtn.setAttribute('aria-selected', 'false');
+    inactiveBtn.setAttribute('tabindex', '0');
+
+    // Keyboard support: navigate on Enter or Space
+    inactiveBtn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            if (inactiveBtn.href) window.location.href = inactiveBtn.href;
+        }
+    });
+
+    // Disable Turbo entirely on switcher links so anchors work on full page loads
+    sectionsBtn.setAttribute('data-turbo', 'false');
+    fullBtn.setAttribute('data-turbo', 'false');
+
+    if (isFullSpec) {
+        sectionsBtn.href = versionBase + '/introduction/';
+
+        // Build id→section-page-path map from TOC data attributes
+        const idToHref = new Map();
+        document.querySelectorAll('.full-spec-toc-item[data-target][data-section-path]').forEach(item => {
+            idToHref.set(item.getAttribute('data-target'), basePath + item.getAttribute('data-section-path'));
+        });
+
+        const updateSectionsLink = () => {
+            const sections = document.querySelectorAll('.full-spec-chapter, .full-spec-content section[id]');
+            let best = null;
+            for (const section of sections) {
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= 120) {
+                    best = section;
+                } else {
+                    break;
+                }
+            }
+            if (!best) return;
+
+            const href = idToHref.get(best.id);
+            if (href) {
+                sectionsBtn.href = href;
+            } else {
+                sectionsBtn.href = versionBase + '/introduction/';
+            }
+        };
+
+        let ticking = false;
+        const onScroll = () => {
+            if (!ticking) {
+                requestAnimationFrame(() => { updateSectionsLink(); ticking = false; });
+                ticking = true;
+            }
+        };
+        document.querySelector('main')?.addEventListener('scroll', onScroll);
+        window.addEventListener('scroll', onScroll);
+    } else {
+        const afterVersion = path.replace(new RegExp('^' + escapedBasePath + '/' + version + '/'), '');
+        const anchor = afterVersion.replace(/\//g, '-').replace(/-$/, '');
+        fullBtn.href = versionBase + '/full/' + (anchor ? '#' + anchor : '');
+    }
+}
+
+// Settings dropdown
+function initSettingsDropdown() {
+    const toggle = document.getElementById('settings-toggle');
+    const panel = document.getElementById('settings-panel');
+    if (!toggle || !panel) return;
+    if (toggle.dataset.bound === 'true') return;
+    toggle.dataset.bound = 'true';
+
+    toggle.addEventListener('click', () => {
+        const isOpen = !panel.classList.contains('hidden');
+        if (isOpen) {
+            panel.classList.add('hidden');
+            toggle.setAttribute('aria-expanded', 'false');
+        } else {
+            panel.classList.remove('hidden');
+            toggle.setAttribute('aria-expanded', 'true');
+        }
+    });
+
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('#settings-dropdown')) {
+            panel.classList.add('hidden');
+            toggle.setAttribute('aria-expanded', 'false');
+        }
+    });
+}
+
 function initializePage() {
     const urlVersion = getVersionFromUrl();
     const currentVersion = urlVersion || localStorage.getItem('wdl-version') || defaultVersion;
@@ -789,6 +1043,10 @@ function initializePage() {
     initExampleLabels();
     initVersionDiff();
     initSearch();
+    deduplicateFullSpecIds();
+    initFullSpecScrollSpy();
+    initViewSwitcher();
+    initSettingsDropdown();
 }
 
 initializePage();
@@ -804,6 +1062,10 @@ document.addEventListener('turbo:frame-load', (event) => {
     initCopyButtons();
     initExampleLabels();
     initVersionDiff();
+    deduplicateFullSpecIds();
+    initFullSpecScrollSpy();
+    initViewSwitcher();
+    initSettingsDropdown();
 });
 document.addEventListener('turbo:before-cache', () => {
     hideResults();

@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}WDL {{ section.extra.spec_version | default(value="") }} Full Specification | {{ config.title }}{% endblock title %}
+
+{% block sidebar_nav %}
+{% include "full_spec_toc.html" %}
+{% endblock sidebar_nav %}
+
+{% block mobile_nav %}
+{% include "full_spec_toc.html" %}
+{% endblock mobile_nav %}
+
+{% block content %}
+{% set v = section.extra.spec_version | default(value=config.extra.current_version) %}
+{% set version_section = get_section(path=v ~ "/_index.md") %}
+
+<header class="mb-12">
+    <h1 class="text-5xl font-bold text-gray-700 dark:text-gray-50">WDL {{ v }} Specification</h1>
+</header>
+
+<div class="prose prose-lg prose-gray dark:prose-invert prose-teal max-w-none full-spec-content">
+{% for sub_path in version_section.subsections %}
+    {% set sub = get_section(path=sub_path) %}
+    {% set sub_slug = sub.path | trim_start_matches(pat="/") | trim_end_matches(pat="/") | split(pat="/") | last %}
+    {% if sub_slug != "full" %}
+
+    {# Collect page paths from subsections so we can skip transparent duplicates #}
+    {% set_global subsection_page_paths = [] %}
+    {% for subsub_path in sub.subsections %}
+        {% set subsub = get_section(path=subsub_path) %}
+        {% for page in subsub.pages %}
+            {% set_global subsection_page_paths = subsection_page_paths | concat(with=page.path) %}
+        {% endfor %}
+    {% endfor %}
+
+    <article id="{{ sub_slug }}" class="full-spec-chapter">
+        <h1 class="full-spec-h1"><a class="zola-anchor" href="#{{ sub_slug }}" aria-label="Anchor link for: {{ sub_slug }}">§</a>{{ sub.title }}</h1>
+        {% if sub.content %}
+        {{ sub.content | safe }}
+        {% endif %}
+
+        {% for page in sub.pages %}
+            {% set_global is_subsection_page = false %}
+            {% for sp in subsection_page_paths %}
+                {% if sp == page.path %}
+                    {% set_global is_subsection_page = true %}
+                {% endif %}
+            {% endfor %}
+            {% if not is_subsection_page %}
+                {% set page_slug = page.path | trim_start_matches(pat="/") | trim_end_matches(pat="/") | split(pat="/") | last %}
+                <section id="{{ sub_slug }}-{{ page_slug }}">
+                    <h2 class="full-spec-h2"><a class="zola-anchor" href="#{{ sub_slug }}-{{ page_slug }}" aria-label="Anchor link for: {{ sub_slug }}-{{ page_slug }}">§</a>{{ page.title }}</h2>
+                    {{ page.content | safe }}
+                </section>
+            {% endif %}
+        {% endfor %}
+
+        {% for subsub_path in sub.subsections %}
+            {% set subsub = get_section(path=subsub_path) %}
+            {% set subsub_slug = subsub.path | trim_start_matches(pat="/") | trim_end_matches(pat="/") | split(pat="/") | last %}
+            <section id="{{ sub_slug }}-{{ subsub_slug }}">
+                <h2 class="full-spec-h2"><a class="zola-anchor" href="#{{ sub_slug }}-{{ subsub_slug }}" aria-label="Anchor link for: {{ sub_slug }}-{{ subsub_slug }}">§</a>{{ subsub.title }}</h2>
+                {% if subsub.content %}
+                {{ subsub.content | safe }}
+                {% endif %}
+
+                {% for page in subsub.pages %}
+                    {% set page_slug = page.path | trim_start_matches(pat="/") | trim_end_matches(pat="/") | split(pat="/") | last %}
+                    <section id="{{ sub_slug }}-{{ subsub_slug }}-{{ page_slug }}">
+                        <h3 class="full-spec-h3"><a class="zola-anchor" href="#{{ sub_slug }}-{{ subsub_slug }}-{{ page_slug }}" aria-label="Anchor link for: {{ sub_slug }}-{{ subsub_slug }}-{{ page_slug }}">§</a>{{ page.title }}</h3>
+                        {{ page.content | safe }}
+                    </section>
+                {% endfor %}
+            </section>
+        {% endfor %}
+    </article>
+    {% endif %}
+{% endfor %}
+</div>
+{% endblock content %}
